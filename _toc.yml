@@ -1,0 +1,25 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+options:
+  numbered: true
+parts:
+- caption: Workshops
+  chapters:
+  - file: workshops/embc2025/intro
+    sections:
+    - file: workshops/embc2025/aims
+    - file: workshops/embc2025/synopsis
+    - file: workshops/embc2025/schedule
+    - file: workshops/embc2025/preparation
+  - file: workshops/ukomain2025/intro
+    sections:
+    - file: workshops/ukomain2025/aims
+    - file: workshops/ukomain2025/synopsis
+    - file: workshops/ukomain2025/schedule
+    - file: workshops/ukomain2025/preparation
+- caption: Tutorials
+  chapters:
+  - file: tutorials/abide

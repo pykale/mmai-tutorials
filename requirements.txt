@@ -1,0 +1,5 @@
+jupyter-book
+matplotlib
+numpy
+git+https://github.com/pykale/pykale@main
+nilearn
