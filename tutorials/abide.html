@@ -1,0 +1,1829 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reducing Phenotypical Effect to Improve Multi-site Autism Classification Performance &#8212; PyKale</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/abide';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Preparation" href="../workshops/ukomain2025/preparation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workshops</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../workshops/embc2025/intro.html">EMBC 2025 Workshop</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/embc2025/aims.html">Aims</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/embc2025/synopsis.html">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/embc2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/embc2025/preparation.html">Preparation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../workshops/ukomain2025/intro.html">Multimodal AI Workshop 2025</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/ukomain2025/aims.html">Aims</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/ukomain2025/synopsis.html">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/ukomain2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workshops/ukomain2025/preparation.html">Preparation</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reducing Phenotypical Effect to Improve Multi-site Autism Classification Performance</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pykale/embc-mmai25/main?urlpath=tree/tutorials/abide.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/pykale/embc-mmai25/blob/main/tutorials/abide.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pykale/embc-mmai25" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pykale/embc-mmai25/issues/new?title=Issue%20on%20page%20%2Ftutorials/abide.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tutorials/abide.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reducing Phenotypical Effect to Improve Multi-site Autism Classification Performance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Reducing Phenotypical Effect to Improve Multi-site Autism Classification Performance</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extractions">Feature Extractions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer">Trainer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resting-state-fmri-preprocessing">Resting-state fMRI Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-seed">Random Seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reducing-phenotypical-effect-to-improve-multi-site-autism-classification-performance">
+<h1>Reducing Phenotypical Effect to Improve Multi-site Autism Classification Performance<a class="headerlink" href="#reducing-phenotypical-effect-to-improve-multi-site-autism-classification-performance" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we will show how to leverage patient’s phenotypic information to reduce the site-dependencies of functional connectivity data using domain adaptation for improving multi-site autism classification performance.</p>
+<p>The basis of this notebook is to extend the original work by Kunda et al. from IEEE TMI 2022 that proposes a second-order functional connectivity named Tangent-Pearson, the Tangent correlation of the correlation and the application of domain adaptation for neuroimaging to reduce site-dependencies.</p>
+<p>Kunda et al. previously applied domain adaptation by only leveraging the site labels. We will extend this work by applying domain adaptation using various phenotypic information like sex, handedness, age, and eye status.</p>
+<p>Our <strong>objectives</strong> are to:</p>
+<ol class="arabic simple">
+<li><p>Load the ABIDE dataset with its available preprocessing pipelines and atlasses.</p></li>
+<li><p>Extracting functional connectivity from the time series extracted from the preprocessed scans.</p></li>
+<li><p>Preprocess the phenotypic information to be used for domain adaptation and obtaining the classification and site labels.</p></li>
+<li><p>Creating a pipeline to train and evaluate the performance.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<p>As a starting point, we need to install some packages and have provided helper functions to assist in this tutorial.</p>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
+<p>The packages that we will require for this tutorial includes PyKale and Nilearn. PyKale is an interdisciplinary machine learning library internally developed at the University of Sheffield and Nilearn is a neuroimaging library mainly intended for fMRI data analysis.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--quiet<span class="w"> </span>git+https://github.com/pykale/pykale@main<span class="w"> </span>nilearn<span class="w"> </span><span class="err">\</span>
+    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;PyKale and Nilearn installed successfully ✅&quot;</span> \
+    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install PyKale and Nilearn ❌&quot;</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyKale and Nilearn installed successfully ✅
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">#</a></h2>
+<p>The helper functions is adopted from the <a class="reference external" href="https://github.com/zaRizk7/abide-demo">source code</a> originally intended for demonstrating the use cases of containers to improve reproducibility and reusability in ML experiments.</p>
+<section id="feature-extractions">
+<h3>Feature Extractions<a class="headerlink" href="#feature-extractions" title="Link to this heading">#</a></h3>
+<p>Contains the imputation, categorical mapping, continuous standardization for the selected phenotypes and chaining functional connectivity extraction for the time series.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.connectome</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConnectivityMeasure</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Integral</span><span class="p">,</span>
+    <span class="n">Interval</span><span class="p">,</span>
+    <span class="n">StrOptions</span><span class="p">,</span>
+    <span class="n">validate_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">SELECTED_PHENOTYPES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SUB_ID&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SITE_ID&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SEX&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FIQ&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HANDEDNESS_CATEGORY&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EYE_STATUS_AT_SCAN&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DX_GROUP&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;SEX&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;MALE&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;FEMALE&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;HANDEDNESS_CATEGORY&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="s2">&quot;LEFT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;R&quot;</span><span class="p">:</span> <span class="s2">&quot;RIGHT&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mixed&quot;</span><span class="p">:</span> <span class="s2">&quot;AMBIDEXTROUS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ambi&quot;</span><span class="p">:</span> <span class="s2">&quot;AMBIDEXTROUS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;L-&gt;R&quot;</span><span class="p">:</span> <span class="s2">&quot;AMBIDEXTROUS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;R-&gt;L&quot;</span><span class="p">:</span> <span class="s2">&quot;AMBIDEXTROUS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-9999&quot;</span><span class="p">:</span> <span class="s2">&quot;LEFT&quot;</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">:</span> <span class="s2">&quot;LEFT&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;EYE_STATUS_AT_SCAN&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;CLOSED&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;DX_GROUP&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;ASD&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;CONTROL&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">AVAILABLE_FC_MEASURES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;pearson&quot;</span><span class="p">:</span> <span class="s2">&quot;correlation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;partial&quot;</span><span class="p">:</span> <span class="s2">&quot;partial correlation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tangent&quot;</span><span class="p">:</span> <span class="s2">&quot;tangent&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;covariance&quot;</span><span class="p">:</span> <span class="s2">&quot;covariance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="s2">&quot;precision&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+        <span class="s2">&quot;standardize&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">}),</span> <span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_phenotypic_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">standardize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process phenotypic data to impute missing values and and encode categorical</span>
+<span class="sd">    variables including sex, handedness, eye status at scan, and diagnostic group.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : pd.DataFrame of shape (n_subjects, n_phenotypes)</span>
+<span class="sd">        The phenotypes data to be processed.</span>
+
+<span class="sd">    standardize: boolean or str of (&quot;site&quot;, &quot;all&quot;)</span>
+<span class="sd">                Standardize FIQ and age. The default is 0.</span>
+<span class="sd">                Setting to True or &quot;all&quot; standardizes the</span>
+<span class="sd">                values over all subjects while &quot;site&quot;</span>
+<span class="sd">                standardizes according to the site.</span>
+
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">            The verbosity level. The default is 0.</span>
+<span class="sd">            verbose &gt; 0 will log the current processing step.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    labels : pd.Series of shape (n_subjects)</span>
+<span class="sd">            The encoded classification group. 0 is &quot;CONTROL&quot; and</span>
+<span class="sd">            1 is &quot;ASD&quot;</span>
+
+<span class="sd">    phenotypes : pd.DataFrame of shape (n_subjects, n_selected_phenotypes)</span>
+<span class="sd">                The processed selected phenotype data with imputed values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;feature_extraction.process_phenotypic_data&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Imputing missing values and encoding handedness...&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Avoid in-place modification</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Check for missing values, either -9999 or NaN</span>
+    <span class="c1"># and impute them with FIQ = 100 following original code.</span>
+    <span class="n">fiq</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;FIQ&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;FIQ&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fiq</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">fiq</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">9999</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">fiq</span><span class="p">)),</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># Standardize FIQ and age by site</span>
+    <span class="k">if</span> <span class="n">standardize</span> <span class="o">==</span> <span class="s2">&quot;site&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;SITE_ID&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">site</span> <span class="o">==</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;SITE_ID&quot;</span><span class="p">]</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">,</span> <span class="s2">&quot;FIQ&quot;</span><span class="p">]]</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">,</span> <span class="s2">&quot;FIQ&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">values</span>
+    <span class="k">elif</span> <span class="n">standardize</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">,</span> <span class="s2">&quot;FIQ&quot;</span><span class="p">]]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">,</span> <span class="s2">&quot;FIQ&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">values</span>
+
+    <span class="c1"># Encode categorical variables to be more explicit categorical</span>
+    <span class="c1"># values. For handedness, if we found missing values, we</span>
+    <span class="c1"># impute them by using &#39;LEFT&#39; as default. Values</span>
+    <span class="c1"># like &#39;Ambi&#39;, &#39;Mixed&#39;, &#39;L-&gt;R&#39;, and &#39;R-&gt;L&#39; are mapped to</span>
+    <span class="c1"># &#39;AMBIDEXTROUS&#39;. The rest of the values are mapped to &#39;LEFT&#39; or &#39;RIGHT&#39;</span>
+    <span class="c1"># for &#39;L&#39; or &#39;R&#39; respectively.</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">MAPPING</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">MAPPING</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Subsets the phenotypes</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">SELECTED_PHENOTYPES</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;SUB_ID&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Separate the class labels, sites, and phenotypes</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;DX_GROUP&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s2">&quot;CONTROL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ASD&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+    <span class="n">sites</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;SITE_ID&quot;</span><span class="p">]</span>
+    <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;DX_GROUP&quot;</span><span class="p">])</span>
+    <span class="c1"># One-hot encode categorical valued phenotypes</span>
+    <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">phenotypes</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Imputation and encoding completed.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;measures&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">list</span><span class="p">],</span>
+        <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_functional_connectivity</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">measures</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pearson&quot;</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract functional connectivity features from time series data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : list[array-like] of shape (n_subjects,)</span>
+<span class="sd">        An array of numpy arrays, where each array is a time series of shape (t, n_rois).</span>
+<span class="sd">        The time series data for each subject.</span>
+
+<span class="sd">    measures : list[str], optional</span>
+<span class="sd">        A list of connectivity measures to use for feature extraction.</span>
+<span class="sd">        The default is [&quot;pearson&quot;].</span>
+<span class="sd">        Supported measures are &quot;pearson&quot;, &quot;partial&quot;, &quot;tangent&quot;, &quot;covariance&quot;, and &quot;precision&quot;.</span>
+<span class="sd">        Multiple measures can be specified as a list to compose a higher-order measure.</span>
+
+<span class="sd">    verbose : int, optional</span>
+<span class="sd">        The verbosity level. The default is 0.</span>
+<span class="sd">        verbose &gt; 0 will log the current processing step.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    features : array-like</span>
+<span class="sd">        An array of shape (n_subjects, n_features) containing the extracted features.</span>
+<span class="sd">        n_features is equal to `n_rois * (n_rois - 1) / 2` for each subjects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;feature_extraction.extract_functional_connectivity&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Extracting functional connectivity features...&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using measures: </span><span class="si">{</span><span class="n">measures</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">measures</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">AVAILABLE_FC_MEASURES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+        <span class="c1"># If it is the last transformation, vectorize and discard the diagonal</span>
+        <span class="c1"># of shape (n_rois * (n_rois - 1) / 2)</span>
+        <span class="n">islast</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">measures</span><span class="p">)</span>
+        <span class="n">measure</span> <span class="o">=</span> <span class="n">ConnectivityMeasure</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">vectorize</span><span class="o">=</span><span class="n">islast</span><span class="p">,</span> <span class="n">discard_diagonal</span><span class="o">=</span><span class="n">islast</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Functional connectivity features extracted.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="trainer">
+<h3>Trainer<a class="headerlink" href="#trainer" title="Link to this heading">#</a></h3>
+<p>Contains the hyperparameter grid and a wrapper function to train the pipeline with or without domain adaptation.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.mida_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">MIDATrainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.dummy</span><span class="w"> </span><span class="kn">import</span> <span class="n">DummyClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">RidgeClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_scorer_names</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GridSearchCV</span><span class="p">,</span> <span class="n">RandomizedSearchCV</span><span class="p">,</span> <span class="n">check_cv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Integral</span><span class="p">,</span>
+    <span class="n">Interval</span><span class="p">,</span>
+    <span class="n">StrOptions</span><span class="p">,</span>
+    <span class="n">validate_params</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;create_trainer&quot;</span><span class="p">]</span>
+
+<span class="c1"># Inverse regularization coefficients for the classifiers</span>
+<span class="c1"># For Ridge (alpha) and MIDA (mu and eta), we use 1 / (2C)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="mi">15</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">30</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">CLASSIFIER</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;logistic&quot;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(),</span>
+    <span class="s2">&quot;svm&quot;</span><span class="p">:</span> <span class="n">LinearSVC</span><span class="p">(),</span>
+    <span class="s2">&quot;ridge&quot;</span><span class="p">:</span> <span class="n">RidgeClassifier</span><span class="p">(),</span>
+<span class="p">}</span>
+
+<span class="n">CLASSIFIER_GRID</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;logistic&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="n">C</span><span class="p">},</span>
+    <span class="s2">&quot;svm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="n">C</span><span class="p">},</span>
+    <span class="s2">&quot;ridge&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">C</span><span class="p">)},</span>
+<span class="p">}</span>
+
+<span class="n">MIDA_GRID</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;num_components&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+    <span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;rbf&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;mu&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">C</span><span class="p">),</span>
+    <span class="s2">&quot;eta&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">C</span><span class="p">),</span>
+    <span class="s2">&quot;ignore_y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+    <span class="s2">&quot;augment&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<span class="p">}</span>
+<span class="n">MIDA_GRID</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;domain_adapter__</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">MIDA_GRID</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;classifier&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;logistic&quot;</span><span class="p">,</span> <span class="s2">&quot;svm&quot;</span><span class="p">,</span> <span class="s2">&quot;ridge&quot;</span><span class="p">})],</span>
+        <span class="s2">&quot;mida&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;search_strategy&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">({</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">})],</span>
+        <span class="s2">&quot;cv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;cv_object&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;scoring&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">get_scorer_names</span><span class="p">())),</span> <span class="nb">list</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">&quot;num_solver_iterations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)],</span>
+        <span class="s2">&quot;num_search_iterations&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Integral</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)],</span>
+        <span class="s2">&quot;num_jobs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Integral</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="s2">&quot;random_state&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;random_state&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;verbose&quot;</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_trainer</span><span class="p">(</span>
+    <span class="n">classifier</span><span class="o">=</span><span class="s2">&quot;logistic&quot;</span><span class="p">,</span>
+    <span class="n">mida</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">search_strategy</span><span class="o">=</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_solver_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">num_search_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">num_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a trainer for a classification model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    classifier : str, default=&quot;logistic&quot;</span>
+<span class="sd">        The classifier to use. Can be &quot;logistic&quot;, &quot;svm&quot;, or &quot;ridge&quot;.</span>
+
+<span class="sd">    mida : bool, default=False</span>
+<span class="sd">        Whether to use MIDA for site-dependency reduction.</span>
+
+<span class="sd">    search_strategy : str, default=&quot;grid&quot;</span>
+<span class="sd">        The search strategy for hyperparameter tuning. Can be &quot;grid&quot; or &quot;random&quot;.</span>
+
+<span class="sd">    cv : int, cross-validation generator, or iterable, default=None</span>
+<span class="sd">        The cross-validation splitting strategy. If None, the default 5-fold</span>
+<span class="sd">        cross-validation is used.</span>
+
+<span class="sd">    scoring : str, list of str, callable, or None, default=None</span>
+<span class="sd">        A single string or a list of strings to use as the scoring metric(s).</span>
+<span class="sd">        If None, the default scoring metric for the classifier is used.</span>
+
+<span class="sd">    num_solver_iterations : int, default=100</span>
+<span class="sd">        The number of iterations for the solver. This is used to set the</span>
+<span class="sd">        max_iter parameter of the classifier.</span>
+
+<span class="sd">    num_search_iterations : int, default=10</span>
+<span class="sd">        The number of iterations for the random search. This is only used</span>
+<span class="sd">        if search_strategy is &quot;random&quot;.</span>
+
+<span class="sd">    num_jobs : int, default=None</span>
+<span class="sd">        The number of jobs to run in parallel with joblib.Parallel. If None,</span>
+<span class="sd">        the number of jobs is set to run on a single core.</span>
+
+<span class="sd">    random_state : int, RandomState instance, or None, default=None</span>
+<span class="sd">        The random seed for the random number generator. If None, the</span>
+<span class="sd">        random state is not set.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    trainer : sklearn.model_selection.BaseSearchCV or MIDATrainer</span>
+<span class="sd">        The model trainer object. This can be either a GridSearchCV,</span>
+<span class="sd">        RandomizedSearchCV, or MIDATrainer object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;modeling.create_trainer&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating trainer with classifier: </span><span class="si">{</span><span class="n">classifier</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using MIDA: </span><span class="si">{</span><span class="n">mida</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Search strategy: </span><span class="si">{</span><span class="n">search_strategy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scoring: </span><span class="si">{</span><span class="n">scoring</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of solver iterations: </span><span class="si">{</span><span class="n">num_solver_iterations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of search iterations: </span><span class="si">{</span><span class="n">num_search_iterations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of jobs: </span><span class="si">{</span><span class="n">num_jobs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random state: </span><span class="si">{</span><span class="n">random_state</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Generate classifier with its parameter grid</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">CLASSIFIER</span><span class="p">[</span><span class="n">classifier</span><span class="p">])</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="n">num_solver_iterations</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="n">param_grid</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">CLASSIFIER_GRID</span><span class="p">[</span><span class="n">classifier</span><span class="p">],</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Update with MIDA&#39;s parameters if we are using MIDA</span>
+    <span class="k">if</span> <span class="n">mida</span><span class="p">:</span>
+        <span class="n">param_grid</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">MIDA_GRID</span><span class="p">)</span>
+
+    <span class="c1"># Construct trainer</span>
+    <span class="n">trainer_args</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;cv&quot;</span><span class="p">:</span> <span class="n">check_cv</span><span class="p">(</span><span class="n">cv</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="s2">&quot;scoring&quot;</span><span class="p">:</span> <span class="n">scoring</span><span class="p">,</span>
+        <span class="s2">&quot;refit&quot;</span><span class="p">:</span> <span class="n">scoring</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scoring</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">scoring</span><span class="p">,</span>
+        <span class="s2">&quot;n_jobs&quot;</span><span class="p">:</span> <span class="n">num_jobs</span><span class="p">,</span>
+        <span class="s2">&quot;error_score&quot;</span><span class="p">:</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="n">verbose</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished constructing trainer.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mida</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">MIDATrainer</span><span class="p">(</span>
+            <span class="n">estimator</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span>
+            <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span>
+            <span class="n">search_strategy</span><span class="o">=</span><span class="n">search_strategy</span><span class="p">,</span>
+            <span class="n">num_iter</span><span class="o">=</span><span class="n">num_search_iterations</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">trainer_args</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">search_strategy</span> <span class="o">==</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="o">**</span><span class="n">trainer_args</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span>
+        <span class="n">estimator</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span>
+        <span class="n">param_distributions</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span>
+        <span class="n">n_iter</span><span class="o">=</span><span class="n">num_search_iterations</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">trainer_args</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pipeline">
+<h1>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">#</a></h1>
+<section id="resting-state-fmri-preprocessing">
+<h2>Resting-state fMRI Preprocessing<a class="headerlink" href="#resting-state-fmri-preprocessing" title="Link to this heading">#</a></h2>
+<p>Usually, we need to preprocess the fMRI scans first before running the pipeline. However, ABIDE dataset provides several preprocessed subsets that can be downloaded directly. The ones we are going to focus on includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">atlas</span></code>: Brain atlas used for extracting the time series. Available ones are: <code class="docutils literal notranslate"><span class="pre">&quot;aal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cc400&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;dosenbach160&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ez&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ho&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;tt&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bp</span></code>: Band-pass filter signals between 0.01Hz and 0.1Hz. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gsr</span></code>: Applies global signal regression on the signals. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qc</span></code>: Only use scans that passes all quality checks. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atlas</span> <span class="o">=</span> <span class="s2">&quot;cc200&quot;</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">gsr</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_abide_pcp</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">fetch_abide_pcp</span><span class="p">(</span>
+    <span class="n">derivatives</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">atlas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+    <span class="n">band_pass_filtering</span><span class="o">=</span><span class="n">bp</span><span class="p">,</span>
+    <span class="n">global_signal_regression</span><span class="o">=</span><span class="n">gsr</span><span class="p">,</span>
+    <span class="n">quality_checked</span><span class="o">=</span><span class="n">qc</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[get_dataset_dir] Dataset found in /home/zarizky/nilearn_data/ABIDE_pcp
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="phenotype-preprocessing">
+<h2>Phenotype Preprocessing<a class="headerlink" href="#phenotype-preprocessing" title="Link to this heading">#</a></h2>
+<p>The phenotypic information comes with several missing data. To utilize it for modeling, we need to impute and encode the missing values. Categorical phenotypes that we will use are <code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">SEX</span></code>, <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>, <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code> which will be one-hot encoded while the continuous ones including <code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code> and <code class="docutils literal notranslate"><span class="pre">FIQ</span></code> will be optionally standardized by defining the argument options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">standardize</span></code>: Standardization strategy for subject’s age and FIQ. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>, standardizes the values over all subjects while <code class="docutils literal notranslate"><span class="pre">&quot;site&quot;</span></code> standardizes according to the sites. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+<p>There are several missing <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code> values, we consider that the missing ones by default are right-handed subjects while for <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>, we impute the missing values by setting them to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
+<p>The labels that assigns control and ASD group is the <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code> phenotype that is binary encoded such that <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> and <code class="docutils literal notranslate"><span class="pre">ASD</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standardize</span> <span class="o">=</span> <span class="s2">&quot;site&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">process_phenotypic_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;phenotypic&quot;</span><span class="p">],</span> <span class="n">standardize</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-extraction">
+<h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">measures</span></code>: Sequences of connectivity measure transformation to extract features from the time series. Available ones are <code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;partial&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tangent&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;covariance&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;pearson&quot;]</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measures</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pearson&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">extract_functional_connectivity</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">atlas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">measures</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modeling">
+<h2>Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
+<section id="random-seed">
+<h3>Random Seed<a class="headerlink" href="#random-seed" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_random_state</span>
+
+<span class="n">random_state</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cross-validation-split">
+<h3>Cross-Validation Split<a class="headerlink" href="#cross-validation-split" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;skf&quot;</span>
+<span class="n">num_folds</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">num_cv_repeats</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeavePGroupsOut</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span>
+    <span class="n">n_splits</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span>
+    <span class="n">n_repeats</span><span class="o">=</span><span class="n">num_cv_repeats</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;lpgo&quot;</span><span class="p">:</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">LeavePGroupsOut</span><span class="p">(</span><span class="n">num_folds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-definition">
+<h3>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span> <span class="o">=</span> <span class="s2">&quot;logistic&quot;</span>
+<span class="n">mida</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">search_strategy</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span>
+<span class="n">scoring</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;roc_auc&quot;</span><span class="p">]</span>
+<span class="n">num_solver_iterations</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_search_iterations</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">num_jobs</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">create_trainer</span><span class="p">(</span>
+    <span class="n">classifier</span><span class="p">,</span>
+    <span class="n">mida</span><span class="p">,</span>
+    <span class="n">search_strategy</span><span class="p">,</span>
+    <span class="n">cv</span><span class="p">,</span>
+    <span class="n">scoring</span><span class="p">,</span>
+    <span class="n">num_solver_iterations</span><span class="p">,</span>
+    <span class="n">num_search_iterations</span><span class="p">,</span>
+    <span class="n">num_jobs</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="training">
+<h3>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span> <span class="k">if</span> <span class="n">mida</span> <span class="k">else</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">sites</span><span class="p">}</span>
+
+<span class="k">if</span> <span class="n">mida</span> <span class="ow">and</span> <span class="n">site_only</span><span class="p">:</span>
+    <span class="n">fit_args</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">mida</span><span class="p">:</span>
+    <span class="n">fit_args</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span>
+
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">fit_args</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:86: UserWarning: The groups parameter is ignored by RepeatedStratifiedKFold
+  warnings.warn(
+/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
+  warnings.warn(
+/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
+  warnings.warn(
+/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
+  warnings.warn(
+/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
+  warnings.warn(
+/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomizedSearchCV(cv=RepeatedStratifiedKFold(n_repeats=5, n_splits=10,
+            random_state=RandomState(MT19937) at 0x7FA866A4DE40),
+                   error_score=&#x27;raise&#x27;,
+                   estimator=LogisticRegression(max_iter=1000000,
+                                                random_state=RandomState(MT19937) at 0x7FA866A4DE40),
+                   param_distributions={&#x27;C&#x27;: array([3.05175781e-05, 6.10351562e-05, 1.22070312e-04, 2.44140625e-04,
+       4.88281250e-04, 9.765...
+       1.25000000e-01, 2.50000000e-01, 5.00000000e-01, 1.00000000e+00,
+       2.00000000e+00, 4.00000000e+00, 8.00000000e+00, 1.60000000e+01,
+       3.20000000e+01, 6.40000000e+01, 1.28000000e+02, 2.56000000e+02,
+       5.12000000e+02, 1.02400000e+03, 2.04800000e+03, 4.09600000e+03,
+       8.19200000e+03, 1.63840000e+04, 3.27680000e+04])},
+                   random_state=RandomState(MT19937) at 0x7FA866A4DE40,
+                   refit=&#x27;accuracy&#x27;, scoring=[&#x27;accuracy&#x27;, &#x27;roc_auc&#x27;])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomizedSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.model_selection.RandomizedSearchCV.html">?<span>Documentation for RandomizedSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomizedSearchCV(cv=RepeatedStratifiedKFold(n_repeats=5, n_splits=10,
+            random_state=RandomState(MT19937) at 0x7FA866A4DE40),
+                   error_score=&#x27;raise&#x27;,
+                   estimator=LogisticRegression(max_iter=1000000,
+                                                random_state=RandomState(MT19937) at 0x7FA866A4DE40),
+                   param_distributions={&#x27;C&#x27;: array([3.05175781e-05, 6.10351562e-05, 1.22070312e-04, 2.44140625e-04,
+       4.88281250e-04, 9.765...
+       1.25000000e-01, 2.50000000e-01, 5.00000000e-01, 1.00000000e+00,
+       2.00000000e+00, 4.00000000e+00, 8.00000000e+00, 1.60000000e+01,
+       3.20000000e+01, 6.40000000e+01, 1.28000000e+02, 2.56000000e+02,
+       5.12000000e+02, 1.02400000e+03, 2.04800000e+03, 4.09600000e+03,
+       8.19200000e+03, 1.63840000e+04, 3.27680000e+04])},
+                   random_state=RandomState(MT19937) at 0x7FA866A4DE40,
+                   refit=&#x27;accuracy&#x27;, scoring=[&#x27;accuracy&#x27;, &#x27;roc_auc&#x27;])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: LogisticRegression</div></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.03125, max_iter=1000000,
+                   random_state=RandomState(MT19937) at 0x7FA864732640)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.03125, max_iter=1000000,
+                   random_state=RandomState(MT19937) at 0x7FA864732640)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
+</div>
+</section>
+<section id="evaluation">
+<h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="p">[</span>
+    <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">aggregate</span><span class="si">}</span><span class="s2">_test_</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scoring</span> <span class="k">for</span> <span class="n">aggregate</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">]]</span>
+<span class="p">]</span>
+
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;mean_test_accuracy&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cv_results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Rank&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv_results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_test_accuracy</th>
+      <th>std_test_accuracy</th>
+      <th>mean_test_roc_auc</th>
+      <th>std_test_roc_auc</th>
+    </tr>
+    <tr>
+      <th>Rank</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.6966</td>
+      <td>0.0434</td>
+      <td>0.7568</td>
+      <td>0.0405</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.6950</td>
+      <td>0.0421</td>
+      <td>0.7548</td>
+      <td>0.0399</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.6948</td>
+      <td>0.0317</td>
+      <td>0.7476</td>
+      <td>0.0384</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6939</td>
+      <td>0.0314</td>
+      <td>0.7477</td>
+      <td>0.0384</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.6936</td>
+      <td>0.0318</td>
+      <td>0.7470</td>
+      <td>0.0388</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.6934</td>
+      <td>0.0325</td>
+      <td>0.7482</td>
+      <td>0.0385</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.6934</td>
+      <td>0.0318</td>
+      <td>0.7479</td>
+      <td>0.0384</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.6886</td>
+      <td>0.0373</td>
+      <td>0.7515</td>
+      <td>0.0388</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.6870</td>
+      <td>0.0360</td>
+      <td>0.7466</td>
+      <td>0.0373</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.5612</td>
+      <td>0.0225</td>
+      <td>0.6736</td>
+      <td>0.0655</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../workshops/ukomain2025/preparation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Preparation</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Reducing Phenotypical Effect to Improve Multi-site Autism Classification Performance</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extractions">Feature Extractions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer">Trainer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resting-state-fmri-preprocessing">Resting-state fMRI Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-seed">Random Seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By PyKale Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
