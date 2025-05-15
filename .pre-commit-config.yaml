@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/datarootsio/databooks
+    rev: 1.3.10
+    hooks:
+      - id: databooks-meta
+        args: ["--cell-meta-keep=tags", "--nb-meta-keep=kernelspec"]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^data/
+      - id: check-yaml
+      - id: end-of-file-fixer
+        exclude: ^data/
+      - id: mixed-line-ending
+        exclude: ^data/
+      - id: check-added-large-files
+        args: ["--maxkb=9000"]
+
+  - repo: https://github.com/psf/black
+    rev: "25.1.0"
+    hooks:
+      - id: black
+        args: ["."]
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.9.1
+    hooks:
+      - id: nbqa-black
+        additional_dependencies: ["black"]
