@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>workshop &#8212; PyKale</title>
+    <title>EMBC and MMAI 25’ Workshop Repository &#8212; PyKale</title>
   
   
   
@@ -198,8 +198,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tutorials/abide.html">Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="tutorials/abide.html">Setup</a></li>
 
 </ul>
 
@@ -373,7 +372,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -384,11 +385,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>workshop</h1>
+    <h1>EMBC and MMAI 25’ Workshop Repository</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-contribute">How to Contribute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -398,8 +409,62 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="workshop">
-<h1>workshop<a class="headerlink" href="#workshop" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="embc-and-mmai-25-workshop-repository">
+<h1>EMBC and MMAI 25’ Workshop Repository<a class="headerlink" href="#embc-and-mmai-25-workshop-repository" title="Link to this heading">#</a></h1>
+<p>This repository contains materials and resources for workshops conducted in 2025, including EMBC and MMAI workshops. It includes markdown files, Jupyter notebooks, and other assets to support the sessions.</p>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tutorials/</span></code>: Contains tutorial notebooks and related materials.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workshops/</span></code>: Contains workshop-specific content for EMBC and UKOMAIN.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>: Lists dependencies required for the project.</p></li>
+</ul>
+</section>
+<section id="how-to-contribute">
+<h2>How to Contribute<a class="headerlink" href="#how-to-contribute" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Fork the repository.</p></li>
+<li><p>Create a new branch for your feature or bug fix:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>my-feature-branch
+</pre></div>
+</div>
+</li>
+<li><p>Make your changes and commit them with clear messages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add feature X&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Push your branch to your forked repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>my-feature-branch
+</pre></div>
+</div>
+</li>
+<li><p>Open a pull request to the main repository.</p></li>
+</ol>
+<p>Please ensure your contributions adhere to the repository’s coding standards and include appropriate documentation.</p>
+</section>
+<section id="pre-commit-hooks">
+<h2>Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Link to this heading">#</a></h2>
+<p>This repository uses pre-commit hooks to ensure code quality and consistency. To set up pre-commit hooks locally, follow these steps:</p>
+<ol class="arabic">
+<li><p>Install the <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> package if you haven’t already:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+</pre></div>
+</div>
+</li>
+<li><p>Install the hooks defined in the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+<li><p>Run the hooks manually on all files (optional):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Pre-commit hooks will now run automatically on every commit to check and format your code.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -438,6 +503,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-contribute">How to Contribute</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
