@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Setup &#8212; PyKale</title>
+    <title>Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance &#8212; PyKale</title>
   
   
   
@@ -197,7 +197,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Setup</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance</a></li>
+
 
 </ul>
 
@@ -433,7 +434,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Setup</h1>
+    <h1>Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -443,16 +444,31 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-seed">Random Seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer">Trainer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resting-state-fmri-preprocessing">Resting-state fMRI Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-seed">Random Seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-cross-validation">Training and Cross-Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
 </ul>
 </li>
 </ul>
@@ -467,9 +483,24 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="setup">
+  <section class="tex2jax_ignore mathjax_ignore" id="reducing-phenotypic-effects-to-improve-multi-site-autism-classification-performance">
+<h1>Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance<a class="headerlink" href="#reducing-phenotypic-effects-to-improve-multi-site-autism-classification-performance" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we demonstrate how to leverage <strong>patient phenotypic information</strong> to reduce <strong>site-specific biases</strong> in functional connectivity data using <strong>domain adaptation</strong>, with the goal of improving <strong>multi-site autism classification</strong>.</p>
+<p>This notebook builds on the work of <strong>Kunda et al. (IEEE TMI, 2022)</strong>, which introduced a second-order functional connectivity representation called <strong>Tangent-Pearson</strong>, the tangent embedding of the Pearson correlation matrix. The original work also applied domain adaptation to reduce site dependencies in fMRI-derived features, using <strong>site labels</strong> as the domain information.</p>
+<p>We extend this approach by incorporating a <strong>richer set</strong> of phenotypic variables, such as sex, handedness, age, and eye status into the domain adaptation framework. This enables more effective harmonization across data collected from different imaging sites.</p>
+<hr class="docutils" />
+<p><strong>Objectives</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Load</strong> the ABIDE dataset using different preprocessing pipelines and brain atlases.</p></li>
+<li><p><strong>Extract</strong> functional connectivity features from ROI-based time series.</p></li>
+<li><p><strong>Preprocess</strong> phenotypic variables for use in domain adaptation, and obtain class labels (ASD vs CONTROL) and site labels.</p></li>
+<li><p><strong>Build</strong> a training and evaluation pipeline to assess classification performance under various domain adaptation strategies.</p></li>
+<li><p><strong>Interpret</strong> the learned model by extracting weights for pairwise ROI feature importance and visualizing them using a connectome plot.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
-<p>As a starting point, we need to install some packages and have provided helper functions to assist in this tutorial.</p>
+<p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -487,6 +518,11 @@ document.write(`
 </div>
 </details>
 </div>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
+<p>The main packages required for this tutorial are PyKale and Nilearn.</p>
+<p><strong>PyKale</strong> is an open-source interdisciplinary machine learning library developed at the University of Sheffield, with a focus on applications in biomedical and scientific domains.</p>
+<p><strong>Nilearn</strong> is a Python library for neuroimaging analysis, widely used for processing and visualizing functional MRI (fMRI) data.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -507,6 +543,19 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">#</a></h2>
+<p>The helper functions used in this tutorial are adapted from the <a class="reference external" href="https://github.com/zaRizk7/abide-demo">source code</a>, which was originally developed to demonstrate the use of containers for improving reproducibility and reusability in machine learning experiments.</p>
+<section id="feature-extraction">
+<h3>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h3>
+<p>Includes functionality for:</p>
+<ul class="simple">
+<li><p><strong>Imputation</strong> of missing phenotypic values,</p></li>
+<li><p><strong>Categorical encoding</strong> of variables such as sex, handedness, and eye status,</p></li>
+<li><p><strong>Standardization</strong> of continuous features like age and FIQ,</p></li>
+<li><p><strong>Chaining functional connectivity transformations</strong> (e.g., Pearson, Tangent) to extract features from ROI-based time series.</p></li>
+</ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -707,6 +756,11 @@ document.write(`
 </div>
 </details>
 </div>
+</section>
+<section id="trainer">
+<h3>Trainer<a class="headerlink" href="#trainer" title="Link to this heading">#</a></h3>
+<p>Defines the <strong>hyperparameter search spac</strong>e and provides a <strong>wrapper function</strong> to train the classification pipeline, with or without domain adaptation.</p>
+<p>Providing various search strategies (e.g., grid or randomized search) and integrates seamlessly with cross-validation and MIDA-based feature transformation when enabled.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -890,37 +944,305 @@ document.write(`
 </details>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="pipeline">
-<h1>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">#</a></h1>
-<p>import pandas as pd
-from collections import defaultdict
-from sklearn.utils._param_validation import validate_params, StrOptions</p>
-<p>Usually, we need to preprocess the fMRI scans first before running the pipeline. However, ABIDE dataset provides several preprocessed subsets that can be downloaded directly. The ones we are going to focus on includes:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">atlas</span></code>: Brain atlas used for extracting the time series. Available ones are: <code class="docutils literal notranslate"><span class="pre">&quot;aal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cc400&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;dosenbach160&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ez&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ho&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;tt&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bp</span></code>: Band-pass filter signals between 0.01Hz and 0.1Hz. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gsr</span></code>: Applies global signal regression on the signals. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">qc</span></code>: Only use scans that passes all quality checks. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
-</ul>
-<div class="cell docutils container">
+<section id="evaluation">
+<h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
+<p>Contains a function to <strong>aggregate the top-1 cross-validation scores</strong> for each defined model, selecting the best-performing configuration per model based on a specified evaluation metric.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">atlas</span> <span class="o">=</span> <span class="s2">&quot;cc200&quot;</span>
-<span class="n">bp</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">gsr</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">qc</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_params</span><span class="p">,</span> <span class="n">StrOptions</span>
+
+<span class="c1"># Mapping for model and score display names</span>
+<span class="n">MODEL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">,</span> <span class="s2">&quot;site_only&quot;</span><span class="p">,</span> <span class="s2">&quot;all_phenotypes&quot;</span><span class="p">]</span>
+<span class="n">MODEL</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODEL</span><span class="p">}</span>
+
+<span class="n">SCORE</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">,</span> <span class="s2">&quot;f1&quot;</span><span class="p">]</span>
+<span class="n">SCORE</span> <span class="o">=</span> <span class="p">{</span><span class="n">score</span><span class="p">:</span> <span class="n">score</span><span class="o">.</span><span class="n">title</span><span class="p">()</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">SCORE</span><span class="p">}</span>
+<span class="n">SCORE</span><span class="p">[</span><span class="s2">&quot;roc_auc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;AUROC&quot;</span>
+<span class="n">SCORE</span><span class="p">[</span><span class="s2">&quot;matthews_corrcoef&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MCC&quot;</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;cv_results&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="s2">&quot;sort_by&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">StrOptions</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">SCORE</span><span class="p">))]},</span>
+    <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compile_results</span><span class="p">(</span><span class="n">cv_results</span><span class="p">,</span> <span class="n">sort_by</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compile and summarize cross-validation results into a formatted DataFrame.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cv_results : dict of str -&gt; pd.DataFrame or dict of str -&gt; dict of str -&gt; list</span>
+<span class="sd">        Dictionary mapping model names to cross-validation results.</span>
+<span class="sd">        Each entry should either be a DataFrame or a dictionary of dictionary of list.</span>
+<span class="sd">    sort_by : str</span>
+<span class="sd">        Metric to use for selecting the best-performing model variant.</span>
+<span class="sd">        Available ones include: &quot;accuracy&quot;, &quot;precision&quot;, &quot;recall&quot;, &quot;f1&quot;, &quot;roc_auc&quot;,</span>
+<span class="sd">        and &quot;matthews_corrcoef&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    compiled_results : pd.DataFrame</span>
+<span class="sd">        Summary table with models as rows and formatted score strings (mean ± std) as columns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">compiled_results</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">cv_results</span><span class="p">:</span>
+        <span class="c1"># Ensure results are in DataFrame format</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">])</span>
+
+        <span class="c1"># Extract all available test scores</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">score</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;rank_test_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span>
+            <span class="k">if</span> <span class="s2">&quot;rank_test&quot;</span> <span class="ow">in</span> <span class="n">score</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Select the best row (lowest rank) based on the given metric</span>
+        <span class="n">cv_result</span> <span class="o">=</span> <span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank_test_</span><span class="si">{</span><span class="n">sort_by</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">compiled_results</span><span class="p">[</span><span class="s2">&quot;Model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MODEL</span><span class="p">[</span><span class="n">model</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">:</span>
+            <span class="n">mean_score</span> <span class="o">=</span> <span class="n">cv_result</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;mean_test_</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+            <span class="n">std_score</span> <span class="o">=</span> <span class="n">cv_result</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;std_test_</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+            <span class="n">compiled_results</span><span class="p">[</span><span class="n">SCORE</span><span class="p">[</span><span class="n">score</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mean_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">std_score</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert to DataFrame and index by model name</span>
+    <span class="n">compiled_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">compiled_results</span><span class="p">)</span>
+    <span class="n">compiled_results</span> <span class="o">=</span> <span class="n">compiled_results</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Model&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">compiled_results</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
+</section>
+<section id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">#</a></h3>
+<p>Provides utility functions to:</p>
+<ul class="simple">
+<li><p>Generate <strong>pairwise ROI labels</strong>,</p></li>
+<li><p>Extract the <strong>top-p most important weights</strong> and convert them into a <strong>symmetric matrix</strong>,</p></li>
+<li><p>Wrap the process of <strong>plotting connectomes</strong> for visual interpretation of model-derived feature importances.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cmap</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_connectome</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">validate_params</span><span class="p">,</span> <span class="n">Real</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;rois&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span> <span class="s2">&quot;sep&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">]},</span> <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_pairwise_rois</span><span class="p">(</span><span class="n">rois</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;---&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate all unique ROI pair labels (upper triangle only).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rois : array-like of str or int</span>
+<span class="sd">        List of region-of-interest (ROI) names.</span>
+<span class="sd">    sep : str, optional</span>
+<span class="sd">        Separator string used to join ROI pairs, by default &#39;---&#39;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pairs : np.ndarray</span>
+<span class="sd">        Array of ROI pair strings in the format &quot;ROI1 --- ROI2&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">sep</span><span class="si">}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">rois</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;coords&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Real</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;neither&quot;</span><span class="p">)],</span>
+        <span class="s2">&quot;sep&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_top_symmetric_weight</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;---&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct a symmetric weight matrix for top-p ROI pairs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    weights : array-like</span>
+<span class="sd">        1D array of weights corresponding to pairwise ROI combinations.</span>
+<span class="sd">    labels : array-like of str or int</span>
+<span class="sd">        List of all ROI names or indices in the original data.</span>
+<span class="sd">    coords : array-like</span>
+<span class="sd">        Coordinates of each ROI, shape (n_rois, 3).</span>
+<span class="sd">    p : float, optional</span>
+<span class="sd">        Proportion of top weights to retain (default is 0.001).</span>
+<span class="sd">    sep : str, optional</span>
+<span class="sd">        Separator used in ROI pair labels, by default &#39;---&#39;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    sym_weights : array-like</span>
+<span class="sd">        Symmetric matrix of selected top weights (n_top_rois, n_top_rois).</span>
+<span class="sd">    top_roi_labels : array-like</span>
+<span class="sd">        Labels of ROIs included in the top-p weight pairs.</span>
+<span class="sd">    top_roi_coords : array-like</span>
+<span class="sd">        Coordinates corresponding to `top_roi_labels`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">weights</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">get_pairwise_rois</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">))</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">rank</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">roi</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">roi</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="p">)]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">weights</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+    <span class="n">unique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+
+    <span class="n">label_to_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">)}</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_to_index</span><span class="p">[</span><span class="n">roi</span><span class="p">]</span> <span class="k">for</span> <span class="n">roi</span> <span class="ow">in</span> <span class="n">unique</span><span class="p">]</span>
+
+    <span class="n">top_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">)[</span><span class="n">indices</span><span class="p">]</span>
+    <span class="n">top_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">coords</span><span class="p">)[</span><span class="n">indices</span><span class="p">]</span>
+    <span class="n">mappings</span> <span class="o">=</span> <span class="p">{</span><span class="n">roi</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">roi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_labels</span><span class="p">)}</span>
+
+    <span class="n">sym_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">roi1</span><span class="p">,</span> <span class="n">roi2</span><span class="p">),</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">weights</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">mappings</span><span class="p">[</span><span class="n">roi1</span><span class="p">],</span> <span class="n">mappings</span><span class="p">[</span><span class="n">roi2</span><span class="p">]</span>
+        <span class="n">sym_weights</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="n">sym_weights</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">weight</span>
+
+    <span class="k">return</span> <span class="n">sym_weights</span><span class="p">,</span> <span class="n">top_labels</span><span class="p">,</span> <span class="n">top_coords</span>
+
+
+<span class="nd">@validate_params</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;coords&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;array-like&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Interval</span><span class="p">(</span><span class="n">Real</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">closed</span><span class="o">=</span><span class="s2">&quot;neither&quot;</span><span class="p">)],</span>
+        <span class="s2">&quot;cmap&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="s2">&quot;marker_size&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">Real</span><span class="p">],</span>
+        <span class="s2">&quot;legend_params&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="p">},</span>
+    <span class="n">prefer_skip_nested_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">visualize_connectome</span><span class="p">(</span>
+    <span class="n">weights</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;tab20&quot;</span><span class="p">,</span> <span class="n">marker_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">legend_params</span><span class="o">=</span><span class="p">{}</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualize the top-p weighted ROI connections as a symmetric connectome plot.</span>
+
+<span class="sd">    This function selects the top proportion `p` of the largest (by absolute value)</span>
+<span class="sd">    weights between region pairs, constructs a symmetric connectivity matrix,</span>
+<span class="sd">    and plots the corresponding connectome using `nilearn.plotting.plot_connectome`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    weights : array-like of shape (n_edges,)</span>
+<span class="sd">        Weights assigned to each unique pair of ROIs, typically from a model or analysis.</span>
+<span class="sd">        These are expected to align with the order of ROI pairs generated from `labels`.</span>
+
+<span class="sd">    labels : array-like of shape (n_rois,)</span>
+<span class="sd">        List of ROI (region of interest) names corresponding to the original brain atlas.</span>
+
+<span class="sd">    coords : array-like of shape (n_rois, 3)</span>
+<span class="sd">        3D coordinates for each ROI, used to place nodes in the plot.</span>
+
+<span class="sd">    p : float, optional</span>
+<span class="sd">        Proportion of the top-weighted connections (by absolute value) to include.</span>
+<span class="sd">        Must be in the open interval (0, 1). Default is 0.001 (0.1%).</span>
+
+<span class="sd">    cmap : str, optional</span>
+<span class="sd">        Matplotlib colormap name used to assign colors to ROI nodes. Default is &#39;tab20&#39;.</span>
+
+<span class="sd">    marker_size : float, optional</span>
+<span class="sd">        Size of ROI node markers in the connectome plot. Default is 100.</span>
+
+<span class="sd">    legend_params : dict, optional</span>
+<span class="sd">        Additional keyword arguments to pass to the plot&#39;s legend (e.g., location, fontsize).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    proj : nilearn.plotting.displays._projectors.ConnectivityProjection</span>
+<span class="sd">        A `nilearn` projection object with the plotted connectome. This object supports</span>
+<span class="sd">        further customization (e.g., adding markers, saving the figure).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - This function assumes the weights are symmetric or that symmetry should be imposed.</span>
+<span class="sd">    - Useful for visualizing model interpretability or structural/functional connectivity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">marker_colors</span> <span class="o">=</span> <span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span>
+    <span class="n">sym_weights</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="n">get_top_symmetric_weight</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">plot_connectome</span><span class="p">(</span><span class="n">sym_weights</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)):</span>
+        <span class="n">proj</span><span class="o">.</span><span class="n">add_markers</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">coords</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span>
+            <span class="n">marker_color</span><span class="o">=</span><span class="n">marker_colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">marker_size</span><span class="o">=</span><span class="n">marker_size</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="n">proj</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">proj</span><span class="o">.</span><span class="n">axes</span><span class="p">))]</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="o">**</span><span class="n">legend_params</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">proj</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pipeline">
+<h1>Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">#</a></h1>
+<section id="resting-state-fmri-preprocessing">
+<h2>Resting-state fMRI Preprocessing<a class="headerlink" href="#resting-state-fmri-preprocessing" title="Link to this heading">#</a></h2>
+<p>Typically, raw fMRI scans require extensive preprocessing before they can be used in a machine learning pipeline. However, the <strong>ABIDE</strong> dataset provides several preprocessed derivatives, which can be downloaded directly from the <a class="reference external" href="https://preprocessed-connectomes-project.org/abide/">Preprocessed Connectomes Project (PCP)</a>, eliminating the need for manual preprocessing.</p>
+<p>In this tutorial, we focus on the following preprocessing options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">atlas</span></code>: The <strong>brain atlas</strong> used to <strong>extract ROI time series</strong>. Available options include: <code class="docutils literal notranslate"><span class="pre">&quot;aal&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cc400&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;dosenbach160&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ez&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;ho&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;tt&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">&quot;aal&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bp</span></code>: Whether to apply <strong>band-pass filter</strong> to the time series between [0.01, 0.1] Hz. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gsr</span></code>: Whether to apply <strong>global signal regression</strong> to remove shared global noise from the signals. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">qc</span></code>: Whether to include <strong>only scans that passed all quality checks</strong> provided by the dataset curators. Default: <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_abide_pcp</span>
 
+<span class="c1"># Define preprocessing options</span>
+<span class="n">atlas</span> <span class="o">=</span> <span class="s2">&quot;aal&quot;</span>  <span class="c1"># Brain atlas used to extract ROI time series (e.g., AAL atlas)</span>
+<span class="n">bp</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Apply band-pass filtering (0.01–0.1 Hz) to remove low- and high-frequency noise</span>
+<span class="n">gsr</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Do not apply global signal regression (GSR)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Include all subjects regardless of quality control status</span>
+
+<span class="c1"># Fetch the preprocessed ABIDE dataset using the specified preprocessing options</span>
+<span class="c1"># This returns a dictionary containing region-wise time series and associated metadata</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">fetch_abide_pcp</span><span class="p">(</span>
-    <span class="n">derivatives</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">atlas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
-    <span class="n">band_pass_filtering</span><span class="o">=</span><span class="n">bp</span><span class="p">,</span>
-    <span class="n">global_signal_regression</span><span class="o">=</span><span class="n">gsr</span><span class="p">,</span>
-    <span class="n">quality_checked</span><span class="o">=</span><span class="n">qc</span><span class="p">,</span>
+    <span class="n">derivatives</span><span class="o">=</span><span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">atlas</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">],</span>  <span class="c1"># Select the atlas-specific ROI time series (e.g., &#39;rois_aal&#39;)</span>
+    <span class="n">band_pass_filtering</span><span class="o">=</span><span class="n">bp</span><span class="p">,</span>  <span class="c1"># Whether to apply band-pass filtering</span>
+    <span class="n">global_signal_regression</span><span class="o">=</span><span class="n">gsr</span><span class="p">,</span>  <span class="c1"># Whether to apply global signal regression</span>
+    <span class="n">quality_checked</span><span class="o">=</span><span class="n">qc</span><span class="p">,</span>  <span class="c1"># Whether to include only subjects that passed QC</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -931,44 +1253,86 @@ from sklearn.utils._param_validation import validate_params, StrOptions</p>
 </div>
 </div>
 </div>
+</section>
 <section id="phenotype-preprocessing">
 <h2>Phenotype Preprocessing<a class="headerlink" href="#phenotype-preprocessing" title="Link to this heading">#</a></h2>
-<p>The phenotypic information comes with several missing data. To utilize it for modeling, we need to impute and encode the missing values. Categorical phenotypes that we will use are <code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">SEX</span></code>, <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>, <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code> which will be one-hot encoded while the continuous ones including <code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code> and <code class="docutils literal notranslate"><span class="pre">FIQ</span></code> will be optionally standardized by defining the argument options:</p>
+<p>The phenotypic information in the dataset contains several missing values. We impute and encode it to make it suitable for modeling.</p>
+<p><strong>Categorical Variables</strong></p>
+<p>The following categorical phenotypes are used and will be <strong>one-hot encoded</strong>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">standardize</span></code>: Standardization strategy for subject’s age and FIQ. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>, standardizes the values over all subjects while <code class="docutils literal notranslate"><span class="pre">&quot;site&quot;</span></code> standardizes according to the sites. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SEX</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code></p></li>
 </ul>
-<p>There are several missing <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code> values, we consider that the missing ones by default are right-handed subjects while for <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>, we impute the missing values by setting them to <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p>
-<p>The labels that assigns control and ASD group is the <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code> phenotype that is binary encoded such that <code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> and <code class="docutils literal notranslate"><span class="pre">ASD</span></code> is assigned to <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code> respectively.</p>
+<p><strong>Continuous Variables</strong></p>
+<p>The following continuous phenotypes will optionally be <strong>standardized</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code></p></li>
+</ul>
+<p>Possible options to <code class="docutils literal notranslate"><span class="pre">standardize</span></code> the continuous phenotypes includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">True</span></code>: Standardize across all subjects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;site&quot;</span></code>: Standardize within each site</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: No standardization</p></li>
+</ul>
+<p><strong>Handling Missing Values</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>: Missing values are assumed to correspond to <code class="docutils literal notranslate"><span class="pre">right-handed</span></code> subjects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code>: Missing values are imputed with a default score of <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+</ul>
+<p><strong>Label Encoding</strong></p>
+<p>The diagnostic label <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code> is used to assign the target class:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> → <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ASD</span></code> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">standardize</span> <span class="o">=</span> <span class="s2">&quot;site&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">process_phenotypic_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;phenotypic&quot;</span><span class="p">],</span> <span class="n">standardize</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">standardize</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;site&quot;</span>  <span class="c1"># Standardize continuous phenotypes (e.g., age, FIQ) within each site</span>
+<span class="p">)</span>
+
+<span class="c1"># Process the phenotypic metadata from the ABIDE dataset</span>
+<span class="c1"># This function handles:</span>
+<span class="c1"># - Imputation of missing values (e.g., assuming right-handed for missing handedness)</span>
+<span class="c1"># - One-hot encoding of categorical variables (e.g., sex, site, eye status)</span>
+<span class="c1"># - Standardization of continuous variables based on the chosen strategy (&#39;site&#39; or &#39;all&#39;)</span>
+
+<span class="c1"># Returns:</span>
+<span class="c1"># - `labels`: Binary class labels (0 = control, 1 = ASD)</span>
+<span class="c1"># - `sites`: Site identifiers for domain adaptation</span>
+<span class="c1"># - `phenotypes`: Feature matrix containing encoded and standardized phenotypic variables</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">process_phenotypic_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;phenotypic&quot;</span><span class="p">],</span> <span class="n">standardize</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="feature-extraction">
-<h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h2>Feature Extraction<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Functional MRI (fMRI) time series data often vary in temporal length. However, many machine learning models, including those used in this study require fixed-size input. To address this, a common approach in fMRI analysis is to compute the functional connectivity (e.g., correlation) between regions of interest (ROIs), resulting in a fixed-size feature representation.</p>
+<p>Specifically, we compute a connectivity matrix for each subject, and extract the upper or lower triangular part (excluding the diagonal) to obtain a feature vector suitable for model training.</p>
+<p>The available arguments for feature extraction are:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">measures</span></code>: Sequences of connectivity measure transformation to extract features from the time series. Available ones are <code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;partial&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tangent&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;covariance&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;pearson&quot;]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">measures</span></code>: A sequence of connectivity transformations applied to the ROI time series. Supported options include: <code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;partial&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tangent&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;covariance&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;pearson&quot;]</span></code>.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">measures</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pearson&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
+<p>Multiple transformations can be chained to compute composite connectivity representations. For example, the <strong>Tangent-Pearson</strong> method proposed by <em>Kunda et al.</em> can be specified via <code class="docutils literal notranslate"><span class="pre">measures</span> <span class="pre">=</span> <span class="pre">[&quot;tangent&quot;,</span> <span class="pre">&quot;pearson&quot;]</span></code>. This design also allows for future extensions to support higher-order connectivity features.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Given the long runtime needed for Tangent-Pearson, we opt to use <code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code> by default.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">extract_functional_connectivity</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">atlas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">measures</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">measures</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pearson&quot;</span><span class="p">]</span>  <span class="c1"># Use Pearson correlation to compute functional connectivity</span>
+
+<span class="c1"># Extract functional connectivity features from ROI time series using the specified measure</span>
+<span class="c1"># - `dataset[f&quot;rois_{atlas}&quot;]`: Time series data extracted from the selected brain atlas (e.g., AAL)</span>
+<span class="c1"># - `measures`: List of connectivity measures to apply; in this case, only Pearson correlation is used</span>
+<span class="c1">#   to compute pairwise correlations between ROI time series, resulting in a symmetric connectivity matrix</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="n">extract_functional_connectivity</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">atlas</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span> <span class="n">measures</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -976,47 +1340,58 @@ from sklearn.utils._param_validation import validate_params, StrOptions</p>
 </section>
 <section id="modeling">
 <h2>Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
+<p>We define and train machine learning models for classifying autism spectrum disorder (ASD) using functional connectivity features.</p>
+<p>We explore different configurations including a baseline model, domain adaptation using site information, and an extended approach that incorporates additional phenotypic variables.</p>
+<p>Each model is evaluated using cross-validation, and we analyze the impact of domain adaptation on classification performance.</p>
 <section id="random-seed">
 <h3>Random Seed<a class="headerlink" href="#random-seed" title="Link to this heading">#</a></h3>
+<p>To ensure reproducibility across runs, we define a fixed random seed. This guarantees that all operations involving randomness, such as cross-validation splits, model initialization, and hyperparameter search to produce consistent results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Random Seed</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_random_state</span>
 
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Set a fixed seed for reproducibility</span>
+
+<span class="c1"># Convert the seed into a numpy-compatible RandomState instance</span>
+<span class="c1"># This ensures consistent behavior across scikit-learn functions that rely on randomness</span>
 <span class="n">random_state</span> <span class="o">=</span> <span class="n">check_random_state</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;skf&quot;</span>
-<span class="n">num_folds</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">num_cv_repeats</span> <span class="o">=</span> <span class="mi">5</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="cross-validation-split">
+<h3>Cross-Validation Split<a class="headerlink" href="#cross-validation-split" title="Link to this heading">#</a></h3>
+<p>To evaluate model performance reliably, we define a cross-validation (CV) strategy. By default, we use <strong>Repeated Stratified K-Fold</strong>, which preserves class distribution across folds and supports repeated trials for more stable estimates.</p>
+<p>Alternatively, we can also use <strong>Leave-P-Groups-Out (LPGO)</strong> cross-validation. This strategy is particularly useful in multi-site studies, as it ensures that data from the same group (e.g., imaging site) are not shared between training and test sets, enabling more realistic generalization assessment under domain shift.</p>
+<p>For this tutorial we will specify several arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">split</span></code>: Defines the cross-validation strategy. <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code> for stratified k-fold to maintain label balance in each fold or use <code class="docutils literal notranslate"><span class="pre">&quot;lpgo&quot;</span></code> to evaluate generalization across sites by holding out entire groups (e.g., imaging sites). Default: <code class="docutils literal notranslate"><span class="pre">&quot;lpgo&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_folds</span></code>: Sets how many folds to use for stratified k-fold or how many groups to leave out in LPGO. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_cv_repeats</span></code>: Determines how many times the k-fold procedure is repeated to obtain more stable estimates (ignored when using LPGO). Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeavePGroupsOut</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
 
+<span class="n">split</span> <span class="o">=</span> <span class="s2">&quot;lpgo&quot;</span>  <span class="c1"># Cross-validation split strategy</span>
+<span class="n">num_folds</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Number of folds (or groups to leave out)</span>
+<span class="n">num_cv_repeats</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Number of repetitions (used only for skf)</span>
+
+<span class="c1"># Define the default cross-validation strategy:</span>
+<span class="c1"># Repeated stratified k-fold maintains class distribution across folds and supports multiple repetitions</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span>
-    <span class="n">n_splits</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span>
-    <span class="n">n_repeats</span><span class="o">=</span><span class="n">num_cv_repeats</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+    <span class="n">n_splits</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span>  <span class="c1"># Number of stratified folds</span>
+    <span class="n">n_repeats</span><span class="o">=</span><span class="n">num_cv_repeats</span><span class="p">,</span>  <span class="c1"># Number of repeat rounds</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>  <span class="c1"># Ensures reproducibility</span>
 <span class="p">)</span>
 
 <span class="c1"># Override with leave-p-proups-out if specified</span>
 <span class="c1"># This strategy holds out `p` unique groups (e.g., sites) per fold, enabling group-level generalization</span>
 <span class="k">if</span> <span class="n">split</span> <span class="o">==</span> <span class="s2">&quot;lpgo&quot;</span><span class="p">:</span>
-    <span class="n">cv</span> <span class="o">=</span> <span class="n">LeavePGroupsOut</span><span class="p">(</span><span class="n">num_folds</span><span class="p">)</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">LeavePGroupsOut</span><span class="p">(</span>
+        <span class="n">num_folds</span>
+    <span class="p">)</span>  <span class="c1"># Use group-based CV for domain adaptation or site bias evaluation</span>
 </pre></div>
 </div>
 </div>
@@ -1024,529 +1399,128 @@ from sklearn.utils._param_validation import validate_params, StrOptions</p>
 </section>
 <section id="model-definition">
 <h3>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h3>
+<p>We define different model configurations used for classification. Each model shares the same base classifier (e.g., logistic regression), but differs in how domain adaptation is applied:</p>
+<ul class="simple">
+<li><p><strong>Baseline</strong>: A standard model trained directly on functional connectivity features without domain adaptation.</p></li>
+<li><p><strong>Site Only</strong>: A domain-adapted model that uses site labels as the adaptation factor, reducing site-specific bias.</p></li>
+<li><p><strong>All Phenotypes</strong>: An extended domain-adapted model that incorporates multiple phenotypic variables (e.g., age, sex, handedness) to further reduce inter-site variability.</p></li>
+</ul>
+<p>We also specify the hyperparameter search strategy and other training parameters for each configuration, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">classifier</span></code>: The base model to use for classification. Available options include <code class="docutils literal notranslate"><span class="pre">&quot;logistic&quot;</span></code> for logistic regression, <code class="docutils literal notranslate"><span class="pre">&quot;ridge&quot;</span></code> for ridge classifier, and <code class="docutils literal notranslate"><span class="pre">&quot;svm&quot;</span></code> for support vector machines. Default: <code class="docutils literal notranslate"><span class="pre">&quot;logistic&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scoring</span></code>: A list of performance metrics (e.g., accuracy, F1, AUROC) used during cross-validation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_solver_iterations</span></code>: Maximum number of iterations allowed for the solver to converge during model fitting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_search_iterations</span></code>: Number of hyperparameter combinations to evaluate in a randomized search.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_jobs</span></code>: Number of CPU cores used in parallel for hyperparameter tuning and model training. Set to <code class="docutils literal notranslate"><span class="pre">-1</span></code> to use all of the available CPU cores or <code class="docutils literal notranslate"><span class="pre">-k</span></code> to use all but <code class="docutils literal notranslate"><span class="pre">k</span></code> CPU cores.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: Controls the verbosity of the training output. Higher values provide more detailed logs.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">classifier</span> <span class="o">=</span> <span class="s2">&quot;logistic&quot;</span>
-<span class="n">mida</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">search_strategy</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span>
-<span class="n">scoring</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;roc_auc&quot;</span><span class="p">]</span>
-<span class="n">num_solver_iterations</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">num_search_iterations</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">num_jobs</span> <span class="o">=</span> <span class="kc">None</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">create_trainer</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
+
+<span class="c1"># Define core training configuration</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="s2">&quot;logistic&quot;</span>  <span class="c1"># Classifier type (e.g., &#39;logistic&#39;, &#39;svm&#39;, etc.)</span>
+<span class="n">scoring</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">SCORE</span><span class="p">)</span>  <span class="c1"># List of scoring metrics to evaluate during CV</span>
+<span class="n">num_solver_iterations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>  <span class="c1"># Max iterations for the solver to converge</span>
+<span class="n">num_search_iterations</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Number of parameter settings sampled in randomized search</span>
+<span class="n">num_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span>  <span class="c1"># Number of parallel jobs for training and CV</span>
+<span class="n">verbose</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Verbosity level for output</span>
+
+<span class="c1"># Initialize dictionary to store trainer instances for each model configuration</span>
+<span class="n">trainers</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Create a baseline trainer without domain adaptation (MIDA disabled)</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_trainer</span><span class="p">(</span>
+    <span class="n">classifier</span><span class="p">,</span>  <span class="c1"># Classifier to use</span>
+    <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Do not apply MIDA (no domain adaptation)</span>
+    <span class="s2">&quot;grid&quot;</span><span class="p">,</span>  <span class="c1"># Use grid search for hyperparameter tuning</span>
+    <span class="n">cv</span><span class="p">,</span>  <span class="c1"># Cross-validation strategy</span>
+    <span class="n">scoring</span><span class="p">,</span>  <span class="c1"># Evaluation metrics</span>
+    <span class="n">num_solver_iterations</span><span class="p">,</span>  <span class="c1"># Max solver iterations</span>
+    <span class="n">num_search_iterations</span><span class="p">,</span>  <span class="c1"># Max hyperparameter trials (ignored for grid search)</span>
+    <span class="n">num_jobs</span><span class="p">,</span>  <span class="c1"># Number of parallel jobs</span>
+    <span class="n">random_state</span><span class="p">,</span>  <span class="c1"># Random seed for reproducibility</span>
+    <span class="n">verbose</span><span class="p">,</span>  <span class="c1"># Verbosity level</span>
+<span class="p">)</span>
+
+<span class="c1"># Create a trainer with MIDA enabled, using site labels as domain adaptation factors</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;site_only&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_trainer</span><span class="p">(</span>
     <span class="n">classifier</span><span class="p">,</span>
-    <span class="n">mida</span><span class="p">,</span>
-    <span class="n">search_strategy</span><span class="p">,</span>
+    <span class="kc">True</span><span class="p">,</span>  <span class="c1"># Apply MIDA for domain adaptation</span>
+    <span class="s2">&quot;random&quot;</span><span class="p">,</span>  <span class="c1"># Use randomized search for hyperparameter tuning</span>
     <span class="n">cv</span><span class="p">,</span>
     <span class="n">scoring</span><span class="p">,</span>
     <span class="n">num_solver_iterations</span><span class="p">,</span>
     <span class="n">num_search_iterations</span><span class="p">,</span>
     <span class="n">num_jobs</span><span class="p">,</span>
     <span class="n">random_state</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">,</span>
 <span class="p">)</span>
+
+<span class="c1"># Clone the &#39;site_only&#39; trainer to create &#39;all_phenotypes&#39; trainer</span>
+<span class="c1"># This enables reusing the same training configuration, while modifying only the input domain factors</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;all_phenotypes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;site_only&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="training">
-<h3>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h3>
+</section>
+<section id="training-and-cross-validation">
+<h2>Training and Cross-Validation<a class="headerlink" href="#training-and-cross-validation" title="Link to this heading">#</a></h2>
+<p>We train each model configuration using the previously defined cross-validation strategy. The training process involves fitting the model on functional connectivity features and evaluating its performance using multiple scoring metrics (e.g., accuracy, F1-score, AUROC).</p>
+<p>For models with domain adaptation, we pass additional domain factors (such as site or phenotypic variables) to guide the alignment of feature representations. Cross-validation is performed to ensure robust performance estimates and to select the best hyperparameter configuration for each model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fit_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span> <span class="k">if</span> <span class="n">mida</span> <span class="k">else</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">sites</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define common training arguments for all models: features (X), labels (y), and group info (sites)</span>
+<span class="n">fit_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">sites</span><span class="p">}</span>
 
-<span class="k">if</span> <span class="n">mida</span> <span class="ow">and</span> <span class="n">site_only</span><span class="p">:</span>
-    <span class="n">fit_args</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">mida</span><span class="p">:</span>
-    <span class="n">fit_args</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span>
+<span class="c1"># Fit the baseline model using raw features (no domain adaptation)</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">fit_args</span><span class="p">)</span>
 
-<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">fit_args</span><span class="p">)</span>
+<span class="c1"># Prepare arguments for MIDA-based models by renaming X -&gt; x (MIDA uses &#39;x&#39;)</span>
+<span class="n">fit_args_mida</span> <span class="o">=</span> <span class="n">fit_args</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">fit_args_mida</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fit_args_mida</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add one-hot encoded site information as domain factors for MIDA</span>
+<span class="n">fit_args_mida</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">sites</span><span class="p">)</span>
+
+<span class="c1"># Fit the &#39;site_only&#39; model using domain adaptation with site labels only</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;site_only&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">fit_args_mida</span><span class="p">)</span>
+
+<span class="c1"># Update the MIDA input to include full phenotype metadata (e.g., age, gender, site)</span>
+<span class="n">fit_args_mida</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span>
+
+<span class="c1"># Fit the &#39;all_phenotypes&#39; model using full metadata as domain-relevant factors</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;all_phenotypes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">fit_args_mida</span><span class="p">)</span>
+
+<span class="c1"># Collect cross-validation results from each trained model for later comparison</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">trainers</span><span class="p">:</span>
+    <span class="c1"># Store each model&#39;s cv_results_ (e.g., scores, ranks) in a DataFrame</span>
+    <span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trainers</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:86: UserWarning: The groups parameter is ignored by RepeatedStratifiedKFold
-  warnings.warn(
-/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
-  warnings.warn(
-/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
-  warnings.warn(
-/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
-  warnings.warn(
-/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
-  warnings.warn(
-/home/zarizky/miniforge3/envs/workshop-notebooks/lib/python3.10/site-packages/sklearn/model_selection/_split.py:877: UserWarning: The groups parameter is ignored by StratifiedKFold
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output text_html"><style>#sk-container-id-1 {
-  /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: #000;
-  --sklearn-color-text-muted: #666;
-  --sklearn-color-line: gray;
-  /* Definition of color scheme for unfitted estimators */
-  --sklearn-color-unfitted-level-0: #fff5e6;
-  --sklearn-color-unfitted-level-1: #f6e4d2;
-  --sklearn-color-unfitted-level-2: #ffe0b3;
-  --sklearn-color-unfitted-level-3: chocolate;
-  /* Definition of color scheme for fitted estimators */
-  --sklearn-color-fitted-level-0: #f0f8ff;
-  --sklearn-color-fitted-level-1: #d4ebff;
-  --sklearn-color-fitted-level-2: #b3dbfd;
-  --sklearn-color-fitted-level-3: cornflowerblue;
-
-  /* Specific color for light theme */
-  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
-  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-icon: #696969;
-
-  @media (prefers-color-scheme: dark) {
-    /* Redefinition of color scheme for dark theme */
-    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
-    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-icon: #878787;
-  }
-}
-
-#sk-container-id-1 {
-  color: var(--sklearn-color-text);
-}
-
-#sk-container-id-1 pre {
-  padding: 0;
-}
-
-#sk-container-id-1 input.sk-hidden--visually {
-  border: 0;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-#sk-container-id-1 div.sk-dashed-wrapped {
-  border: 1px dashed var(--sklearn-color-line);
-  margin: 0 0.4em 0.5em 0.4em;
-  box-sizing: border-box;
-  padding-bottom: 0.4em;
-  background-color: var(--sklearn-color-background);
-}
-
-#sk-container-id-1 div.sk-container {
-  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
-     but bootstrap.min.css set `[hidden] { display: none !important; }`
-     so we also need the `!important` here to be able to override the
-     default hidden behavior on the sphinx rendered scikit-learn.org.
-     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
-  display: inline-block !important;
-  position: relative;
-}
-
-#sk-container-id-1 div.sk-text-repr-fallback {
-  display: none;
-}
-
-div.sk-parallel-item,
-div.sk-serial,
-div.sk-item {
-  /* draw centered vertical line to link estimators */
-  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
-  background-size: 2px 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-/* Parallel-specific style estimator block */
-
-#sk-container-id-1 div.sk-parallel-item::after {
-  content: "";
-  width: 100%;
-  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
-  flex-grow: 1;
-}
-
-#sk-container-id-1 div.sk-parallel {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  background-color: var(--sklearn-color-background);
-  position: relative;
-}
-
-#sk-container-id-1 div.sk-parallel-item {
-  display: flex;
-  flex-direction: column;
-}
-
-#sk-container-id-1 div.sk-parallel-item:first-child::after {
-  align-self: flex-end;
-  width: 50%;
-}
-
-#sk-container-id-1 div.sk-parallel-item:last-child::after {
-  align-self: flex-start;
-  width: 50%;
-}
-
-#sk-container-id-1 div.sk-parallel-item:only-child::after {
-  width: 0;
-}
-
-/* Serial-specific style estimator block */
-
-#sk-container-id-1 div.sk-serial {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--sklearn-color-background);
-  padding-right: 1em;
-  padding-left: 1em;
-}
-
-
-/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
-clickable and can be expanded/collapsed.
-- Pipeline and ColumnTransformer use this feature and define the default style
-- Estimators will overwrite some part of the style using the `sk-estimator` class
-*/
-
-/* Pipeline and ColumnTransformer style (default) */
-
-#sk-container-id-1 div.sk-toggleable {
-  /* Default theme specific background. It is overwritten whether we have a
-  specific estimator or a Pipeline/ColumnTransformer */
-  background-color: var(--sklearn-color-background);
-}
-
-/* Toggleable label */
-#sk-container-id-1 label.sk-toggleable__label {
-  cursor: pointer;
-  display: flex;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 0.5em;
-  box-sizing: border-box;
-  text-align: center;
-  align-items: start;
-  justify-content: space-between;
-  gap: 0.5em;
-}
-
-#sk-container-id-1 label.sk-toggleable__label .caption {
-  font-size: 0.6rem;
-  font-weight: lighter;
-  color: var(--sklearn-color-text-muted);
-}
-
-#sk-container-id-1 label.sk-toggleable__label-arrow:before {
-  /* Arrow on the left of the label */
-  content: "▸";
-  float: left;
-  margin-right: 0.25em;
-  color: var(--sklearn-color-icon);
-}
-
-#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
-  color: var(--sklearn-color-text);
-}
-
-/* Toggleable content - dropdown */
-
-#sk-container-id-1 div.sk-toggleable__content {
-  max-height: 0;
-  max-width: 0;
-  overflow: hidden;
-  text-align: left;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-1 div.sk-toggleable__content.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-1 div.sk-toggleable__content pre {
-  margin: 0.2em;
-  border-radius: 0.25em;
-  color: var(--sklearn-color-text);
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-1 div.sk-toggleable__content.fitted pre {
-  /* unfitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
-  /* Expand drop-down */
-  max-height: 200px;
-  max-width: 100%;
-  overflow: auto;
-}
-
-#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
-  content: "▾";
-}
-
-/* Pipeline/ColumnTransformer-specific style */
-
-#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator-specific style */
-
-/* Colorize estimator box */
-#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-#sk-container-id-1 div.sk-label label.sk-toggleable__label,
-#sk-container-id-1 div.sk-label label {
-  /* The background is the default theme color */
-  color: var(--sklearn-color-text-on-default-background);
-}
-
-/* On hover, darken the color of the background */
-#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-/* Label box, darken color on hover, fitted */
-#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
-  color: var(--sklearn-color-text);
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Estimator label */
-
-#sk-container-id-1 div.sk-label label {
-  font-family: monospace;
-  font-weight: bold;
-  display: inline-block;
-  line-height: 1.2em;
-}
-
-#sk-container-id-1 div.sk-label-container {
-  text-align: center;
-}
-
-/* Estimator-specific */
-#sk-container-id-1 div.sk-estimator {
-  font-family: monospace;
-  border: 1px dotted var(--sklearn-color-border-box);
-  border-radius: 0.25em;
-  box-sizing: border-box;
-  margin-bottom: 0.5em;
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-0);
-}
-
-#sk-container-id-1 div.sk-estimator.fitted {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-0);
-}
-
-/* on hover */
-#sk-container-id-1 div.sk-estimator:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-2);
-}
-
-#sk-container-id-1 div.sk-estimator.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-2);
-}
-
-/* Specification for estimator info (e.g. "i" and "?") */
-
-/* Common style for "i" and "?" */
-
-.sk-estimator-doc-link,
-a:link.sk-estimator-doc-link,
-a:visited.sk-estimator-doc-link {
-  float: right;
-  font-size: smaller;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1em;
-  height: 1em;
-  width: 1em;
-  text-decoration: none !important;
-  margin-left: 0.5em;
-  text-align: center;
-  /* unfitted */
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-  color: var(--sklearn-color-unfitted-level-1);
-}
-
-.sk-estimator-doc-link.fitted,
-a:link.sk-estimator-doc-link.fitted,
-a:visited.sk-estimator-doc-link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-div.sk-estimator:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover,
-div.sk-label-container:hover .sk-estimator-doc-link:hover,
-.sk-estimator-doc-link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover,
-div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
-.sk-estimator-doc-link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-/* Span, style for the box shown on hovering the info icon */
-.sk-estimator-doc-link span {
-  display: none;
-  z-index: 9999;
-  position: relative;
-  font-weight: normal;
-  right: .2ex;
-  padding: .5ex;
-  margin: .5ex;
-  width: min-content;
-  min-width: 20ex;
-  max-width: 50ex;
-  color: var(--sklearn-color-text);
-  box-shadow: 2pt 2pt 4pt #999;
-  /* unfitted */
-  background: var(--sklearn-color-unfitted-level-0);
-  border: .5pt solid var(--sklearn-color-unfitted-level-3);
-}
-
-.sk-estimator-doc-link.fitted span {
-  /* fitted */
-  background: var(--sklearn-color-fitted-level-0);
-  border: var(--sklearn-color-fitted-level-3);
-}
-
-.sk-estimator-doc-link:hover span {
-  display: block;
-}
-
-/* "?"-specific style due to the `<a>` HTML tag */
-
-#sk-container-id-1 a.estimator_doc_link {
-  float: right;
-  font-size: 1rem;
-  line-height: 1em;
-  font-family: monospace;
-  background-color: var(--sklearn-color-background);
-  border-radius: 1rem;
-  height: 1rem;
-  width: 1rem;
-  text-decoration: none;
-  /* unfitted */
-  color: var(--sklearn-color-unfitted-level-1);
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-}
-
-#sk-container-id-1 a.estimator_doc_link.fitted {
-  /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
-}
-
-/* On hover */
-#sk-container-id-1 a.estimator_doc_link:hover {
-  /* unfitted */
-  background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
-  text-decoration: none;
-}
-
-#sk-container-id-1 a.estimator_doc_link.fitted:hover {
-  /* fitted */
-  background-color: var(--sklearn-color-fitted-level-3);
-}
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomizedSearchCV(cv=RepeatedStratifiedKFold(n_repeats=5, n_splits=10,
-            random_state=RandomState(MT19937) at 0x7FA866A4DE40),
-                   error_score=&#x27;raise&#x27;,
-                   estimator=LogisticRegression(max_iter=1000000,
-                                                random_state=RandomState(MT19937) at 0x7FA866A4DE40),
-                   param_distributions={&#x27;C&#x27;: array([3.05175781e-05, 6.10351562e-05, 1.22070312e-04, 2.44140625e-04,
-       4.88281250e-04, 9.765...
-       1.25000000e-01, 2.50000000e-01, 5.00000000e-01, 1.00000000e+00,
-       2.00000000e+00, 4.00000000e+00, 8.00000000e+00, 1.60000000e+01,
-       3.20000000e+01, 6.40000000e+01, 1.28000000e+02, 2.56000000e+02,
-       5.12000000e+02, 1.02400000e+03, 2.04800000e+03, 4.09600000e+03,
-       8.19200000e+03, 1.63840000e+04, 3.27680000e+04])},
-                   random_state=RandomState(MT19937) at 0x7FA866A4DE40,
-                   refit=&#x27;accuracy&#x27;, scoring=[&#x27;accuracy&#x27;, &#x27;roc_auc&#x27;])</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomizedSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.model_selection.RandomizedSearchCV.html">?<span>Documentation for RandomizedSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomizedSearchCV(cv=RepeatedStratifiedKFold(n_repeats=5, n_splits=10,
-            random_state=RandomState(MT19937) at 0x7FA866A4DE40),
-                   error_score=&#x27;raise&#x27;,
-                   estimator=LogisticRegression(max_iter=1000000,
-                                                random_state=RandomState(MT19937) at 0x7FA866A4DE40),
-                   param_distributions={&#x27;C&#x27;: array([3.05175781e-05, 6.10351562e-05, 1.22070312e-04, 2.44140625e-04,
-       4.88281250e-04, 9.765...
-       1.25000000e-01, 2.50000000e-01, 5.00000000e-01, 1.00000000e+00,
-       2.00000000e+00, 4.00000000e+00, 8.00000000e+00, 1.60000000e+01,
-       3.20000000e+01, 6.40000000e+01, 1.28000000e+02, 2.56000000e+02,
-       5.12000000e+02, 1.02400000e+03, 2.04800000e+03, 4.09600000e+03,
-       8.19200000e+03, 1.63840000e+04, 3.27680000e+04])},
-                   random_state=RandomState(MT19937) at 0x7FA866A4DE40,
-                   refit=&#x27;accuracy&#x27;, scoring=[&#x27;accuracy&#x27;, &#x27;roc_auc&#x27;])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: LogisticRegression</div></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.03125, max_iter=1000000,
-                   random_state=RandomState(MT19937) at 0x7FA864732640)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>LogisticRegression</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a></div></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression(C=0.03125, max_iter=1000000,
-                   random_state=RandomState(MT19937) at 0x7FA864732640)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
-<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="p">[</span>
-    <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">aggregate</span><span class="si">}</span><span class="s2">_test_</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scoring</span> <span class="k">for</span> <span class="n">aggregate</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">]]</span>
-<span class="p">]</span>
-
-<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;mean_test_accuracy&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cv_results</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">cv_results</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Rank&quot;</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 20 folds for each of 31 candidates, totalling 620 fits
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="id2">
+<h2>Evaluation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>We evaluate and compare the performance of different model configurations using cross-validation results. We aggregate the top-performing scores for each model based on a specified evaluation metric (e.g., accuracy), allowing us to assess the effectiveness of domain adaptation strategies.</p>
+<p>By comparing models with and without domain adaptation, we can determine the impact of incorporating site and phenotypic information on multi-site autism classification performance. This analysis helps identify which configurations generalize best across heterogeneous imaging sites.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cv_results</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compile the cross-validation results into a summary table,</span>
+<span class="c1"># sorting by the model with the highest test accuracy across CV folds</span>
+<span class="n">compiled_results</span> <span class="o">=</span> <span class="n">compile_results</span><span class="p">(</span><span class="n">cv_results</span><span class="p">,</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display the compiled results DataFrame (models as rows, metrics as formatted strings)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">compiled_results</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1619,6 +1593,87 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div></div></div>
 </div>
 </section>
+<section id="interpretation">
+<h2>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h2>
+<p>We interpret the trained models by analyzing the learned weights associated with functional connectivity features. Specifically, we extract the top-weighted ROI pairs that contributed most to the classification decision.</p>
+<p>These weights are visualized as a <strong>connectome plot</strong>, allowing us to examine which brain region interactions are most informative for distinguishing individuals with autism from controls. This not only enhances the interpretability of the model but also provides potential insights into neurobiological patterns relevant to autism.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_atlas_aal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_parcellation_cut_coords</span>
+
+<span class="c1"># Retrieve the trained model configured with all phenotypic metadata</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;all_phenotypes&quot;</span><span class="p">]</span>
+
+<span class="c1"># Fetch the AAL (Automated Anatomical Labeling) atlas</span>
+<span class="c1"># Provides ROI labels and brain region maps</span>
+<span class="n">atlas</span> <span class="o">=</span> <span class="n">fetch_atlas_aal</span><span class="p">()</span>
+
+<span class="c1"># Extract 3D MNI coordinates for each ROI in the AAL atlas</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">find_parcellation_cut_coords</span><span class="p">(</span><span class="n">atlas</span><span class="o">.</span><span class="n">maps</span><span class="p">)</span>
+
+<span class="c1"># Extract weights from the MIDA-transformed feature space (domain-adapted representation)</span>
+<span class="n">mida_weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">best_mida_</span><span class="o">.</span><span class="n">orig_coef_</span>
+
+<span class="c1"># Extract weights from the final classifier (e.g., logistic regression coefficients)</span>
+<span class="n">classifier_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Compute final feature-level weights by linearly combining MIDA and classifier weights</span>
+<span class="c1"># Resulting in one scalar per connectivity feature</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="p">(</span><span class="n">mida_weights</span> <span class="o">@</span> <span class="n">classifier_weights</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Visualize the top 0.2% strongest ROI-to-ROI connections using a connectome plot</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">visualize_connectome</span><span class="p">(</span>
+    <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">atlas</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>  <span class="c1"># ROI names from the AAL atlas</span>
+    <span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span>  <span class="c1"># ROI spatial coordinates (MNI space)</span>
+    <span class="n">p</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span>  <span class="c1"># Visualize top 0.2% of weights by magnitude</span>
+    <span class="n">legend_params</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Region of Interest&quot;</span><span class="p">,</span>  <span class="c1"># Title shown above the legend</span>
+        <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Organize legend entries into 3 columns</span>
+        <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower center&quot;</span><span class="p">,</span>  <span class="c1"># Legend anchor point</span>
+        <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">),</span>  <span class="c1"># Adjust legend position</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Display the resulting connectome plot</span>
+<span class="n">display</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[get_dataset_dir] Dataset found in /home/zarizky/nilearn_data/aal_SPM12
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x7f03fca42d10&gt;
+</pre></div>
+</div>
+<img alt="../_images/8ddd7c99661dff61ed85d3f2d06ec08abf12c8d702d83df52ceab6c5c990bfbf.png" src="../_images/8ddd7c99661dff61ed85d3f2d06ec08abf12c8d702d83df52ceab6c5c990bfbf.png" />
+</div>
+</div>
+<p>This plot shows the <strong>most discriminative ROI connections</strong> for classifying ASD vs Control subjects.</p>
+<ul class="simple">
+<li><p><strong>Red edges</strong> indicate connections <strong>stronger in ASD</strong>.</p></li>
+<li><p><strong>Blue edges</strong> indicate connections <strong>stronger in Control</strong>.</p></li>
+<li><p>Color intensity reflects the <strong>magnitude of contribution</strong> to the model’s decision.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Key Patterns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Increased connectivity in ASD (Red</strong>):</p>
+<ul>
+<li><p>Between <strong>frontal regions</strong> (<em>Frontal_Inf_Tri_L</em>, <em>Frontal_Sup_R</em>) and <strong>limbic structures</strong> (<em>Hippocampus_R</em>, <em>Amygdala_L</em>), suggesting atypical emotional or executive function coupling.</p></li>
+<li><p><strong>Temporal and subcortical regions</strong> (<em>Temporal_Pole_Mid_R</em>, <em>Putamen_R</em>) are also prominent—linked to altered language, reward, or sensorimotor integration in ASD.</p></li>
+</ul>
+</li>
+<li><p><strong>Increased connectivity in Control (Blue)</strong>:</p>
+<ul>
+<li><p>Involving <strong>parietal and sensorimotor regions</strong> (<em>Postcentral_R</em>, <em>Precuneus_R</em>, <em>Supramarginal_R</em>), indicating more typical integration of sensory and motor pathways.</p></li>
+<li><p>Also includes <strong>default mode and association regions</strong> (<em>Angular_L</em>, <em>Parietal_Inf_R</em>), which are often underconnected in ASD.</p></li>
+</ul>
+</li>
+</ul>
+<p>The model distinguishes ASD from Control subjects by identifying <strong>abnormal functional connections</strong>, especially across <strong>frontal–limbic</strong>, <strong>temporal–subcortical</strong>, and <strong>parietal–sensorimotor networks</strong>, aligning with known neurodevelopmental differences in autism.</p>
 </section>
 </section>
 
@@ -1677,16 +1732,31 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-seed">Random Seed</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Reducing Phenotypic Effects to Improve Multi-site Autism Classification Performance</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer">Trainer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline">Pipeline</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resting-state-fmri-preprocessing">Resting-state fMRI Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-seed">Random Seed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-cross-validation">Training and Cross-Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
 </ul>
 </li>
 </ul>
