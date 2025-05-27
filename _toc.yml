@@ -22,4 +22,4 @@ parts:
     - file: workshops/ukomain2025/preparation
 - caption: Tutorials
   chapters:
-  - file: tutorials/abide
+  - file: tutorials/brain-disorder-diagnosis/notebook
