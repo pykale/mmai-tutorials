@@ -1,5 +1,7 @@
-jupyter-book
-matplotlib
-numpy
+jupyter-book==1.0.4.post1
+matplotlib==3.10.3
+seaborn==0.13.2
+numpy==1.26.4
 git+https://github.com/pykale/pykale@main
-nilearn
+nilearn==0.11.1
+yacs==0.1.8
