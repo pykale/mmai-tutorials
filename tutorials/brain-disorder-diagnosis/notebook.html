@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Brain Disorder Diagnosis &#8212; PyKale</title>
+    <title>Setup &#8212; PyKale</title>
   
   
   
@@ -147,14 +147,8 @@
   
   
   
-    
-    
-      
-    
-    
-    <img src="../../_static/logo.png" class="logo__image only-light" alt="PyKale - Home"/>
-    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
   
+    <p class="title logo__title">PyKale</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -197,8 +191,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brain Disorder Diagnosis</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Setup</a></li>
 
 
 
@@ -438,7 +431,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Brain Disorder Diagnosis</h1>
+    <h1>Setup</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -448,8 +441,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
@@ -480,22 +472,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="brain-disorder-diagnosis">
-<h1>Brain Disorder Diagnosis<a class="headerlink" href="#brain-disorder-diagnosis" title="Link to this heading">#</a></h1>
-<p>In this tutorial, we demonstrate how to leverage <strong>patient phenotypic information</strong> to reduce <strong>site-specific biases</strong> in functional connectivity data using <strong>domain adaptation</strong>, with the goal of improving <strong>multi-site autism classification</strong>.</p>
-<p>This notebook builds on the work of <strong>Kunda et al. (IEEE TMI, 2022)</strong>, which introduced a second-order functional connectivity representation called <strong>Tangent-Pearson</strong>, the tangent embedding of the Pearson correlation matrix. The original work also applied domain adaptation to reduce site dependencies in fMRI-derived features, using <strong>site labels</strong> as the domain information.</p>
-<p>We extend this approach by incorporating a <strong>richer set</strong> of phenotypic variables, such as sex, handedness, age, and eye status into the domain adaptation framework. This enables more effective harmonization across data collected from different imaging sites.</p>
-<hr class="docutils" />
-<p><strong>Objectives</strong></p>
-<ol class="arabic simple">
-<li><p><strong>Load</strong> the ABIDE dataset using different preprocessing pipelines and brain atlases.</p></li>
-<li><p><strong>Extract</strong> functional connectivity features from ROI-based time series.</p></li>
-<li><p><strong>Preprocess</strong> phenotypic variables for use in domain adaptation, and obtain class labels (ASD vs CONTROL) and site labels.</p></li>
-<li><p><strong>Build</strong> a training and evaluation pipeline to assess classification performance under various domain adaptation strategies.</p></li>
-<li><p><strong>Interpret</strong> the learned model by extracting weights for pairwise ROI feature importance and visualizing them using a connectome plot.</p></li>
-</ol>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="setup">
+  <section class="tex2jax_ignore mathjax_ignore" id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
 <p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
 <p>Moreover, we provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. The three additional helper scripts are:</p>
@@ -1064,8 +1041,7 @@ TRAINER:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
