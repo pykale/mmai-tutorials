@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Setup &#8212; PyKale</title>
+    <title>Brain Disorder Diagnosis &#8212; PyKale</title>
   
   
   
@@ -191,7 +191,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Setup</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brain Disorder Diagnosis</a></li>
+
 
 
 
@@ -431,7 +432,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Setup</h1>
+    <h1>Brain Disorder Diagnosis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -441,14 +442,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data Loading and Preprocessing</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="visible nav section-nav flex-column">
@@ -457,7 +459,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-Validation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
 </ul>
@@ -472,7 +474,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="setup">
+  <section class="tex2jax_ignore mathjax_ignore" id="brain-disorder-diagnosis">
+<h1>Brain Disorder Diagnosis<a class="headerlink" href="#brain-disorder-diagnosis" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we demonstrate how to leverage <strong>patient phenotypic information</strong> to reduce <strong>site-specific biases</strong> in functional connectivity data using <strong>domain adaptation</strong>, with the goal of improving <strong>multi-site autism classification</strong>.</p>
+<p>This notebook builds on the work of <strong>Kunda et al. (IEEE TMI, 2022)</strong>, which introduced a second-order functional connectivity representation called <strong>Tangent-Pearson</strong>, the tangent embedding of the Pearson correlation matrix. The original work also applied domain adaptation to reduce site dependencies in fMRI-derived features, using <strong>site labels</strong> as the domain information.</p>
+<p>We extend this approach by incorporating a <strong>richer set</strong> of phenotypic variables, such as sex, handedness, age, and eye status into the domain adaptation framework. This enables more effective harmonization across data collected from different imaging sites.</p>
+<hr class="docutils" />
+<p><strong>Objectives</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Load</strong> the ABIDE dataset using different preprocessing pipelines and brain atlases.</p></li>
+<li><p><strong>Preprocess</strong> phenotypic variables for use in domain adaptation, and obtain class labels (ASD vs CONTROL) and site labels.</p></li>
+<li><p><strong>Extract</strong> functional connectivity <strong>embedding</strong> from ROI-based time series.</p></li>
+<li><p><strong>Build</strong> a <strong>training</strong> and <strong>evaluation</strong> pipeline to assess classification performance under various domain adaptation strategies.</p></li>
+<li><p><strong>Interpret</strong> the learned model by extracting weights for pairwise ROI feature importance and visualizing them using a connectome plot.</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
 <p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
 <p>Moreover, we provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. The three additional helper scripts are:</p>
@@ -481,6 +498,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">parsing.py</span></code>: Contains utilities to compile evaluation results from the training process.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">preprocess.py</span></code>: Handles phenotype preprocessing (e.g., imputing missing values and encoding categorical variables) and feature extraction from the fMRI time series.</p></li>
 </ul>
+<p>For Google Colab, these helper scripts are found in <code class="docutils literal notranslate"><span class="pre">embc-mmai25/tutorials/brain-disorder-diagnosis</span></code>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -493,6 +511,19 @@ document.write(`
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
+
+<span class="c1"># Test if running in Colab</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">drive</span>
+
+    <span class="n">mount_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;/content&quot;</span><span class="p">,</span> <span class="s2">&quot;drive&quot;</span><span class="p">)</span>
+    <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="n">mount_dir</span><span class="p">)</span>
+    <span class="c1"># Assign it to your dataset&#39;s location</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mount_dir</span><span class="p">,</span> <span class="s2">&quot;MyDrive&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+    <span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span>
+    <span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">-</span><span class="n">b</span> <span class="n">brain</span><span class="o">-</span><span class="n">decoding</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">embc</span><span class="o">-</span><span class="n">mmai25</span><span class="o">.</span><span class="n">git</span>
+    <span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">embc</span><span class="o">-</span><span class="n">mmai25</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">brain</span><span class="o">-</span><span class="n">disorder</span><span class="o">-</span><span class="n">diagnosis</span>
 </pre></div>
 </div>
 </div>
@@ -500,9 +531,11 @@ document.write(`
 </div>
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
-<p>The main packages required for this tutorial are PyKale and Nilearn.</p>
-<p><strong>PyKale</strong> is an open-source interdisciplinary machine learning library developed at the University of Sheffield, with a focus on applications in biomedical and scientific domains.</p>
-<p><strong>Nilearn</strong> is a Python library for neuroimaging analysis, widely used for processing and visualizing functional MRI (fMRI) data.</p>
+<p>The main packages required for this tutorial are <code class="docutils literal notranslate"><span class="pre">pykale</span></code>, <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, and <code class="docutils literal notranslate"><span class="pre">yacs</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pykale</span></code> is an open-source interdisciplinary machine learning library developed at the University of Sheffield, with a focus on applications in biomedical and scientific domains.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nilearn</span></code> is a Python library for neuroimaging analysis, widely used for processing and visualizing functional MRI (fMRI) data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> is a popular data wrangling library.</p>
+<p><code class="docutils literal notranslate"><span class="pre">yacs</span></code> is a configuration management used to store experiment settings.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -510,15 +543,16 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> <span class="n">nilearn</span> \
-    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;PyKale and Nilearn installed successfully ✅&quot;</span> \
-    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install PyKale and Nilearn ❌&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
+    <span class="n">nilearn</span><span class="o">==</span><span class="mf">0.11.1</span> <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> \
+    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale, nilearn, and yacs installed successfully ✅&quot;</span> \
+    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale, nilearn, and yacs ❌&quot;</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyKale and Nilearn installed successfully ✅
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pykale, nilearn, and yacs installed successfully ✅
 </pre></div>
 </div>
 </div>
@@ -537,7 +571,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
 
 <span class="n">cfg</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>
-<span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;experiments/base.yaml&quot;</span><span class="p">)</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;experiments/base.yml&quot;</span><span class="p">)</span>
 <span class="n">cfg</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 </pre></div>
@@ -548,9 +582,9 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CONNECTIVITY:
   MEASURES: [&#39;pearson&#39;]
 CROSS_VALIDATION:
-  NUM_FOLDS: 1
+  NUM_FOLDS: 10
   NUM_REPEATS: 1
-  SPLIT: lpgo
+  SPLIT: skf
 DATASET:
   ATLAS: aal
   BANDPASS: False
@@ -563,13 +597,13 @@ RANDOM_STATE: 0
 TRAINER:
   CLASSIFIER: lr
   NONLINEAR: False
-  NUM_SEARCH_ITER: 100
-  NUM_SOLVER_ITER: 1000000
+  NUM_SEARCH_ITER: 50
+  NUM_SOLVER_ITER: 100
   N_JOBS: -4
   REFIT: accuracy
   SCORING: [&#39;accuracy&#39;, &#39;roc_auc&#39;]
   SEARCH_STRATEGY: random
-  VERBOSE: 1
+  VERBOSE: 0
 </pre></div>
 </div>
 </div>
@@ -590,10 +624,10 @@ TRAINER:
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_abide_pcp</span>
 
-
 <span class="c1"># Fetch the preprocessed ABIDE dataset using the specified preprocessing options</span>
 <span class="c1"># This returns a dictionary containing region-wise time series and associated metadata</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">fetch_abide_pcp</span><span class="p">(</span>
+    <span class="n">data_dir</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
     <span class="c1"># Select the atlas-specific ROI time series (e.g., &#39;rois_aal&#39;)</span>
     <span class="n">derivatives</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;rois_</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">ATLAS</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
     <span class="c1"># Whether to apply band-pass filtering</span>
@@ -652,9 +686,6 @@ TRAINER:
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">process_phenotypic_data</span>
 
-<span class="c1"># Standardize continuous phenotypes (e.g., age, FIQ) within each site</span>
-<span class="n">standardize</span> <span class="o">=</span> <span class="s2">&quot;site&quot;</span>
-
 <span class="c1"># Process the phenotypic metadata from the ABIDE dataset</span>
 <span class="c1"># This function handles:</span>
 <span class="c1"># - Imputation of missing values (e.g., assuming right-handed for missing handedness)</span>
@@ -665,17 +696,19 @@ TRAINER:
 <span class="c1"># - `labels`: Binary class labels (0 = control, 1 = ASD)</span>
 <span class="c1"># - `sites`: Site identifiers for domain adaptation</span>
 <span class="c1"># - `phenotypes`: Feature matrix containing encoded and standardized phenotypic variables</span>
-<span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">process_phenotypic_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;phenotypic&quot;</span><span class="p">],</span> <span class="n">standardize</span><span class="p">)</span>
+<span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">process_phenotypic_data</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;phenotypic&quot;</span><span class="p">],</span> <span class="n">cfg</span><span class="o">.</span><span class="n">PHENOTYPE</span><span class="o">.</span><span class="n">STANDARDIZE</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="feature-extraction">
-<h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h2>
+<section id="embedding-extraction">
+<h2>Embedding Extraction<a class="headerlink" href="#embedding-extraction" title="Link to this heading">#</a></h2>
 <p>Functional MRI (fMRI) time series data often vary in temporal length. However, many machine learning models, including those used in this study require fixed-size input. To address this, a common approach in fMRI analysis is to compute the functional connectivity (e.g., correlation) between regions of interest (ROIs), resulting in a fixed-size feature representation.</p>
 <p>Specifically, we compute a connectivity matrix for each subject, and extract the upper or lower triangular part (excluding the diagonal) to obtain a feature vector suitable for model training.</p>
-<p>The available arguments for feature extraction are:</p>
+<p>The available arguments for embedding extraction are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">measures</span></code>: A sequence of connectivity transformations applied to the ROI time series. Supported options include: <code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;partial&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tangent&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;covariance&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;pearson&quot;]</span></code>.</p></li>
 </ul>
@@ -706,7 +739,6 @@ TRAINER:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_random_state</span>
-
 
 <span class="c1"># Convert the seed into a numpy-compatible RandomState instance</span>
 <span class="c1"># This ensures consistent behavior across scikit-learn functions that rely on randomness</span>
@@ -771,8 +803,7 @@ TRAINER:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.mida_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multi_domain_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
 
 <span class="c1"># Configuration with cv included</span>
 <span class="n">trainer_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
@@ -796,14 +827,13 @@ TRAINER:
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="cross-validation">
-<h1>Cross-Validation<a class="headerlink" href="#cross-validation" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="training">
+<h1>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h1>
 <p>We train each model configuration using the previously defined cross-validation strategy. The training process involves fitting the model on functional connectivity features and evaluating its performance using multiple scoring metrics (e.g., accuracy, F1-score, AUROC).</p>
-<p>For models with domain adaptation, we pass additional domain factors (such as site or phenotypic variables) to guide the alignment of feature representations. Cross-validation is performed to ensure robust performance estimates and to select the best hyperparameter configuration for each model.</p>
+<p>For models with domain adaptation, we pass additional domain factors (such as site or phenotypic variables) to guide the alignment of embedding. Cross-validation is performed to ensure robust performance estimates and to select the best hyperparameter configuration for each model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelBinarizer</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 
 <span class="c1"># Define common training arguments for all models: features (X), labels (y), and group info (sites)</span>
@@ -813,9 +843,9 @@ TRAINER:
 <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="n">pbar</span> <span class="o">:=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">trainers</span><span class="p">)):</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">fit_args</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;site_only&quot;</span><span class="p">:</span>
-        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">sites</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;all_phenotypes&quot;</span><span class="p">:</span>
-        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;factors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span>
+        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;group_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sites</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;all_phenotypes&quot;</span><span class="p">:</span>
+        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;group_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span>
 
     <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fitting </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> model&quot;</span><span class="p">)</span>
     <span class="n">trainers</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
@@ -824,7 +854,7 @@ TRAINER:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████████████████████████████████████████████| 3/3 [40:08&lt;00:00, 802.99s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████| 3/3 [02:14&lt;00:00, 44.96s/it]
 </pre></div>
 </div>
 </div>
@@ -878,18 +908,18 @@ TRAINER:
   <tbody>
     <tr>
       <th>Baseline</th>
-      <td>0.6658 ± 0.0852</td>
-      <td>0.7157 ± 0.1028</td>
+      <td>0.6736 ± 0.0489</td>
+      <td>0.7329 ± 0.0480</td>
     </tr>
     <tr>
       <th>Site Only</th>
-      <td>0.6692 ± 0.1000</td>
-      <td>0.7057 ± 0.0944</td>
+      <td>0.6860 ± 0.0304</td>
+      <td>0.7307 ± 0.0273</td>
     </tr>
     <tr>
       <th>All Phenotypes</th>
-      <td>0.6638 ± 0.0769</td>
-      <td>0.7140 ± 0.0871</td>
+      <td>0.6794 ± 0.0554</td>
+      <td>0.7319 ± 0.0517</td>
     </tr>
   </tbody>
 </table>
@@ -915,9 +945,9 @@ TRAINER:
     <span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span>
     <span class="n">labels</span><span class="p">,</span>
     <span class="n">coords</span><span class="p">,</span>
-    <span class="mf">0.002</span><span class="p">,</span>
+    <span class="mf">0.002</span><span class="p">,</span>  <span class="c1"># Take top 0.2% of connections</span>
     <span class="n">legend_params</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">2.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">),</span>
+        <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">2.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">),</span>  <span class="c1"># Align legend outside the plot</span>
         <span class="s2">&quot;ncol&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -931,7 +961,7 @@ TRAINER:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[get_dataset_dir] Dataset found in /home/zarizky/nilearn_data/aal_SPM12
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x7fa26def1b70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x79dd265e3e80&gt;
 </pre></div>
 </div>
 <img alt="../../_images/411b3cbcddeae65be4dfc29aaef965a94de383176a269a60343d42518728c671.png" src="../../_images/411b3cbcddeae65be4dfc29aaef965a94de383176a269a60343d42518728c671.png" />
@@ -1041,14 +1071,15 @@ TRAINER:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data Loading and Preprocessing</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phenotype-preprocessing">Phenotype Preprocessing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="visible nav section-nav flex-column">
@@ -1057,7 +1088,7 @@ TRAINER:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-Validation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
 </ul>
