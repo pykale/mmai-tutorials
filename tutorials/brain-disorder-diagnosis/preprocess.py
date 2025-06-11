@@ -114,7 +114,7 @@ def process_phenotypic_data(data, standardize=False):
 
     # Separate the class labels, sites, and phenotypes
     labels = data["DX_GROUP"].map({"CONTROL": 0, "ASD": 1})
-    sites = data["SITE_ID"]
+    sites = data["SITE_ID"].to_numpy()
     phenotypes = data.drop(columns=["DX_GROUP"])
     # One-hot encode categorical valued phenotypes
     phenotypes = pd.get_dummies(phenotypes)
