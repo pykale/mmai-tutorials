@@ -28,9 +28,9 @@ _C.PHENOTYPE.STANDARDIZE = "site"
 # Cross-validation configuration
 _C.CROSS_VALIDATION = CfgNode()
 # Cross-validation split method (e.g., leave-p-groups-out)
-_C.CROSS_VALIDATION.SPLIT = "lpgo"
+_C.CROSS_VALIDATION.SPLIT = "skf"
 # Number of folds for cross-validation
-_C.CROSS_VALIDATION.NUM_FOLDS = 1
+_C.CROSS_VALIDATION.NUM_FOLDS = 10
 # Number of repeats for cross-validation
 _C.CROSS_VALIDATION.NUM_REPEATS = 1
 
@@ -53,7 +53,7 @@ _C.TRAINER.REFIT = "accuracy"
 # Number of parallel jobs (-1: all CPUs, -4: all but 4 CPUs)
 _C.TRAINER.N_JOBS = -4
 # Verbosity level
-_C.TRAINER.VERBOSE = 1
+_C.TRAINER.VERBOSE = 0
 
 # Random state for reproducibility
 # Seed for random number generators
