@@ -1,123 +1,95 @@
-import logging
-
 import numpy as np
-import pandas as pd
-from nilearn.connectome import ConnectivityMeasure
+import polars as pl
 from sklearn.preprocessing import StandardScaler
-from sklearn.utils._param_validation import (
-    Integral,
-    Interval,
-    StrOptions,
-    validate_params,
-)
+from sklearn.utils._param_validation import StrOptions, validate_params
 
-SELECTED_PHENOTYPES = [
-    "SUB_ID",
-    "SITE_ID",
-    "SEX",
-    "AGE_AT_SCAN",
-    "FIQ",
-    "HANDEDNESS_CATEGORY",
-    "EYE_STATUS_AT_SCAN",
-    "DX_GROUP",
-]
+__all__ = ["preprocess_phenotypic_data", "extract_functional_connectivity"]
 
-MAPPING = {
-    "SEX": {1: "MALE", 2: "FEMALE"},
-    "HANDEDNESS_CATEGORY": {
-        "L": "LEFT",
-        "R": "RIGHT",
-        "Mixed": "AMBIDEXTROUS",
-        "Ambi": "AMBIDEXTROUS",
-        "L->R": "AMBIDEXTROUS",
-        "R->L": "AMBIDEXTROUS",
-        "-9999": "LEFT",
-        np.nan: "LEFT",
-    },
-    "EYE_STATUS_AT_SCAN": {1: "OPEN", 2: "CLOSED"},
-    "DX_GROUP": {1: "ASD", 2: "CONTROL"},
-}
-
-AVAILABLE_FC_MEASURES = {
-    "pearson": "correlation",
-    "partial": "partial correlation",
-    "tangent": "tangent",
-    "covariance": "covariance",
-    "precision": "precision",
-}
+CATEGORICAL_PHENOTYPES = ["SITE_ID", "SEX", "HANDEDNESS_CATEGORY", "EYE_STATUS_AT_SCAN"]
+CONTINUOUS_PHENOTYPES = ["AGE_AT_SCAN", "FIQ"]
 
 
 @validate_params(
-    {"data": [pd.DataFrame], "standardize": [StrOptions({"site", "all"}), "boolean"]},
+    {
+        "data": [pl.DataFrame],
+        "standardize": [StrOptions({"site", "all"}), "boolean"],
+    },
     prefer_skip_nested_validation=False,
 )
-def process_phenotypic_data(data, standardize=False):
-    """Process phenotypic data to impute missing values and and encode categorical
-    variables including sex, handedness, eye status at scan, and diagnostic group.
+def preprocess_phenotypic_data(data, standardize=False):
+    """
+    Preprocess phenotypic data by encoding labels, one-hot encoding categorical variables,
+    and optionally standardizing continuous variables.
 
     Parameters
     ----------
-    data : pd.DataFrame of shape (n_subjects, n_phenotypes)
-        The phenotypes data to be processed.
-
-    standardize: boolean or str of ("site", "all")
-                Standardize FIQ and age. The default is 0.
-                Setting to True or "all" standardizes the
-                values over all subjects while "site"
-                standardizes according to the site.
-
-    verbose : int, optional
-            The verbosity level. The default is 0.
-            verbose > 0 will log the current processing step.
+    data : pl.DataFrame
+        The input phenotypic dataframe containing both labels and covariates.
+    standardize : {'site', 'all', True, False}, optional
+        Strategy for standardizing continuous variables:
+        - 'site': standardize AGE_AT_SCAN and FIQ within each site.
+        - 'all' or True: standardize AGE_AT_SCAN and FIQ across all subjects.
+        - False (default): no standardization applied.
 
     Returns
     -------
-    labels : pd.Series of shape (n_subjects)
-            The encoded classification group. 0 is "CONTROL" and
-            1 is "ASD"
-
-    phenotypes : pd.DataFrame of shape (n_subjects, n_selected_phenotypes)
-                The processed selected phenotype data with imputed values.
+    labels : np.ndarray of shape (n_subjects,)
+        Binary classification labels encoded as 0 (CONTROL) and 1 (ASD).
+    sites : np.ndarray of shape (n_subjects,)
+        Site identifiers for each subject.
+    phenotypes : pl.DataFrame
+        Preprocessed phenotypic features, with categorical variables one-hot encoded
+        and continuous variables optionally standardized.
     """
-    # Avoid in-place modification
-    data = data.copy()
+    # Encode labels
+    labels = data["DX_GROUP"].replace({"CONTROL": 0, "ASD": 1})
+    labels = labels.cast(pl.Int8).to_numpy()
 
-    # Check for missing values, either -9999 or NaN
-    # and impute them with FIQ = 100 following original code.
-    fiq = data["FIQ"].copy()
-    data["FIQ"] = fiq.where((fiq != -9999) & (~np.isnan(fiq)), 100)
-
-    # Standardize FIQ and age by site
-    if standardize == "site":
-        for site in data["SITE_ID"].unique():
-            mask = site == data["SITE_ID"]
-            values = data.loc[mask, ["AGE_AT_SCAN", "FIQ"]]
-            values = StandardScaler().fit_transform(values)
-            data.loc[mask, ["AGE_AT_SCAN", "FIQ"]] = values
-    elif standardize:
-        values = data.loc[:, ["AGE_AT_SCAN", "FIQ"]]
-        values = StandardScaler().fit_transform(values)
-        data.loc[:, ["AGE_AT_SCAN", "FIQ"]] = values
-
-    # Encode categorical variables to be more explicit categorical
-    # values. For handedness, if we found missing values, we
-    # impute them by using 'LEFT' as default. Values
-    # like 'Ambi', 'Mixed', 'L->R', and 'R->L' are mapped to
-    # 'AMBIDEXTROUS'. The rest of the values are mapped to 'LEFT' or 'RIGHT'
-    # for 'L' or 'R' respectively.
-    for key in MAPPING:
-        values = data[key].copy().map(MAPPING[key])
-        data[key] = values.astype("category")
-
-    # Subsets the phenotypes
-    data = data[SELECTED_PHENOTYPES].set_index("SUB_ID")
-
-    # Separate the class labels, sites, and phenotypes
-    labels = data["DX_GROUP"].map({"CONTROL": 0, "ASD": 1})
+    # Extract site information
     sites = data["SITE_ID"].to_numpy()
-    phenotypes = data.drop(columns=["DX_GROUP"])
-    # One-hot encode categorical valued phenotypes
-    phenotypes = pd.get_dummies(phenotypes)
+
+    # Drop label column before feature processing
+    data = data.drop("DX_GROUP")
+
+    # One-hot encode categorical phenotypes
+    data = data.to_dummies(CATEGORICAL_PHENOTYPES)
+
+    if standardize == "site":
+        sites_unique = np.unique(sites)
+        scaled_data = []
+
+        for site in sites_unique:
+            # Select data for the current site
+            site_data = data.filter(sites == site)
+
+            values = site_data.select(CONTINUOUS_PHENOTYPES).to_numpy()
+            scaler = StandardScaler()
+            values_scaled = scaler.fit_transform(values)
+            age, fiq = values_scaled.T
+
+            scaled_site_data = site_data.with_columns(
+                [pl.Series("AGE_AT_SCAN", age), pl.Series("FIQ", fiq)]
+            )
+
+            scaled_data.append(scaled_site_data)
+
+        data = pl.concat(scaled_data)
+
+    elif standardize:
+        values = data.select(CONTINUOUS_PHENOTYPES).to_numpy()
+        scaler = StandardScaler()
+        values_scaled = scaler.fit_transform(values)
+        age, fiq = values_scaled.T
+
+        data = data.with_columns(
+            [
+                pl.Series("AGE_AT_SCAN", age),
+                pl.Series("FIQ", fiq),
+            ]
+        )
+
+    data = data.sort("SUB_ID").drop("SUB_ID")
+    phenotypes = data.to_numpy()
 
     return labels, sites, phenotypes
 
@@ -126,17 +98,19 @@ def process_phenotypic_data(data, standardize=False):
     {"data": ["array-like"], "measures": [list]}, prefer_skip_nested_validation=False
 )
 def extract_functional_connectivity(data, measures=["pearson"]):
-    """Extract functional connectivity features from time series data.
+    """
+    Extract functional connectivity features from time series data using
+    specified connectivity measures.
+
+    To extract Tangent-Pearson connectivity, set `measures=["tangent", "pearson"]`.
 
     Parameters
     ----------
     data : list[array-like] of shape (n_subjects,)
         An array of numpy arrays, where each array is a time series of shape (t, n_rois).
         The time series data for each subject.
-
-    measures : list[str], optional
+    measures : list[str], optional (default=["pearson"])
         A list of connectivity measures to use for feature extraction.
-        The default is ["pearson"].
         Supported measures are "pearson", "partial", "tangent", "covariance", and "precision".
         Multiple measures can be specified as a list to compose a higher-order measure.
 
@@ -144,13 +118,11 @@ def extract_functional_connectivity(data, measures=["pearson"]):
     -------
     features : array-like
         An array of shape (n_subjects, n_features) containing the extracted features.
-        n_features is equal to `n_rois * (n_rois - 1) / 2` for each subjects.
+        n_features is equal to `n_rois * (n_rois - 1) / 2` for each subject if vectorized.
     """
     for i, k in enumerate(reversed(measures), 1):
         k = AVAILABLE_FC_MEASURES.get(k)
 
-        # If it is the last transformation, vectorize and discard the diagonal
-        # of shape (n_rois * (n_rois - 1) / 2)
         islast = i == len(measures)
         measure = ConnectivityMeasure(kind=k, vectorize=islast, discard_diagonal=islast)
         data = measure.fit_transform(data)
