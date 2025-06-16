@@ -1,6 +1,5 @@
 DATASET:
   ATLAS: hcp-ica
-  FC: tangent-pearson
 
 CROSS_VALIDATION:
   NUM_REPEATS: 1
