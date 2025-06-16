@@ -119,7 +119,7 @@ def _ensure_abide_file(data_dir, target_path, verbose):
             print(f"✔ File found: {target_path}")
         return
 
-    manifest_path = os.path.join("manifests", "abide.json")
+    manifest_path = os.path.join(os.path.dirname(__file__), "manifests", "abide.json")
     with open(manifest_path, "r") as f:
         manifest = json.load(f)
 
