@@ -37,18 +37,29 @@ _C.PHENOTYPE.STANDARDIZE = "site"
 
 # Cross-validation configuration
 _C.CROSS_VALIDATION = CfgNode()
-# Cross-validation split method (e.g., leave-p-groups-out)
+# Cross-validation split method
+# Available options:
+# - "skf" (Stratified K-Folds)
+# - "lpgo" (Leave-P-Groups-Out)
 _C.CROSS_VALIDATION.SPLIT = "skf"
 # Number of folds for cross-validation
+# or number of groups for Leave-P-Groups-Out
 _C.CROSS_VALIDATION.NUM_FOLDS = 10
 # Number of repeats for cross-validation
 _C.CROSS_VALIDATION.NUM_REPEATS = 5
 
 # Trainer configuration
 _C.TRAINER = CfgNode()
-# Classifier to use (e.g., auto-select)
+# Classifier to use
+# Available options:
+# - "lda"
+# - "lr"
+# - "linear_svm"
+# - "svm"
+# - "ridge"
+# - "auto"
 _C.TRAINER.CLASSIFIER = "lr"
-# Use non-linear transformations
+# Use non-linear transformations (no interpretability)
 _C.TRAINER.NONLINEAR = False
 # Search strategy for hyperparameter tuning
 _C.TRAINER.SEARCH_STRATEGY = "random"
