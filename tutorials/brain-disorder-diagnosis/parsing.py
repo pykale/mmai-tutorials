@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 import polars as pl
-from sklearn.utils._param_validation import StrOptions, validate_params
+
 
 # Mapping for model and score display names
 MODEL = ["baseline", "site_only", "all_phenotypes"]
@@ -13,10 +13,6 @@ SCORE["roc_auc"] = "AUROC"
 SCORE["matthews_corrcoef"] = "MCC"
 
 
-@validate_params(
-    {"cv_results": [dict], "sort_by": [StrOptions(set(SCORE))]},
-    prefer_skip_nested_validation=True,
-)
 def compile_results(cv_results, sort_by):
     """
     Compile and summarize cross-validation results into a formatted Polars DataFrame.

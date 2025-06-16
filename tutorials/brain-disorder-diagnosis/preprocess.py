@@ -1,21 +1,22 @@
 import numpy as np
 import polars as pl
 from sklearn.preprocessing import StandardScaler
-from sklearn.utils._param_validation import StrOptions, validate_params
+
 
 __all__ = ["preprocess_phenotypic_data", "extract_functional_connectivity"]
 
 CATEGORICAL_PHENOTYPES = ["SITE_ID", "SEX", "HANDEDNESS_CATEGORY", "EYE_STATUS_AT_SCAN"]
 CONTINUOUS_PHENOTYPES = ["AGE_AT_SCAN", "FIQ"]
 
+AVAILABLE_FC_MEASURES = {
+    "pearson": "correlation",
+    "partial": "partial correlation",
+    "tangent": "tangent",
+    "covariance": "covariance",
+    "precision": "precision",
+}
 
-@validate_params(
-    {
-        "data": [pl.DataFrame],
-        "standardize": [StrOptions({"site", "all"}), "boolean"],
-    },
-    prefer_skip_nested_validation=False,
-)
+
 def preprocess_phenotypic_data(data, standardize=False):
     """
     Preprocess phenotypic data by encoding labels, one-hot encoding categorical variables,
@@ -94,9 +95,6 @@ def preprocess_phenotypic_data(data, standardize=False):
     return labels, sites, phenotypes
 
 
-@validate_params(
-    {"data": ["array-like"], "measures": [list]}, prefer_skip_nested_validation=False
-)
 def extract_functional_connectivity(data, measures=["pearson"]):
     """
     Extract functional connectivity features from time series data using
