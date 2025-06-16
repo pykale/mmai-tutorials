@@ -28,7 +28,7 @@ _C.DATASET.ATLAS = "cc200"
 # - "precision"
 # - "covariance"
 # - "tangent-pearson"
-_C.DATASET.FC = "pearson"
+_C.DATASET.FC = "tangent-pearson"
 
 # Phenotype configuration
 _C.PHENOTYPE = CfgNode()
