@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1BSpl4xBbIsQ709b5_QRcy-Uh0hNEfSBe",
+        "path": "atlas"
+    },
+    {
+        "id": "1cGEKgOM1sT_JZnV4GKa8j0H8oh_z3K9a",
+        "path": "atlas/deterministic"
+    },
+    {
+        "id": "1Er9eoLqSY6KYgYd516XHNbQole1pok6-",
+        "path": "atlas/deterministic/tt"
+    },
+    {
+        "id": "1b7EhBoAr_cany3GAYmGRbNtBvValq107",
+        "path": "atlas/deterministic/cc200"
+    },
+    {
+        "id": "1dy3ACTD5_0CJ7BIy2lPBye1ep_Kvw-Py",
+        "path": "atlas/deterministic/ho"
+    },
+    {
+        "id": "1gUpE8tSFjlmACFiDzGYGbqAuY4yUtyKd",
+        "path": "atlas/deterministic/aal"
+    },
+    {
+        "id": "1kZmHdVfZQh_prqzc5LdIpAg1bITzwIh2",
+        "path": "atlas/deterministic/dos160"
+    },
+    {
+        "id": "1P90qp_z0A05bgFrKWN_L4W0RAdEp0HXE",
+        "path": "atlas/deterministic/hcp-ica"
+    },
+    {
+        "id": "17WoiOgQGIq00SLzMQaItJDvmUEUTP9bn",
+        "path": "atlas/deterministic/cc400"
+    },
+    {
+        "id": "1jNzbR3UhNxcavEs7PqusPDeadiUx4FfY",
+        "path": "atlas/probabilistic"
+    },
+    {
+        "id": "18dAJp1gcxEQ8qRnp5tdZJiI_PaLVGqwv",
+        "path": "atlas/probabilistic/difumo64"
+    }
+]
