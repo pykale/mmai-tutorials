@@ -2,6 +2,9 @@ DATASET:
   ATLAS: hcp-ica
   FC: tangent-pearson
 
+CROSS_VALIDATION:
+  NUM_REPEATS: 1
+
 TRAINER:
   NUM_SEARCH_ITER: 50
   NUM_SOLVER_ITER: 100

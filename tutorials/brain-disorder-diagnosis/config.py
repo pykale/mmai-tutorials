@@ -42,7 +42,7 @@ _C.CROSS_VALIDATION.SPLIT = "skf"
 # Number of folds for cross-validation
 _C.CROSS_VALIDATION.NUM_FOLDS = 10
 # Number of repeats for cross-validation
-_C.CROSS_VALIDATION.NUM_REPEATS = 1
+_C.CROSS_VALIDATION.NUM_REPEATS = 5
 
 # Trainer configuration
 _C.TRAINER = CfgNode()
