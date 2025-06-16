@@ -145,7 +145,7 @@ def _ensure_atlas_folder(data_dir, atlas_path, verbose):
             print(f"✔ Atlas folder found: {atlas_path}")
         return
 
-    manifest_path = os.path.join("manifests", "atlas.json")
+    manifest_path = os.path.join(os.path.dirname(__file__), "manifests", "atlas.json")
     with open(manifest_path, "r") as f:
         manifest = json.load(f)
 
