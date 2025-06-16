@@ -4,17 +4,42 @@ import numpy as np
 import pandas as pd
 import gdown
 
-AVAILABLE_ATLAS = {"aal", "cc200", "difumo64", "dos160", "hcp-ica", "ho", "tt"}
-AVAILABLE_FC = {
-    "pearson",
-    "partial",
-    "tangent",
-    "precision",
-    "covariance",
-    "tangent-pearson",
-}
+from sklearn.utils._param_validation import StrOptions, validate_params
 
 
+@validate_params(
+    {
+        "data_dir": [str],
+        "atlas": [
+            StrOptions(
+                {
+                    "aal",
+                    "cc200",
+                    "difumo64",
+                    "dos160",
+                    "hcp-ica",
+                    "ho",
+                    "tt",
+                }
+            )
+        ],
+        "fc": [
+            StrOptions(
+                {
+                    "pearson",
+                    "partial",
+                    "tangent",
+                    "precision",
+                    "covariance",
+                    "tangent-pearson",
+                }
+            )
+        ],
+        "vectorize": [bool],
+        "verbose": [bool],
+    },
+    prefer_skip_nested_validation=False,
+)
 def load_data(
     data_dir="data", atlas="cc200", fc="tangent-pearson", vectorize=True, verbose=True
 ):
@@ -47,7 +72,7 @@ def load_data(
         Functional connectivity data (vectorized if requested).
 
     phenotypes : pd.DataFrame
-        Phenotypic data loaded via Polars with proper missing value handling.
+        Loaded phenotypic data.
 
     rois : np.ndarray
         ROI labels.
@@ -60,16 +85,6 @@ def load_data(
     FileNotFoundError
         If the required file paths are not found after attempted download.
     """
-    if atlas not in AVAILABLE_ATLAS:
-        raise ValueError(
-            f"Invalid atlas '{atlas}'. Available options: {AVAILABLE_ATLAS}"
-        )
-
-    if fc not in AVAILABLE_FC:
-        raise ValueError(
-            f"Invalid functional connectivity '{fc}'. Available options: {AVAILABLE_FC}"
-        )
-
     # Paths
     fc_path = os.path.join(data_dir, "abide", "fc", atlas, f"{fc}.npy")
     is_proba = atlas in {"difumo64"}
