@@ -63,9 +63,8 @@ def preprocess_phenotypic_data(data, standardize=False):
         The phenotypes data to be processed.
 
     standardize: boolean or str of ("site", "all"), (default=False)
-                Standardize FIQ and age. The default is 0.
-                Setting to True or "all" standardizes the
-                values over all subjects while "site"
+                Standardize FIQ and age. Setting to True or "all"
+                standardizes the values over all subjects while "site"
                 standardizes according to the site.
 
     Returns
