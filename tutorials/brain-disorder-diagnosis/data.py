@@ -68,7 +68,7 @@ def load_data(
 
     Returns
     -------
-    fc : np.ndarray
+    fc_data : np.ndarray
         Functional connectivity data (vectorized if requested).
 
     phenotypes : pd.DataFrame
@@ -98,10 +98,10 @@ def load_data(
     _ensure_atlas_folder(data_dir, atlas_path, verbose)
 
     # Load connectivity data
-    fc = np.load(fc_path)
+    fc_data = np.load(fc_path)
     if vectorize:
-        row, col = np.triu_indices(fc.shape[1], 1)
-        fc = fc[..., row, col]
+        row, col = np.triu_indices(fc_data.shape[1], 1)
+        fc_data = fc_data[..., row, col]
 
     phenotypes = pd.read_csv(phenotypes_path)
 
@@ -109,7 +109,7 @@ def load_data(
         rois = np.array(f.read().strip().split("\n"))
     coords = np.load(os.path.join(atlas_path, "coords.npy"))
 
-    return fc, phenotypes, rois, coords
+    return fc_data, phenotypes, rois, coords
 
 
 def _ensure_abide_file(data_dir, target_path, verbose):
