@@ -1,6 +1,10 @@
 DATASET:
-  ATLAS: aal
+  ATLAS: hcp-ica
+  FC: tangent-pearson
 
 TRAINER:
   NUM_SEARCH_ITER: 50
   NUM_SOLVER_ITER: 100
+  N_JOBS: -1
+
+RANDOM_STATE: 0
