@@ -69,6 +69,8 @@ _C.TRAINER.SCORING = ["accuracy", "roc_auc"]
 _C.TRAINER.REFIT = "accuracy"
 # Number of parallel jobs (-1: all CPUs, -4: all but 4 CPUs)
 _C.TRAINER.N_JOBS = 1
+# Pre-dispatch of jobs for parallel processing
+_C.TRAINER.PRE_DISPATCH = "2*n_jobs"
 # Verbosity level
 _C.TRAINER.VERBOSE = 0
 
