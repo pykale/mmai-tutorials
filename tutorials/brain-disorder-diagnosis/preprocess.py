@@ -62,16 +62,19 @@ def preprocess_phenotypic_data(data, standardize=False):
     data : pd.DataFrame of shape (n_subjects, n_phenotypes)
         The phenotypes data to be processed.
 
-    standardize: boolean or str of ("site", "all"), (default=False)
+    standardize : boolean or str of ("site", "all"), (default=False)
                 Standardize FIQ and age. Setting to True or "all"
                 standardizes the values over all subjects while "site"
                 standardizes according to the site.
 
     Returns
     -------
-    labels : pd.Series of shape (n_subjects)
+    labels : array-like of shape (n_subjects)
             The encoded classification group. 0 is "CONTROL" and
             1 is "ASD"
+
+    sites : array-like of shape (n_subjects)
+            The site IDs for each subject.
 
     phenotypes : pd.DataFrame of shape (n_subjects, n_selected_phenotypes)
                 The processed selected phenotype data with imputed values.
@@ -110,7 +113,7 @@ def preprocess_phenotypic_data(data, standardize=False):
     data = data[SELECTED_PHENOTYPES].set_index("SUB_ID")
 
     # Separate the class labels, sites, and phenotypes
-    labels = data["DX_GROUP"].map({"CONTROL": 0, "ASD": 1})
+    labels = data["DX_GROUP"].map({"CONTROL": 0, "ASD": 1}).to_numpy()
     sites = data["SITE_ID"].to_numpy()
     phenotypes = data.drop(columns=["DX_GROUP"])
     # One-hot encode categorical valued phenotypes
