@@ -1,7 +1,7 @@
 import os
 import json
 import numpy as np
-import polars as pl
+import pandas as pd
 import gdown
 
 AVAILABLE_ATLAS = {"aal", "cc200", "difumo64", "dos160", "hcp-ica", "ho", "tt"}
@@ -28,12 +28,16 @@ def load_data(
     ----------
     data_dir : str, optional (default="data")
         Local directory to store the dataset.
+
     atlas : str, optional (default="cc200")
         Atlas name (subfolder inside fc/).
+
     fc : str, optional (default="tangent-pearson")
         Functional connectivity file name (without extension).
+
     vectorize : bool, optional (default=True)
         Whether to vectorize the upper triangle of the connectivity matrices.
+
     verbose : bool, optional (default=True)
         Whether to print download and progress messages.
 
@@ -41,10 +45,13 @@ def load_data(
     -------
     fc : np.ndarray
         Functional connectivity data (vectorized if requested).
-    phenotypes : pl.DataFrame
+
+    phenotypes : pd.DataFrame
         Phenotypic data loaded via Polars with proper missing value handling.
+
     rois : np.ndarray
         ROI labels.
+
     coords : np.ndarray
         ROI coordinates.
 
@@ -81,7 +88,7 @@ def load_data(
         row, col = np.triu_indices(fc.shape[1], 1)
         fc = fc[..., row, col]
 
-    phenotypes = pl.read_csv(phenotypes_path)
+    phenotypes = pd.read_csv(phenotypes_path)
 
     with open(os.path.join(atlas_path, "labels.txt"), "r") as f:
         rois = np.array(f.read().strip().split("\n"))
