@@ -12,16 +12,7 @@ from sklearn.utils._param_validation import StrOptions, validate_params
         "data_dir": [str],
         "atlas": [
             StrOptions(
-                {
-                    "aal",
-                    "cc200",
-                    "cc400",
-                    "difumo64",
-                    "dos160",
-                    "hcp-ica",
-                    "ho",
-                    "tt",
-                }
+                {"aal", "cc200", "cc400", "difumo64", "dos160", "hcp-ica", "ho", "tt"}
             )
         ],
         "fc": [
