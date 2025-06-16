@@ -15,6 +15,7 @@ from sklearn.utils._param_validation import StrOptions, validate_params
                 {
                     "aal",
                     "cc200",
+                    "cc400",
                     "difumo64",
                     "dos160",
                     "hcp-ica",
