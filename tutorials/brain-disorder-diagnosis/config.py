@@ -1,24 +1,34 @@
+import os
 from yacs.config import CfgNode
+
+DEFAULT_DIR = os.path.join(os.getcwd(), "data")
 
 _C = CfgNode()
 
 # Dataset configuration
 _C.DATASET = CfgNode()
 # Path to the dataset directory
-_C.DATASET.PATH = "nilearn_data"
+_C.DATASET.PATH = DEFAULT_DIR
 # Name of the brain atlas to use
+# Available options:
+# - "aal" (AAL)
+# - "cc200" (Cameron Craddock 200)
+# - "cc400" (Cameron Craddock 400)
+# - "difumo64" (DiFuMo 64)
+# - "dos160" (Dosenbach 160)
+# - "hcp-ica" (HCP-ICA)
+# - "ho" (Harvard-Oxford)
+# - "tt" (Talairach-Tournoux)
 _C.DATASET.ATLAS = "cc200"
-# Whether to apply bandpass filtering
-_C.DATASET.BANDPASS = False
-# Whether to apply global signal regression
-_C.DATASET.GLOBAL_SIGNAL_REGRESSION = False
-# Whether to use only quality-checked data
-_C.DATASET.QUALITY_CHECKED = False
-
-# Connectivity configuration
-_C.CONNECTIVITY = CfgNode()
-# List of connectivity measures to compute
-_C.CONNECTIVITY.MEASURES = ["pearson"]
+# Functional connectivity to use
+# Available options:
+# - "pearson"
+# - "partial"
+# - "tangent"
+# - "precision"
+# - "covariance"
+# - "tangent-pearson"
+_C.DATASET.FC = "tangent-pearson"
 
 # Phenotype configuration
 _C.PHENOTYPE = CfgNode()
@@ -27,37 +37,57 @@ _C.PHENOTYPE.STANDARDIZE = "site"
 
 # Cross-validation configuration
 _C.CROSS_VALIDATION = CfgNode()
-# Cross-validation split method (e.g., leave-p-groups-out)
+# Cross-validation split method
+# Available options:
+# - "skf" (Stratified K-Folds)
+# - "lpgo" (Leave-P-Groups-Out)
 _C.CROSS_VALIDATION.SPLIT = "skf"
 # Number of folds for cross-validation
+# or number of groups for Leave-P-Groups-Out
 _C.CROSS_VALIDATION.NUM_FOLDS = 10
 # Number of repeats for cross-validation
-_C.CROSS_VALIDATION.NUM_REPEATS = 1
+_C.CROSS_VALIDATION.NUM_REPEATS = 5
 
 # Trainer configuration
 _C.TRAINER = CfgNode()
-# Classifier to use (e.g., auto-select)
+# Classifier to use
+# Available options:
+# - "lda"
+# - "lr"
+# - "linear_svm"
+# - "svm"
+# - "ridge"
+# - "auto"
 _C.TRAINER.CLASSIFIER = "lr"
-# Use non-linear transformations
+# Use non-linear transformations (no interpretability)
 _C.TRAINER.NONLINEAR = False
 # Search strategy for hyperparameter tuning
 _C.TRAINER.SEARCH_STRATEGY = "random"
 # Number of iterations for hyperparameter search
-_C.TRAINER.NUM_SEARCH_ITER = 100
+_C.TRAINER.NUM_SEARCH_ITER = int(1e3)
 # Number of iterations for solver
 _C.TRAINER.NUM_SOLVER_ITER = int(1e6)
 # List of scoring metrics
+# Available options:
+# - "accuracy"
+# - "precision"
+# - "recall"
+# - "f1"
+# - "roc_auc"
+# - "matthews_corrcoef"
 _C.TRAINER.SCORING = ["accuracy", "roc_auc"]
 # Refit based on the best hyperparameters on a scoring metric
 _C.TRAINER.REFIT = "accuracy"
 # Number of parallel jobs (-1: all CPUs, -4: all but 4 CPUs)
-_C.TRAINER.N_JOBS = -4
+_C.TRAINER.N_JOBS = 1
+# Pre-dispatch of jobs for parallel processing
+_C.TRAINER.PRE_DISPATCH = "2*n_jobs"
 # Verbosity level
 _C.TRAINER.VERBOSE = 0
 
 # Random state for reproducibility
 # Seed for random number generators
-_C.RANDOM_STATE = 0
+_C.RANDOM_STATE = None
 
 
 def get_cfg_defaults():

@@ -2,6 +2,8 @@ import pandas as pd
 from collections import defaultdict
 from sklearn.utils._param_validation import validate_params, StrOptions
 
+__all__ = ["compile_results"]
+
 # Mapping for model and score display names
 MODEL = ["baseline", "site_only", "all_phenotypes"]
 MODEL = {model: " ".join(model.split("_")).title() for model in MODEL}
@@ -25,6 +27,7 @@ def compile_results(cv_results, sort_by):
     cv_results : dict of str -> pd.DataFrame or dict of str -> dict of str -> list
         Dictionary mapping model names to cross-validation results.
         Each entry should either be a DataFrame or a dictionary of dictionary of list.
+
     sort_by : str
         Metric to use for selecting the best-performing model variant.
         Available ones include: "accuracy", "precision", "recall", "f1", "roc_auc",

@@ -11,6 +11,8 @@ from sklearn.utils._param_validation import (
     validate_params,
 )
 
+__all__ = ["preprocess_phenotypic_data", "extract_functional_connectivity"]
+
 SELECTED_PHENOTYPES = [
     "SUB_ID",
     "SITE_ID",
@@ -51,7 +53,7 @@ AVAILABLE_FC_MEASURES = {
     {"data": [pd.DataFrame], "standardize": [StrOptions({"site", "all"}), "boolean"]},
     prefer_skip_nested_validation=False,
 )
-def process_phenotypic_data(data, standardize=False):
+def preprocess_phenotypic_data(data, standardize=False):
     """Process phenotypic data to impute missing values and and encode categorical
     variables including sex, handedness, eye status at scan, and diagnostic group.
 
@@ -60,21 +62,19 @@ def process_phenotypic_data(data, standardize=False):
     data : pd.DataFrame of shape (n_subjects, n_phenotypes)
         The phenotypes data to be processed.
 
-    standardize: boolean or str of ("site", "all")
-                Standardize FIQ and age. The default is 0.
-                Setting to True or "all" standardizes the
-                values over all subjects while "site"
+    standardize : boolean or str of ("site", "all"), (default=False)
+                Standardize FIQ and age. Setting to True or "all"
+                standardizes the values over all subjects while "site"
                 standardizes according to the site.
-
-    verbose : int, optional
-            The verbosity level. The default is 0.
-            verbose > 0 will log the current processing step.
 
     Returns
     -------
-    labels : pd.Series of shape (n_subjects)
+    labels : array-like of shape (n_subjects)
             The encoded classification group. 0 is "CONTROL" and
             1 is "ASD"
+
+    sites : array-like of shape (n_subjects)
+            The site IDs for each subject.
 
     phenotypes : pd.DataFrame of shape (n_subjects, n_selected_phenotypes)
                 The processed selected phenotype data with imputed values.
@@ -113,7 +113,7 @@ def process_phenotypic_data(data, standardize=False):
     data = data[SELECTED_PHENOTYPES].set_index("SUB_ID")
 
     # Separate the class labels, sites, and phenotypes
-    labels = data["DX_GROUP"].map({"CONTROL": 0, "ASD": 1})
+    labels = data["DX_GROUP"].map({"CONTROL": 0, "ASD": 1}).to_numpy()
     sites = data["SITE_ID"].to_numpy()
     phenotypes = data.drop(columns=["DX_GROUP"])
     # One-hot encode categorical valued phenotypes
@@ -134,9 +134,8 @@ def extract_functional_connectivity(data, measures=["pearson"]):
         An array of numpy arrays, where each array is a time series of shape (t, n_rois).
         The time series data for each subject.
 
-    measures : list[str], optional
+    measures : list[str], optional (default=["pearson"])
         A list of connectivity measures to use for feature extraction.
-        The default is ["pearson"].
         Supported measures are "pearson", "partial", "tangent", "covariance", and "precision".
         Multiple measures can be specified as a list to compose a higher-order measure.
 
