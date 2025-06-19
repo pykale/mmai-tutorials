@@ -1,0 +1,31 @@
+DATA:
+  ECG_PATH: "/content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_last_1000.pt"
+  CXR_PATH: "/content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_last_1000.pt"
+  CSV_PATH: "/content/drive/MyDrive/EMBC_workshop_data/chexpert_healthy_abnormality_subset.csv"
+  BATCH_SIZE: 32
+  NUM_WORKERS: 2
+
+MODEL:
+  LATENT_DIM: 256
+  INPUT_IMAGE_CHANNELS: 1
+  INPUT_DIM_ECG: 60000
+  NUM_LEADS: 12
+
+FT:
+  EPOCHS: 10
+  LR: 0.001
+  HIDDEN_DIM: 128
+  NUM_CLASSES: 2
+  CKPT_PATH: "/content/drive/MyDrive/EMBC_workshop_data/CardioVAE.pth"
+  ACCELERATOR: "gpu"
+  DEVICE: "cuda"
+  KFOLDS: 5
+  SEED: 42
+
+INTERPRET:
+  SAMPLE_IDX: 101
+  ZOOM_RANGE: [3, 3.5]
+  ECG_THRESHOLD: 0.7
+  CXR_THRESHOLD: 0.7
+  LEAD_NUMBER: 12
+  SAMPLING_RATE: 500
