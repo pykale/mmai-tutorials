@@ -4,8 +4,12 @@ _C = CN()
 
 # Data configuration
 _C.DATA = CN()
-_C.DATA.ECG_PATH = "/content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_1000.pt"
-_C.DATA.CXR_PATH = "/content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_1000.pt"
+_C.DATA.ECG_PATH = (
+    "/content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_1000.pt"
+)
+_C.DATA.CXR_PATH = (
+    "/content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_1000.pt"
+)
 _C.DATA.BATCH_SIZE = 128
 _C.DATA.NUM_WORKERS = 2
 
@@ -28,6 +32,8 @@ _C.TRAIN.LAMBDA_SIGNAL = 10.0
 _C.TRAIN.SCALE_FACTOR = 1e-4
 _C.TRAIN.SAVE_PATH = "/content/drive/MyDrive/EMBC_workshop_data/cardioVAE.pth"
 _C.TRAIN.ACCELERATOR = "gpu"  # or "cpu"
-_C.TRAIN.DEVICES = 1          # or 2, 4, "auto", etc.
+_C.TRAIN.DEVICES = 1  # or 2, 4, "auto", etc.
+
+
 def get_cfg_defaults():
     return _C.clone()

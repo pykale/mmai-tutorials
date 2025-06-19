@@ -4,9 +4,15 @@ _C = CN()
 
 # Data configuration
 _C.DATA = CN()
-_C.DATA.ECG_PATH = "/content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_last_1000.pt"
-_C.DATA.CXR_PATH = "/content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_last_1000.pt"
-_C.DATA.CSV_PATH = "/content/drive/MyDrive/EMBC_workshop_data/chexpert_healthy_abnormality_subset.csv"
+_C.DATA.ECG_PATH = (
+    "/content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_last_1000.pt"
+)
+_C.DATA.CXR_PATH = (
+    "/content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_last_1000.pt"
+)
+_C.DATA.CSV_PATH = (
+    "/content/drive/MyDrive/EMBC_workshop_data/chexpert_healthy_abnormality_subset.csv"
+)
 _C.DATA.BATCH_SIZE = 32
 _C.DATA.NUM_WORKERS = 2
 _C.DATA.DATA_DEVICE = "cpu"
@@ -26,8 +32,8 @@ _C.FT.HIDDEN_DIM = 128
 _C.FT.NUM_CLASSES = 2
 _C.FT.CKPT_PATH = "/content/drive/MyDrive/EMBC_workshop_data/CardioVAE.pth"
 _C.FT.ACCELERATOR = "gpu"
-_C.FT.DEVICES = 1           # This is for PyTorch Lightning's Trainer, set as int not string
-_C.FT.DEVICE = "cuda"       # For torch.device()
+_C.FT.DEVICES = 1  # This is for PyTorch Lightning's Trainer, set as int not string
+_C.FT.DEVICE = "cuda"  # For torch.device()
 _C.FT.KFOLDS = 5
 _C.FT.SEED = 42
 
@@ -39,6 +45,7 @@ _C.INTERPRET.ECG_THRESHOLD = 0.7
 _C.INTERPRET.CXR_THRESHOLD = 0.7
 _C.INTERPRET.LEAD_NUMBER = 12
 _C.INTERPRET.SAMPLING_RATE = 500
+
 
 def get_cfg_defaults():
     return _C.clone()

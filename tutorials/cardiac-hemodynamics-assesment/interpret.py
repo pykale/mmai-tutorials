@@ -6,6 +6,7 @@ import neurokit2 as nk
 from captum.attr import IntegratedGradients
 from scipy.ndimage import binary_dilation
 
+
 def multimodal_ecg_cxr_attribution(
     last_fold_model,
     last_val_loader,
@@ -23,17 +24,32 @@ def multimodal_ecg_cxr_attribution(
     """
     # Gather all batches (as in your code)
     batches = list(last_val_loader)
-    all_xray_images, all_ecg_waveforms, all_labels = [torch.cat(items) for items in zip(*batches)]
+    all_xray_images, all_ecg_waveforms, all_labels = [
+        torch.cat(items) for items in zip(*batches)
+    ]
 
     # --- Select Sample ---
-    xray_image = all_xray_images[sample_idx].unsqueeze(0).to(next(last_fold_model.parameters()).device)
-    ecg_waveform = all_ecg_waveforms[sample_idx].unsqueeze(0).to(next(last_fold_model.parameters()).device)
+    xray_image = (
+        all_xray_images[sample_idx]
+        .unsqueeze(0)
+        .to(next(last_fold_model.parameters()).device)
+    )
+    ecg_waveform = (
+        all_ecg_waveforms[sample_idx]
+        .unsqueeze(0)
+        .to(next(last_fold_model.parameters()).device)
+    )
     label = all_labels[sample_idx].item()
 
     # --- ECG Preprocessing ---
     ecg_waveform_1d = all_ecg_waveforms[sample_idx].cpu().numpy().ravel()
     ecg_smoothed = nk.ecg_clean(ecg_waveform_1d, sampling_rate=sampling_rate)
-    ecg_smoothed_tensor = torch.tensor(ecg_smoothed.copy(), dtype=torch.float32).unsqueeze(0).unsqueeze(0).to(next(last_fold_model.parameters()).device)
+    ecg_smoothed_tensor = (
+        torch.tensor(ecg_smoothed.copy(), dtype=torch.float32)
+        .unsqueeze(0)
+        .unsqueeze(0)
+        .to(next(last_fold_model.parameters()).device)
+    )
 
     # --- Prediction ---
     last_fold_model.eval()
@@ -50,18 +66,22 @@ def multimodal_ecg_cxr_attribution(
     attributions, _ = integrated_gradients.attribute(
         inputs=(xray_image, ecg_smoothed_tensor),
         target=predicted_label,
-        return_convergence_delta=True
+        return_convergence_delta=True,
     )
     attributions_xray = attributions[0]
     attributions_ecg = attributions[1]
 
     # --- ECG Attribution ---
     attributions_ecg_np = attributions_ecg.cpu().detach().numpy().squeeze()
-    norm_attributions_ecg = (attributions_ecg_np - attributions_ecg_np.min()) / (attributions_ecg_np.max() - attributions_ecg_np.min() + 1e-8)
+    norm_attributions_ecg = (attributions_ecg_np - attributions_ecg_np.min()) / (
+        attributions_ecg_np.max() - attributions_ecg_np.min() + 1e-8
+    )
     ecg_waveform_np = ecg_smoothed_tensor.cpu().detach().numpy().squeeze()
     full_length = min(60000, len(ecg_waveform_np))
     full_time = np.arange(0, full_length) / sampling_rate / lead_number
-    important_indices_full = np.where(norm_attributions_ecg[:full_length] >= ecg_threshold)[0]
+    important_indices_full = np.where(
+        norm_attributions_ecg[:full_length] >= ecg_threshold
+    )[0]
 
     zoom_start = int(zoom_range[0] * 6000)
     zoom_end = int(zoom_range[1] * 6000)
@@ -74,10 +94,12 @@ def multimodal_ecg_cxr_attribution(
 
     # --- CXR Attribution: Points ---
     attributions_xray_np = attributions_xray.cpu().detach().numpy().squeeze()
-    norm_attributions_xray = (attributions_xray_np - np.min(attributions_xray_np)) / (np.max(attributions_xray_np) - np.min(attributions_xray_np) + 1e-8)
+    norm_attributions_xray = (attributions_xray_np - np.min(attributions_xray_np)) / (
+        np.max(attributions_xray_np) - np.min(attributions_xray_np) + 1e-8
+    )
     xray_image_np = xray_image.cpu().detach().numpy().squeeze()
 
-    binary_mask = (norm_attributions_xray >= cxr_threshold)
+    binary_mask = norm_attributions_xray >= cxr_threshold
     dilated_mask = binary_dilation(binary_mask, iterations=1)
     y_pts, x_pts = np.where(dilated_mask)
     importance_pts = norm_attributions_xray[y_pts, x_pts]
@@ -100,5 +122,5 @@ def multimodal_ecg_cxr_attribution(
         "y_pts": y_pts,
         "importance_pts": importance_pts,
         "ecg_threshold": ecg_threshold,
-        "cxr_threshold": cxr_threshold
+        "cxr_threshold": cxr_threshold,
     }
