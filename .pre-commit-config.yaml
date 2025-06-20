@@ -27,5 +27,8 @@ repos:
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.9.1
     hooks:
+#      - id: nbqa-isort
+#        additional_dependencies: ["isort"]
       - id: nbqa-black
         additional_dependencies: ["black"]
+#      - id: nbqa-flake8
