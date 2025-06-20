@@ -123,18 +123,19 @@ def preprocess_phenotypic_data(data, standardize=False):
 
 
 @validate_params(
-    {"data": ["array-like"], "measures": [list]}, prefer_skip_nested_validation=False
+    {"data": ["array-like"], "measures": [list, tuple]},
+    prefer_skip_nested_validation=False,
 )
 def extract_functional_connectivity(data, measures=["pearson"]):
     """Extract functional connectivity features from time series data.
 
     Parameters
     ----------
-    data : list[array-like] of shape (n_subjects,)
+    data : list[array-like] or tuple[array-like] of shape (n_subjects,)
         An array of numpy arrays, where each array is a time series of shape (t, n_rois).
         The time series data for each subject.
 
-    measures : list[str], optional (default=["pearson"])
+    measures : list[str] or tuple[str], optional (default=["pearson"])
         A list of connectivity measures to use for feature extraction.
         Supported measures are "pearson", "partial", "tangent", "covariance", and "precision".
         Multiple measures can be specified as a list to compose a higher-order measure.
