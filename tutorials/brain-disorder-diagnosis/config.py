@@ -1,14 +1,12 @@
-import os
 from yacs.config import CfgNode
 
-DEFAULT_DIR = os.path.join(os.getcwd(), "data")
 
 _C = CfgNode()
 
 # Dataset configuration
 _C.DATASET = CfgNode()
 # Path to the dataset directory
-_C.DATASET.PATH = DEFAULT_DIR
+_C.DATASET.PATH = "data"
 # Name of the brain atlas to use
 # Available options:
 # - "aal" (AAL)
