@@ -179,4 +179,7 @@ _build/
 # VS Code
 .vscode/
 
+# PyCharm
+.idea
+
 _build
