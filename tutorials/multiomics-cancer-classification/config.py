@@ -5,6 +5,7 @@ graph convolutional networks allowing patient classification and biomarker ident
 
 https://github.com/txWang/MOGONET/blob/main/main_mogonet.py
 """
+
 from yacs.config import CfgNode
 
 # ---------------------------------------------------------
@@ -36,7 +37,9 @@ _C.SOLVER.MAX_EPOCHS = 2500
 # Model (MOGONET) configs
 # -----------------------------------------------------------------------------
 _C.MODEL = CfgNode()
-_C.MODEL.EDGE_PER_NODE = 10  # Predefined number of edges per nodes in computing adjacency matrix
+_C.MODEL.EDGE_PER_NODE = (
+    10  # Predefined number of edges per nodes in computing adjacency matrix
+)
 _C.MODEL.EQUAL_WEIGHT = False
 _C.MODEL.GCN_LR_PRETRAIN = 1e-3
 _C.MODEL.GCN_LR = 5e-4
