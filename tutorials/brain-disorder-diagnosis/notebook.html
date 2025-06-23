@@ -186,6 +186,7 @@
 
 
 
+
 </ul>
 
     </div>
@@ -430,8 +431,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
@@ -483,8 +484,9 @@ document.write(`
 <li><p><strong>Build</strong> a <strong>training</strong> and <strong>evaluation</strong> pipeline to assess classification performance under various domain adaptation strategies.</p></li>
 <li><p><strong>Interpret</strong> the learned model by extracting weights for pairwise ROI feature importance and visualizing them using a connectome plot.</p></li>
 </ol>
-<section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
 <p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
 <p>In addition, several helper scripts are provided to modularize the code and simplify the workflow. These can be inspected directly as <code class="docutils literal notranslate"><span class="pre">.py</span></code> files in the notebook’s current directory. The helper scripts include:</p>
 <ul class="simple">
@@ -518,7 +520,6 @@ document.write(`
 </div>
 </details>
 </div>
-</section>
 <section id="packages">
 <h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
 <p>The main packages required for this tutorial are:</p>
@@ -581,7 +582,7 @@ We provide detailed descriptions of each configurable option in the following se
 DATASET:
   ATLAS: hcp-ica
   FC: tangent-pearson
-  PATH: /home/zarizky/projects/embc-mmai25/tutorials/brain-disorder-diagnosis/data
+  PATH: data
 PHENOTYPE:
   STANDARDIZE: site
 RANDOM_STATE: 0
@@ -663,9 +664,9 @@ TRAINER:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✔ File found: /home/zarizky/projects/embc-mmai25/tutorials/brain-disorder-diagnosis/data/abide/fc/hcp-ica/tangent-pearson.npy
-✔ File found: /home/zarizky/projects/embc-mmai25/tutorials/brain-disorder-diagnosis/data/abide/phenotypes.csv
-✔ Atlas folder found: /home/zarizky/projects/embc-mmai25/tutorials/brain-disorder-diagnosis/data/atlas/deterministic/hcp-ica
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✔ File found: data/abide/fc/hcp-ica/tangent-pearson.npy
+✔ File found: data/abide/phenotypes.csv
+✔ Atlas folder found: data/atlas/deterministic/hcp-ica
 </pre></div>
 </div>
 </div>
@@ -884,8 +885,8 @@ TRAINER:
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multi_domain_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multi_domain_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
 
 <span class="c1"># Configuration with cv and random_state/seed included</span>
 <span class="n">trainer_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
@@ -936,7 +937,7 @@ TRAINER:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████| 3/3 [00:21&lt;00:00,  7.23s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████| 3/3 [00:24&lt;00:00,  8.19s/it]
 </pre></div>
 </div>
 </div>
@@ -1041,10 +1042,10 @@ TRAINER:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x751dbdeaf640&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x33ded7a00&gt;
 </pre></div>
 </div>
-<img alt="../../_images/fd2336bb4ea75c3545fe7cae5f5077964fe2b6609ab447d2f01c7c5064ebdd2a.png" src="../../_images/fd2336bb4ea75c3545fe7cae5f5077964fe2b6609ab447d2f01c7c5064ebdd2a.png" />
+<img alt="../../_images/fe01ee12dfe28c81ec37e7f8fcbd373e3927ff9b59b3dcac0e957ccec037aa3c.png" src="../../_images/fe01ee12dfe28c81ec37e7f8fcbd373e3927ff9b59b3dcac0e957ccec037aa3c.png" />
 </div>
 </div>
 <section id="interpretation-of-discriminative-connectivity-patterns">
@@ -1154,8 +1155,8 @@ TRAINER:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brain Disorder Diagnosis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>

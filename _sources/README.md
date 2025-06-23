@@ -11,21 +11,29 @@ This repository contains materials and resources for workshops conducted in 2025
 ## How to Contribute
 
 1. Fork the repository.
-2. Create a new branch for your feature or bug fix:
+2. Create a new branch for your tutorial or bug fix:
    ```bash
-   git checkout -b my-feature-branch
+   git checkout -b my-branch
    ```
 3. Make your changes and commit them with clear messages:
    ```bash
-   git commit -m "Add feature X"
+   git commit -m "Add function ... to simplify tutorial ... content"
    ```
 4. Push your branch to your forked repository:
    ```bash
-   git push origin my-feature-branch
+   git push origin my-tutorial-branch
    ```
 5. Open a pull request to the main repository.
 
 Please ensure your contributions adhere to the repository's coding standards and include appropriate documentation.
+
+## Building the Book
+
+To build the book in development, assuming that the working directory is the project's folder, please call:
+
+```bash
+jupyter-book build .
+```
 
 ## Pre-commit Hooks
 
