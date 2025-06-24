@@ -1,4 +1,4 @@
-# Remap model parameters from the pre-trained checkoints to adjust with new parameter name.
+# Remap model parameters from the pre-trained checkpoints to adjust with new parameter name.
 
 
 def remap_state_dict_keys(state_dict):

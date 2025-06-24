@@ -18,9 +18,70 @@ def multimodal_ecg_cxr_attribution(
     sampling_rate=500,
 ):
     """
-    Compute and return all data needed for multimodal ECG+CXR attribution visualization.
+    Computes model attributions for multimodal (ECG + CXR) input using Integrated Gradients.
 
-    Returns: dict with all tensors, arrays and keys for plotting.
+    This function selects a sample from the provided validation loader and computes the attributions
+    (importance scores) for both ECG and CXR modalities using Captum's Integrated Gradients.
+    It returns all relevant arrays and data needed for downstream visualization, including normalized
+    attributions, important indices, and segment data for zoomed-in views.
+
+    Parameters
+    ----------
+    last_fold_model : torch.nn.Module
+        Trained multimodal model that accepts both CXR images and ECG waveforms as input.
+    last_val_loader : DataLoader
+        PyTorch DataLoader for the validation dataset. Each batch should yield (CXR, ECG, label).
+    sample_idx : int, optional
+        Index of the sample in the validation set to interpret (default is 0).
+    ecg_threshold : float, optional
+        Threshold (0-1) to consider ECG attributions as important (default is 0.70).
+    cxr_threshold : float, optional
+        Threshold (0-1) to consider CXR attributions as important (default is 0.70).
+    zoom_range : tuple of float, optional
+        Start and end (in seconds) for zoomed ECG visualization window (default is (3, 3.5)).
+    lead_number : int, optional
+        Number of ECG leads (default is 12).
+    sampling_rate : int, optional
+        Sampling rate of the ECG waveform in Hz (default is 500).
+
+    Returns
+    -------
+    dict
+        Dictionary containing:
+            - label : int
+                True class label for the selected sample.
+            - predicted_label : int
+                Model's predicted class for the sample.
+            - predicted_probability : float
+                Probability of the predicted class.
+            - ecg_waveform_np : np.ndarray
+                1D numpy array of the processed ECG waveform.
+            - full_time : np.ndarray
+                Time axis (seconds) for the full ECG.
+            - full_length : int
+                Number of time points in the (possibly trimmed) ECG.
+            - important_indices_full : np.ndarray
+                Indices in the full ECG considered important by attribution threshold.
+            - segment_ecg_waveform : np.ndarray
+                Zoomed ECG segment.
+            - zoom_time : np.ndarray
+                Time axis (seconds) for the zoomed ECG segment.
+            - important_indices_zoom : np.ndarray
+                Important indices within the zoomed ECG segment.
+            - zoom_start_sec : float
+                Start time (seconds) of the zoomed window.
+            - zoom_end_sec : float
+                End time (seconds) of the zoomed window.
+            - xray_image_np : np.ndarray
+                CXR image as a numpy array.
+            - x_pts, y_pts : np.ndarray
+                Coordinates of important points in the CXR image (after dilation).
+            - importance_pts : np.ndarray
+                Attribution values at (x_pts, y_pts).
+            - ecg_threshold : float
+                The threshold used for ECG attributions.
+            - cxr_threshold : float
+                The threshold used for CXR attributions.
     """
     # Gather all batches (as in your code)
     batches = list(last_val_loader)
