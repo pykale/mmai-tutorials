@@ -23,5 +23,6 @@ parts:
 - caption: Tutorials
   chapters:
   - file: tutorials/brain-disorder-diagnosis/notebook
+  - file: tutorials/cardiac-hemodynamics-assesment/notebook
   - file: tutorials/drug-target-interaction/notebook-cross-domain
   - file: tutorials/multiomics-cancer-classification/notebook
