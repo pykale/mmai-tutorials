@@ -1,0 +1,1379 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cardiac Hemodynamics Assessment &#8212; PyKale</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assesment/notebook';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/notebook-cross-domain.html" />
+    <link rel="prev" title="Brain Disorder Diagnosis" href="../brain-disorder-diagnosis/notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/EMBC_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../../_static/EMBC_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../brain-disorder-diagnosis/notebook.html">Brain Disorder Diagnosis</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiac Hemodynamics Assessment</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html"><strong>Drug–Target Interaction Prediction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pykale/embc-mmai25/main?urlpath=tree/tutorials/cardiac-hemodynamics-assesment/notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/pykale/embc-mmai25/blob/main/tutorials/cardiac-hemodynamics-assesment/notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pykale/embc-mmai25" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pykale/embc-mmai25/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assesment/notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/cardiac-hemodynamics-assesment/notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cardiac Hemodynamics Assessment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cardiac Hemodynamics Assessment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives"><strong>Objectives</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-colab">Additional Notes for Colab</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-configuration">Pre-training Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data Loading and Preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">Multimodal pretraining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-variational-autoencoder-pretraining">Multimodal Variational Autoencoder Pretraining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-steps">Key Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">🔧 Model Architecture</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer-setup">⚙️ Trainer Setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-execution">🚀 Training Execution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">📁 Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finetuning-configuration">Finetuning Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Data Loading and Preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning-and-evaluation">Multimodal Fine-tuning and Evaluation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-pipeline-overview">Full Pipeline Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-interpretability-visualizing-ecg-attribution-with-integrated-gradients">Model Interpretability: Visualizing ECG Attribution with Integrated Gradients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-explanation">Step-by-Step Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cardiac-hemodynamics-assessment">
+<h1>Cardiac Hemodynamics Assessment<a class="headerlink" href="#cardiac-hemodynamics-assessment" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we demonstrate how to use low-cost, non-invasive modalities—<strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>—to assess <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>, a key indicator of cardiac hemodynamics. The goal is to reduce reliance on high-cost or invasive methods such as <strong>Cardiac MRI</strong> and <strong>Right Heart Catheterization (RHC)</strong>, enabling early screening of <strong>pulmonary hypertension (PH)</strong> and <strong>heart failure (HF)</strong>.</p>
+<p>This notebook is based on the work of <strong>Suvon et al. (MICCAI 2024)</strong>, which introduced a tri-stream pre-training method using a <strong>multimodal variational autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale">PyKale</a> library. Here, we provide a concise example of how to pre-train and fine-tune this model.</p>
+<hr class="docutils" />
+<section id="objectives">
+<h2><strong>Objectives</strong><a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Load</strong> a preprocessed subset of 50K paired multimodal dataset from <strong>MIMIC-CXR</strong> and <strong>MIMIC-IV-ECG</strong>. Due to resource constraints in Colab, we use a reduced version of the dataset. The full preprocessing pipeline is also shared for reference.</p></li>
+<li><p><strong>Pre-train</strong> the CardioVAE model using a small subset of the paired data. This step illustrates how to run the tri-stream pretraining pipeline and save the resulting model.</p></li>
+<li><p><strong>Load</strong> a separate, labeled subset of paired CXR+ECG data for fine-tuning. Labels represent <strong>healthy</strong> versus <strong>cardiothoracic abnormality</strong> cases.</p></li>
+<li><p><strong>Fine-tune</strong> the pre-trained CardioVAE model on the labeled subset to adapt it for a downstream classification task.</p></li>
+<li><p><strong>Interpret</strong> the fine-tuned model using <strong>Integrated Gradients</strong> from the Captum library to identify and visualize modality-specific salient features.</p></li>
+</ol>
+<p><strong>Note:</strong> Please make a shortcut of <a class="reference external" href="https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing">https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing</a> in your MyDrive.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<p>As a starting point, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we also suppress unnecessary warnings.</p>
+<p>Several helper scripts are included to modularize the code and simplify the workflow. These can be inspected directly as <code class="docutils literal notranslate"><span class="pre">.py</span></code> files in the notebook’s working directory:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pretraining_config.py</span></code></strong>: Defines the base configuration settings for pretraining <strong>CardioVAE</strong>, which can be customized or overridden using external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">finetune_config.py</span></code></strong>: Defines the base configuration settings for the fine-tuning stage. These can also be overridden with <code class="docutils literal notranslate"><span class="pre">.yml</span></code> configuration files.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">remap_model_parameters.py</span></code></strong>: The original CardioVAE model (MICCAI 2024) used a different naming convention for model parameters. Since the model has now been integrated into the <strong>PyKale</strong> library with a unified API, this script remaps the original pre-trained model weights to the new parameter names for compatibility.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Connect with your google drive for data laoding
+from google.colab import drive
+
+drive.mount(&quot;/content/drive&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
+import site
+import sys
+import warnings
+import logging
+
+
+# Disable warnings
+warnings.filterwarnings(&quot;ignore&quot;)
+os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
+
+# Suppress PyTorch Lightning logs
+logging.getLogger(&quot;pytorch_lightning&quot;).setLevel(logging.ERROR)
+logging.getLogger(&quot;pytorch_lightning.utilities.rank_zero&quot;).setLevel(logging.ERROR)
+logging.getLogger(&quot;pytorch_lightning.accelerators.cuda&quot;).setLevel(logging.ERROR)
+
+
+if &quot;google.colab&quot; in str(get_ipython()):
+    sys.path.insert(0, site.getusersitepackages())
+    !git clone --single-branch --branch heart-tutorial https://github.com/pykale/embc-mmai25.git
+    %cp -r /content/embc-mmai25/tutorials/cardiac-hemodynamics-assesment/* /content/
+    %rm -r /content/embc-mmai25
+</pre></div>
+</div>
+</div>
+</div>
+<section id="packages">
+<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
+<p>The main packages required for this tutorial are:</p>
+<ul class="simple">
+<li><p><strong>pykale</strong>: An open-source machine learning library developed at the University of Sheffield, focused on biomedical and scientific applications. It supports multimodal learning, domain adaptation, and interpretability.</p></li>
+<li><p><strong>wfdb</strong>: A toolkit for reading, writing, and processing physiological signal data, especially useful for ECG waveform analysis.</p></li>
+<li><p><strong>yacs</strong>: A lightweight configuration management library that helps organize experimental settings in a structured, readable format.</p></li>
+<li><p><strong>pytorch-lightning</strong>: A high-level framework built on PyTorch that simplifies training workflows, making code cleaner and easier to scale.</p></li>
+<li><p><strong>tabulate</strong>: Used to print tabular data in a readable format, helpful for summarizing results or configuration parameters.</p></li>
+<li><p><strong>captum</strong>: A model interpretability library for PyTorch, providing tools such as Integrated Gradients to explain model predictions.</p></li>
+<li><p><strong>neurokit2</strong>: A user-friendly library for physiological signal processing, especially for extracting and analyzing ECG features.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="additional-notes-for-colab">
+<h3>Additional Notes for Colab<a class="headerlink" href="#additional-notes-for-colab" title="Link to this heading">#</a></h3>
+<p>Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the installation step.<br />
+#<strong>Note:</strong> If you’re running this notebook for the first time in Colab, be sure to <strong>restart the runtime after installation</strong> to properly load all libraries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip uninstall --quiet -y torch torchvision torchaudio torchdata
+
+!pip install --quiet torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+!pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+
+!pip install --quiet --user \
+    git+https://github.com/pykale/pykale@main \
+    yacs==0.1.8 wfdb pytorch-lightning tabulate captum neurokit2\
+    &amp;&amp; echo &quot;pykale,yacs and wfdb installed successfully ✅&quot; \
+    || echo &quot;Failed to install pykale,yacs and wfdb ❌&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pre-training-configuration">
+<h2>Pre-training Configuration<a class="headerlink" href="#pre-training-configuration" title="Link to this heading">#</a></h2>
+<p>To reduce code clutter in the notebook, we use a dedicated configuration file—<code class="docutils literal notranslate"><span class="pre">pretraining_config.py</span></code>—which defines the default parameters for pre-training <strong>CardioVAE</strong>. These defaults can be easily customized by providing an external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> configuration file, such as <code class="docutils literal notranslate"><span class="pre">experiments/pretraining_base.yml</span></code>.</p>
+<p>This setup enables clear separation between code and experiment settings, making the workflow more modular and reproducible.</p>
+<p>Refer to the provided configuration files for detailed customization instructions.<br />
+A breakdown of each configurable option is described in the sections that follow.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from pretraining_config import get_cfg_defaults
+
+cfg = get_cfg_defaults()
+cfg.merge_from_file(&quot;experiments/pretraining_base.yml&quot;)
+print(cfg)
+
+# laoding
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DATA:
+  BATCH_SIZE: 32
+  CXR_PATH: /content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_1000.pt
+  ECG_PATH: /content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_1000.pt
+  NUM_WORKERS: 2
+MODEL:
+  INPUT_DIM_CXR: 1
+  INPUT_DIM_ECG: 60000
+  LATENT_DIM: 128
+  NUM_LEADS: 12
+TRAIN:
+  ACCELERATOR: gpu
+  DATA_DEVICE: cpu
+  DEVICE: cuda
+  DEVICES: 1
+  EPOCHS: 10
+  LAMBDA_IMAGE: 1.0
+  LAMBDA_SIGNAL: 10.0
+  LR: 0.001
+  SAVE_PATH: cardioVAE.pth
+  SCALE_FACTOR: 0.0001
+  SEED: 123
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-loading-and-preprocessing">
+<h1>Data Loading and Preprocessing<a class="headerlink" href="#data-loading-and-preprocessing" title="Link to this heading">#</a></h1>
+<p>Both image and signal data typically require common preprocessing steps such as resizing, normalization, tensor conversion, and interpolation before being fed into a deep learning model.</p>
+<p>In this tutorial, we use a <strong>preprocessed subset (first 1000 samples)</strong> of the paired CXR and ECG data to demonstrate the pretraining process. This helps reduce complexity and avoids the time-intensive process of loading and preprocessing the full dataset.</p>
+<p>However, we also provide the CSV files containing subject IDs for the entire 50K paired dataset. If you wish to pre-train the model on the full data, you can use the <strong>PyKale API</strong> to load samples directly from the CXR and ECG directories with preprocessing included.</p>
+<p>To keep this tutorial lightweight and runnable in environments like <strong>Google Colab</strong>, the full-data loading functionality is commented out by default but can be easily enabled.</p>
+<hr class="docutils" />
+<p><strong>Note:</strong><br />
+Please ensure the shared folder <strong><code class="docutils literal notranslate"><span class="pre">EMBC_workshop_data</span></code></strong> is added as a <strong>shortcut to your Google Drive (My Drive)</strong> to access the required files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># (OPTIONAL)
+# from kale.loaddata.signal_access import load_ecg_from_folder
+# from kale.loaddata.image_access import load_images_from_dir
+
+# ecg_tensor = load_ecg_from_folder(&quot;/data/ecg/&quot;, &quot;ecg_files.csv&quot;)
+# cxr_tensor = load_images_from_dir(&quot;/data/cxr/&quot;, &quot;cxr_files.csv&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
+from kale.loaddata.signal_image_access import SignalImageDataset
+from kale.utils.seed import set_seed
+import random
+import numpy as np
+import torch
+
+set_seed(cfg.TRAIN.SEED)
+
+ecg_tensor = torch.load(cfg.DATA.ECG_PATH, map_location=cfg.TRAIN.DATA_DEVICE)
+cxr_tensor = torch.load(cfg.DATA.CXR_PATH, map_location=cfg.TRAIN.DATA_DEVICE)
+print(&quot;ECG tensor shape:&quot;, ecg_tensor.shape)
+print(&quot;CXR tensor shape:&quot;, cxr_tensor.shape)
+# Prepare train and val datasets using your provided method
+train_dataset, val_dataset = SignalImageDataset.prepare_data_loaders(
+    ecg_tensor, cxr_tensor
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="multimodal-pretraining">
+<h1>Multimodal pretraining<a class="headerlink" href="#multimodal-pretraining" title="Link to this heading">#</a></h1>
+<section id="multimodal-variational-autoencoder-pretraining">
+<h2>Multimodal Variational Autoencoder Pretraining<a class="headerlink" href="#multimodal-variational-autoencoder-pretraining" title="Link to this heading">#</a></h2>
+<p>We implement a <strong>multimodal variational autoencoder (VAE)</strong> using <strong>PyKale</strong> and <strong>PyTorch Lightning</strong> to jointly learn representations from paired <strong>Chest X-ray (CXR)</strong> images and <strong>ECG</strong> signals.<br />
+This framework enables <strong>unsupervised pretraining</strong> that captures the underlying relationships between these two clinically relevant modalities.</p>
+<hr class="docutils" />
+<section id="key-steps">
+<h3>Key Steps<a class="headerlink" href="#key-steps" title="Link to this heading">#</a></h3>
+<section id="model-architecture">
+<h4>🔧 Model Architecture<a class="headerlink" href="#model-architecture" title="Link to this heading">#</a></h4>
+<p>We instantiate the <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code>, which contains <strong>parallel encoders and decoders</strong> for each modality. These are fused into a <strong>shared latent space</strong>, allowing the model to learn both modality-specific and modality-shared representations.</p>
+</section>
+<section id="trainer-setup">
+<h4>⚙️ Trainer Setup<a class="headerlink" href="#trainer-setup" title="Link to this heading">#</a></h4>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">SignalImageTriStreamVAETrainer</span></code> to manage the <strong>multistream training process</strong>, handling:</p>
+<ul class="simple">
+<li><p>Joint and individual modality reconstructions</p></li>
+<li><p>ELBO loss computation</p></li>
+<li><p>Logging and evaluation</p></li>
+</ul>
+<p>All hyperparameters—including learning rate, batch size, latent dimension, and modality-specific loss weights—are defined in a <strong>central configuration file</strong> to ensure full reproducibility.</p>
+</section>
+<section id="training-execution">
+<h4>🚀 Training Execution<a class="headerlink" href="#training-execution" title="Link to this heading">#</a></h4>
+<p>The training loop is executed using <strong>PyTorch Lightning’s <code class="docutils literal notranslate"><span class="pre">Trainer</span></code></strong>, which manages:</p>
+<ul class="simple">
+<li><p>Automatic GPU/CPU selection</p></li>
+<li><p>Epoch scheduling</p></li>
+<li><p>Checkpointing and logging</p></li>
+</ul>
+<p>Model weights are saved after training for later <strong>fine-tuning</strong> or <strong>evaluation</strong>.</p>
+</section>
+<section id="configuration">
+<h4>📁 Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h4>
+<p>All major parameters (data paths, batch size, learning rate, number of epochs, etc.) are defined in a <strong>YAML or Python config</strong>.<br />
+This enables reproducible and modifiable experimentation, especially useful for scaling to larger datasets or different tasks.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Note:</strong><br />
+To run this tutorial successfully on <strong>Google Colab</strong> without GPU or memory errors, some hyperparameters were adjusted:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> was reduced from <strong>256</strong> to <strong>128</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_epochs</span></code> was set to <strong>10</strong> for quick training</p></li>
+</ul>
+<p>For better performance and stable representations, we recommend training for <strong>at least 100 epochs</strong> with a latent dimension of <strong>256</strong> in a full-scale environment.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
+from kale.pipeline.multimodal_trainer import SignalImageTriStreamVAETrainer
+from kale.embed.multimodal_encoder import SignalImageVAE
+
+model = SignalImageVAE(
+    image_input_channels=cfg.MODEL.INPUT_DIM_CXR,
+    signal_input_dim=cfg.MODEL.INPUT_DIM_ECG,
+    latent_dim=cfg.MODEL.LATENT_DIM,
+)
+
+# PyKale trainer instance (all from config)
+pl_trainer = SignalImageTriStreamVAETrainer(
+    model=model,
+    train_dataset=train_dataset,
+    val_dataset=val_dataset,
+    batch_size=cfg.DATA.BATCH_SIZE,
+    num_workers=cfg.DATA.NUM_WORKERS,
+    lambda_image=cfg.TRAIN.LAMBDA_IMAGE,
+    lambda_signal=cfg.TRAIN.LAMBDA_SIGNAL,
+    lr=cfg.TRAIN.LR,
+    annealing_epochs=cfg.TRAIN.EPOCHS,
+    scale_factor=cfg.TRAIN.SCALE_FACTOR,
+)
+
+trainer = pl.Trainer(
+    max_epochs=cfg.TRAIN.EPOCHS,
+    accelerator=cfg.TRAIN.ACCELERATOR,
+    devices=cfg.TRAIN.DEVICES,
+    log_every_n_steps=10,
+)
+
+trainer.fit(pl_trainer)
+
+# Save model state dict
+torch.save(model.state_dict(), cfg.TRAIN.SAVE_PATH)
+print(f&quot;Saved model state dictionary to &#39;{cfg.TRAIN.SAVE_PATH}&#39;&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="finetuning-configuration">
+<h2>Finetuning Configuration<a class="headerlink" href="#finetuning-configuration" title="Link to this heading">#</a></h2>
+<p>To keep the notebook clean and modular, we use a dedicated configuration file—<code class="docutils literal notranslate"><span class="pre">finetune_config.py</span></code>—that defines the default parameters for fine-tuning <strong>CardioVAE</strong>.<br />
+These defaults can be customized using an external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file, such as <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code>.</p>
+<p>This setup ensures reproducibility and flexibility across different downstream tasks and datasets.</p>
+<p>Please refer to the provided configuration files for detailed instructions on how to adjust parameters such as learning rate, number of epochs, loss weights, and model paths.</p>
+<p>A breakdown of each configurable option is provided in the following sections.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from finetune_config import get_cfg_defaults
+
+cfg = get_cfg_defaults()
+cfg.merge_from_file(&quot;experiments/finetune_base.yml&quot;)
+print(cfg)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DATA:
+  BATCH_SIZE: 32
+  CSV_PATH: /content/drive/MyDrive/EMBC_workshop_data/chexpert_healthy_abnormality_subset.csv
+  CXR_PATH: /content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_last_1000.pt
+  DATA_DEVICE: cpu
+  ECG_PATH: /content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_last_1000.pt
+  NUM_WORKERS: 2
+FT:
+  ACCELERATOR: gpu
+  CKPT_PATH: /content/drive/MyDrive/EMBC_workshop_data/CardioVAE.pth
+  DEVICE: cuda
+  DEVICES: 1
+  EPOCHS: 10
+  HIDDEN_DIM: 128
+  KFOLDS: 5
+  LR: 0.001
+  NUM_CLASSES: 2
+  SEED: 42
+INTERPRET:
+  CXR_THRESHOLD: 0.7
+  ECG_THRESHOLD: 0.7
+  LEAD_NUMBER: 12
+  SAMPLE_IDX: 101
+  SAMPLING_RATE: 500
+  ZOOM_RANGE: [3, 3.5]
+MODEL:
+  INPUT_DIM_ECG: 60000
+  INPUT_IMAGE_CHANNELS: 1
+  LATENT_DIM: 256
+  NUM_LEADS: 12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Data Loading and Preprocessing<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Similar to the pretraining stage, we prepare paired CXR and ECG data for fine-tuning.<br />
+However, unlike the original fine-tuning example in <strong>Suvon et al. (MICCAI 2024)</strong>—which used a private in-house dataset—we use a <strong>publicly available</strong> small subset from <strong>MIMIC-CXR</strong> and <strong>MIMIC-IV-ECG</strong>, with binary labels:</p>
+<ul class="simple">
+<li><p><strong>Healthy</strong> → <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p><strong>Cardiothoracic Abnormality</strong> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
+<p>This subset is carefully selected to ensure it is <strong>not included in the original 50K samples</strong> used during pretraining, thereby simulating a real downstream evaluation scenario.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
+import pandas as pd
+
+X_ecg_tensor = torch.load(cfg.DATA.ECG_PATH, map_location=cfg.DATA.DATA_DEVICE)
+X_image_tensor = torch.load(cfg.DATA.CXR_PATH, map_location=cfg.DATA.DATA_DEVICE)
+df = pd.read_csv(cfg.DATA.CSV_PATH)
+labels = torch.tensor(df[&quot;label&quot;].values, dtype=torch.long)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="multimodal-fine-tuning-and-evaluation">
+<h1>Multimodal Fine-tuning and Evaluation<a class="headerlink" href="#multimodal-fine-tuning-and-evaluation" title="Link to this heading">#</a></h1>
+<section id="cross-validation-split">
+<h2>Cross-Validation Split<a class="headerlink" href="#cross-validation-split" title="Link to this heading">#</a></h2>
+<p>To assess classification performance in a <strong>robust and unbiased</strong> manner, we use a <strong>Stratified K-Fold (SKF)</strong> cross-validation strategy.<br />
+This ensures that each fold maintains the original class distribution (e.g., healthy vs. abnormal), which is especially important in medical datasets where class imbalance is common.</p>
+<p>All cross-validation hyperparameters are defined in the config for full reproducibility:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">cv_strategy</span></code></strong>: The cross-validation method</p>
+<ul>
+<li><p><em>Options</em>: <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code> (Stratified K-Fold)</p></li>
+<li><p><em>Default</em>: <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_folds</span></code></strong>: Number of folds</p>
+<ul>
+<li><p><em>Default</em>: As defined in config (e.g., <code class="docutils literal notranslate"><span class="pre">5</span></code>)</p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">random_state</span></code></strong>: Seed for reproducibility</p>
+<ul>
+<li><p><em>Default</em>: As defined in config (e.g., <code class="docutils literal notranslate"><span class="pre">42</span></code>)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="model-definition">
+<h2>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h2>
+<p>For downstream classification, we adopt a <strong>transfer learning setup</strong>, where a pretrained <strong>multimodal VAE</strong> is used as a <strong>feature extractor</strong>. A shallow classifier is then fine-tuned to predict binary patient status:</p>
+<ul class="simple">
+<li><p><strong>Healthy (<code class="docutils literal notranslate"><span class="pre">0</span></code>)</strong></p></li>
+<li><p><strong>Cardiothoracic Abnormality (<code class="docutils literal notranslate"><span class="pre">1</span></code>)</strong></p></li>
+</ul>
+<p>The classifier is implemented as a <strong>PyTorch Lightning module</strong>, where a lightweight classification head is added on top of the frozen or partially trainable encoder.</p>
+<p>All model-related hyperparameters are defined in the config for reproducibility:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">feature_extractor</span></code></strong>: Pretrained multimodal VAE (<code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">classifier_head</span></code></strong>: Single hidden layer or linear layer for binary classification</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimizer</span></code></strong>: Adam optimizer (e.g., learning rate = <code class="docutils literal notranslate"><span class="pre">0.001</span></code>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">epochs</span></code></strong>: Number of fine-tuning epochs (e.g., <code class="docutils literal notranslate"><span class="pre">15</span></code>)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">metrics</span></code></strong>: Accuracy and AUROC are reported for each fold</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="full-pipeline-overview">
+<h2>Full Pipeline Overview<a class="headerlink" href="#full-pipeline-overview" title="Link to this heading">#</a></h2>
+<p>The complete fine-tuning pipeline is managed using <strong>PyTorch Lightning</strong>, with cross-validation handled via <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.StratifiedKFold</span></code>.</p>
+<p>For each fold:</p>
+<ol class="arabic simple">
+<li><p>The pretrained <strong>CardioVAE</strong> model is loaded.</p></li>
+<li><p>A new classification head is initialized.</p></li>
+<li><p>The model is trained and validated on the corresponding train/validation split.</p></li>
+</ol>
+<p>This setup ensures both <strong>reproducibility</strong> and <strong>fair performance evaluation</strong> across all folds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tabulate import tabulate
+from torch.utils.data import DataLoader, TensorDataset
+from sklearn.model_selection import StratifiedKFold
+import numpy as np
+import torch
+import pytorch_lightning as pl
+from kale.embed.multimodal_encoder import SignalImageVAE
+from kale.pipeline.multimodal_trainer import SignalImageFineTuningTrainer
+from remap_model_parameters import remap_state_dict_keys
+
+# Cross-validation setup
+skf = StratifiedKFold(n_splits=cfg.FT.KFOLDS, shuffle=True, random_state=cfg.FT.SEED)
+fold_results = []
+
+for fold, (train_ids, val_ids) in enumerate(skf.split(np.zeros(len(labels)), labels)):
+    print(f&quot;\n--- Fold {fold+1} ---&quot;)
+
+    train_dataset = TensorDataset(
+        X_image_tensor[train_ids], X_ecg_tensor[train_ids], labels[train_ids]
+    )
+    val_dataset = TensorDataset(
+        X_image_tensor[val_ids], X_ecg_tensor[val_ids], labels[val_ids]
+    )
+
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=cfg.DATA.BATCH_SIZE,
+        shuffle=True,
+        num_workers=cfg.DATA.NUM_WORKERS,
+    )
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=cfg.DATA.BATCH_SIZE,
+        shuffle=False,
+        num_workers=cfg.DATA.NUM_WORKERS,
+    )
+
+    # Load and remap checkpoint
+    checkpoint = torch.load(cfg.FT.CKPT_PATH, map_location=cfg.FT.DEVICE)
+    checkpoint = remap_state_dict_keys(checkpoint)
+
+    pretrained_mvae = SignalImageVAE(
+        image_input_channels=cfg.MODEL.INPUT_IMAGE_CHANNELS,
+        signal_input_dim=cfg.MODEL.INPUT_DIM_ECG,
+        latent_dim=cfg.MODEL.LATENT_DIM,
+    )
+    pretrained_mvae.load_state_dict(checkpoint, strict=False)
+    pretrained_mvae.to(cfg.FT.DEVICE)
+    pretrained_mvae.eval()
+
+    model_pl = SignalImageFineTuningTrainer(
+        pretrained_model=pretrained_mvae,
+        num_classes=cfg.FT.NUM_CLASSES,
+        lr=cfg.FT.LR,
+        hidden_dim=cfg.FT.HIDDEN_DIM,
+    )
+
+    trainer = pl.Trainer(
+        max_epochs=cfg.FT.EPOCHS,
+        accelerator=cfg.FT.ACCELERATOR,
+        devices=cfg.FT.DEVICES,
+        log_every_n_steps=10,
+        enable_checkpointing=False,
+        logger=False,
+    )
+
+    trainer.fit(model_pl, train_dataloaders=train_loader, val_dataloaders=val_loader)
+
+    if fold == cfg.FT.KFOLDS - 1:
+        last_fold_model = model_pl
+        last_val_loader = val_loader
+
+    val_metrics = trainer.callback_metrics
+    acc = val_metrics[&quot;val_acc&quot;].item() if &quot;val_acc&quot; in val_metrics else float(&quot;nan&quot;)
+    auc = (
+        val_metrics[&quot;val_auroc&quot;].item() if &quot;val_auroc&quot; in val_metrics else float(&quot;nan&quot;)
+    )
+    mcc = val_metrics[&quot;val_mcc&quot;].item() if &quot;val_mcc&quot; in val_metrics else float(&quot;nan&quot;)
+
+    # Print metrics for this fold
+    print(f&quot;Accuracy: {acc:.3f}&quot;)
+    print(f&quot;AUROC:      {auc:.3f}&quot;)
+    print(f&quot;MCC:      {mcc:.3f}&quot;)
+
+    fold_results.append((acc, auc, mcc))
+
+# Final summary
+accuracies, aucs, mccs = zip(*fold_results)
+table_data = [
+    [&quot;Accuracy&quot;, f&quot;{np.mean(accuracies):.3f} ± {np.std(accuracies):.3f}&quot;],
+    [&quot;AUROC&quot;, f&quot;{np.mean(aucs):.3f} ± {np.std(aucs):.3f}&quot;],
+    [&quot;MCC&quot;, f&quot;{np.mean(mccs):.3f} ± {np.std(mccs):.3f}&quot;],
+]
+print(&quot;\n=== Final Cross-Validation Summary ===&quot;)
+print(tabulate(table_data, headers=[&quot;Metric&quot;, &quot;Mean ± STD&quot;], tablefmt=&quot;fancy_grid&quot;))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Fold 1 ---
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "675530fccf554f609c09eff01636c5aa"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "0682ceb20d094104af6b227fc991d9a7"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "65e5b62be28744e68ca0aba441697f76"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "14e20b4bf0104e309868fed6a2548aa7"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6ca42590afd441c68fb7d5fb37c00e7b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "80b4b33bcafe47239b3abe61b98b8296"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "119f5c29dfcc4ca6bc5fcdf0f0de2693"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9e933550b6884248b7219fb702c32388"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9a0cddfe297b49fba32f147bee9f3a40"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "645404e4f4f24b48bddfd361c7c667a2"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c0e287afbdef4a06917abda0ab69af9d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "cd1abee08ad2438599025c3189a9883c"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.746
+AUROC:      0.782
+MCC:      0.484
+
+--- Fold 2 ---
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "67ef4767873f44ac932999a5c03a57ac"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "830e43c3cec841688042885032e2e43c"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ea84319e7c5043268aaf74edb50c6a0b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7edf07fa10e14330a43ea237a76f600f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "4bd55a9f2671424b9344cb6c9b1c8467"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8926bdc726f94fd3abc266b1798103a4"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f7c3f167950f4d129cf182ef647892e3"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "bac15844165b421cb9db3a9ca2ede6f5"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "78458023ea6546978c855d92032e9162"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a28e635c63584ae0bb26c0bc8bfbc13a"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "dfa5e3ec87cd40e08d86cc64d0fc0c4d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "1429bb8039e5478ea5597d79b4a777e2"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.697
+AUROC:      0.766
+MCC:      0.391
+
+--- Fold 3 ---
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "af3f173a78a34154bd962fd91e120828"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3c3455ec235540899cb363c08797ba1f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f1a14f6e80554cd286e3e97121b73a4b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "32f7868db7be43f7ba860fe243af55c4"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9287e2dedcfa4a33ba521f450bd644c1"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a1123153ee5d45dfa3e5d7892ab351d6"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "0799cebaff64489d8bdd175265c71037"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "14c38886331c454d80b0a06460ae87bb"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "432a6c33968d4c36aca04a08f759ab40"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "bd823aa80ff94a3c8e520da52803c48d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9ed4a50bd2ef46dfbd1e838a0fcbc395"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "380d4d7f2d4f49f4b7f0c2022fb40976"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.728
+AUROC:      0.770
+MCC:      0.449
+
+--- Fold 4 ---
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2d87a2da9ea14683b59fad36177a3480"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9d2e2708505844f08994366585b6cf1d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "023046660f0e4c66b70b15fadde0a79d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "e6dd734b52e04abe8a54934ac8f304ca"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9e22ad96b31b4fc7a4c8123aa0c30614"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "849bfd35e7d8476795a28e9b03133ea6"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "66d89705f6f946429d647a51482d05c0"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "acc544aa4c224b588c2583ce547b8062"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6edf4c79e328404ca62fcb31c30968c8"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "11f4e1f366ae46fc97f3863a44c95a7f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6ac70d4e044a40b693d28fa91b37d8c9"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8ddd08f6b7d94d38b4fbbf892d8111a8"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.717
+AUROC:      0.767
+MCC:      0.425
+
+--- Fold 5 ---
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "1f783d674be442bfbad00de65575a3e5"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f59313b5d64c41a08176f905e9357960"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "56f12ff257f1436581e4387560d08020"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c8a597d10ded456d95ced0a835fd5ef1"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2ccda6c45fa24ed79ad5929526526c02"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "fb94bf5c43e34336993e7a0ce32adbc6"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "eff3ff489c8c4a16a47e87816120c77f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "5e2bdf6a8b3b4e7b92233aeb0c972d65"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "437c8641824f4123a95cf61f64c83f9d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c7f60bfbad114bb48e151289d2697a11"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c09b217d9ebb41c4b8e40389ef42f401"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3d1afc39a7ae4ccfae8f5e5ca32956b0"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.679
+AUROC:      0.744
+MCC:      0.351
+
+=== Final Cross-Validation Summary ===
+╒══════════╤═══════════════╕
+│ Metric   │ Mean ± STD    │
+╞══════════╪═══════════════╡
+│ Accuracy │ 0.714 ± 0.023 │
+├──────────┼───────────────┤
+│ AUROC    │ 0.766 ± 0.012 │
+├──────────┼───────────────┤
+│ MCC      │ 0.420 ± 0.046 │
+╘══════════╧═══════════════╛
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-interpretability-visualizing-ecg-attribution-with-integrated-gradients">
+<h2>Model Interpretability: Visualizing ECG Attribution with Integrated Gradients<a class="headerlink" href="#model-interpretability-visualizing-ecg-attribution-with-integrated-gradients" title="Link to this heading">#</a></h2>
+<p>To understand which parts of the ECG signal influenced the model’s decision, we use <strong>Integrated Gradients</strong>, a gradient-based attribution method provided by the <strong>Captum</strong> library.<br />
+This helps identify salient regions of the ECG that contributed most to the predicted label, improving model transparency and clinical trust.</p>
+<hr class="docutils" />
+<section id="step-by-step-explanation">
+<h3>Step-by-Step Explanation<a class="headerlink" href="#step-by-step-explanation" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Data Preparation</strong><br />
+We first load a sample from the validation set and separate its CXR and ECG components. The ECG signal is smoothed using <strong>NeuroKit2’s <code class="docutils literal notranslate"><span class="pre">ecg_clean</span></code></strong> function to reduce noise and enhance waveform clarity.</p></li>
+<li><p><strong>Model Prediction</strong><br />
+The sample is passed through the fine-tuned model to generate predicted probabilities and the final label. The model is set to evaluation mode and moved to the appropriate device (<code class="docutils literal notranslate"><span class="pre">CPU</span></code> or <code class="docutils literal notranslate"><span class="pre">GPU</span></code>).</p></li>
+<li><p><strong>Attribution with Integrated Gradients</strong><br />
+Using Captum’s <code class="docutils literal notranslate"><span class="pre">IntegratedGradients</span></code>, we compute attribution scores for both the CXR and ECG inputs.<br />
+Here, we focus on the ECG modality by extracting its corresponding attribution tensor.</p></li>
+<li><p><strong>Attribution Normalization</strong><br />
+The ECG attribution values are normalized between 0 and 1 to prepare for visualization. A fixed threshold (e.g., 0.70) is applied to highlight the most influential regions.</p></li>
+<li><p><strong>Visualization</strong><br />
+We generate two plots:</p>
+<ul class="simple">
+<li><p><strong>Full ECG View</strong>: Highlights the important regions across the entire signal (first 12 seconds).</p></li>
+<li><p><strong>Zoomed-In Segment</strong>: Focuses on a shorter interval (e.g., 3-second segment) with higher-resolution detail of salient points.</p></li>
+</ul>
+<p>In both plots, red-highlighted regions correspond to time intervals with attribution values above the defined threshold, indicating strong influence on the model’s prediction.</p>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The input ECG is assumed to be flattened from a 12-lead concatenated signal (e.g., 5000 samples per lead × 12 leads = 60,000 total points).</p></li>
+<li><p>Time is converted into seconds and plotted on the x-axis with respect to lead concatenation.</p></li>
+<li><p>This visualization is useful for both <strong>clinical insight</strong> and <strong>debugging model behavior</strong>.</p></li>
+<li><p>Here, we have used the fine-tuned model from the final fold of the cross-validation stage for interpretation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from interpret import multimodal_ecg_cxr_attribution
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Example usage (set your variables)
+cfg = get_cfg_defaults()
+# If you load from YAML, use your loader method here instead
+
+sample_idx = cfg.INTERPRET.SAMPLE_IDX
+zoom_range = tuple(cfg.INTERPRET.ZOOM_RANGE)
+ecg_threshold = cfg.INTERPRET.ECG_THRESHOLD
+cxr_threshold = cfg.INTERPRET.CXR_THRESHOLD
+lead_number = cfg.MODEL.NUM_LEADS
+sampling_rate = cfg.INTERPRET.SAMPLING_RATE
+
+
+# Run interpretation
+result = multimodal_ecg_cxr_attribution(
+    last_fold_model=last_fold_model,
+    last_val_loader=last_val_loader,
+    sample_idx=sample_idx,
+    ecg_threshold=ecg_threshold,
+    cxr_threshold=cxr_threshold,
+    zoom_range=zoom_range,
+)
+
+# --- Plotting (same as before) ---
+fig, axes = plt.subplots(1, 3, figsize=(24, 5))
+fig.patch.set_facecolor(&quot;white&quot;)
+
+# 1. Full ECG
+axes[0].set_facecolor(&quot;white&quot;)
+axes[0].plot(
+    result[&quot;full_time&quot;],
+    result[&quot;ecg_waveform_np&quot;][: result[&quot;full_length&quot;]],
+    color=&quot;black&quot;,
+    linewidth=1,
+    label=&quot;ECG Waveform&quot;,
+)
+for idx in result[&quot;important_indices_full&quot;]:
+    stretch_start = max(0, idx - 6)
+    stretch_end = min(result[&quot;full_length&quot;], idx + 6 + 1)
+    axes[0].plot(
+        result[&quot;full_time&quot;][stretch_start:stretch_end],
+        result[&quot;ecg_waveform_np&quot;][stretch_start:stretch_end],
+        color=&quot;red&quot;,
+        linewidth=2,
+    )
+axes[0].set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
+axes[0].set_ylabel(&quot;Amplitude&quot;, fontsize=&quot;x-large&quot;)
+axes[0].set_title(&quot;Full ECG with Important Regions&quot;, fontsize=&quot;x-large&quot;)
+axes[0].set_xticks(np.linspace(0, 10, 11))
+axes[0].set_xlim([0, 10])
+axes[0].tick_params(axis=&quot;x&quot;, labelsize=&quot;large&quot;)
+axes[0].tick_params(axis=&quot;y&quot;, labelsize=&quot;large&quot;)
+axes[0].legend([&quot;ECG Waveform&quot;, &quot;Important Regions&quot;], fontsize=&quot;medium&quot;)
+
+# 2. Zoomed ECG
+axes[1].set_facecolor(&quot;white&quot;)
+axes[1].plot(
+    result[&quot;zoom_time&quot;],
+    result[&quot;segment_ecg_waveform&quot;],
+    color=&quot;black&quot;,
+    linewidth=3,
+    label=&quot;ECG Waveform&quot;,
+)
+for idx in result[&quot;important_indices_zoom&quot;]:
+    stretch_start = max(0, idx - 6)
+    stretch_end = min(len(result[&quot;segment_ecg_waveform&quot;]), idx + 6 + 1)
+    axes[1].plot(
+        result[&quot;zoom_time&quot;][stretch_start:stretch_end],
+        result[&quot;segment_ecg_waveform&quot;][stretch_start:stretch_end],
+        color=&quot;red&quot;,
+        linewidth=6,
+    )
+axes[1].set_xticks(np.linspace(result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;], 11))
+axes[1].set_xlim([result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;]])
+axes[1].set_yticks([])
+axes[1].set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
+axes[1].set_ylabel(&quot;&quot;)
+axes[1].set_title(
+    f&#39;Zoomed-In ECG Segment ({result[&quot;zoom_start_sec&quot;]:.2f}s – {result[&quot;zoom_end_sec&quot;]:.2f}s)&#39;,
+    fontsize=&quot;x-large&quot;,
+)
+
+# 3. CXR with points (&quot;X&quot;)
+x_pts = result[&quot;x_pts&quot;]
+y_pts = result[&quot;y_pts&quot;]
+importance_pts = result[&quot;importance_pts&quot;]
+cxr_thresh = result[&quot;cxr_threshold&quot;]
+axes[2].set_facecolor(&quot;white&quot;)
+axes[2].imshow(result[&quot;xray_image_np&quot;], cmap=&quot;gray&quot;, alpha=1)
+sc = axes[2].scatter(
+    x_pts,
+    y_pts,
+    c=importance_pts,
+    cmap=&quot;summer&quot;,
+    marker=&quot;x&quot;,
+    s=150,
+    vmin=cxr_thresh,
+    vmax=1.0,
+    alpha=0.8,
+    linewidths=0.7,
+    edgecolor=&quot;black&quot;,
+)
+cbar = plt.colorbar(sc, ax=axes[2], fraction=0.04, pad=0.04)
+cbar.set_label(&quot;Importance (0.7–1.0)&quot;)
+axes[2].axis(&quot;off&quot;)
+axes[2].set_title(&quot;CXR: Important Regions&quot;, fontsize=&quot;x-large&quot;)
+
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/51907b9129b68e200aad1e4c641ae705fbf1367406c7ff25c583b8afcbb97e59.png" src="../../_images/51907b9129b68e200aad1e4c641ae705fbf1367406c7ff25c583b8afcbb97e59.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/cardiac-hemodynamics-assesment"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../brain-disorder-diagnosis/notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Brain Disorder Diagnosis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../drug-target-interaction/notebook-cross-domain.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Drug–Target Interaction Prediction</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cardiac Hemodynamics Assessment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives"><strong>Objectives</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-colab">Additional Notes for Colab</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-configuration">Pre-training Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data Loading and Preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">Multimodal pretraining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-variational-autoencoder-pretraining">Multimodal Variational Autoencoder Pretraining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-steps">Key Steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">🔧 Model Architecture</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer-setup">⚙️ Trainer Setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-execution">🚀 Training Execution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">📁 Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finetuning-configuration">Finetuning Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Data Loading and Preprocessing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning-and-evaluation">Multimodal Fine-tuning and Evaluation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-pipeline-overview">Full Pipeline Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-interpretability-visualizing-ecg-attribution-with-integrated-gradients">Model Interpretability: Visualizing ECG Attribution with Integrated Gradients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-explanation">Step-by-Step Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By PyKale Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
