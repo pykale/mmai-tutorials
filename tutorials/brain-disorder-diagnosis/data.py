@@ -27,8 +27,8 @@ from sklearn.utils._param_validation import StrOptions, validate_params
                 }
             )
         ],
-        "vectorize": [bool],
-        "verbose": [bool],
+        "vectorize": ["boolean"],
+        "verbose": ["boolean"],
     },
     prefer_skip_nested_validation=False,
 )
