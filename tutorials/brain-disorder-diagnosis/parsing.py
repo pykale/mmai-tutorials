@@ -67,3 +67,40 @@ def compile_results(cv_results, sort_by):
     compiled_results = compiled_results.set_index("Model")
 
     return compiled_results
+
+
+@validate_params(
+    {"param_grid": [list], "exclude": [str, None]}, prefer_skip_nested_validation=True
+)
+def filter_param_grid(param_grid, exclude=None):
+    """
+    Filter the parameter grid to exclude specific parameters.
+
+    Parameters
+    ----------
+    param_grid : list of key-value pairs
+        List of key-value pairs representing the parameter grid for hyperparameter tuning.
+
+    exclude : str or None
+        Parameter name to exclude from the grid. If None, no parameters are excluded.
+
+    Returns
+    -------
+    filtered_param_grid : dict or None
+        Filtered parameter grid as a dictionary. If no parameters remain after filtering,
+        returns None.
+    """
+    if exclude is None and len(param_grid) > 0:
+        return dict(param_grid)
+
+    if len(param_grid) == 0:
+        return None
+
+    filtered_param_grid = {}
+    for param, grid in param_grid:
+        if exclude in param:
+            continue
+
+        filtered_param_grid[param] = grid
+
+    return filtered_param_grid
