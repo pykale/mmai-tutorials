@@ -4,7 +4,12 @@ import numpy as np
 import pandas as pd
 import gdown
 
-from sklearn.utils._param_validation import StrOptions, validate_params
+from sklearn.utils._param_validation import (
+    StrOptions,
+    validate_params,
+    Interval,
+    Integral,
+)
 
 
 @validate_params(
@@ -27,13 +32,19 @@ from sklearn.utils._param_validation import StrOptions, validate_params
                 }
             )
         ],
-        "vectorize": [bool],
-        "verbose": [bool],
+        "vectorize": ["boolean"],
+        "top_k_sites": [None, Interval(Integral, 1, None, closed="left")],
+        "verbose": ["boolean"],
     },
     prefer_skip_nested_validation=False,
 )
 def load_data(
-    data_dir="data", atlas="cc200", fc="tangent-pearson", vectorize=True, verbose=True
+    data_dir="data",
+    atlas="cc200",
+    fc="tangent-pearson",
+    vectorize=True,
+    top_k_sites=None,
+    verbose=True,
 ):
     """
     Load functional connectivity data and phenotypic data with gdown support.
@@ -54,6 +65,10 @@ def load_data(
 
     vectorize : bool, optional (default=True)
         Whether to vectorize the upper triangle of the connectivity matrices.
+
+    top_k_sites : int or None, optional (default=None)
+        If specified, only the top K sites with the most subjects will be used.
+        If None, all sites will be used.
 
     verbose : bool, optional (default=True)
         Whether to print download and progress messages.
@@ -100,6 +115,17 @@ def load_data(
     with open(os.path.join(atlas_path, "labels.txt"), "r") as f:
         rois = np.array(f.read().strip().split("\n"))
     coords = np.load(os.path.join(atlas_path, "coords.npy"))
+
+    sites = phenotypes["SITE_ID"].value_counts()
+    if top_k_sites is not None:
+        if top_k_sites > len(sites):
+            raise ValueError(
+                f"top_k_sites ({top_k_sites}) cannot be greater than the number of sites ({len(sites)})"
+            )
+        top_sites = sites.nlargest(top_k_sites).index
+        mask = phenotypes["SITE_ID"].isin(top_sites)
+        phenotypes = phenotypes[mask]
+        fc_data = fc_data[mask]
 
     return fc_data, phenotypes, rois, coords
 
