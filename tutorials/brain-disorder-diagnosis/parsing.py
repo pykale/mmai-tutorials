@@ -70,15 +70,16 @@ def compile_results(cv_results, sort_by):
 
 
 @validate_params(
-    {"param_grid": [list], "exclude": [str, None]}, prefer_skip_nested_validation=True
+    {"param_grid": [list, None], "exclude": [str, None]},
+    prefer_skip_nested_validation=True,
 )
-def filter_param_grid(param_grid, exclude=None):
+def parse_param_grid(param_grid=None, exclude=None):
     """
-    Filter the parameter grid to exclude specific parameters.
+    Parse and filter the parameter grid to exclude specific parameters.
 
     Parameters
     ----------
-    param_grid : list of key-value pairs
+    param_grid : list of key-value pairs or None
         List of key-value pairs representing the parameter grid for hyperparameter tuning.
 
     exclude : str or None
@@ -86,21 +87,21 @@ def filter_param_grid(param_grid, exclude=None):
 
     Returns
     -------
-    filtered_param_grid : dict or None
+    parsed_param_grid : dict or None
         Filtered parameter grid as a dictionary. If no parameters remain after filtering,
         returns None.
     """
+    if param_grid is None or len(param_grid) == 0:
+        return None
+
     if exclude is None and len(param_grid) > 0:
         return dict(param_grid)
 
-    if len(param_grid) == 0:
-        return None
-
-    filtered_param_grid = {}
+    parsed_param_grid = {}
     for param, grid in param_grid:
         if exclude in param:
             continue
 
-        filtered_param_grid[param] = grid
+        parsed_param_grid[param] = grid
 
-    return filtered_param_grid
+    return parsed_param_grid
