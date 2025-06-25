@@ -1,0 +1,14 @@
+CROSS_VALIDATION:
+  SPLIT: lpgo
+  NUM_FOLDS: 1
+
+TRAINER:
+  CLASSIFIER: ridge
+  PARAM_GRID:
+    - [alpha, [0.25, 0.5, 0.75, 1.0]]
+    - [domain_adapter__num_components, [50, 150, 300]]
+    - [domain_adapter__mu, [0.25, 0.5, 0.75, 1.0]]
+  SEARCH_STRATEGY: grid
+  N_JOBS: -1
+
+RANDOM_STATE: 0
