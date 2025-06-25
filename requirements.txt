@@ -1,8 +1,20 @@
+# Requirements for the book itself
 jupyter-book==1.0.4.post1
+
+# Visualization tools
 matplotlib==3.10.3
 seaborn==0.13.2
+
+# Data loading, processing, and manipulation
 numpy==1.26.4
-git+https://github.com/pykale/pykale@main
-nilearn==0.10.4
-yacs==0.1.8
 gdown==5.2.0
+
+# PyKale latest version
+git+https://github.com/pykale/pykale@main
+
+# Additional dependencies for the tutorial notebooks
+nilearn==0.12.0
+torch==2.3.0
+torch-geometric==2.3.0
+torch-sparse
+torch-scatter
