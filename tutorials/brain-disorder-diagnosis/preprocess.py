@@ -146,7 +146,13 @@ def extract_functional_connectivity(data, measures=["pearson"]):
         n_features is equal to `n_rois * (n_rois - 1) / 2` for each subjects.
     """
     for i, k in enumerate(reversed(measures), 1):
-        k = AVAILABLE_FC_MEASURES.get(k)
+        try:
+            k = AVAILABLE_FC_MEASURES.get(k)
+        except KeyError:
+            raise ValueError(
+                f"Unsupported connectivity measure: {k}. "
+                f"Available options are: {', '.join(AVAILABLE_FC_MEASURES.keys())}."
+            )
 
         # If it is the last transformation, vectorize and discard the diagonal
         # of shape (n_rois * (n_rois - 1) / 2)
