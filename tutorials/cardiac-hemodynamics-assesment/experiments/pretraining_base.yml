@@ -11,7 +11,7 @@ MODEL:
   NUM_LEADS: 12
 
 TRAIN:
-  EPOCHS: 10
+  EPOCHS: 1
   LR: 0.001
   SEED: 123
   DEVICE: "cuda"
