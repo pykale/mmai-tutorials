@@ -27,6 +27,8 @@ _C.DATASET.ATLAS = "cc200"
 # - "covariance"
 # - "tangent-pearson"
 _C.DATASET.FC = "tangent-pearson"
+# Number of top sites to load for the runtime.
+_C.DATASET.TOP_K_SITES = None
 
 # Phenotype configuration
 _C.PHENOTYPE = CfgNode()
