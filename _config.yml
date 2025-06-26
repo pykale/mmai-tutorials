@@ -4,6 +4,7 @@
 title: PyKale
 author: PyKale Contributors
 logo: EMBC_logo.png
+copyright: 2025
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
