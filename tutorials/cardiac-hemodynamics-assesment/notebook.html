@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cardiac Hemodynamics Assessment &#8212; PyKale</title>
+    <title>Cardiothoracic Abnormality Assessment &#8212; PyKale</title>
   
   
   
@@ -188,12 +188,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiac Hemodynamics Assessment</a></li>
-
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html"><strong>Drug–Target Interaction Prediction</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
 </ul>
@@ -430,7 +425,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Cardiac Hemodynamics Assessment</h1>
+    <h1>Cardiothoracic Abnormality Assessment</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -440,47 +435,45 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cardiac Hemodynamics Assessment</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives"><strong>Objectives</strong></a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-colab">Additional Notes for Colab</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-configuration">Pre-training Configuration</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data Loading and Preprocessing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">Multimodal pretraining</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-variational-autoencoder-pretraining">Multimodal Variational Autoencoder Pretraining</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-steps">Key Steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">🔧 Model Architecture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer-setup">⚙️ Trainer Setup</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-execution">🚀 Training Execution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">📁 Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">📌 Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">🎯 Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-preparation">⚙️ Environment preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-configuration">Pre-training Configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-configuration">Fine-tuning Configuration</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finetuning-configuration">Finetuning Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">🧹 Data Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-data-loading">Pre-training Data Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-data-loading">Fine-tuning Data Loading</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Data Loading and Preprocessing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning-and-evaluation">Multimodal Fine-tuning and Evaluation</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-pipeline-overview">Full Pipeline Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-interpretability-visualizing-ecg-attribution-with-integrated-gradients">Model Interpretability: Visualizing ECG Attribution with Integrated Gradients</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-explanation">Step-by-Step Explanation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">🧠 Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed">📥 Embed</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-encoder">Signal Encoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#image-encoder">Image Encoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-fusion">️ Feature Fusion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">🔮 Predict</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruction-pre-training">Reconstruction (Pre-training)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-fine-tuning">Classification (Fine-tuning)</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model training</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">🛠️ Multimodal Pretraining</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning">🎯 Multimodal Fine-tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate">📈 Evaluate</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-interpretation">🔍 Model Interpretation</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -491,35 +484,65 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="cardiac-hemodynamics-assessment">
-<h1>Cardiac Hemodynamics Assessment<a class="headerlink" href="#cardiac-hemodynamics-assessment" title="Link to this heading">#</a></h1>
-<p>In this tutorial, we demonstrate how to use low-cost, non-invasive modalities—<strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>—to assess <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>, a key indicator of cardiac hemodynamics. The goal is to reduce reliance on high-cost or invasive methods such as <strong>Cardiac MRI</strong> and <strong>Right Heart Catheterization (RHC)</strong>, enabling early screening of <strong>pulmonary hypertension (PH)</strong> and <strong>heart failure (HF)</strong>.</p>
-<p>This notebook is based on the work of <strong>Suvon et al. (MICCAI 2024)</strong>, which introduced a tri-stream pre-training method using a <strong>multimodal variational autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale">PyKale</a> library. Here, we provide a concise example of how to pre-train and fine-tune this model.</p>
-<hr class="docutils" />
+  <section class="tex2jax_ignore mathjax_ignore" id="cardiothoracic-abnormality-assessment">
+<h1>Cardiothoracic Abnormality Assessment<a class="headerlink" href="#cardiothoracic-abnormality-assessment" title="Link to this heading">#</a></h1>
+<p><img alt="" src="../../_images/embc_heart_tutorial_fig.png" /></p>
+<p>In this tutorial, we demonstrate how to use low-cost, non-invasive modalities <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong> to assess <strong>Cardiothoracic Abnormalities</strong>.</p>
+<section id="problem-formulation">
+<h2>📌 Problem Formulation<a class="headerlink" href="#problem-formulation" title="Link to this heading">#</a></h2>
+<p>We will use a multimodal dataset derived from MIMIC-CXR and MIMIC-IV-ECG, which contains approximately 50K paired CXR and ECG samples. In this tutorial, we pretrain a multimodal <strong>CardioVAE</strong> model using ~49K CXR-ECG pairs via a tri-stream pretraining method. We then fine-tune this pretrained CardioVAE model on a smaller subset (~1K paired samples) with binary labels: <strong>Healthy</strong> and <strong>Cardiothoracic Abnormality</strong>. Lastly, we demonstrate how to interpret the trained CardioVAE model on both the CXR and ECG modalities.</p>
+<p>This notebook is based on the work of <strong>Suvon et al. (MICCAI 2024)</strong>, which introduced a tri-stream pretraining strategy using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations for assessing <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a critical indicator of cardiac hemodynamics. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale">PyKale</a> library. Here, we provide a concise example of how to use this model through PyKale’s APIs—from pretraining and fine-tuning to model interpretation.</p>
+</section>
 <section id="objectives">
-<h2><strong>Objectives</strong><a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<h2>🎯 Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Load</strong> a preprocessed subset of 50K paired multimodal dataset from <strong>MIMIC-CXR</strong> and <strong>MIMIC-IV-ECG</strong>. Due to resource constraints in Colab, we use a reduced version of the dataset. The full preprocessing pipeline is also shared for reference.</p></li>
-<li><p><strong>Pre-train</strong> the CardioVAE model using a small subset of the paired data. This step illustrates how to run the tri-stream pretraining pipeline and save the resulting model.</p></li>
-<li><p><strong>Load</strong> a separate, labeled subset of paired CXR+ECG data for fine-tuning. Labels represent <strong>healthy</strong> versus <strong>cardiothoracic abnormality</strong> cases.</p></li>
-<li><p><strong>Fine-tune</strong> the pre-trained CardioVAE model on the labeled subset to adapt it for a downstream classification task.</p></li>
-<li><p><strong>Interpret</strong> the fine-tuned model using <strong>Integrated Gradients</strong> from the Captum library to identify and visualize modality-specific salient features.</p></li>
+<li><p>Understand the roles of CXR and ECG in evaluating cardiac and thoracic health, and the benefits of multimodal modeling with these low-cost modalities.</p></li>
+<li><p>Learn the standard PyKale workflow for pretraining, fine-tuning, and interpreting the CardioVAE model.</p></li>
 </ol>
-<p><strong>Note:</strong> Please make a shortcut of <a class="reference external" href="https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing">https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing</a> in your MyDrive.</p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="setup">
-<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
-<p>As a starting point, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we also suppress unnecessary warnings.</p>
-<p>Several helper scripts are included to modularize the code and simplify the workflow. These can be inspected directly as <code class="docutils literal notranslate"><span class="pre">.py</span></code> files in the notebook’s working directory:</p>
+<section id="environment-preparation">
+<h2>⚙️ Environment preparation<a class="headerlink" href="#environment-preparation" title="Link to this heading">#</a></h2>
+<section id="package-installation">
+<h3>Package installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
+<p>The main packages required for this tutorial are:</p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">pretraining_config.py</span></code></strong>: Defines the base configuration settings for pretraining <strong>CardioVAE</strong>, which can be customized or overridden using external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">finetune_config.py</span></code></strong>: Defines the base configuration settings for the fine-tuning stage. These can also be overridden with <code class="docutils literal notranslate"><span class="pre">.yml</span></code> configuration files.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">remap_model_parameters.py</span></code></strong>: The original CardioVAE model (MICCAI 2024) used a different naming convention for model parameters. Since the model has now been integrated into the <strong>PyKale</strong> library with a unified API, this script remaps the original pre-trained model weights to the new parameter names for compatibility.</p></li>
+<li><p><strong>pykale</strong>: An open-source machine learning library developed at the University of Sheffield, focused on biomedical and scientific applications. It supports multimodal learning, domain adaptation, and interpretability.</p></li>
+<li><p><strong>wfdb</strong>: A toolkit for reading, writing, and processing physiological signal data, especially useful for ECG waveform analysis.</p></li>
+<li><p><strong>yacs</strong>: A lightweight configuration management library that helps organize experimental settings in a structured, readable format.</p></li>
+<li><p><strong>pytorch-lightning</strong>: A high-level framework built on PyTorch that simplifies training workflows, making code cleaner and easier to scale.</p></li>
+<li><p><strong>tabulate</strong>: Used to print tabular data in a readable format, helpful for summarizing results or configuration parameters.</p></li>
 </ul>
+<p><strong>Additional Notes for Colab</strong>
+Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the below installation step. Also an autometic crash and reset has been added as after installing this depedencies you need to restart the session. **Dont run this block again if you already did once</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Connect with your google drive for data laoding
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
+
+!pip uninstall --quiet -y torch torchvision torchaudio torchdata
+
+!pip install --quiet torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+!pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+
+!pip install --quiet --user \
+    git+https://github.com/pykale/pykale@main \
+    yacs==0.1.8 wfdb pytorch-lightning tabulate captum neurokit2\
+    &amp;&amp; echo &quot;pykale,yacs and wfdb installed successfully ✅&quot; \
+    || echo &quot;Failed to install pykale,yacs and wfdb ❌&quot;
+
+# This code crashes the Colab runtime, triggering an automatic reset.
+os.kill(os.getpid(), 9)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
+<p>As a starting point, we will mount Google Drive in Colab so that the data can be accessed directly. You might be prompted to grant permission to access your Google account—please proceed with the authorisation when asked.</p>
+<p>Next, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we also suppress unnecessary warnings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Connect with your google drive for data and model loading
 from google.colab import drive
 
 drive.mount(&quot;/content/drive&quot;)
@@ -548,69 +571,44 @@ logging.getLogger(&quot;pytorch_lightning.accelerators.cuda&quot;).setLevel(logg
 
 if &quot;google.colab&quot; in str(get_ipython()):
     sys.path.insert(0, site.getusersitepackages())
-    !git clone --single-branch --branch heart-tutorial https://github.com/pykale/embc-mmai25.git
+    !git clone --single-branch https://github.com/pykale/embc-mmai25.git
     %cp -r /content/embc-mmai25/tutorials/cardiac-hemodynamics-assesment/* /content/
     %rm -r /content/embc-mmai25
 </pre></div>
 </div>
 </div>
 </div>
-<section id="packages">
-<h2>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h2>
-<p>The main packages required for this tutorial are:</p>
-<ul class="simple">
-<li><p><strong>pykale</strong>: An open-source machine learning library developed at the University of Sheffield, focused on biomedical and scientific applications. It supports multimodal learning, domain adaptation, and interpretability.</p></li>
-<li><p><strong>wfdb</strong>: A toolkit for reading, writing, and processing physiological signal data, especially useful for ECG waveform analysis.</p></li>
-<li><p><strong>yacs</strong>: A lightweight configuration management library that helps organize experimental settings in a structured, readable format.</p></li>
-<li><p><strong>pytorch-lightning</strong>: A high-level framework built on PyTorch that simplifies training workflows, making code cleaner and easier to scale.</p></li>
-<li><p><strong>tabulate</strong>: Used to print tabular data in a readable format, helpful for summarizing results or configuration parameters.</p></li>
-<li><p><strong>captum</strong>: A model interpretability library for PyTorch, providing tools such as Integrated Gradients to explain model predictions.</p></li>
-<li><p><strong>neurokit2</strong>: A user-friendly library for physiological signal processing, especially for extracting and analyzing ECG features.</p></li>
-</ul>
-<hr class="docutils" />
-<section id="additional-notes-for-colab">
-<h3>Additional Notes for Colab<a class="headerlink" href="#additional-notes-for-colab" title="Link to this heading">#</a></h3>
-<p>Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the installation step.<br />
-#<strong>Note:</strong> If you’re running this notebook for the first time in Colab, be sure to <strong>restart the runtime after installation</strong> to properly load all libraries.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip uninstall --quiet -y torch torchvision torchaudio torchdata
-
-!pip install --quiet torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-!pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
-
-!pip install --quiet --user \
-    git+https://github.com/pykale/pykale@main \
-    yacs==0.1.8 wfdb pytorch-lightning tabulate captum neurokit2\
-    &amp;&amp; echo &quot;pykale,yacs and wfdb installed successfully ✅&quot; \
-    || echo &quot;Failed to install pykale,yacs and wfdb ❌&quot;
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>To maintain a clean and modular notebook design, <strong>CardioVAE</strong> uses dedicated configuration files for both pre-training and fine-tuning. This setup ensures a clear separation between code and experimental settings, enhancing reproducibility and flexibility across different tasks and datasets.</p>
+<p>Configuration parameters can be overridden using external YAML files (e.g., <code class="docutils literal notranslate"><span class="pre">experiments/pretraining_base.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code>).</p>
 <section id="pre-training-configuration">
-<h2>Pre-training Configuration<a class="headerlink" href="#pre-training-configuration" title="Link to this heading">#</a></h2>
-<p>To reduce code clutter in the notebook, we use a dedicated configuration file—<code class="docutils literal notranslate"><span class="pre">pretraining_config.py</span></code>—which defines the default parameters for pre-training <strong>CardioVAE</strong>. These defaults can be easily customized by providing an external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> configuration file, such as <code class="docutils literal notranslate"><span class="pre">experiments/pretraining_base.yml</span></code>.</p>
-<p>This setup enables clear separation between code and experiment settings, making the workflow more modular and reproducible.</p>
-<p>Refer to the provided configuration files for detailed customization instructions.<br />
-A breakdown of each configurable option is described in the sections that follow.</p>
+<h4>Pre-training Configuration<a class="headerlink" href="#pre-training-configuration" title="Link to this heading">#</a></h4>
+<p>Default settings for the pre-training stage are defined in <code class="docutils literal notranslate"><span class="pre">pretraining_config.py</span></code>. These include data paths, model architecture, and optimizer parameters.<br />
+This modular structure allows easy experiment tracking and customisation by simply editing the associated <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from pretraining_config import get_cfg_defaults
 
-cfg = get_cfg_defaults()
-cfg.merge_from_file(&quot;experiments/pretraining_base.yml&quot;)
-print(cfg)
+cfg_PT = get_cfg_defaults()
+cfg_PT.merge_from_file(&quot;experiments/pretraining_base.yml&quot;)
 
-# laoding
+# ------ Hyperparameters to play with -----
+cfg_PT.MODEL.LATENT_DIM = 128
+cfg_PT.TRAIN.EPOCHS = 1
+cfg_PT.TRAIN.LAMBDA_IMAGE = 1
+cfg_PT.TRAIN.LAMBDA_SIGNAL = 10
+# User can change this to try different batch size.
+cfg_PT.DATA.BATCH_SIZE = 128
+
+print(cfg_PT)
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DATA:
-  BATCH_SIZE: 32
+  BATCH_SIZE: 128
   CXR_PATH: /content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_1000.pt
   ECG_PATH: /content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_1000.pt
   NUM_WORKERS: 2
@@ -624,9 +622,9 @@ TRAIN:
   DATA_DEVICE: cpu
   DEVICE: cuda
   DEVICES: 1
-  EPOCHS: 10
-  LAMBDA_IMAGE: 1.0
-  LAMBDA_SIGNAL: 10.0
+  EPOCHS: 1
+  LAMBDA_IMAGE: 1
+  LAMBDA_SIGNAL: 10
   LR: 0.001
   SAVE_PATH: cardioVAE.pth
   SCALE_FACTOR: 0.0001
@@ -636,158 +634,24 @@ TRAIN:
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="data-loading-and-preprocessing">
-<h1>Data Loading and Preprocessing<a class="headerlink" href="#data-loading-and-preprocessing" title="Link to this heading">#</a></h1>
-<p>Both image and signal data typically require common preprocessing steps such as resizing, normalization, tensor conversion, and interpolation before being fed into a deep learning model.</p>
-<p>In this tutorial, we use a <strong>preprocessed subset (first 1000 samples)</strong> of the paired CXR and ECG data to demonstrate the pretraining process. This helps reduce complexity and avoids the time-intensive process of loading and preprocessing the full dataset.</p>
-<p>However, we also provide the CSV files containing subject IDs for the entire 50K paired dataset. If you wish to pre-train the model on the full data, you can use the <strong>PyKale API</strong> to load samples directly from the CXR and ECG directories with preprocessing included.</p>
-<p>To keep this tutorial lightweight and runnable in environments like <strong>Google Colab</strong>, the full-data loading functionality is commented out by default but can be easily enabled.</p>
-<hr class="docutils" />
-<p><strong>Note:</strong><br />
-Please ensure the shared folder <strong><code class="docutils literal notranslate"><span class="pre">EMBC_workshop_data</span></code></strong> is added as a <strong>shortcut to your Google Drive (My Drive)</strong> to access the required files.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># (OPTIONAL)
-# from kale.loaddata.signal_access import load_ecg_from_folder
-# from kale.loaddata.image_access import load_images_from_dir
-
-# ecg_tensor = load_ecg_from_folder(&quot;/data/ecg/&quot;, &quot;ecg_files.csv&quot;)
-# cxr_tensor = load_images_from_dir(&quot;/data/cxr/&quot;, &quot;cxr_files.csv&quot;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-from kale.loaddata.signal_image_access import SignalImageDataset
-from kale.utils.seed import set_seed
-import random
-import numpy as np
-import torch
-
-set_seed(cfg.TRAIN.SEED)
-
-ecg_tensor = torch.load(cfg.DATA.ECG_PATH, map_location=cfg.TRAIN.DATA_DEVICE)
-cxr_tensor = torch.load(cfg.DATA.CXR_PATH, map_location=cfg.TRAIN.DATA_DEVICE)
-print(&quot;ECG tensor shape:&quot;, ecg_tensor.shape)
-print(&quot;CXR tensor shape:&quot;, cxr_tensor.shape)
-# Prepare train and val datasets using your provided method
-train_dataset, val_dataset = SignalImageDataset.prepare_data_loaders(
-    ecg_tensor, cxr_tensor
-)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="multimodal-pretraining">
-<h1>Multimodal pretraining<a class="headerlink" href="#multimodal-pretraining" title="Link to this heading">#</a></h1>
-<section id="multimodal-variational-autoencoder-pretraining">
-<h2>Multimodal Variational Autoencoder Pretraining<a class="headerlink" href="#multimodal-variational-autoencoder-pretraining" title="Link to this heading">#</a></h2>
-<p>We implement a <strong>multimodal variational autoencoder (VAE)</strong> using <strong>PyKale</strong> and <strong>PyTorch Lightning</strong> to jointly learn representations from paired <strong>Chest X-ray (CXR)</strong> images and <strong>ECG</strong> signals.<br />
-This framework enables <strong>unsupervised pretraining</strong> that captures the underlying relationships between these two clinically relevant modalities.</p>
-<hr class="docutils" />
-<section id="key-steps">
-<h3>Key Steps<a class="headerlink" href="#key-steps" title="Link to this heading">#</a></h3>
-<section id="model-architecture">
-<h4>🔧 Model Architecture<a class="headerlink" href="#model-architecture" title="Link to this heading">#</a></h4>
-<p>We instantiate the <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code>, which contains <strong>parallel encoders and decoders</strong> for each modality. These are fused into a <strong>shared latent space</strong>, allowing the model to learn both modality-specific and modality-shared representations.</p>
-</section>
-<section id="trainer-setup">
-<h4>⚙️ Trainer Setup<a class="headerlink" href="#trainer-setup" title="Link to this heading">#</a></h4>
-<p>We use the <code class="docutils literal notranslate"><span class="pre">SignalImageTriStreamVAETrainer</span></code> to manage the <strong>multistream training process</strong>, handling:</p>
-<ul class="simple">
-<li><p>Joint and individual modality reconstructions</p></li>
-<li><p>ELBO loss computation</p></li>
-<li><p>Logging and evaluation</p></li>
-</ul>
-<p>All hyperparameters—including learning rate, batch size, latent dimension, and modality-specific loss weights—are defined in a <strong>central configuration file</strong> to ensure full reproducibility.</p>
-</section>
-<section id="training-execution">
-<h4>🚀 Training Execution<a class="headerlink" href="#training-execution" title="Link to this heading">#</a></h4>
-<p>The training loop is executed using <strong>PyTorch Lightning’s <code class="docutils literal notranslate"><span class="pre">Trainer</span></code></strong>, which manages:</p>
-<ul class="simple">
-<li><p>Automatic GPU/CPU selection</p></li>
-<li><p>Epoch scheduling</p></li>
-<li><p>Checkpointing and logging</p></li>
-</ul>
-<p>Model weights are saved after training for later <strong>fine-tuning</strong> or <strong>evaluation</strong>.</p>
-</section>
-<section id="configuration">
-<h4>📁 Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h4>
-<p>All major parameters (data paths, batch size, learning rate, number of epochs, etc.) are defined in a <strong>YAML or Python config</strong>.<br />
-This enables reproducible and modifiable experimentation, especially useful for scaling to larger datasets or different tasks.</p>
-<hr class="docutils" />
-<blockquote>
-<div><p><strong>Note:</strong><br />
-To run this tutorial successfully on <strong>Google Colab</strong> without GPU or memory errors, some hyperparameters were adjusted:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">latent_dim</span></code> was reduced from <strong>256</strong> to <strong>128</strong></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_epochs</span></code> was set to <strong>10</strong> for quick training</p></li>
-</ul>
-<p>For better performance and stable representations, we recommend training for <strong>at least 100 epochs</strong> with a latent dimension of <strong>256</strong> in a full-scale environment.</p>
-</div></blockquote>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
-from kale.pipeline.multimodal_trainer import SignalImageTriStreamVAETrainer
-from kale.embed.multimodal_encoder import SignalImageVAE
-
-model = SignalImageVAE(
-    image_input_channels=cfg.MODEL.INPUT_DIM_CXR,
-    signal_input_dim=cfg.MODEL.INPUT_DIM_ECG,
-    latent_dim=cfg.MODEL.LATENT_DIM,
-)
-
-# PyKale trainer instance (all from config)
-pl_trainer = SignalImageTriStreamVAETrainer(
-    model=model,
-    train_dataset=train_dataset,
-    val_dataset=val_dataset,
-    batch_size=cfg.DATA.BATCH_SIZE,
-    num_workers=cfg.DATA.NUM_WORKERS,
-    lambda_image=cfg.TRAIN.LAMBDA_IMAGE,
-    lambda_signal=cfg.TRAIN.LAMBDA_SIGNAL,
-    lr=cfg.TRAIN.LR,
-    annealing_epochs=cfg.TRAIN.EPOCHS,
-    scale_factor=cfg.TRAIN.SCALE_FACTOR,
-)
-
-trainer = pl.Trainer(
-    max_epochs=cfg.TRAIN.EPOCHS,
-    accelerator=cfg.TRAIN.ACCELERATOR,
-    devices=cfg.TRAIN.DEVICES,
-    log_every_n_steps=10,
-)
-
-trainer.fit(pl_trainer)
-
-# Save model state dict
-torch.save(model.state_dict(), cfg.TRAIN.SAVE_PATH)
-print(f&quot;Saved model state dictionary to &#39;{cfg.TRAIN.SAVE_PATH}&#39;&quot;)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="finetuning-configuration">
-<h2>Finetuning Configuration<a class="headerlink" href="#finetuning-configuration" title="Link to this heading">#</a></h2>
-<p>To keep the notebook clean and modular, we use a dedicated configuration file—<code class="docutils literal notranslate"><span class="pre">finetune_config.py</span></code>—that defines the default parameters for fine-tuning <strong>CardioVAE</strong>.<br />
-These defaults can be customized using an external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file, such as <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code>.</p>
-<p>This setup ensures reproducibility and flexibility across different downstream tasks and datasets.</p>
-<p>Please refer to the provided configuration files for detailed instructions on how to adjust parameters such as learning rate, number of epochs, loss weights, and model paths.</p>
-<p>A breakdown of each configurable option is provided in the following sections.</p>
+<section id="fine-tuning-configuration">
+<h4>Fine-tuning Configuration<a class="headerlink" href="#fine-tuning-configuration" title="Link to this heading">#</a></h4>
+<p>Fine-tuning parameters are managed in <code class="docutils literal notranslate"><span class="pre">finetune_config.py</span></code>. These include learning rate, loss weights, number of epochs, model checkpoint paths, and other task-specific options.<br />
+External YAML files like <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code> enable flexible adjustments for different downstream tasks or datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from finetune_config import get_cfg_defaults
 
-cfg = get_cfg_defaults()
-cfg.merge_from_file(&quot;experiments/finetune_base.yml&quot;)
-print(cfg)
+cfg_FT = get_cfg_defaults()
+cfg_FT.merge_from_file(&quot;experiments/finetune_base.yml&quot;)
+
+# ------ Hyperparameters to play with -----
+cfg_FT.FT.EPOCHS = 10
+cfg_FT.FT.HIDDEN_DIM = 128
+# User can change this to try different batch size.
+cfg_FT.DATA.BATCH_SIZE = 32
+
+print(cfg_FT)
 </pre></div>
 </div>
 </div>
@@ -813,7 +677,6 @@ FT:
 INTERPRET:
   CXR_THRESHOLD: 0.7
   ECG_THRESHOLD: 0.7
-  LEAD_NUMBER: 12
   SAMPLE_IDX: 101
   SAMPLING_RATE: 500
   ZOOM_RANGE: [3, 3.5]
@@ -828,366 +691,469 @@ MODEL:
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Data Loading and Preprocessing<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>Similar to the pretraining stage, we prepare paired CXR and ECG data for fine-tuning.<br />
-However, unlike the original fine-tuning example in <strong>Suvon et al. (MICCAI 2024)</strong>—which used a private in-house dataset—we use a <strong>publicly available</strong> small subset from <strong>MIMIC-CXR</strong> and <strong>MIMIC-IV-ECG</strong>, with binary labels:</p>
+</section>
+<section id="data-preparation">
+<h2>🧹 Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h2>
+<p>This tutorial uses separate data pipelines for <strong>pre-training</strong> and <strong>fine-tuning</strong>, both based on paired chest X-ray (CXR) and ECG signal features. Each stage follows standard preprocessing steps—such as resizing, normalization, interpolation, and tensor conversion—tailored for resource-constrained environments like <strong>Google Colab</strong>.</p>
+<p>PyKale API for Data preparation:</p>
 <ul class="simple">
-<li><p><strong>Healthy</strong> → <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
-<li><p><strong>Cardiothoracic Abnormality</strong> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_access.load_ecg_from_folder</span></code> provides a convenient function for loading ECG waveform data stored in a directory structure. It supports automatic parsing and conversion of ECG signal files into PyTorch tensors, with options for standard preprocessing such as normalisation, resize, interpolation, and resampling. This enables streamlined integration with deep learning pipelines.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.image_access.load_images_from_dir</span></code> offers an easy-to-use utility for loading image datasets from directory hierarchies. It supports standard image formats and returns PyTorch tensors, performing essential preprocessing steps such as resizing and normalisation. This function is suitable for image classification, computer vision, and multimodal learning tasks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_image_access.SignalImageDataset</span></code> defines a unified dataset class designed for paired signal (e.g., ECG) and image (e.g., CXR) modalities. It facilitates synchronized access to multi-source data, providing ready-to-use PyTorch datasets that can be directly utilised for multimodal training, evaluation, and downstream applications.</p></li>
 </ul>
-<p>This subset is carefully selected to ensure it is <strong>not included in the original 50K samples</strong> used during pretraining, thereby simulating a real downstream evaluation scenario.</p>
+<p><strong>Note:</strong> Please create a shortcut to the following Google Drive folder in your <strong>MyDrive</strong>:<br />
+👉 <a class="reference external" href="https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing">Google Drive Link</a></p>
+<p>There’s no need to download the data manually. After mounting your Google Drive in the setup section, you will be able to directly access all datasets and pretrained models.</p>
+<section id="pre-training-data-loading">
+<h3>Pre-training Data Loading<a class="headerlink" href="#pre-training-data-loading" title="Link to this heading">#</a></h3>
+<p>To accommodate the resource constraints of platforms like <strong>Google Colab</strong>, this tutorial uses a lightweight version of the dataset consisting of the <strong>first 1,000 preprocessed samples</strong> from the full 50K paired CXR and ECG dataset. This significantly reduces runtime and memory requirements, allowing for rapid experimentation without the overhead of full-scale data loading and transformation.</p>
+<p>The complete preprocessing pipeline, implemented using the PyKale API, is provided for reference. Additionally, CSV files containing subject IDs for the full dataset are provided. Users interested in training on the complete 50K dataset can leverage the <strong>PyKale API</strong>, which supports direct loading of raw CXR and ECG features with integrated preprocessing.</p>
+<p><strong>Note:</strong></p>
+<ul class="simple">
+<li><p>For ease of use in Colab, the full-data loading functionality is <strong>commented out by default</strong>. It can be re-enabled for local or high-resource environments.</p></li>
+<li><p>To access the required files, ensure that the shared folder <strong><code class="docutils literal notranslate"><span class="pre">EMBC_workshop_data</span></code></strong> is added as a <strong>shortcut to your Google Drive (under “My Drive”)</strong>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># (OPTIONAL)
+# from kale.loaddata.signal_access import load_ecg_from_folder
+# from kale.loaddata.image_access import load_images_from_dir
+
+# ecg_tensor = load_ecg_from_folder(&quot;/data/ecg/&quot;, &quot;ecg_files.csv&quot;)
+# cxr_tensor = load_images_from_dir(&quot;/data/cxr/&quot;, &quot;cxr_files.csv&quot;)
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-import pandas as pd
+from kale.loaddata.signal_image_access import SignalImageDataset
+from kale.utils.seed import set_seed
+import random
+import numpy as np
+import torch
 
-X_ecg_tensor = torch.load(cfg.DATA.ECG_PATH, map_location=cfg.DATA.DATA_DEVICE)
-X_image_tensor = torch.load(cfg.DATA.CXR_PATH, map_location=cfg.DATA.DATA_DEVICE)
-df = pd.read_csv(cfg.DATA.CSV_PATH)
-labels = torch.tensor(df[&quot;label&quot;].values, dtype=torch.long)
+set_seed(cfg_PT.TRAIN.SEED)
+
+ecg_tensor_PT = torch.load(cfg_PT.DATA.ECG_PATH, map_location=cfg_PT.TRAIN.DATA_DEVICE)
+cxr_tensor_PT = torch.load(cfg_PT.DATA.CXR_PATH, map_location=cfg_PT.TRAIN.DATA_DEVICE)
+
+train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders(
+    ecg_tensor_PT, cxr_tensor_PT
+)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="multimodal-fine-tuning-and-evaluation">
-<h1>Multimodal Fine-tuning and Evaluation<a class="headerlink" href="#multimodal-fine-tuning-and-evaluation" title="Link to this heading">#</a></h1>
-<section id="cross-validation-split">
-<h2>Cross-Validation Split<a class="headerlink" href="#cross-validation-split" title="Link to this heading">#</a></h2>
-<p>To assess classification performance in a <strong>robust and unbiased</strong> manner, we use a <strong>Stratified K-Fold (SKF)</strong> cross-validation strategy.<br />
-This ensures that each fold maintains the original class distribution (e.g., healthy vs. abnormal), which is especially important in medical datasets where class imbalance is common.</p>
-<p>All cross-validation hyperparameters are defined in the config for full reproducibility:</p>
+<section id="fine-tuning-data-loading">
+<h3>Fine-tuning Data Loading<a class="headerlink" href="#fine-tuning-data-loading" title="Link to this heading">#</a></h3>
+<p>For the fine-tuning stage, we use the <strong>last 1,000 paired CXR and ECG samples</strong> from the full 50K dataset derived from <strong>MIMIC-CXR</strong> and <strong>MIMIC-IV-ECG</strong>. Corresponding disease labels are obtained from MIMIC-CXR, which includes 12 cardiothoracic abnormality classes along with a “No Finding” label representing healthy cases.</p>
+<p>To formulate a binary classification task, all abnormality classes are grouped into a single <strong>Cardiothoracic Abnormality</strong> category, while the “No Finding” label is treated as <strong>Healthy</strong>. The resulting label mapping is as follows:</p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">cv_strategy</span></code></strong>: The cross-validation method</p>
-<ul>
-<li><p><em>Options</em>: <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code> (Stratified K-Fold)</p></li>
-<li><p><em>Default</em>: <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> → <strong>Healthy</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> → <strong>Cardiothoracic Abnormality</strong></p></li>
 </ul>
-</li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_folds</span></code></strong>: Number of folds</p>
-<ul>
-<li><p><em>Default</em>: As defined in config (e.g., <code class="docutils literal notranslate"><span class="pre">5</span></code>)</p></li>
-</ul>
-</li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">random_state</span></code></strong>: Seed for reproducibility</p>
-<ul>
-<li><p><em>Default</em>: As defined in config (e.g., <code class="docutils literal notranslate"><span class="pre">42</span></code>)</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="model-definition">
-<h2>Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h2>
-<p>For downstream classification, we adopt a <strong>transfer learning setup</strong>, where a pretrained <strong>multimodal VAE</strong> is used as a <strong>feature extractor</strong>. A shallow classifier is then fine-tuned to predict binary patient status:</p>
-<ul class="simple">
-<li><p><strong>Healthy (<code class="docutils literal notranslate"><span class="pre">0</span></code>)</strong></p></li>
-<li><p><strong>Cardiothoracic Abnormality (<code class="docutils literal notranslate"><span class="pre">1</span></code>)</strong></p></li>
-</ul>
-<p>The classifier is implemented as a <strong>PyTorch Lightning module</strong>, where a lightweight classification head is added on top of the frozen or partially trainable encoder.</p>
-<p>All model-related hyperparameters are defined in the config for reproducibility:</p>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">feature_extractor</span></code></strong>: Pretrained multimodal VAE (<code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code>)</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">classifier_head</span></code></strong>: Single hidden layer or linear layer for binary classification</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimizer</span></code></strong>: Adam optimizer (e.g., learning rate = <code class="docutils literal notranslate"><span class="pre">0.001</span></code>)</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">epochs</span></code></strong>: Number of fine-tuning epochs (e.g., <code class="docutils literal notranslate"><span class="pre">15</span></code>)</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">metrics</span></code></strong>: Accuracy and AUROC are reported for each fold</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="full-pipeline-overview">
-<h2>Full Pipeline Overview<a class="headerlink" href="#full-pipeline-overview" title="Link to this heading">#</a></h2>
-<p>The complete fine-tuning pipeline is managed using <strong>PyTorch Lightning</strong>, with cross-validation handled via <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.StratifiedKFold</span></code>.</p>
-<p>For each fold:</p>
-<ol class="arabic simple">
-<li><p>The pretrained <strong>CardioVAE</strong> model is loaded.</p></li>
-<li><p>A new classification head is initialized.</p></li>
-<li><p>The model is trained and validated on the corresponding train/validation split.</p></li>
-</ol>
-<p>This setup ensures both <strong>reproducibility</strong> and <strong>fair performance evaluation</strong> across all folds.</p>
+<p>This fine-tuning subset is explicitly selected to ensure no overlap with the samples used during pre-training, thereby simulating a realistic downstream evaluation setting.</p>
+<p>Unlike the fine-tuning strategy reported in <em>Suvon et al., MICCAI 2024</em>, which relied on a private in-house dataset, this approach is fully reproducible using publicly available data from MIMIC-CXR and MIMIC-IV-ECG.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tabulate import tabulate
-from torch.utils.data import DataLoader, TensorDataset
-from sklearn.model_selection import StratifiedKFold
-import numpy as np
-import torch
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
+from torch.utils.data import TensorDataset, DataLoader, random_split
+import pandas as pd
+
+# Set seed for reproducibility
+torch.manual_seed(cfg_FT.FT.SEED)
+
+# Load data
+ecg_tensor_FT = torch.load(cfg_FT.DATA.ECG_PATH, map_location=cfg_FT.DATA.DATA_DEVICE)
+cxr_tensor_FT = torch.load(cfg_FT.DATA.CXR_PATH, map_location=cfg_FT.DATA.DATA_DEVICE)
+label_df = pd.read_csv(cfg_FT.DATA.CSV_PATH)
+labels = torch.tensor(label_df[&quot;label&quot;].values, dtype=torch.long)
+
+# Combine tensors into a single dataset
+dataset = TensorDataset(cxr_tensor_FT, ecg_tensor_FT, labels)
+
+# Split into train/val
+val_ratio = 0.2
+num_samples = len(dataset)
+num_val = int(val_ratio * num_samples)
+num_train = num_samples - num_val
+
+train_dataset_FT, val_dataset_FT = random_split(
+    dataset,
+    [num_train, num_val],
+    generator=torch.Generator().manual_seed(cfg_FT.FT.SEED),
+)
+
+# DataLoaders
+train_loader_FT = DataLoader(
+    train_dataset_FT,
+    batch_size=cfg_FT.DATA.BATCH_SIZE,
+    shuffle=True,
+    num_workers=cfg_FT.DATA.NUM_WORKERS,
+)
+val_loader_FT = DataLoader(
+    val_dataset_FT,
+    batch_size=cfg_FT.DATA.BATCH_SIZE,
+    shuffle=False,
+    num_workers=cfg_FT.DATA.NUM_WORKERS,
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="model-definition">
+<h2>🧠 Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h2>
+<p>We use the <strong>PyKale</strong> library to implement a modular multimodal variational autoencoder (VAE) for learning joint representations from <strong>ECG</strong> and <strong>CXR</strong> data. The architecture includes modality-specific encoders and decoders, a PoE-based fusion mechanism, and task-specific heads for reconstruction and classification.</p>
+<section id="embed">
+<h3>📥 Embed<a class="headerlink" href="#embed" title="Link to this heading">#</a></h3>
+<p>The embedding module is composed of independent encoders for each modality and a fusion mechanism to obtain a shared latent representation.</p>
+<section id="signal-encoder">
+<h4>Signal Encoder<a class="headerlink" href="#signal-encoder" title="Link to this heading">#</a></h4>
+<p>The ECG signal pathway uses <code class="docutils literal notranslate"><span class="pre">SignalVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn</span></code>.<br />
+This encoder captures high-level temporal features from preprocessed ECG waveforms and maps them to a latent space suitable for downstream fusion and representation learning.</p>
+</section>
+<section id="image-encoder">
+<h4>Image Encoder<a class="headerlink" href="#image-encoder" title="Link to this heading">#</a></h4>
+<p>The image pathway uses <code class="docutils literal notranslate"><span class="pre">ImageVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.image_cnn</span></code>.<br />
+This encoder captures high-level spatial features from preprocessed CXR’s and maps them to a latent space suitable for downstream fusion and representation learning.</p>
+</section>
+<section id="feature-fusion">
+<h4>️ Feature Fusion<a class="headerlink" href="#feature-fusion" title="Link to this heading">#</a></h4>
+<p>Encoded modality-specific features are combined using a <strong>Product-of-Experts (PoE)</strong> approach, implemented in <code class="docutils literal notranslate"><span class="pre">kale.embed.feature_fusion</span></code>.<br />
+The PoE fusion computes a joint posterior over the latent space by aggregating information from each modality, enabling coherent multimodal representation.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="predict">
+<h3>🔮 Predict<a class="headerlink" href="#predict" title="Link to this heading">#</a></h3>
+<section id="reconstruction-pre-training">
+<h4>Reconstruction (Pre-training)<a class="headerlink" href="#reconstruction-pre-training" title="Link to this heading">#</a></h4>
+<p>During pre-training, the model reconstructs both modalities using decoders from the shared latent representation:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ImageVAEDecoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.vae_decoder</span></code> for CXR reconstruction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SignalVAEDecoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn_vae</span></code> for ECG waveform reconstruction</p></li>
+</ul>
+<p>The model is trained to minimise the <strong>Evidence Lower Bound (ELBO)</strong>, encouraging informative and disentangled latent representations.</p>
+</section>
+<section id="classification-fine-tuning">
+<h4>Classification (Fine-tuning)<a class="headerlink" href="#classification-fine-tuning" title="Link to this heading">#</a></h4>
+<p>For downstream classification tasks, we reuse the pretrained encoders as feature extractors.<br />
+The <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/finetune.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.finetune</span></code></a> adds a lightweight classification head on top of the shared latent space for supervised learning.<br />
+This setup is optimised for clinical prediction tasks, such as binary or multi-label disease classification.</p>
+</section>
+</section>
+</section>
+<section id="model-training">
+<h2>Model training<a class="headerlink" href="#model-training" title="Link to this heading">#</a></h2>
+<section id="multimodal-pretraining">
+<h3>🛠️ Multimodal Pretraining<a class="headerlink" href="#multimodal-pretraining" title="Link to this heading">#</a></h3>
+<p>We pretraind a CardioVAE model using the <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code> class from <strong>PyKale</strong> to jointly model paired CXR and ECG data. The goal is to learn <strong>shared and modality-specific representations</strong> in an <strong>unsupervised</strong> manner via reconstruction.</p>
+<p>We instantiate <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/embed/multimodal_encoder.py"><code class="docutils literal notranslate"><span class="pre">kale.embed.multimodal_encoder</span></code></a>, which includes:</p>
+<ul class="simple">
+<li><p>A <strong>signal encoder-decoder</strong> built on <code class="docutils literal notranslate"><span class="pre">SignalVAEEncoder</span></code> for ECG waveforms</p></li>
+<li><p>An <strong>image encoder-decoder</strong> built on <code class="docutils literal notranslate"><span class="pre">ImageVAEEncoder</span></code> for CXR images</p></li>
+<li><p>A <strong>Product-of-Experts (PoE)</strong> fusion module for combining modality-specific latent vectors into a shared latent representation</p></li>
+</ul>
+<p>To pretrain, we use <code class="docutils literal notranslate"><span class="pre">SignalImageTriStreamVAETrainer</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/multimodal_trainer.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.multimodal_trainer</span></code></a> to:</p>
+<ul class="simple">
+<li><p>Perform <strong>joint and single-modality reconstructions</strong></p></li>
+<li><p>Optimise the <strong>ELBO loss</strong>, balancing image and signal modalities</p></li>
+<li><p>Manage logging, and reconstruction-based validation</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
+from kale.pipeline.multimodal_trainer import SignalImageTriStreamVAETrainer
+from kale.embed.multimodal_encoder import SignalImageVAE
+
+model = SignalImageVAE(
+    image_input_channels=cfg_PT.MODEL.INPUT_DIM_CXR,
+    signal_input_dim=cfg_PT.MODEL.INPUT_DIM_ECG,
+    latent_dim=cfg_PT.MODEL.LATENT_DIM,
+)
+
+# PyKale trainer instance (all from config)
+pl_trainer = SignalImageTriStreamVAETrainer(
+    model=model,
+    train_dataset=train_dataset_PT,
+    val_dataset=val_dataset_PT,
+    batch_size=cfg_PT.DATA.BATCH_SIZE,
+    num_workers=cfg_PT.DATA.NUM_WORKERS,
+    lambda_image=cfg_PT.TRAIN.LAMBDA_IMAGE,
+    lambda_signal=cfg_PT.TRAIN.LAMBDA_SIGNAL,
+    lr=cfg_PT.TRAIN.LR,
+    annealing_epochs=cfg_PT.TRAIN.EPOCHS,
+    scale_factor=cfg_PT.TRAIN.SCALE_FACTOR,
+)
+
+trainer = pl.Trainer(
+    max_epochs=cfg_PT.TRAIN.EPOCHS,
+    accelerator=cfg_PT.TRAIN.ACCELERATOR,
+    devices=cfg_PT.TRAIN.DEVICES,
+    log_every_n_steps=10,
+)
+
+trainer.fit(pl_trainer)
+
+# Save model state dict
+torch.save(model.state_dict(), cfg_PT.TRAIN.SAVE_PATH)
+print(f&quot;Saved model state dictionary to &#39;{cfg_PT.TRAIN.SAVE_PATH}&#39;&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multimodal-fine-tuning">
+<h3>🎯 Multimodal Fine-tuning<a class="headerlink" href="#multimodal-fine-tuning" title="Link to this heading">#</a></h3>
+<p>For downstream classification, we fine-tune a shallow classifier on top of a <strong>pretrained CardioVAE encoder</strong>. The encoder is loaded from <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code>, pretrained with reconstruction loss, and used as a fixed or partially trainable <strong>feature extractor</strong>.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/finetune.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.finetune</span></code></a>, which wraps:</p>
+<ul class="simple">
+<li><p>A <strong>pretrained encoder</strong> from <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code></p></li>
+<li><p>A <strong>classification head</strong> (single or multi-layer MLP)</p></li>
+<li><p>A <strong>training step</strong> that supports standard supervised learning with cross-entropy loss</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
 import pytorch_lightning as pl
 from kale.embed.multimodal_encoder import SignalImageVAE
 from kale.pipeline.multimodal_trainer import SignalImageFineTuningTrainer
-from remap_model_parameters import remap_state_dict_keys
+from kale.utils.remap_model_parameters import remap_state_dict_keys
 
-# Cross-validation setup
-skf = StratifiedKFold(n_splits=cfg.FT.KFOLDS, shuffle=True, random_state=cfg.FT.SEED)
-fold_results = []
+# Load and remap checkpoint
+checkpoint = torch.load(cfg_FT.FT.CKPT_PATH, map_location=cfg_FT.FT.DEVICE)
+checkpoint = remap_state_dict_keys(checkpoint)
 
-for fold, (train_ids, val_ids) in enumerate(skf.split(np.zeros(len(labels)), labels)):
-    print(f&quot;\n--- Fold {fold+1} ---&quot;)
+pretrained_mvae = SignalImageVAE(
+    image_input_channels=cfg_FT.MODEL.INPUT_IMAGE_CHANNELS,
+    signal_input_dim=cfg_FT.MODEL.INPUT_DIM_ECG,
+    latent_dim=cfg_FT.MODEL.LATENT_DIM,
+)
+pretrained_mvae.load_state_dict(checkpoint, strict=False)
+pretrained_mvae.to(cfg_FT.FT.DEVICE)
+pretrained_mvae.eval()
 
-    train_dataset = TensorDataset(
-        X_image_tensor[train_ids], X_ecg_tensor[train_ids], labels[train_ids]
-    )
-    val_dataset = TensorDataset(
-        X_image_tensor[val_ids], X_ecg_tensor[val_ids], labels[val_ids]
-    )
+model_pl = SignalImageFineTuningTrainer(
+    pretrained_model=pretrained_mvae,
+    num_classes=cfg_FT.FT.NUM_CLASSES,
+    lr=cfg_FT.FT.LR,
+    hidden_dim=cfg_FT.FT.HIDDEN_DIM,
+)
 
-    train_loader = DataLoader(
-        train_dataset,
-        batch_size=cfg.DATA.BATCH_SIZE,
-        shuffle=True,
-        num_workers=cfg.DATA.NUM_WORKERS,
-    )
-    val_loader = DataLoader(
-        val_dataset,
-        batch_size=cfg.DATA.BATCH_SIZE,
-        shuffle=False,
-        num_workers=cfg.DATA.NUM_WORKERS,
-    )
+trainer = pl.Trainer(
+    max_epochs=cfg_FT.FT.EPOCHS,
+    accelerator=cfg_FT.FT.ACCELERATOR,
+    devices=cfg_FT.FT.DEVICES,
+    log_every_n_steps=10,
+    enable_checkpointing=False,
+    logger=False,
+)
 
-    # Load and remap checkpoint
-    checkpoint = torch.load(cfg.FT.CKPT_PATH, map_location=cfg.FT.DEVICE)
-    checkpoint = remap_state_dict_keys(checkpoint)
+trainer.fit(model_pl, train_dataloaders=train_loader_FT, val_dataloaders=val_loader_FT)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluate">
+<h3>📈 Evaluate<a class="headerlink" href="#evaluate" title="Link to this heading">#</a></h3>
+<p>After training, we extract key validation metrics using PyTorch Lightning’s built-in <code class="docutils literal notranslate"><span class="pre">callback_metrics</span></code>. These metrics provide a quantitative summary of model performance on the validation set.</p>
+<p>We report the following:</p>
+<ul class="simple">
+<li><p><strong>Accuracy</strong>: Proportion of correct predictions</p></li>
+<li><p><strong>AUROC</strong>: Area under the Receiver Operating Characteristic curve, measuring ranking quality</p></li>
+<li><p><strong>MCC</strong>: Matthews Correlation Coefficient, a balanced metric even for imbalanced classes</p></li>
+</ul>
+<p>The metrics are printed in a tabulated format using the <code class="docutils literal notranslate"><span class="pre">tabulate</span></code> library for clear presentation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tabulate import tabulate
 
-    pretrained_mvae = SignalImageVAE(
-        image_input_channels=cfg.MODEL.INPUT_IMAGE_CHANNELS,
-        signal_input_dim=cfg.MODEL.INPUT_DIM_ECG,
-        latent_dim=cfg.MODEL.LATENT_DIM,
-    )
-    pretrained_mvae.load_state_dict(checkpoint, strict=False)
-    pretrained_mvae.to(cfg.FT.DEVICE)
-    pretrained_mvae.eval()
+# Get validation metrics
+val_metrics = trainer.callback_metrics
+acc = val_metrics[&quot;val_acc&quot;].item() if &quot;val_acc&quot; in val_metrics else float(&quot;nan&quot;)
+auc = val_metrics[&quot;val_auroc&quot;].item() if &quot;val_auroc&quot; in val_metrics else float(&quot;nan&quot;)
+mcc = val_metrics[&quot;val_mcc&quot;].item() if &quot;val_mcc&quot; in val_metrics else float(&quot;nan&quot;)
 
-    model_pl = SignalImageFineTuningTrainer(
-        pretrained_model=pretrained_mvae,
-        num_classes=cfg.FT.NUM_CLASSES,
-        lr=cfg.FT.LR,
-        hidden_dim=cfg.FT.HIDDEN_DIM,
-    )
-
-    trainer = pl.Trainer(
-        max_epochs=cfg.FT.EPOCHS,
-        accelerator=cfg.FT.ACCELERATOR,
-        devices=cfg.FT.DEVICES,
-        log_every_n_steps=10,
-        enable_checkpointing=False,
-        logger=False,
-    )
-
-    trainer.fit(model_pl, train_dataloaders=train_loader, val_dataloaders=val_loader)
-
-    if fold == cfg.FT.KFOLDS - 1:
-        last_fold_model = model_pl
-        last_val_loader = val_loader
-
-    val_metrics = trainer.callback_metrics
-    acc = val_metrics[&quot;val_acc&quot;].item() if &quot;val_acc&quot; in val_metrics else float(&quot;nan&quot;)
-    auc = (
-        val_metrics[&quot;val_auroc&quot;].item() if &quot;val_auroc&quot; in val_metrics else float(&quot;nan&quot;)
-    )
-    mcc = val_metrics[&quot;val_mcc&quot;].item() if &quot;val_mcc&quot; in val_metrics else float(&quot;nan&quot;)
-
-    # Print metrics for this fold
-    print(f&quot;Accuracy: {acc:.3f}&quot;)
-    print(f&quot;AUROC:      {auc:.3f}&quot;)
-    print(f&quot;MCC:      {mcc:.3f}&quot;)
-
-    fold_results.append((acc, auc, mcc))
-
-# Final summary
-accuracies, aucs, mccs = zip(*fold_results)
+# Print metrics
 table_data = [
-    [&quot;Accuracy&quot;, f&quot;{np.mean(accuracies):.3f} ± {np.std(accuracies):.3f}&quot;],
-    [&quot;AUROC&quot;, f&quot;{np.mean(aucs):.3f} ± {np.std(aucs):.3f}&quot;],
-    [&quot;MCC&quot;, f&quot;{np.mean(mccs):.3f} ± {np.std(mccs):.3f}&quot;],
+    [&quot;Accuracy&quot;, f&quot;{acc:.3f}&quot;],
+    [&quot;AUROC&quot;, f&quot;{auc:.3f}&quot;],
+    [&quot;MCC&quot;, f&quot;{mcc:.3f}&quot;],
 ]
-print(&quot;\n=== Final Cross-Validation Summary ===&quot;)
-print(tabulate(table_data, headers=[&quot;Metric&quot;, &quot;Mean ± STD&quot;], tablefmt=&quot;fancy_grid&quot;))
+print(&quot;\n=== Validation Summary ===&quot;)
+print(tabulate(table_data, headers=[&quot;Metric&quot;, &quot;Value&quot;], tablefmt=&quot;fancy_grid&quot;))
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Fold 1 ---
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "675530fccf554f609c09eff01636c5aa"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "0682ceb20d094104af6b227fc991d9a7"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "65e5b62be28744e68ca0aba441697f76"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "14e20b4bf0104e309868fed6a2548aa7"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6ca42590afd441c68fb7d5fb37c00e7b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "80b4b33bcafe47239b3abe61b98b8296"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "119f5c29dfcc4ca6bc5fcdf0f0de2693"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9e933550b6884248b7219fb702c32388"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9a0cddfe297b49fba32f147bee9f3a40"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "645404e4f4f24b48bddfd361c7c667a2"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c0e287afbdef4a06917abda0ab69af9d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "cd1abee08ad2438599025c3189a9883c"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.746
-AUROC:      0.782
-MCC:      0.484
-
---- Fold 2 ---
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "67ef4767873f44ac932999a5c03a57ac"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "830e43c3cec841688042885032e2e43c"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ea84319e7c5043268aaf74edb50c6a0b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7edf07fa10e14330a43ea237a76f600f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "4bd55a9f2671424b9344cb6c9b1c8467"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8926bdc726f94fd3abc266b1798103a4"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f7c3f167950f4d129cf182ef647892e3"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "bac15844165b421cb9db3a9ca2ede6f5"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "78458023ea6546978c855d92032e9162"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a28e635c63584ae0bb26c0bc8bfbc13a"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "dfa5e3ec87cd40e08d86cc64d0fc0c4d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "1429bb8039e5478ea5597d79b4a777e2"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.697
-AUROC:      0.766
-MCC:      0.391
-
---- Fold 3 ---
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "af3f173a78a34154bd962fd91e120828"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3c3455ec235540899cb363c08797ba1f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f1a14f6e80554cd286e3e97121b73a4b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "32f7868db7be43f7ba860fe243af55c4"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9287e2dedcfa4a33ba521f450bd644c1"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a1123153ee5d45dfa3e5d7892ab351d6"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "0799cebaff64489d8bdd175265c71037"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "14c38886331c454d80b0a06460ae87bb"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "432a6c33968d4c36aca04a08f759ab40"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "bd823aa80ff94a3c8e520da52803c48d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9ed4a50bd2ef46dfbd1e838a0fcbc395"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "380d4d7f2d4f49f4b7f0c2022fb40976"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.728
-AUROC:      0.770
-MCC:      0.449
-
---- Fold 4 ---
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2d87a2da9ea14683b59fad36177a3480"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9d2e2708505844f08994366585b6cf1d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "023046660f0e4c66b70b15fadde0a79d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "e6dd734b52e04abe8a54934ac8f304ca"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9e22ad96b31b4fc7a4c8123aa0c30614"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "849bfd35e7d8476795a28e9b03133ea6"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "66d89705f6f946429d647a51482d05c0"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "acc544aa4c224b588c2583ce547b8062"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6edf4c79e328404ca62fcb31c30968c8"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "11f4e1f366ae46fc97f3863a44c95a7f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6ac70d4e044a40b693d28fa91b37d8c9"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8ddd08f6b7d94d38b4fbbf892d8111a8"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.717
-AUROC:      0.767
-MCC:      0.425
-
---- Fold 5 ---
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "1f783d674be442bfbad00de65575a3e5"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f59313b5d64c41a08176f905e9357960"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "56f12ff257f1436581e4387560d08020"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c8a597d10ded456d95ced0a835fd5ef1"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2ccda6c45fa24ed79ad5929526526c02"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "fb94bf5c43e34336993e7a0ce32adbc6"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "eff3ff489c8c4a16a47e87816120c77f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "5e2bdf6a8b3b4e7b92233aeb0c972d65"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "437c8641824f4123a95cf61f64c83f9d"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c7f60bfbad114bb48e151289d2697a11"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c09b217d9ebb41c4b8e40389ef42f401"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3d1afc39a7ae4ccfae8f5e5ca32956b0"}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.679
-AUROC:      0.744
-MCC:      0.351
-
-=== Final Cross-Validation Summary ===
-╒══════════╤═══════════════╕
-│ Metric   │ Mean ± STD    │
-╞══════════╪═══════════════╡
-│ Accuracy │ 0.714 ± 0.023 │
-├──────────┼───────────────┤
-│ AUROC    │ 0.766 ± 0.012 │
-├──────────┼───────────────┤
-│ MCC      │ 0.420 ± 0.046 │
-╘══════════╧═══════════════╛
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Validation Summary ===
+╒══════════╤═════════╕
+│ Metric   │   Value │
+╞══════════╪═════════╡
+│ Accuracy │   0.663 │
+├──────────┼─────────┤
+│ AUROC    │   0.726 │
+├──────────┼─────────┤
+│ MCC      │   0.326 │
+╘══════════╧═════════╛
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="model-interpretability-visualizing-ecg-attribution-with-integrated-gradients">
-<h2>Model Interpretability: Visualizing ECG Attribution with Integrated Gradients<a class="headerlink" href="#model-interpretability-visualizing-ecg-attribution-with-integrated-gradients" title="Link to this heading">#</a></h2>
-<p>To understand which parts of the ECG signal influenced the model’s decision, we use <strong>Integrated Gradients</strong>, a gradient-based attribution method provided by the <strong>Captum</strong> library.<br />
-This helps identify salient regions of the ECG that contributed most to the predicted label, improving model transparency and clinical trust.</p>
-<hr class="docutils" />
-<section id="step-by-step-explanation">
-<h3>Step-by-Step Explanation<a class="headerlink" href="#step-by-step-explanation" title="Link to this heading">#</a></h3>
-<ol class="arabic">
-<li><p><strong>Data Preparation</strong><br />
-We first load a sample from the validation set and separate its CXR and ECG components. The ECG signal is smoothed using <strong>NeuroKit2’s <code class="docutils literal notranslate"><span class="pre">ecg_clean</span></code></strong> function to reduce noise and enhance waveform clarity.</p></li>
-<li><p><strong>Model Prediction</strong><br />
-The sample is passed through the fine-tuned model to generate predicted probabilities and the final label. The model is set to evaluation mode and moved to the appropriate device (<code class="docutils literal notranslate"><span class="pre">CPU</span></code> or <code class="docutils literal notranslate"><span class="pre">GPU</span></code>).</p></li>
-<li><p><strong>Attribution with Integrated Gradients</strong><br />
-Using Captum’s <code class="docutils literal notranslate"><span class="pre">IntegratedGradients</span></code>, we compute attribution scores for both the CXR and ECG inputs.<br />
-Here, we focus on the ECG modality by extracting its corresponding attribution tensor.</p></li>
-<li><p><strong>Attribution Normalization</strong><br />
-The ECG attribution values are normalized between 0 and 1 to prepare for visualization. A fixed threshold (e.g., 0.70) is applied to highlight the most influential regions.</p></li>
-<li><p><strong>Visualization</strong><br />
-We generate two plots:</p>
-<ul class="simple">
-<li><p><strong>Full ECG View</strong>: Highlights the important regions across the entire signal (first 12 seconds).</p></li>
-<li><p><strong>Zoomed-In Segment</strong>: Focuses on a shorter interval (e.g., 3-second segment) with higher-resolution detail of salient points.</p></li>
-</ul>
-<p>In both plots, red-highlighted regions correspond to time intervals with attribution values above the defined threshold, indicating strong influence on the model’s prediction.</p>
-</li>
-</ol>
 </section>
-<hr class="docutils" />
-<section id="notes">
-<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>The input ECG is assumed to be flattened from a 12-lead concatenated signal (e.g., 5000 samples per lead × 12 leads = 60,000 total points).</p></li>
-<li><p>Time is converted into seconds and plotted on the x-axis with respect to lead concatenation.</p></li>
-<li><p>This visualization is useful for both <strong>clinical insight</strong> and <strong>debugging model behavior</strong>.</p></li>
-<li><p>Here, we have used the fine-tuned model from the final fold of the cross-validation stage for interpretation.</p></li>
-</ul>
+<section id="model-interpretation">
+<h2>🔍 Model Interpretation<a class="headerlink" href="#model-interpretation" title="Link to this heading">#</a></h2>
+<p>We interpret the fine-tuned model using the multimodal_signal_image_attribution interpretation method from PyKale, which builds on Captum’s Integrated Gradients to generate visual explanations for both CXR and ECG inputs.
+This method helps identify which regions in each modality, such as specific waveform segments in ECG and spatial regions in CXR, contributed most to the model’s prediction. This improves both transparency and clinical interpretability.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from interpret import multimodal_ecg_cxr_attribution
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.interpret.signal_image_attribution import multimodal_signal_image_attribution
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Example usage (set your variables)
-cfg = get_cfg_defaults()
-# If you load from YAML, use your loader method here instead
+# User can change this to try different ECG and CXR interpretation configaration to play with
+cfg_FT.INTERPRET.ECG_THRESHOLD = 0.75
+cfg_FT.INTERPRET.SAMPLE_IDX = 3
+cfg_FT.INTERPRET.ZOOM_RANGE = [3.5, 4]
+cfg_FT.INTERPRET.CXR_THRESHOLD = 0.75
 
-sample_idx = cfg.INTERPRET.SAMPLE_IDX
-zoom_range = tuple(cfg.INTERPRET.ZOOM_RANGE)
-ecg_threshold = cfg.INTERPRET.ECG_THRESHOLD
-cxr_threshold = cfg.INTERPRET.CXR_THRESHOLD
-lead_number = cfg.MODEL.NUM_LEADS
-sampling_rate = cfg.INTERPRET.SAMPLING_RATE
+
+sample_idx = cfg_FT.INTERPRET.SAMPLE_IDX
+zoom_range = tuple(cfg_FT.INTERPRET.ZOOM_RANGE)
+ecg_threshold = cfg_FT.INTERPRET.ECG_THRESHOLD
+cxr_threshold = cfg_FT.INTERPRET.CXR_THRESHOLD
+lead_number = cfg_FT.MODEL.NUM_LEADS
+sampling_rate = cfg_FT.INTERPRET.SAMPLING_RATE
 
 
 # Run interpretation
-result = multimodal_ecg_cxr_attribution(
-    last_fold_model=last_fold_model,
-    last_val_loader=last_val_loader,
+result = multimodal_signal_image_attribution(
+    last_fold_model=model_pl,
+    last_val_loader=val_loader_FT,
     sample_idx=sample_idx,
-    ecg_threshold=ecg_threshold,
-    cxr_threshold=cxr_threshold,
+    signal_threshold=ecg_threshold,
+    image_threshold=cxr_threshold,
     zoom_range=zoom_range,
 )
-
-# --- Plotting (same as before) ---
-fig, axes = plt.subplots(1, 3, figsize=(24, 5))
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Full ECG View:</strong> Displays attribution across the full 12-lead ECG signal. A percentile-based threshold (e.g., top 25%) is applied to highlight segments with the highest contribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(figsize=(12, 5))
 fig.patch.set_facecolor(&quot;white&quot;)
+ax.set_facecolor(&quot;white&quot;)
 
-# 1. Full ECG
-axes[0].set_facecolor(&quot;white&quot;)
-axes[0].plot(
+# Plot the full ECG waveform
+ax.plot(
     result[&quot;full_time&quot;],
-    result[&quot;ecg_waveform_np&quot;][: result[&quot;full_length&quot;]],
+    result[&quot;signal_waveform_np&quot;][: result[&quot;full_length&quot;]],
     color=&quot;black&quot;,
     linewidth=1,
     label=&quot;ECG Waveform&quot;,
 )
+
 for idx in result[&quot;important_indices_full&quot;]:
     stretch_start = max(0, idx - 6)
     stretch_end = min(result[&quot;full_length&quot;], idx + 6 + 1)
-    axes[0].plot(
+    ax.plot(
         result[&quot;full_time&quot;][stretch_start:stretch_end],
-        result[&quot;ecg_waveform_np&quot;][stretch_start:stretch_end],
+        result[&quot;signal_waveform_np&quot;][stretch_start:stretch_end],
         color=&quot;red&quot;,
         linewidth=2,
     )
-axes[0].set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
-axes[0].set_ylabel(&quot;Amplitude&quot;, fontsize=&quot;x-large&quot;)
-axes[0].set_title(&quot;Full ECG with Important Regions&quot;, fontsize=&quot;x-large&quot;)
-axes[0].set_xticks(np.linspace(0, 10, 11))
-axes[0].set_xlim([0, 10])
-axes[0].tick_params(axis=&quot;x&quot;, labelsize=&quot;large&quot;)
-axes[0].tick_params(axis=&quot;y&quot;, labelsize=&quot;large&quot;)
-axes[0].legend([&quot;ECG Waveform&quot;, &quot;Important Regions&quot;], fontsize=&quot;medium&quot;)
 
-# 2. Zoomed ECG
-axes[1].set_facecolor(&quot;white&quot;)
-axes[1].plot(
+ax.set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
+ax.set_ylabel(&quot;Amplitude&quot;, fontsize=&quot;x-large&quot;)
+ax.set_title(&quot;Full ECG with Important Regions&quot;, fontsize=&quot;x-large&quot;)
+ax.set_xticks(np.linspace(0, 10, 11))
+ax.set_xlim([0, 10])
+ax.tick_params(axis=&quot;x&quot;, labelsize=&quot;large&quot;)
+ax.tick_params(axis=&quot;y&quot;, labelsize=&quot;large&quot;)
+ax.legend([&quot;ECG Waveform&quot;, &quot;Important Regions&quot;], fontsize=&quot;medium&quot;)
+
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4eceee9f036697bc7c320d8f448b1a507bfbf964620460029e87e3737a7e0f67.png" src="../../_images/4eceee9f036697bc7c320d8f448b1a507bfbf964620460029e87e3737a7e0f67.png" />
+</div>
+</div>
+<p><strong>Zoomed-In ECG Segment:</strong> Focuses on a specific time window (e.g., 3 to 4 seconds) for fine-grained inspection of high-attribution waveform regions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(figsize=(12, 5))
+fig.patch.set_facecolor(&quot;white&quot;)
+ax.set_facecolor(&quot;white&quot;)
+
+# Plot zoomed-in ECG segment
+ax.plot(
     result[&quot;zoom_time&quot;],
-    result[&quot;segment_ecg_waveform&quot;],
+    result[&quot;segment_signal_waveform&quot;],
     color=&quot;black&quot;,
     linewidth=3,
     label=&quot;ECG Waveform&quot;,
 )
+
+
 for idx in result[&quot;important_indices_zoom&quot;]:
     stretch_start = max(0, idx - 6)
-    stretch_end = min(len(result[&quot;segment_ecg_waveform&quot;]), idx + 6 + 1)
-    axes[1].plot(
+    stretch_end = min(len(result[&quot;segment_signal_waveform&quot;]), idx + 6 + 1)
+    ax.plot(
         result[&quot;zoom_time&quot;][stretch_start:stretch_end],
-        result[&quot;segment_ecg_waveform&quot;][stretch_start:stretch_end],
+        result[&quot;segment_signal_waveform&quot;][stretch_start:stretch_end],
         color=&quot;red&quot;,
         linewidth=6,
     )
-axes[1].set_xticks(np.linspace(result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;], 11))
-axes[1].set_xlim([result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;]])
-axes[1].set_yticks([])
-axes[1].set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
-axes[1].set_ylabel(&quot;&quot;)
-axes[1].set_title(
+
+
+ax.set_xticks(np.linspace(result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;], 11))
+ax.set_xlim([result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;]])
+ax.set_yticks([])
+ax.set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
+ax.set_ylabel(&quot;&quot;)
+ax.set_title(
     f&#39;Zoomed-In ECG Segment ({result[&quot;zoom_start_sec&quot;]:.2f}s – {result[&quot;zoom_end_sec&quot;]:.2f}s)&#39;,
     fontsize=&quot;x-large&quot;,
 )
 
-# 3. CXR with points (&quot;X&quot;)
-x_pts = result[&quot;x_pts&quot;]
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a7ac3b8c739d6cd265f297dc2fe00a7e01d31e333b84c6d9b44d9b6869581893.png" src="../../_images/a7ac3b8c739d6cd265f297dc2fe00a7e01d31e333b84c6d9b44d9b6869581893.png" />
+</div>
+</div>
+<p><strong>CXR Attribution Map:</strong> Shows a heatmap over the input CXR image, with highlighted areas corresponding to regions above a configurable percentile threshold (e.g., top 25%). This helps reveal where the model focused attention in the spatial domain.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x_pts = result[&quot;x_pts&quot;]
 y_pts = result[&quot;y_pts&quot;]
 importance_pts = result[&quot;importance_pts&quot;]
-cxr_thresh = result[&quot;cxr_threshold&quot;]
-axes[2].set_facecolor(&quot;white&quot;)
-axes[2].imshow(result[&quot;xray_image_np&quot;], cmap=&quot;gray&quot;, alpha=1)
-sc = axes[2].scatter(
+cxr_thresh = result[&quot;image_threshold&quot;]
+
+fig, ax = plt.subplots(figsize=(6, 6))
+fig.patch.set_facecolor(&quot;white&quot;)
+ax.set_facecolor(&quot;white&quot;)
+
+# Show base CXR image
+ax.imshow(result[&quot;image_np&quot;], cmap=&quot;gray&quot;, alpha=1)
+
+# Overlay attribution points
+sc = ax.scatter(
     x_pts,
     y_pts,
     c=importance_pts,
@@ -1200,10 +1166,14 @@ sc = axes[2].scatter(
     linewidths=0.7,
     edgecolor=&quot;black&quot;,
 )
-cbar = plt.colorbar(sc, ax=axes[2], fraction=0.04, pad=0.04)
-cbar.set_label(&quot;Importance (0.7–1.0)&quot;)
-axes[2].axis(&quot;off&quot;)
-axes[2].set_title(&quot;CXR: Important Regions&quot;, fontsize=&quot;x-large&quot;)
+
+# Add colorbar for importance
+cbar = plt.colorbar(sc, ax=ax, fraction=0.04, pad=0.04)
+cbar.set_label(f&quot;Importance ({cxr_thresh:.2f}–1.00)&quot;)
+
+# Final formatting
+ax.axis(&quot;off&quot;)
+ax.set_title(&quot;CXR: Important Regions&quot;, fontsize=&quot;x-large&quot;)
 
 plt.tight_layout()
 plt.show()
@@ -1211,10 +1181,9 @@ plt.show()
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/51907b9129b68e200aad1e4c641ae705fbf1367406c7ff25c583b8afcbb97e59.png" src="../../_images/51907b9129b68e200aad1e4c641ae705fbf1367406c7ff25c583b8afcbb97e59.png" />
+<img alt="../../_images/4303f2a108def85e2bd9ba6c24db8b949044c8a573e81468599331e71068b487.png" src="../../_images/4303f2a108def85e2bd9ba6c24db8b949044c8a573e81468599331e71068b487.png" />
 </div>
 </div>
-</section>
 </section>
 </section>
 
@@ -1282,47 +1251,45 @@ plt.show()
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cardiac Hemodynamics Assessment</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives"><strong>Objectives</strong></a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-notes-for-colab">Additional Notes for Colab</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-configuration">Pre-training Configuration</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data Loading and Preprocessing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">Multimodal pretraining</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-variational-autoencoder-pretraining">Multimodal Variational Autoencoder Pretraining</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-steps">Key Steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-architecture">🔧 Model Architecture</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#trainer-setup">⚙️ Trainer Setup</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-execution">🚀 Training Execution</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">📁 Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">📌 Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">🎯 Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-preparation">⚙️ Environment preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-configuration">Pre-training Configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-configuration">Fine-tuning Configuration</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finetuning-configuration">Finetuning Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">🧹 Data Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-training-data-loading">Pre-training Data Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning-data-loading">Fine-tuning Data Loading</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Data Loading and Preprocessing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning-and-evaluation">Multimodal Fine-tuning and Evaluation</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">Cross-Validation Split</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-pipeline-overview">Full Pipeline Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-interpretability-visualizing-ecg-attribution-with-integrated-gradients">Model Interpretability: Visualizing ECG Attribution with Integrated Gradients</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-explanation">Step-by-Step Explanation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">🧠 Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed">📥 Embed</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-encoder">Signal Encoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#image-encoder">Image Encoder</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-fusion">️ Feature Fusion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">🔮 Predict</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstruction-pre-training">Reconstruction (Pre-training)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-fine-tuning">Classification (Fine-tuning)</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model training</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">🛠️ Multimodal Pretraining</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning">🎯 Multimodal Fine-tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate">📈 Evaluate</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-interpretation">🔍 Model Interpretation</a></li>
+</ul>
   </nav></div>
 
 </div></div>
