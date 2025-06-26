@@ -179,4 +179,10 @@ _build/
 # VS Code
 .vscode/
 
+# PyCharm
+.idea
+
 _build
+
+.DS_Store
+tutorials/multiomics-cancer-classification/outputs

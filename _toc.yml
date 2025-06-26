@@ -6,20 +6,23 @@ root: intro
 options:
   numbered: true
 parts:
-- caption: Workshops
-  chapters:
-  - file: workshops/embc2025/intro
-    sections:
-    - file: workshops/embc2025/aims
-    - file: workshops/embc2025/synopsis
-    - file: workshops/embc2025/schedule
-    - file: workshops/embc2025/preparation
-  - file: workshops/ukomain2025/intro
-    sections:
-    - file: workshops/ukomain2025/aims
-    - file: workshops/ukomain2025/synopsis
-    - file: workshops/ukomain2025/schedule
-    - file: workshops/ukomain2025/preparation
+#- caption: Workshops
+#  chapters:
+#  - file: workshops/embc2025/intro
+#    sections:
+#    - file: workshops/embc2025/aims
+#    - file: workshops/embc2025/synopsis
+#    - file: workshops/embc2025/schedule
+#    - file: workshops/embc2025/preparation
+##  - file: workshops/ukomain2025/intro
+#    sections:
+#    - file: workshops/ukomain2025/aims
+#    - file: workshops/ukomain2025/synopsis
+#    - file: workshops/ukomain2025/schedule
+#    - file: workshops/ukomain2025/preparation
 - caption: Tutorials
   chapters:
   - file: tutorials/brain-disorder-diagnosis/notebook
+  - file: tutorials/cardiac-hemodynamics-assesment/notebook
+  - file: tutorials/drug-target-interaction/notebook-cross-domain
+  - file: tutorials/multiomics-cancer-classification/notebook

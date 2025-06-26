@@ -1,0 +1,24 @@
+DATA:
+  ECG_PATH: "/content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_1000.pt"
+  CXR_PATH: "/content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_1000.pt"
+  BATCH_SIZE: 32
+  NUM_WORKERS: 2
+
+MODEL:
+  LATENT_DIM: 128
+  INPUT_DIM_ECG: 60000
+  INPUT_DIM_CXR: 1
+  NUM_LEADS: 12
+
+TRAIN:
+  EPOCHS: 1
+  LR: 0.001
+  SEED: 123
+  DEVICE: "cuda"
+  DATA_DEVICE: "cpu"
+  LAMBDA_IMAGE: 1.0
+  LAMBDA_SIGNAL: 10.0
+  SCALE_FACTOR: 0.0001
+  SAVE_PATH: "cardioVAE.pth"
+  ACCELERATOR: "gpu"
+  DEVICES: 1

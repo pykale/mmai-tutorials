@@ -123,14 +123,15 @@ def preprocess_phenotypic_data(data, standardize=False):
 
 
 @validate_params(
-    {"data": ["array-like"], "measures": [list]}, prefer_skip_nested_validation=False
+    {"data": ["array-like"], "measures": [list, tuple]},
+    prefer_skip_nested_validation=False,
 )
 def extract_functional_connectivity(data, measures=["pearson"]):
     """Extract functional connectivity features from time series data.
 
     Parameters
     ----------
-    data : list[array-like] of shape (n_subjects,)
+    data : list[array-like] or tuple[array-like] of shape (n_subjects,)
         An array of numpy arrays, where each array is a time series of shape (t, n_rois).
         The time series data for each subject.
 
