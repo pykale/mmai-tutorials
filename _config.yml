@@ -35,6 +35,11 @@ html:
   use_issues_button: true
   use_repository_button: true
 
+sphinx:
+  extra_extensions:
+    - sphinx_exercise
+    - sphinx_togglebutton
+
 # Only works for .ipynb files
 launch_buttons:
   colab_url: "https://colab.research.google.com"

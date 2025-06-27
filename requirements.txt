@@ -1,5 +1,6 @@
 # Requirements for the book itself
 jupyter-book==1.0.4.post1
+sphinx-exercise==1.0.1
 
 # Visualization tools
 matplotlib==3.10.3
