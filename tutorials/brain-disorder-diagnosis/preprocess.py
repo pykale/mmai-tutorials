@@ -50,10 +50,14 @@ AVAILABLE_FC_MEASURES = {
 
 
 @validate_params(
-    {"data": [pd.DataFrame], "standardize": [StrOptions({"site", "all"}), "boolean"]},
+    {
+        "data": [pd.DataFrame],
+        "standardize": [StrOptions({"site", "all"}), "boolean"],
+        "one_hot_encode": ["boolean"],
+    },
     prefer_skip_nested_validation=False,
 )
-def preprocess_phenotypic_data(data, standardize=False):
+def preprocess_phenotypic_data(data, standardize=False, one_hot_encode=True):
     """Process phenotypic data to impute missing values and and encode categorical
     variables including sex, handedness, eye status at scan, and diagnostic group.
 
@@ -66,6 +70,9 @@ def preprocess_phenotypic_data(data, standardize=False):
                 Standardize FIQ and age. Setting to True or "all"
                 standardizes the values over all subjects while "site"
                 standardizes according to the site.
+
+    one_hot_encode : boolean (default=True)
+                Whether to one-hot encode categorical variables in the phenotypes.
 
     Returns
     -------
@@ -117,7 +124,8 @@ def preprocess_phenotypic_data(data, standardize=False):
     sites = data["SITE_ID"].to_numpy()
     phenotypes = data.drop(columns=["DX_GROUP"])
     # One-hot encode categorical valued phenotypes
-    phenotypes = pd.get_dummies(phenotypes)
+    if one_hot_encode:
+        phenotypes = pd.get_dummies(phenotypes)
 
     return labels, sites, phenotypes
 
