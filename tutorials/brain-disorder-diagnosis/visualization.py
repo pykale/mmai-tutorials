@@ -45,6 +45,9 @@ def plot_phenotypic_distribution(*values, ncols=2, figsize=(16, 20), title=None)
     - Categorical variables are plotted as count plots.
     - Numeric variables are plotted as histograms with KDE.
     """
+    if len(values) == 0:
+        raise ValueError("At least one value must be provided for plotting.")
+
     nrows = len(values) // ncols + (len(values) % ncols > 0)
     fig, axs = plt.subplots(
         figsize=figsize,
@@ -57,6 +60,7 @@ def plot_phenotypic_distribution(*values, ncols=2, figsize=(16, 20), title=None)
 
     axs = axs.flatten() if len(values) > 1 else [axs]
 
+    hue = None
     for i, (ax, item) in enumerate(zip(axs, values)):
         # Unpack title, value, optional dtype
         if isinstance(item, tuple):
@@ -70,11 +74,18 @@ def plot_phenotypic_distribution(*values, ncols=2, figsize=(16, 20), title=None)
             value = item if isinstance(item, pd.Series) else pd.Series(item)
             title = value.name or f"Feature {i+1}"
 
+        value = value.reset_index(drop=True)
+
+        # Check for hue
+        if i == 0 and pd.api.types.is_categorical_dtype(value):
+            hue = value
+
         # Plot based on dtype
+        use_hue = hue if i > 0 else None
         if value.dtype == "object" or pd.api.types.is_categorical_dtype(value):
-            sns.countplot(x=value, order=value.value_counts().index, ax=ax)
+            sns.countplot(x=value, order=value.value_counts().index, hue=use_hue, ax=ax)
         else:
-            sns.histplot(value, bins=20, kde=True, ax=ax)
+            sns.histplot(x=value, bins=20, kde=True, hue=use_hue, ax=ax)
 
         ax.set_xlabel(value.name)
         if i % ncols == 0:
@@ -129,8 +140,10 @@ def plot_connectivity_matrix(
     fig : matplotlib.figure.Figure
         The matplotlib figure object.
 
-    ax : matplotlib.axes.Axes
-        The axis on which the heatmap is plotted.
+    axs : matplotlib.axes.Axes
+        The axes on which the heatmap is plotted. The left and right axes
+        shows the full and upper triangle of the connectivity matrix,
+        respectively.
 
     Raises
     ------
@@ -156,15 +169,56 @@ def plot_connectivity_matrix(
                 "The vectorized FC length must be equal to n*(n-1)/2"
             ) from e
 
-    fig, ax = plt.subplots(figsize=figsize)
-    ax.set_title(title)
+    fig, axs = plt.subplots(
+        figsize=figsize, ncols=2, gridspec_kw={"width_ratios": [1, 1], "wspace": 0.02}
+    )
+    fig.suptitle(title)
+
+    vmin = kwargs.get("vmin", np.min(fc))
+    vmax = kwargs.get("vmax", np.max(fc))
+
+    # Left plot
     sns.heatmap(
         fc,
-        xticklabels=labels if annotate else [],
-        yticklabels=labels if annotate else [],
+        xticklabels=False,
+        yticklabels=False,
         square=True,
-        ax=ax,
+        ax=axs[0],
+        cbar=False,
+        vmin=vmin,
+        vmax=vmax,
         **kwargs,
     )
+    axs[0].set_title("Full Connectivity Matrix")
 
-    return fig, ax
+    # Right plot
+    sns.heatmap(
+        np.triu(fc, k=1),
+        xticklabels=False,
+        yticklabels=False,
+        square=True,
+        ax=axs[1],
+        cbar=False,
+        vmin=vmin,
+        vmax=vmax,
+        **kwargs,
+    )
+    axs[1].set_title("Upper Triangle of Connectivity Matrix")
+
+    # Add shared colorbar to the right of both subplots
+    im = axs[1].get_children()[0]  # Get the QuadMesh image
+    cbar = fig.colorbar(im, ax=axs, orientation="vertical", fraction=0.02, pad=0.02)
+    cbar.ax.tick_params(labelsize=12)
+
+    if annotate:
+        # Left: add both x and y tick labels
+        axs[0].set_xticks(np.arange(len(labels)))
+        axs[0].set_xticklabels(labels, rotation=90, fontsize=10)
+        axs[0].set_yticks(np.arange(len(labels)))
+        axs[0].set_yticklabels(labels, fontsize=10)
+
+        # Right: remove all tick labels (to save space)
+        axs[1].set_xticks(np.arange(len(labels)))
+        axs[1].set_xticklabels(labels, rotation=90, fontsize=10)
+
+    return fig, axs
