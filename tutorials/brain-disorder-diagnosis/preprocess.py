@@ -159,7 +159,7 @@ def extract_functional_connectivity(data, measures=["pearson"]):
             k = AVAILABLE_FC_MEASURES.get(k)
         except KeyError:
             raise ValueError(
-                f"Unsupported connectivity measure: {k}. "
+                f"Unsupported connectivity measure '{k}' in {measures}. "
                 f"Available options are: {', '.join(AVAILABLE_FC_MEASURES.keys())}."
             )
 
