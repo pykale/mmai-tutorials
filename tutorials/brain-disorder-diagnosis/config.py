@@ -6,7 +6,7 @@ _C = CfgNode()
 # Dataset configuration
 _C.DATASET = CfgNode()
 # Path to the dataset directory
-_C.DATASET.PATH = "data"
+_C.DATASET.DATA_DIR = "data"
 # Name of the brain atlas to use
 # Available options:
 # - "aal" (AAL)
