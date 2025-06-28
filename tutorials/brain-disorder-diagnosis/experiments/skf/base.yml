@@ -1,6 +1,6 @@
 DATASET:
   ATLAS: hcp-ica
-  TOP_K_SITES: 5
+  TOP_K_SITES: 10
 
 CROSS_VALIDATION:
   SPLIT: skf
