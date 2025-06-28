@@ -82,10 +82,19 @@ def plot_phenotypic_distribution(*values, ncols=2, figsize=(16, 20), title=None)
 
         # Plot based on dtype
         use_hue = hue if i > 0 else None
+        hue_order = hue.value_counts().index if i > 0 else None
         if value.dtype == "object" or pd.api.types.is_categorical_dtype(value):
-            sns.countplot(x=value, order=value.value_counts().index, hue=use_hue, ax=ax)
+            sns.countplot(
+                x=value,
+                order=value.value_counts().index,
+                hue=use_hue,
+                hue_order=hue_order,
+                ax=ax,
+            )
         else:
-            sns.histplot(x=value, bins=20, kde=True, hue=use_hue, ax=ax)
+            sns.histplot(
+                x=value, bins=20, kde=True, hue=use_hue, hue_order=hue_order, ax=ax
+            )
 
         ax.set_xlabel(value.name)
         if i % ncols == 0:
