@@ -23,4 +23,3 @@ parts:
 - caption: Tutorials
   chapters:
   - file: tutorials/brain-disorder-diagnosis/notebook
-  - file: tutorials/drug-target-interaction/notebook-cross-domain
