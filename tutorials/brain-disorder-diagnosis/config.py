@@ -6,7 +6,7 @@ _C = CfgNode()
 # Dataset configuration
 _C.DATASET = CfgNode()
 # Path to the dataset directory
-_C.DATASET.PATH = "data"
+_C.DATASET.DATA_DIR = "data"
 # Name of the brain atlas to use
 # Available options:
 # - "aal" (AAL)
@@ -27,6 +27,8 @@ _C.DATASET.ATLAS = "cc200"
 # - "covariance"
 # - "tangent-pearson"
 _C.DATASET.FC = "tangent-pearson"
+# Number of top sites to load for the runtime.
+_C.DATASET.TOP_K_SITES = None
 
 # Phenotype configuration
 _C.PHENOTYPE = CfgNode()
@@ -57,6 +59,11 @@ _C.TRAINER = CfgNode()
 # - "ridge"
 # - "auto"
 _C.TRAINER.CLASSIFIER = "lr"
+# Parameter grid for hyperparameter tuning
+# We use list of pairs directly instead of CfgNode for flexibility
+# As a workaround for yacs limitation, we use None to indicate
+# that we're using the large set of default hyperparameters.
+_C.TRAINER.PARAM_GRID = None
 # Use non-linear transformations (no interpretability)
 _C.TRAINER.NONLINEAR = False
 # Search strategy for hyperparameter tuning

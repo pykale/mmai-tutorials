@@ -3,7 +3,8 @@
 
 title: PyKale
 author: PyKale Contributors
-logo: EMBC_logo.png
+logo: resources/embc_logo.png
+copyright: 2025
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -33,6 +34,12 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  favicon: resources/icon.ico
+
+sphinx:
+  extra_extensions:
+    - sphinx_exercise
+    - sphinx_togglebutton
 
 # Only works for .ipynb files
 launch_buttons:

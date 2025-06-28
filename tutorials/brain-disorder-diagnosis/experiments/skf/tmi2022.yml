@@ -1,0 +1,16 @@
+CROSS_VALIDATION:
+  SPLIT: skf
+  NUM_FOLDS: 10
+  NUM_REPEATS: 5
+
+TRAINER:
+  CLASSIFIER: ridge
+  PARAM_GRID:
+    - [alpha, [0.25, 0.5, 0.75, 1.0]]
+    - [domain_adapter__num_components, [50, 150, 300]]
+    - [domain_adapter__mu, [0.25, 0.5, 0.75, 1.0]]
+    - [domain_adapter__ignore_y, [True]]
+    - [domain_adapter__augment, [pre, post, null]]
+  SEARCH_STRATEGY: grid
+
+RANDOM_STATE: 0
