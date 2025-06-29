@@ -30,12 +30,35 @@ This tutorial is designed for researchers, students, and practitioners in biomed
 
 ---
 
+### How to go through the tutorial
+
+The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook—preferably in Google Colab—by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.
+
+
 ### Resources Provided
 - All notebooks and data access links
 - PyKale documentation and example pipelines
 - Open discussion forum for continued collaboration
 
 ## Structure
+
+```text
+    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+    ├───model.py
+    ├───models
+    │   ├───**.pt
+    ├───data
+    │   ├───**.csv
+    │   ├───**.**
+    ├───images
+    │   ├───**.png
+    │   ├───**.jpg
+    ├───**.py
+```
 
 ### Part 1: Foundational Tutorials with Practical Examples
 This session introduces key concepts in multimodal AI and open research, followed by four focused, hands-on tutorials using **public biomedical datasets** and the **PyKale multimodal AI library**. Each tutorial follows a common pipeline:
