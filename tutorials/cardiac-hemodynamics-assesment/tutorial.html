@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -57,11 +58,10 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assesment/notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assesment/tutorial';</script>
+    <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/notebook-cross-domain.html" />
-    <link rel="prev" title="Brain Disorder Diagnosis" href="../brain-disorder-diagnosis/notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -153,8 +155,8 @@
       
     
     
-    <img src="../../_static/EMBC_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
-    <script>document.write(`<img src="../../_static/EMBC_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+    <img src="../../_static/embc_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../../_static/embc_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
   
   
 </a></div>
@@ -180,16 +182,8 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../brain-disorder-diagnosis/notebook.html">Brain Disorder Diagnosis</a></li>
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiothoracic Abnormality Assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html"><strong>Drug–Target Interaction Prediction</strong></a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
 </ul>
 
@@ -245,7 +239,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/pykale/embc-mmai25/main?urlpath=tree/tutorials/cardiac-hemodynamics-assesment/notebook.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/pykale/embc-mmai25/main?urlpath=tree/tutorials/cardiac-hemodynamics-assesment/tutorial.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -263,7 +257,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/embc-mmai25/blob/main/tutorials/cardiac-hemodynamics-assesment/notebook.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/embc-mmai25/blob/main/tutorials/cardiac-hemodynamics-assesment/tutorial.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +305,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/embc-mmai25/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assesment/notebook.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/embc-mmai25/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assesment/tutorial.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -341,7 +335,7 @@
       
       
       
-      <li><a href="../../_sources/tutorials/cardiac-hemodynamics-assesment/notebook.ipynb" target="_blank"
+      <li><a href="../../_sources/tutorials/cardiac-hemodynamics-assesment/tutorial.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -466,7 +460,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model training</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">🔥 Model training</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">🛠️ Multimodal Pretraining</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning">🎯 Multimodal Fine-tuning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate">📈 Evaluate</a></li>
@@ -488,6 +482,7 @@ document.write(`
 <h1>Cardiothoracic Abnormality Assessment<a class="headerlink" href="#cardiothoracic-abnormality-assessment" title="Link to this heading">#</a></h1>
 <p><img alt="" src="../../_images/embc_heart_tutorial_fig.png" /></p>
 <p>In this tutorial, we demonstrate how to use low-cost, non-invasive modalities <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong> to assess <strong>Cardiothoracic Abnormalities</strong>.</p>
+<p><strong>⏱️ Estimated runtime:</strong> Completing the steps in this tutorial will take approximately 8 minutes.</p>
 <section id="problem-formulation">
 <h2>📌 Problem Formulation<a class="headerlink" href="#problem-formulation" title="Link to this heading">#</a></h2>
 <p>We will use a multimodal dataset derived from MIMIC-CXR and MIMIC-IV-ECG, which contains approximately 50K paired CXR and ECG samples. In this tutorial, we pretrain a multimodal <strong>CardioVAE</strong> model using ~49K CXR-ECG pairs via a tri-stream pretraining method. We then fine-tune this pretrained CardioVAE model on a smaller subset (~1K paired samples) with binary labels: <strong>Healthy</strong> and <strong>Cardiothoracic Abnormality</strong>. Lastly, we demonstrate how to interpret the trained CardioVAE model on both the CXR and ECG modalities.</p>
@@ -513,7 +508,8 @@ document.write(`
 <li><p><strong>tabulate</strong>: Used to print tabular data in a readable format, helpful for summarizing results or configuration parameters.</p></li>
 </ul>
 <p><strong>Additional Notes for Colab</strong>
-Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the below installation step. Also an autometic crash and reset has been added as after installing this depedencies you need to restart the session. **Dont run this block again if you already did once</p>
+Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the below installation step. Also an autometic crash and reset has been added as after installing this depedencies you need to restart the session. <strong>Don’t run this block again if you already did once</strong></p>
+<p><strong>⏱️ Estimated runtime:</strong> 4 minutes</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
@@ -540,6 +536,7 @@ os.kill(os.getpid(), 9)
 <h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
 <p>As a starting point, we will mount Google Drive in Colab so that the data can be accessed directly. You might be prompted to grant permission to access your Google account—please proceed with the authorisation when asked.</p>
 <p>Next, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we also suppress unnecessary warnings.</p>
+<p><strong>⏱️ Estimated runtime:</strong> 25 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Connect with your google drive for data and model loading
@@ -585,14 +582,14 @@ if &quot;google.colab&quot; in str(get_ipython()):
 <p>Configuration parameters can be overridden using external YAML files (e.g., <code class="docutils literal notranslate"><span class="pre">experiments/pretraining_base.yml</span></code>, <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code>).</p>
 <section id="pre-training-configuration">
 <h4>Pre-training Configuration<a class="headerlink" href="#pre-training-configuration" title="Link to this heading">#</a></h4>
-<p>Default settings for the pre-training stage are defined in <code class="docutils literal notranslate"><span class="pre">pretraining_config.py</span></code>. These include data paths, model architecture, and optimizer parameters.<br />
+<p>Default settings for the pre-training stage are defined in <code class="docutils literal notranslate"><span class="pre">config_pretrain.py</span></code>. These include data paths, model architecture, and optimizer parameters.
 This modular structure allows easy experiment tracking and customisation by simply editing the associated <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from pretraining_config import get_cfg_defaults
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from config_pretrain import get_cfg_defaults
 
 cfg_PT = get_cfg_defaults()
-cfg_PT.merge_from_file(&quot;experiments/pretraining_base.yml&quot;)
+cfg_PT.merge_from_file(&quot;configs/pretraining_base.yml&quot;)
 
 # ------ Hyperparameters to play with -----
 cfg_PT.MODEL.LATENT_DIM = 128
@@ -606,44 +603,18 @@ print(cfg_PT)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DATA:
-  BATCH_SIZE: 128
-  CXR_PATH: /content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_1000.pt
-  ECG_PATH: /content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_1000.pt
-  NUM_WORKERS: 2
-MODEL:
-  INPUT_DIM_CXR: 1
-  INPUT_DIM_ECG: 60000
-  LATENT_DIM: 128
-  NUM_LEADS: 12
-TRAIN:
-  ACCELERATOR: gpu
-  DATA_DEVICE: cpu
-  DEVICE: cuda
-  DEVICES: 1
-  EPOCHS: 1
-  LAMBDA_IMAGE: 1
-  LAMBDA_SIGNAL: 10
-  LR: 0.001
-  SAVE_PATH: cardioVAE.pth
-  SCALE_FACTOR: 0.0001
-  SEED: 123
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="fine-tuning-configuration">
 <h4>Fine-tuning Configuration<a class="headerlink" href="#fine-tuning-configuration" title="Link to this heading">#</a></h4>
-<p>Fine-tuning parameters are managed in <code class="docutils literal notranslate"><span class="pre">finetune_config.py</span></code>. These include learning rate, loss weights, number of epochs, model checkpoint paths, and other task-specific options.<br />
+<p>Fine-tuning parameters are managed in <code class="docutils literal notranslate"><span class="pre">config_finetune.py</span></code>. These include learning rate, loss weights, number of epochs, model checkpoint paths, and other task-specific options.
 External YAML files like <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code> enable flexible adjustments for different downstream tasks or datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from finetune_config import get_cfg_defaults
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from config_finetune import get_cfg_defaults
 
 cfg_FT = get_cfg_defaults()
-cfg_FT.merge_from_file(&quot;experiments/finetune_base.yml&quot;)
+cfg_FT.merge_from_file(&quot;configs/finetune_base.yml&quot;)
 
 # ------ Hyperparameters to play with -----
 cfg_FT.FT.EPOCHS = 10
@@ -652,39 +623,6 @@ cfg_FT.FT.HIDDEN_DIM = 128
 cfg_FT.DATA.BATCH_SIZE = 32
 
 print(cfg_FT)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DATA:
-  BATCH_SIZE: 32
-  CSV_PATH: /content/drive/MyDrive/EMBC_workshop_data/chexpert_healthy_abnormality_subset.csv
-  CXR_PATH: /content/drive/MyDrive/EMBC_workshop_data/cxr_features_tensor_last_1000.pt
-  DATA_DEVICE: cpu
-  ECG_PATH: /content/drive/MyDrive/EMBC_workshop_data/ecg_features_tensor_last_1000.pt
-  NUM_WORKERS: 2
-FT:
-  ACCELERATOR: gpu
-  CKPT_PATH: /content/drive/MyDrive/EMBC_workshop_data/CardioVAE.pth
-  DEVICE: cuda
-  DEVICES: 1
-  EPOCHS: 10
-  HIDDEN_DIM: 128
-  KFOLDS: 5
-  LR: 0.001
-  NUM_CLASSES: 2
-  SEED: 42
-INTERPRET:
-  CXR_THRESHOLD: 0.7
-  ECG_THRESHOLD: 0.7
-  SAMPLE_IDX: 101
-  SAMPLING_RATE: 500
-  ZOOM_RANGE: [3, 3.5]
-MODEL:
-  INPUT_DIM_ECG: 60000
-  INPUT_IMAGE_CHANNELS: 1
-  LATENT_DIM: 256
-  NUM_LEADS: 12
 </pre></div>
 </div>
 </div>
@@ -713,6 +651,7 @@ MODEL:
 <li><p>For ease of use in Colab, the full-data loading functionality is <strong>commented out by default</strong>. It can be re-enabled for local or high-resource environments.</p></li>
 <li><p>To access the required files, ensure that the shared folder <strong><code class="docutils literal notranslate"><span class="pre">EMBC_workshop_data</span></code></strong> is added as a <strong>shortcut to your Google Drive (under “My Drive”)</strong>.</p></li>
 </ul>
+<p><strong>⏱️ Estimated runtime:</strong> 12 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># (OPTIONAL)
@@ -757,6 +696,7 @@ train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders(
 </ul>
 <p>This fine-tuning subset is explicitly selected to ensure no overlap with the samples used during pre-training, thereby simulating a realistic downstream evaluation setting.</p>
 <p>Unlike the fine-tuning strategy reported in <em>Suvon et al., MICCAI 2024</em>, which relied on a private in-house dataset, this approach is fully reproducible using publicly available data from MIMIC-CXR and MIMIC-IV-ECG.</p>
+<p><strong>⏱️ Estimated runtime:</strong> 10 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
@@ -849,7 +789,7 @@ This setup is optimised for clinical prediction tasks, such as binary or multi-l
 </section>
 </section>
 <section id="model-training">
-<h2>Model training<a class="headerlink" href="#model-training" title="Link to this heading">#</a></h2>
+<h2>🔥 Model training<a class="headerlink" href="#model-training" title="Link to this heading">#</a></h2>
 <section id="multimodal-pretraining">
 <h3>🛠️ Multimodal Pretraining<a class="headerlink" href="#multimodal-pretraining" title="Link to this heading">#</a></h3>
 <p>We pretraind a CardioVAE model using the <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code> class from <strong>PyKale</strong> to jointly model paired CXR and ECG data. The goal is to learn <strong>shared and modality-specific representations</strong> in an <strong>unsupervised</strong> manner via reconstruction.</p>
@@ -865,6 +805,7 @@ This setup is optimised for clinical prediction tasks, such as binary or multi-l
 <li><p>Optimise the <strong>ELBO loss</strong>, balancing image and signal modalities</p></li>
 <li><p>Manage logging, and reconstruction-based validation</p></li>
 </ul>
+<p><strong>⏱️ Estimated runtime:</strong> 2 minutes with 1 epoch</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
@@ -917,6 +858,7 @@ print(f&quot;Saved model state dictionary to &#39;{cfg_PT.TRAIN.SAVE_PATH}&#39;&
 <li><p>A <strong>classification head</strong> (single or multi-layer MLP)</p></li>
 <li><p>A <strong>training step</strong> that supports standard supervised learning with cross-entropy loss</p></li>
 </ul>
+<p><strong>⏱️ Estimated runtime:</strong> 1 minute with 10 epoch</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
@@ -1012,6 +954,7 @@ print(tabulate(table_data, headers=[&quot;Metric&quot;, &quot;Value&quot;], tabl
 <h2>🔍 Model Interpretation<a class="headerlink" href="#model-interpretation" title="Link to this heading">#</a></h2>
 <p>We interpret the fine-tuned model using the multimodal_signal_image_attribution interpretation method from PyKale, which builds on Captum’s Integrated Gradients to generate visual explanations for both CXR and ECG inputs.
 This method helps identify which regions in each modality, such as specific waveform segments in ECG and spatial regions in CXR, contributed most to the model’s prediction. This improves both transparency and clinical interpretability.</p>
+<p><strong>⏱️ Estimated runtime:</strong> 10 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.interpret.signal_image_attribution import multimodal_signal_image_attribution
@@ -1217,24 +1160,6 @@ plt.show()
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../brain-disorder-diagnosis/notebook.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Brain Disorder Diagnosis</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../drug-target-interaction/notebook-cross-domain.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Drug–Target Interaction Prediction</strong></p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1282,7 +1207,7 @@ plt.show()
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model training</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">🔥 Model training</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">🛠️ Multimodal Pretraining</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning">🎯 Multimodal Fine-tuning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate">📈 Evaluate</a></li>
@@ -1313,7 +1238,7 @@ By PyKale Contributors
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2025.
       <br/>
     
   </p>

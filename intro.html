@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -60,9 +61,10 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <link rel="icon" href="_static/icon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Brain Disorder Diagnosis" href="tutorials/brain-disorder-diagnosis/notebook.html" />
+    <link rel="next" title="Drug–Target Interaction Prediction" href="tutorials/drug-target-interaction/notebook-cross-domain.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,8 +158,8 @@
       
     
     
-    <img src="_static/EMBC_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
-    <script>document.write(`<img src="_static/EMBC_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+    <img src="_static/embc_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="_static/embc_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
   
   
 </a></div>
@@ -184,15 +186,7 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tutorials/brain-disorder-diagnosis/notebook.html">Brain Disorder Diagnosis</a></li>
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="tutorials/cardiac-hemodynamics-assesment/notebook.html">Cardiothoracic Abnormality Assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/drug-target-interaction/notebook-cross-domain.html"><strong>Drug–Target Interaction Prediction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/drug-target-interaction/notebook-cross-domain.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
 </ul>
 
@@ -392,6 +386,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-audience-and-prerequisites">Target Audience and Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-go-through-the-tutorial">How to go through the tutorial</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-provided">Resources Provided</a></li>
 </ul>
 </li>
@@ -445,6 +440,10 @@ document.write(`
 </ul>
 </section>
 <hr class="docutils" />
+<section id="how-to-go-through-the-tutorial">
+<h3>How to go through the tutorial<a class="headerlink" href="#how-to-go-through-the-tutorial" title="Link to this heading">#</a></h3>
+<p>The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook—preferably in Google Colab—by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.</p>
+</section>
 <section id="resources-provided">
 <h3>Resources Provided<a class="headerlink" href="#resources-provided" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -456,6 +455,23 @@ document.write(`
 </section>
 <section id="structure">
 <h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+    ├───model.py
+    ├───models
+    │   ├───**.pt
+    ├───data
+    │   ├───**.csv
+    │   ├───**.**
+    ├───images
+    │   ├───**.png
+    │   ├───**.jpg
+    ├───**.py
+</pre></div>
+</div>
 <section id="part-1-foundational-tutorials-with-practical-examples">
 <h3>Part 1: Foundational Tutorials with Practical Examples<a class="headerlink" href="#part-1-foundational-tutorials-with-practical-examples" title="Link to this heading">#</a></h3>
 <p>This session introduces key concepts in multimodal AI and open research, followed by four focused, hands-on tutorials using <strong>public biomedical datasets</strong> and the <strong>PyKale multimodal AI library</strong>. Each tutorial follows a common pipeline:</p>
@@ -558,11 +574,11 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="tutorials/brain-disorder-diagnosis/notebook.html"
+       href="tutorials/drug-target-interaction/notebook-cross-domain.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Brain Disorder Diagnosis</p>
+        <p class="prev-next-title">Drug–Target Interaction Prediction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -585,6 +601,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-audience-and-prerequisites">Target Audience and Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-go-through-the-tutorial">How to go through the tutorial</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-provided">Resources Provided</a></li>
 </ul>
 </li>
@@ -618,7 +635,7 @@ By PyKale Contributors
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2025.
       <br/>
     
   </p>

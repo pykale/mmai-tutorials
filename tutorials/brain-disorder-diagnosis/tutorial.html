@@ -1,0 +1,2286 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>🧠 Brain Disorder Diagnosis &#8212; PyKale</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/brain-disorder-diagnosis/tutorial';</script>
+    <link rel="icon" href="../../_static/icon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/embc_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../../_static/embc_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/pykale/embc-mmai25/main?urlpath=tree/tutorials/brain-disorder-diagnosis/tutorial.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/pykale/embc-mmai25/blob/main/tutorials/brain-disorder-diagnosis/tutorial.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pykale/embc-mmai25" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pykale/embc-mmai25/issues/new?title=Issue%20on%20page%20%2Ftutorials/brain-disorder-diagnosis/tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/brain-disorder-diagnosis/tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>🧠 Brain Disorder Diagnosis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">💭 Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">📖 Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">📝 Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-preparation">🏞️ Environment Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">📦 Package Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">🪛 Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">🧑‍🍳 Data Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">🚚 Data Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">🛠️ Data Preprocessing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">🧶 Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">🤼 Cross-Validation Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">📥 Embedding Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-methods">📡 Prediction Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-and-proposed-model">🏎️ Baseline and Proposed Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">🏃 Model Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">📈 Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">🕶️ Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-tasks">📜 Extra Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-solutions">✍️ Exercise Solutions</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="brain-disorder-diagnosis">
+<h1>🧠 Brain Disorder Diagnosis<a class="headerlink" href="#brain-disorder-diagnosis" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>💭 Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Brain disorders are often associated with abnormal neurological, behavioral, or anatomical patterns. One example is <strong>Autism Spectrum Disorder (ASD)</strong>, a lifelong neurodevelopmental condition affecting more than 1% of children. ASD is characterized by a range of symptoms, including:</p>
+<ul class="simple">
+<li><p>Deficits in social communication</p></li>
+<li><p>Varying levels of disability</p></li>
+<li><p>Repetitive behavioral patterns</p></li>
+<li><p>Restricted interests</p></li>
+</ul>
+<p>Diagnosing ASD remains a challenging task due to behavioral heterogeneity and complex neuroanatomical abnormalities. Non-invasive neuroimaging techniques, especially magnetic resonance imaging (MRI), and in particular, resting-state functional MRI (rs-fMRI) have shown potential in identifying key biomarkers associated with ASD. These biomarkers are often located in specific <strong>regions of interest (ROIs)</strong> within the brain. These ROIs are normally defined through a brain mapping called an <strong>atlas</strong> that normally have its own definition of ROIs for its intended use cases.</p>
+<figure class="align-default" id="id1">
+<img alt="../../_images/abide.png" src="../../_images/abide.png" />
+<figcaption>
+<p><span class="caption-text">Autism Brain Imaging Data Exchange</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>However, MRI data collected from a single site (e.g., a research institution or hospital) typically involve a limited number of subjects, due to the high cost of MRI scans and the challenge of recruiting patients. To overcome this limitation, large-scale collaborative efforts are often established. One such effort is the <a class="reference external" href="https://fcon_1000.projects.nitrc.org/indi/abide/">Autism Brain Imaging Data Exchange (ABIDE)</a>, a publicly available multi-site dataset that aggregates data from over 16 independent sites, comprising over 1,035 subjects.</p>
+<p>Machine learning (ML) models have demonstrated promising results in analyzing fMRI data, with <strong>functional connectivity (FC)</strong>, the pairwise correlation or covariance between ROIs being a standard representation. Despite the availability of larger datasets like ABIDE, modeling ASD remains difficult due to significant inter-site variability. These include differences in participant phenotypes, MRI scanner specifications, and preprocessing pipelines, all of which can hinder the effective integration of multi-site data. Therefore, a key challenge lies in how to harmonize these heterogeneous sources to build robust models for ASD diagnosis.</p>
+</section>
+<section id="problem-formulation">
+<h2>📖 Problem Formulation<a class="headerlink" href="#problem-formulation" title="Link to this heading">#</a></h2>
+<p>This notebook builds upon the work of <a class="reference external" href="https://eprints.whiterose.ac.uk/id/eprint/191961/1/MultisiteASD_TMI_2022.pdf">Kunda et al. (2022)</a>, published in <em>IEEE Transactions on Medical Imaging</em>. The authors address the following key research questions:</p>
+<ul class="simple">
+<li><p><strong>Between-site heterogeneity</strong>: How can we effectively account for experimental differences in the ABIDE rs-fMRI dataset?</p></li>
+<li><p><strong>Discriminative features</strong>: Can we design novel rs-fMRI features to improve autism classification?</p></li>
+</ul>
+<p>To answer these questions, the authors propose:</p>
+<ul class="simple">
+<li><p>A second-order functional connectivity representation called <strong>Tangent-Pearson</strong>, which captures more discriminative features for ASD prediction.</p></li>
+<li><p>The use of <strong>domain adaptation</strong> to mitigate inter-site heterogeneity present in multi-site neuroimaging data.</p></li>
+</ul>
+</section>
+<section id="objectives">
+<h2>📝 Objectives<a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>In this notebook, we adopt the same approach by treating the ABIDE dataset as a <strong>binary classification problem</strong>, where the target label indicates the subject’s diagnostic group: ASD (positive) or control (negative).</p>
+<figure class="align-default" id="id2">
+<img alt="../../_images/flowchart.png" src="../../_images/flowchart.png" />
+<figcaption>
+<p><span class="caption-text">Machine learning pipeline to predict ASD vs control subjects.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The figure above outlines the pipeline used in this tutorial:</p>
+<ol class="arabic simple">
+<li><p><strong>Load Brain Signals and Phenotypic Information</strong>:<br />
+We begin by loading ROI-based time series extracted from resting-state fMRI scans. Each time series represents blood-oxygen-level-dependent (BOLD) activity in a specific brain region (e.g., medial prefrontal cortex). Additionally, we load subject-level phenotypic information such as site, age at scan, sex, handedness, and eye status.</p></li>
+<li><p><strong>Construct Brain Networks</strong>:<br />
+From the ROI time series, we compute functional connectivity (FC) matrices using methods like <strong>Partial Correlation</strong> or <strong>Tangent-Pearson</strong>, which characterize inter-regional relationships.</p></li>
+<li><p><strong>Learn Site-Independent Features</strong>:<br />
+To reduce site-related variability, we apply <strong>domain adaptation</strong> technique to project the data into a space where site effects are reduced.</p></li>
+<li><p><strong>Predict ASD vs Control</strong>:<br />
+We use <strong>linear classifiers</strong> such as <strong>logistic regression</strong>, <strong>SVM</strong>, or <strong>ridge classifiers</strong> to predict the subject’s condition. These models are chosen for their inherent interpretability, as the learned weights directly highlight the importance of each ROI or ROI-ROI connection.</p></li>
+<li><p><strong>Compute Accuracy and AUROC</strong>:<br />
+Model performance is evaluated using <strong>accuracy</strong> and <strong>area under the receiver operating characteristic curve (AUROC)</strong>.</p></li>
+<li><p><strong>Visualise Patterns</strong>:<br />
+Finally, we interpret the trained model to identify discriminative brain networks that are most indicative of ASD. To do this, we use <strong>brain connectome visualizations</strong> to show the spatial locations of the associated brain regions and their connections, highlighting patterns linked to the diagnostic outcome.</p></li>
+</ol>
+<p>To do this, we use <a class="reference external" href="https://github.com/pykale/pykale"><strong>PyKale</strong></a> to conveniently build the pipeline proposed by Kunda et al. (2022) for modeling multi-site datasets such as ABIDE.</p>
+<p>Along the way, we include short-and-quick exercises to enhance understanding and engagements throughout the tutorial.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This notebook does not cover the full scope of building a complete machine learning pipeline for neuroimaging. In particular, we omit the preprocessing steps required to transform raw neuroimaging data into brain signals, due to the complexity, variability, and computational demands of such procedures.</p>
+<p>Recent efforts, such as the <strong>Brain Imaging Data Structure (BIDS)</strong>, have introduced standardized formats for organizing neuroimaging datasets. However, the <strong>ABIDE dataset</strong> does not conform to this standard. As a result, unlike other tutorials that support fully integrated data loading and preparation using PyKale, neither this notebook nor PyKale itself provides such functionality at the time of writing.</p>
+<p>Additionally, due to the limited computational resources available in <strong>Google Colab</strong> (the intended execution environment), we do not include detailed instructions for manually extracting FC features in this notebook. Nevertheless, we provide optional helper functions for users interested in performing this step, which will be explained in a later section.</p>
+</div>
+</section>
+<section id="environment-preparation">
+<h2>🏞️ Environment Preparation<a class="headerlink" href="#environment-preparation" title="Link to this heading">#</a></h2>
+<p>As a starting point, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
+<p>Several helper scripts are provided to modularize the code and streamline the workflow. These scripts are located in the current working directory of the notebook and can be inspected directly as <code class="docutils literal notranslate"><span class="pre">.py</span></code> files. The helper scripts include:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">config.py</span></code></strong>: Defines base configuration settings, which can be customized or overridden using external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">data.py</span></code></strong>: Provides data loading functions and utilities for automatically downloading required datasets.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">parsing.py</span></code></strong>: Contains utilities for compiling and summarizing evaluation results, as well as parsing the hyperparameter grid defined in the configuration.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">preprocess.py</span></code></strong>: Handles phenotype preprocessing, including missing value imputation, categorical variable encoding, and FC extraction from the brain signals.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">visualization.py</span></code></strong>: Provides functions to visualize functional connectivity (FC) examples and the distribution of phenotypic variables.</p></li>
+</ul>
+<p>Throughout the tutorial, we will provide further explanations on the contents and roles of these helper scripts as they are used.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">site</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
+
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">getusersitepackages</span><span class="p">())</span>
+    <span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">-</span><span class="n">b</span> <span class="n">brain</span><span class="o">-</span><span class="n">decoding</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">embc</span><span class="o">-</span><span class="n">mmai25</span><span class="o">.</span><span class="n">git</span>
+    <span class="o">%</span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">embc</span><span class="o">-</span><span class="n">mmai25</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">brain</span><span class="o">-</span><span class="n">disorder</span><span class="o">-</span><span class="n">diagnosis</span><span class="o">/*</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span>
+    <span class="o">%</span><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">embc</span><span class="o">-</span><span class="n">mmai25</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<section id="package-installation">
+<h3>📦 Package Installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
+<p>The main packages required for this tutorial are:</p>
+<ul class="simple">
+<li><p><strong>pykale</strong>: An open-source interdisciplinary machine learning library developed at the University of Sheffield. It focuses on applications in biomedical and scientific domains, providing tools for multimodal learning, domain adaptation, and model interpretability.</p></li>
+<li><p><strong>gdown</strong>: A utility package that simplifies downloading files and folders directly from Google Drive.</p></li>
+<li><p><strong>nilearn</strong>: A Python library for neuroimaging analysis. It offers convenient tools for processing, analyzing, and visualizing functional MRI (fMRI) data.</p></li>
+<li><p><strong>yacs</strong>: A lightweight configuration management library used to store and organize experiment settings in a hierarchical and human-readable format.</p></li>
+</ul>
+<p><em><strong>Estimated Runtime in Google Colab</strong></em>: 3-5 minutes</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">user</span> \
+    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
+    <span class="n">gdown</span><span class="o">==</span><span class="mf">5.2.0</span> <span class="n">nilearn</span><span class="o">==</span><span class="mf">0.12.0</span> <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.3.0</span><span class="o">+</span><span class="n">cpu</span><span class="o">.</span><span class="n">html</span> \
+    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale, gdown, nilearn, and yacs installed successfully ✅&quot;</span> \
+    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale, gdown, nilearn, and yacs ❌&quot;</span>
+</pre></div>
+</div>
+</div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pykale, gdown, nilearn, and yacs installed successfully ✅
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="configuration">
+<h3>🪛 Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>To minimize complexity and reduce clutter within the notebook, we externalize experiment settings using a configuration system. A default set of parameters is defined in the <code class="docutils literal notranslate"><span class="pre">config.py</span></code> script, and these can be overridden by supplying an external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> configuration file.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">experiments/lpgo/base.yml</span></code> provides a lightweight setup suitable for quick experimentation. <strong>Note</strong> that this configuration file is used to describe the outputs shown in this notebook.</p>
+<p>Therefore, if a different configuration is used during execution, some of the descriptions or assumptions in the notebook may no longer apply and should be interpreted with caution, as they may become misleading.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">base.yml</span></code> configuration is designed to yield acceptable performance within 15–20 minutes using a free Google Colab runtime. However, the expected performance will be lower compared to the results reported in Kunda et al. (2022).</p>
+<p>For more extensive experimentation, the default hyperparameter grid in <code class="docutils literal notranslate"><span class="pre">config.py</span></code> provides a broader search space, which may yield improved results at the cost of increased runtime.</p>
+<p>If you wish to replicate the exact settings used in <a class="reference external" href="https://eprints.whiterose.ac.uk/id/eprint/191961/1/MultisiteASD_TMI_2022.pdf">Kunda et al. (2022)</a>, the <code class="docutils literal notranslate"><span class="pre">experiments/lpgo/tmi2022.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">experiments/skf/tmi2022.yml</span></code> files includes the hyperparameter grid taken directly from their <a class="reference external" href="https://github.com/kundaMwiza/fMRI-site-adaptation">original source code</a>.</p>
+</div>
+<p>Using a configuration file offers several benefits:</p>
+<ul class="simple">
+<li><p><strong>Separation of concerns</strong>: Keeps the notebook focused on analysis and results, while experiment parameters are managed externally.</p></li>
+<li><p><strong>Reproducibility</strong>: Ensures that all experiment settings are recorded, making it easier to reproduce results consistently.</p></li>
+<li><p><strong>Flexibility</strong>: Allows rapid switching between different configurations (e.g., model types, feature sets, domain adaptation strategies) without modifying the core notebook.</p></li>
+<li><p><strong>Scalability</strong>: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.</p></li>
+</ul>
+<p>Please refer to the provided configuration files for details on how to customize your experiment.<br />
+A description of each configurable option is provided in the following sections.</p>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/lpgo/base.yml&quot;</span><span class="p">)</span>
+
+<span class="c1"># A subset of the configuration can be modified here for quick playtest.</span>
+<span class="c1"># Uncomment the following lines if you are interested in quickly</span>
+<span class="c1"># modifying the configuration without modifying or making new `yml` files.</span>
+
+<span class="c1"># cfg.DATASET.ATLAS = &quot;hcp-ica&quot;</span>
+<span class="c1"># cfg.DATASET.FC = &quot;tangent-pearson&quot;</span>
+<span class="c1"># cfg.DATASET.TOP_K_SITES = 5</span>
+<span class="c1"># cfg.CROSS_VALIDATION.SPLIT = &quot;skf&quot;</span>
+<span class="c1"># cfg.CROSS_VALIDATION.NUM_FOLDS = 5</span>
+<span class="c1"># cfg.CROSS_VALIDATION.NUM_REPEATS = 2</span>
+<span class="c1"># cfg.MODEL.CLASSIFIER = &quot;lr&quot;</span>
+<span class="c1"># cfg.MODEL.PARAM_GRID = None</span>
+<span class="c1"># cfg.MODEL.NUM_SEARCH_ITER = 100</span>
+<span class="c1"># cfg.MODEL.NUM_SOLVER_ITER = 100</span>
+
+<span class="n">cfg</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CROSS_VALIDATION:
+  NUM_FOLDS: 1
+  NUM_REPEATS: 5
+  SPLIT: lpgo
+DATASET:
+  ATLAS: hcp-ica
+  DATA_DIR: data
+  FC: tangent-pearson
+  TOP_K_SITES: 10
+PHENOTYPE:
+  STANDARDIZE: site
+RANDOM_STATE: 0
+TRAINER:
+  CLASSIFIER: lr
+  NONLINEAR: False
+  NUM_SEARCH_ITER: 100
+  NUM_SOLVER_ITER: 100
+  N_JOBS: -2
+  PARAM_GRID: None
+  PRE_DISPATCH: 2*n_jobs
+  REFIT: accuracy
+  SCORING: [&#39;accuracy&#39;, &#39;roc_auc&#39;]
+  SEARCH_STRATEGY: random
+  VERBOSE: 0
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</section>
+<section id="data-preparation">
+<h2>🧑‍🍳 Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h2>
+<p>Typically, raw fMRI scans require extensive preprocessing before they can be used in a machine learning pipeline. However, the <strong>ABIDE</strong> dataset provides several preprocessed derivatives, which can be downloaded directly from the <a class="reference external" href="https://preprocessed-connectomes-project.org/abide/">Preprocessed Connectomes Project (PCP)</a>, eliminating the need for manual preprocessing.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Given the long runtime required to compute functional connectivity (FC) embeddings from raw fMRI data, this notebook omits that step and instead provides <strong>pre-computed embeddings</strong> via the <code class="docutils literal notranslate"><span class="pre">load_data</span></code> function, along with the associated atlas.</p>
+<p>For users interested in computing the ROI time series and FC embeddings from scratch, assuming preprocessed images are available, we recommend referring to the following tools and functions:</p>
+<ul>
+<li><p><a class="reference external" href="https://nilearn.github.io/stable/modules/generated/nilearn.maskers.NiftiLabelsMasker.html"><code class="docutils literal notranslate"><span class="pre">NiftiLabelsMasker</span></code></a>: For use with <strong>deterministic (3D)</strong> atlases.</p></li>
+<li><p><a class="reference external" href="https://nilearn.github.io/stable/modules/generated/nilearn.maskers.NiftiMapsMasker.html"><code class="docutils literal notranslate"><span class="pre">NiftiMapsMasker</span></code></a>: For use with <strong>probabilistic (4D)</strong> atlases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extract_functional_connectivity</span></code> function in <code class="docutils literal notranslate"><span class="pre">preprocess.py</span></code>: This function wraps <code class="docutils literal notranslate"><span class="pre">nilearn.connectome.ConnectivityMeasure</span></code> and supports composing multiple FC measures. For example, to compute a <strong>Tangent-Pearson</strong> embedding from a list of ROI time series, you can call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extract_functional_connectivity</span><span class="p">(</span><span class="n">time_series</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;tangent&quot;</span><span class="p">,</span> <span class="s2">&quot;pearson&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<section id="data-loading">
+<h3>🚚 Data Loading<a class="headerlink" href="#data-loading" title="Link to this heading">#</a></h3>
+<p>As mentioned earlier, we provide a <code class="docutils literal notranslate"><span class="pre">load_data</span></code> function to load <strong>pre-computed functional connectivity (FC)</strong> embeddings along with associated phenotypic information.<br />
+This function supports automated downloading via <a class="reference external" href="https://pypi.org/project/gdown/">gdown</a> by reading from manifest files if the data is not found locally.</p>
+<p>When using configuration files, remember that all parameter names must be specified in <strong>uppercase</strong> per <code class="docutils literal notranslate"><span class="pre">yacs</span></code> convention.</p>
+<p>The available argument we mainly focused on includes:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">data_dir</span></code></strong>: Local directory to store and load the dataset. If files are missing, they will be automatically downloaded.</p>
+<ul>
+<li><p><em>Default:</em> Current working directory + <code class="docutils literal notranslate"><span class="pre">/data</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">atlas</span></code></strong>: The name of the brain atlas used to extract ROI time series. This corresponds to a subfolder inside <code class="docutils literal notranslate"><span class="pre">fc/</span></code>.</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;aal&quot;</span></code>: AAL Atlas</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code>: Craddock 200 ROI Atlas</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;cc400&quot;</span></code>: Craddock 400 ROI Atlas</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;difumo64&quot;</span></code>: DiFuMo 64 components</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;dos160&quot;</span></code>: Dosenbach 160 Atlas</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;hcp-ica&quot;</span></code>: HCP ICA-based components</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ho&quot;</span></code>: Harvard-Oxford Atlas</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tt&quot;</span></code>: Talairach-Tournoux</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;cc200&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fc</span></code></strong>: The type of functional connectivity embedding to load (file name without extension).</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;pearson&quot;</span></code>: Pearson correlation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;partial&quot;</span></code>: Partial correlation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tangent&quot;</span></code>: Tangent embedding</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>: Precision (inverse covariance)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;covariance&quot;</span></code>: Sample covariance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tangent-pearson&quot;</span></code>: Hybrid of tangent embedding and Pearson correlation</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;tangent-pearson&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">top_k_sites</span></code></strong>: Optionally restrict the dataset to the top <em>K</em> sites (by number of subjects). If <code class="docutils literal notranslate"><span class="pre">None</span></code>, all sites are included.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>It returns four values, including:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fc_data</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>): Functional connectivity data (vectorized if <code class="docutils literal notranslate"><span class="pre">vectorize=True</span></code>).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">phenotypes</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>): Associated phenotypic information (e.g., site, age, gender).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rois</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>): ROI labels associated with the selected atlas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">coords</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>): ROI coordinates for visualization purposes.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+
+<span class="n">fc</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">,</span> <span class="n">rois</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">DATA_DIR</span><span class="p">,</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">ATLAS</span><span class="p">,</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">FC</span><span class="p">,</span>
+    <span class="n">top_k_sites</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">TOP_K_SITES</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>✔ File found: data/abide/fc/hcp-ica/tangent-pearson.npy
+✔ File found: data/abide/phenotypes.csv
+✔ Atlas folder found: data/atlas/deterministic/hcp-ica
+</pre></div>
+</div>
+</div>
+</div>
+<div class="exercise admonition" id="find-number-of-samples">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>How many samples are found in the sub-sampled ABIDE dataset?</p>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<ul class="simple">
+<li><p>In Python, the length of arrays like lists and tuples can be
+found using <code class="docutils literal notranslate"><span class="pre">len(array)</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">phenotypes</span></code> variable is an array containing the phenotypes
+describing the subjects.</p></li>
+</ul>
+</div>
+</section>
+</div>
+<p>To get a more visual overview on what FC represents and which parts of it we use for the features, we visualize the FC below using a heatmap.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_connectivity_matrix</span>
+
+<span class="n">sub_idx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sub_id</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">][</span><span class="s2">&quot;SUB_ID&quot;</span><span class="p">]</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Tangent-Pearson Connectivity for Subject </span><span class="si">{</span><span class="n">sub_id</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_connectivity_matrix</span><span class="p">(</span>
+    <span class="n">fc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">],</span> <span class="n">rois</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">annotate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;bwr&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/bbfc07ed0d6bc98aacecb5dddf4dc9da53e6a00f5f3e4e4fa43a03dd8d6ba743.png" src="../../_images/bbfc07ed0d6bc98aacecb5dddf4dc9da53e6a00f5f3e4e4fa43a03dd8d6ba743.png" />
+</div>
+</div>
+<p>The heatmap above displays the <strong>functional connectivity (FC) matrix</strong> for <strong>Subject 50003</strong>, computed using the <strong>Tangent-Pearson</strong> method. The matrix represents pairwise relationships between different brain regions of interest (ROIs) based on their time-series similarity.</p>
+<ul class="simple">
+<li><p><strong>Left panel – Full Connectivity Matrix</strong>:<br />
+A symmetric matrix where each entry represents the strength and direction of FC between two ROIs.</p>
+<ul>
+<li><p><strong>Red values</strong> indicate positive connectivity.</p></li>
+<li><p><strong>Blue values</strong> indicate negative connectivity.</p></li>
+<li><p>The matrix is symmetric because the connectivity from region A to B is equal to that from B to A.</p></li>
+</ul>
+</li>
+<li><p><strong>Right panel – Upper Triangle of the Matrix</strong>:<br />
+To avoid redundancy due to symmetry, only the <strong>upper triangular portion</strong> of the matrix (excluding the diagonal) is shown.<br />
+This representation is commonly used in machine learning pipelines to <strong>vectorize the FC matrix</strong> for classification or regression tasks, significantly reducing the number of features from <code class="docutils literal notranslate"><span class="pre">n*n</span></code> to <code class="docutils literal notranslate"><span class="pre">n*(n-1)/2</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of ROIs. However, the feature size increase will remain <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code> as the number of ROIs increases.</p></li>
+<li><p><strong>Colorbar</strong>:<br />
+Indicates the range of connectivity values, with stronger connections lying at the extremes of red and blue.</p></li>
+</ul>
+<p>This representation is widely used in neuroimaging studies for subject-level modeling, feature extraction, and biomarker discovery.</p>
+<div class="exercise admonition" id="find-roi-count">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>How many ROIs are defined in the FC matrix?</p>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<ul class="simple">
+<li><p>In Python, the length of arrays like lists and tuples can be
+found using <code class="docutils literal notranslate"><span class="pre">len(array)</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">rois</span></code> variable is an array containing the label for each
+available ROI.</p></li>
+</ul>
+</div>
+</section>
+</div>
+<p>Next, we want to inspect the phenotypic information provided in <strong>ABIDE dataset</strong>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">RANDOM_STATE</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SUB_ID</th>
+      <th>X</th>
+      <th>subject</th>
+      <th>SITE_ID</th>
+      <th>FILE_ID</th>
+      <th>DX_GROUP</th>
+      <th>DSM_IV_TR</th>
+      <th>AGE_AT_SCAN</th>
+      <th>SEX</th>
+      <th>HANDEDNESS_CATEGORY</th>
+      <th>...</th>
+      <th>qc_notes_rater_1</th>
+      <th>qc_anat_rater_2</th>
+      <th>qc_anat_notes_rater_2</th>
+      <th>qc_func_rater_2</th>
+      <th>qc_func_notes_rater_2</th>
+      <th>qc_anat_rater_3</th>
+      <th>qc_anat_notes_rater_3</th>
+      <th>qc_func_rater_3</th>
+      <th>qc_func_notes_rater_3</th>
+      <th>SUB_IN_SMP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>218</th>
+      <td>50302</td>
+      <td>226</td>
+      <td>50302</td>
+      <td>UM_1</td>
+      <td>UM_1_0050302</td>
+      <td>1</td>
+      <td>-9999</td>
+      <td>10.4000</td>
+      <td>2</td>
+      <td>R</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>373</th>
+      <td>50501</td>
+      <td>410</td>
+      <td>50501</td>
+      <td>USM</td>
+      <td>USM_0050501</td>
+      <td>1</td>
+      <td>1</td>
+      <td>17.7057</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>594</th>
+      <td>50954</td>
+      <td>646</td>
+      <td>50954</td>
+      <td>NYU</td>
+      <td>NYU_0050954</td>
+      <td>1</td>
+      <td>1</td>
+      <td>14.7500</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>931</th>
+      <td>51333</td>
+      <td>1003</td>
+      <td>51333</td>
+      <td>MAX_MUN</td>
+      <td>MaxMun_c_0051333</td>
+      <td>2</td>
+      <td>0</td>
+      <td>24.0000</td>
+      <td>1</td>
+      <td>R</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>maybe</td>
+      <td>ic-cerebellum</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>50017</td>
+      <td>16</td>
+      <td>50017</td>
+      <td>PITT</td>
+      <td>Pitt_0050017</td>
+      <td>1</td>
+      <td>1</td>
+      <td>22.7000</td>
+      <td>1</td>
+      <td>R</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>maybe</td>
+      <td>skull-striping fail</td>
+      <td>maybe</td>
+      <td>ic-cerebellum_temporal_lob</td>
+      <td>fail</td>
+      <td>noise</td>
+      <td>OK</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 104 columns</p>
+</div></div></div>
+</div>
+<p>As we can see, there is a wide range of phenotypic information available for each subject ranging from patient descriptors such as site (<code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code>), diagnostic group (<code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code>), and age at scan (<code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code>), to quality control metrics for individual scans (e.g., columns starting with <code class="docutils literal notranslate"><span class="pre">qc</span></code>).</p>
+<div class="exercise admonition" id="find-number-of-phenotypes">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>How many phenotypic variables are available in the ABIDE dataset?</p>
+</section>
+</div>
+<p>We also want to know how the phenotypes are distributed, we can visualize it with count and histogram plot for categorical and continuous variable respectively. Following Kunda et al. (2022), we mainly focused on the distribution of site, gender, handedness, eye status, age, and FIQ.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
+
+<span class="c1"># Prepare phenotypic values for plotting</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Site&quot;</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s2">&quot;SITE_ID&quot;</span><span class="p">],</span> <span class="s2">&quot;category&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Gender&quot;</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s2">&quot;SEX&quot;</span><span class="p">],</span> <span class="s2">&quot;category&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Handedness&quot;</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s2">&quot;HANDEDNESS_CATEGORY&quot;</span><span class="p">],</span> <span class="s2">&quot;category&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Eye Status&quot;</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s2">&quot;EYE_STATUS_AT_SCAN&quot;</span><span class="p">],</span> <span class="s2">&quot;category&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">],</span> <span class="s2">&quot;double&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;FIQ&quot;</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s2">&quot;FIQ&quot;</span><span class="p">],</span> <span class="s2">&quot;double&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="c1"># Plot phenotypic distribution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plot_phenotypic_distribution</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Phenotypic Distribution Before Preprocessing&quot;</span><span class="p">,</span>
+    <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/7f025fc074b03904cd9f8edb720c07dda0cd6818e5d0b11cdda4166ebe0b4d9b.png" src="../../_images/7f025fc074b03904cd9f8edb720c07dda0cd6818e5d0b11cdda4166ebe0b4d9b.png" />
+</div>
+</div>
+<p>Several important observations can be made:</p>
+<ul class="simple">
+<li><p><strong>📍 Site Distribution</strong>: The majority of subjects were collected at <strong>NYU</strong>, followed by <strong>UM_1</strong> and <strong>UCLA_1</strong>. Other sites like <strong>USM</strong>, <strong>PITT</strong>, and <strong>YALE</strong> have relatively fewer samples. This imbalance in sample size could bias model performance toward larger sites if not properly addressed through <strong>harmonization</strong> or <strong>site-stratified validation</strong>.</p></li>
+<li><p><strong>👫 Gender Distribution</strong>: Across nearly all sites, the dataset is <strong>male-dominated</strong> (<code class="docutils literal notranslate"><span class="pre">1</span></code> = male, <code class="docutils literal notranslate"><span class="pre">2</span></code> = female), a known characteristic of ABIDE. The <strong>underrepresentation of females</strong> could limit the generalizability of sex-related findings.</p></li>
+<li><p><strong>✋ Handedness Distribution</strong>: Most subjects are <strong>right-handed (<code class="docutils literal notranslate"><span class="pre">R</span></code>)</strong>, with smaller proportions of <strong>left-handed (<code class="docutils literal notranslate"><span class="pre">L</span></code>)</strong>, <strong>ambidextrous (<code class="docutils literal notranslate"><span class="pre">Ambi</span></code>)</strong>, and <strong>mixed</strong>. Notably, there is a <strong>substantial number of <code class="docutils literal notranslate"><span class="pre">-9999</span></code> entries</strong>, indicating <strong>missing or invalid data</strong>. This missingness is uneven across sites, potentially introducing site-specific biases.</p></li>
+<li><p><strong>👁️ Eye Status Distribution</strong>: Most scans were recorded with subjects’ <strong>eyes open (<code class="docutils literal notranslate"><span class="pre">1</span></code>)</strong>, though a non-negligible number had <strong>eyes closed (<code class="docutils literal notranslate"><span class="pre">2</span></code>)</strong>. The distribution is generally consistent across sites, with minimal missing data.</p></li>
+<li><p><strong>🎂 Age Distribution</strong>: The age of participants ranges from around <strong>5 to 55 years</strong>, with a strong skew toward younger subjects, especially between <strong>7 and 18 years old</strong>. This is typical of developmental neuroimaging datasets and emphasizes the need to <strong>control for age</strong> in modeling or analysis.</p></li>
+<li><p><strong>🧠 FIQ (Full-Scale IQ) Distribution</strong>: The FIQ distribution is <strong>severely distorted</strong> by missing or placeholder values (e.g., <strong><code class="docutils literal notranslate"><span class="pre">-9999</span></code></strong>). These dominate the histogram and create an artificial spike around zero. Valid FIQ values span a wide range but are sparsely distributed. <strong>Imputation or exclusion</strong> of these invalid entries is essential for any analysis involving IQ.</p></li>
+</ul>
+</section>
+<section id="data-preprocessing">
+<h3>🛠️ Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
+<p>Before modeling, we need to preprocess the phenotypic variables to ensure they are in a usable format. This includes handling missing values, encoding categorical variables, and optionally standardizing continuous ones.</p>
+<p><strong>Categorical Variables</strong></p>
+<p>The following categorical phenotypes are included and will be <strong>one-hot encoded</strong> for modeling:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SEX</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code></p></li>
+</ul>
+<p>These variables are first mapped to descriptive labels using the provided <code class="docutils literal notranslate"><span class="pre">MAPPING</span></code> dictionary:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SEX</span></code>: <code class="docutils literal notranslate"><span class="pre">{1</span> <span class="pre">→</span> <span class="pre">MALE,</span> <span class="pre">2</span> <span class="pre">→</span> <span class="pre">FEMALE}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>: Includes various representations unified into:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;RIGHT&quot;</span></code> (including missing values and <code class="docutils literal notranslate"><span class="pre">-9999</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;LEFT&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;AMBIDEXTROUS&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Mixed&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;L-&gt;R&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Ambi&quot;</span></code>)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code>: <code class="docutils literal notranslate"><span class="pre">{1</span> <span class="pre">→</span> <span class="pre">OPEN,</span> <span class="pre">2</span> <span class="pre">→</span> <span class="pre">CLOSED}</span></code></p></li>
+</ul>
+<p><strong>Continuous Variables</strong></p>
+<p>The following continuous phenotypes will be optionally <strong>standardized</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code></p></li>
+</ul>
+<p>We will explain the available options for standardizing these phenotypes in more detail down below.</p>
+<p><strong>Handling Missing Values</strong></p>
+<p>Missing values are handled with the following assumptions and imputation strategies:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>: Missing entries (<code class="docutils literal notranslate"><span class="pre">-9999</span></code> or <code class="docutils literal notranslate"><span class="pre">NaN</span></code>) are imputed as <code class="docutils literal notranslate"><span class="pre">&quot;RIGHT&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code>: Missing scores (<code class="docutils literal notranslate"><span class="pre">-9999</span></code>) are imputed with a default value of <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
+</ul>
+<p>These choices ensure that the downstream models can operate without interruption while maintaining reasonable assumptions based on domain knowledge.</p>
+<p><strong>Target Variable Encoding</strong></p>
+<p>The diagnostic group <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code> is used to define the target label for classification:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> → <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ASD</span></code> → <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
+<p>This binary label is suitable for supervised learning tasks focused on ASD detection.</p>
+<p>To do this, the <code class="docutils literal notranslate"><span class="pre">preprocess_phenotypic_data</span></code> function handles this functionality for us.
+The main arguments for <code class="docutils literal notranslate"><span class="pre">preprocess_phenotypic_data</span></code> include:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">data</span></code></strong>:<br />
+A DataFrame containing the phenotypic information for each subject. Must include all selected phenotypes such as <code class="docutils literal notranslate"><span class="pre">SEX</span></code>, <code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code>, <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>, <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>, <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code>, and <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code>.</p>
+<ul>
+<li><p><em>Type:</em> <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(n_subjects,</span> <span class="pre">n_phenotypes)</span></code></p></li>
+<li><p><em>Required</em></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">standardize</span></code></strong>:<br />
+Whether to standardize continuous variables (<code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code> and <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>). This helps remove scale-related bias before modeling.</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: No standardization (raw values retained)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code>: Standardize across all subjects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;site&quot;</span></code>: Standardize within each acquisition site</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">one_hot_encode</span></code></strong>:<br />
+Whether to one-hot encode categorical variables (<code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">SEX</span></code>, <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>, <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code>). This is typically used when feeding the data into machine learning models.</p>
+<ul>
+<li><p><em>Type:</em> <code class="docutils literal notranslate"><span class="pre">bool</span></code></p></li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>The function returns the following:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">labels</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">array-like</span></code>):<br />
+The encoded diagnostic labels derived from <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code>.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: CONTROL</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: ASD</p></li>
+<li><p><em>Shape:</em> <code class="docutils literal notranslate"><span class="pre">(n_subjects,)</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sites</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">array-like</span></code>):<br />
+Site identifiers corresponding to each subject, useful for site-wise stratification or harmonization.</p>
+<ul>
+<li><p><em>Shape:</em> <code class="docutils literal notranslate"><span class="pre">(n_subjects,)</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">phenotypes</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>):<br />
+The cleaned and processed phenotype DataFrame with missing values imputed, categorical variables mapped (and optionally one-hot encoded), and continuous variables optionally standardized.</p>
+<ul>
+<li><p><em>Shape:</em> <code class="docutils literal notranslate"><span class="pre">(n_subjects,</span> <span class="pre">n_selected_phenotypes)</span></code></p></li>
+<li><p><em>Note:</em> The selected phenotypes include:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SEX</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_phenotypic_data</span>
+
+<span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">preprocess_phenotypic_data</span><span class="p">(</span>
+    <span class="n">phenotypes</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">PHENOTYPE</span><span class="o">.</span><span class="n">STANDARDIZE</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After preprocessing, we want to observe how the encoding, imputation, and standardization affected the phenotypes.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">RANDOM_STATE</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AGE_AT_SCAN</th>
+      <th>FIQ</th>
+      <th>SITE_ID_KKI</th>
+      <th>SITE_ID_MAX_MUN</th>
+      <th>SITE_ID_NYU</th>
+      <th>SITE_ID_PITT</th>
+      <th>SITE_ID_STANFORD</th>
+      <th>SITE_ID_TRINITY</th>
+      <th>SITE_ID_UCLA_1</th>
+      <th>SITE_ID_UM_1</th>
+      <th>SITE_ID_USM</th>
+      <th>SITE_ID_YALE</th>
+      <th>SEX_FEMALE</th>
+      <th>SEX_MALE</th>
+      <th>HANDEDNESS_CATEGORY_AMBIDEXTROUS</th>
+      <th>HANDEDNESS_CATEGORY_LEFT</th>
+      <th>HANDEDNESS_CATEGORY_RIGHT</th>
+      <th>EYE_STATUS_AT_SCAN_CLOSED</th>
+      <th>EYE_STATUS_AT_SCAN_OPEN</th>
+    </tr>
+    <tr>
+      <th>SUB_ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>50302</th>
+      <td>-1.046379</td>
+      <td>-0.566951</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>50501</th>
+      <td>-0.602117</td>
+      <td>-1.553855</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>50954</th>
+      <td>-0.078069</td>
+      <td>-2.174853</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>51333</th>
+      <td>-0.111109</td>
+      <td>-0.991772</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>50017</th>
+      <td>0.546855</td>
+      <td>-1.911015</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can see that the number of phenotypes are now reduced, the continuous and categorical variables are now standardized and one-hot encoded respectively.</p>
+<div class="exercise admonition" id="find-number-of-phenotypes-after-preprocess">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>How many phenotypes are there once we have preprocessed the phenotypes?</p>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<ul class="simple">
+<li><p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, executing <code class="docutils literal notranslate"><span class="pre">pd.DataFrame.shape</span></code> outputs a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> containing
+<code class="docutils literal notranslate"><span class="pre">(num_rows,</span> <span class="pre">num_columns)</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">phenotypes</span></code> variable is a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> type.</p></li>
+</ul>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="understanding-one-hot-encoding">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>We have seen the preprocessed phenotypes and noted that the categorical
+variables have been one-hot-encoded.</p>
+<p>Given your observation, what does one-hot encoding do to the categorical variables?</p>
+</section>
+</div>
+<p>We also want to check how the phenotypes are distributed after we preprocess it.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
+
+
+<span class="c1"># Mapping from column names to readable labels</span>
+<span class="n">MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;SEX&quot;</span><span class="p">:</span> <span class="s2">&quot;Gender&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HANDEDNESS_CATEGORY&quot;</span><span class="p">:</span> <span class="s2">&quot;Handedness&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EYE_STATUS_AT_SCAN&quot;</span><span class="p">:</span> <span class="s2">&quot;Eye Status&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SITE_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;Site&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">:</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FIQ&quot;</span><span class="p">:</span> <span class="s2">&quot;FIQ&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># Initialize list with site information</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Site&quot;</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">)]</span>
+
+<span class="c1"># Iterate over relevant phenotype variables</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">MAPPING</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;SITE_ID&quot;</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># Direct numeric columns</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;AGE_AT_SCAN&quot;</span><span class="p">,</span> <span class="s2">&quot;FIQ&quot;</span><span class="p">]:</span>
+        <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="s2">&quot;double&quot;</span><span class="p">))</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># One-hot encoded categorical variables</span>
+    <span class="n">one_hot_cols</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">one_hot_cols</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># Decode one-hot encoding by extracting the max value index</span>
+    <span class="n">decoded</span> <span class="o">=</span> <span class="n">one_hot_cols</span><span class="o">.</span><span class="n">idxmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="n">decoded</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">))</span>
+
+<span class="c1"># Plot the distributions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plot_phenotypic_distribution</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">values</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Phenotypic Distribution After Preprocessing&quot;</span><span class="p">,</span>
+    <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/c43b5db465672793ce10931a70ce3175bccb2bed491188e94b0839b7d3404252.png" src="../../_images/c43b5db465672793ce10931a70ce3175bccb2bed491188e94b0839b7d3404252.png" />
+</div>
+</div>
+<p>We can see that we can interpret the phenotypes much clearer now, as we can infer that:</p>
+<ul class="simple">
+<li><p><strong>📍 Site Distribution</strong>: The overall site imbalance remains, with <strong>NYU</strong> contributing the largest number of subjects, followed by <strong>UM_1</strong> and <strong>UCLA_1</strong>. The relative proportions of samples from each site are largely preserved, but absolute counts are reduced compared to the raw dataset.</p></li>
+<li><p><strong>👫 Gender Distribution</strong>: The gender imbalance persists post-preprocessing, with <strong>male subjects still forming the majority</strong> at each site. While the reduction in sample size is visible, the male-to-female ratio remains comparable to the original.</p></li>
+<li><p><strong>✋ Handedness Distribution</strong>: The preprocessing step appears to have <strong>removed most invalid or missing values</strong>, particularly entries like <code class="docutils literal notranslate"><span class="pre">-9999</span></code>. The dataset now primarily includes <strong>right-handed</strong> subjects, with a small proportion of <strong>left-handed</strong> and <strong>ambidextrous</strong> individuals. This results in a cleaner handedness distribution.</p></li>
+<li><p><strong>👁️ Eye Status Distribution</strong>: The <strong>eye status remains consistent</strong>, with most subjects scanned with <strong>eyes open</strong>. Very few entries are labeled with <strong>eyes closed</strong>, and no missing values are apparent, suggesting good data completeness for this variable.</p></li>
+<li><p><strong>🎂 Age Distribution</strong>: Age values have been <strong>normalized</strong>, and the distribution now appears centered around zero (z-scored). The skew toward younger participants is still present, but more subtle. This normalization facilitates fair comparison across sites and removes scale bias in modeling.</p></li>
+<li><p><strong>🧠 FIQ (Full-Scale IQ) Distribution</strong>: Similar to age, FIQ has been <strong>standardized</strong>, producing a roughly normal distribution across sites. The spike of invalid values (<code class="docutils literal notranslate"><span class="pre">-9999</span></code>) observed in the raw data has been eliminated, indicating effective handling of missing or outlier values during preprocessing. This cleaner distribution is more suitable for downstream statistical analysis and machine learning models.</p></li>
+</ul>
+</section>
+</section>
+<section id="model-definition">
+<h2>🧶 Model Definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h2>
+<p><strong>PyKale</strong> provides flexible pipelines for modeling interdisciplinary problems. In our case, the primary objective is to develop a <strong>robust yet interpretable model</strong> capable of effectively integrating multi-site data.</p>
+<p>We leverage the <code class="docutils literal notranslate"><span class="pre">kale.pipeline.multi_domain_adapter.AutoMIDAClassificationTrainer</span></code> (or simply <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>), which encapsulates the domain adaptation method <a class="reference external" href="https://ieeexplore.ieee.org/document/7815350"><strong>Maximum Independence Domain Adaptation (MIDA)</strong></a>. This trainer integrates domain adaptation with classification by allowing the user to specify any <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>-compatible linear classifier for prediction, offering a convenient way to construct powerful and flexible pipelines.</p>
+<p>In the following sections, we first describe the <strong>cross-validation split</strong> strategy used in this tutorial, followed by an explanation of the <strong>embedding extraction</strong> and <strong>prediction</strong> methods.</p>
+<section id="cross-validation-split">
+<h3>🤼 Cross-Validation Split<a class="headerlink" href="#cross-validation-split" title="Link to this heading">#</a></h3>
+<p>The choice of cross-validation strategy can significantly impact how can we evaluate of a model’s robustness and generalizability, especially when dealing with multi-site or grouped data.</p>
+<figure class="align-default" id="id3">
+<img alt="../../_images/split-comparison.png" src="../../_images/split-comparison.png" />
+<figcaption>
+<p><span class="caption-text">Illustrative comparison between n-repeated stratified k-fold and leave p-groups out</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition-legend-description admonition">
+<p class="admonition-title">Legend Description</p>
+<ul class="simple">
+<li><p>White boxes: Training samples</p></li>
+<li><p>Colored boxes: Test samples (color indicates group)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code> / <code class="docutils literal notranslate"><span class="pre">−</span></code>: Binary class labels</p></li>
+<li><p>Group 1 (red), Group 2 (blue), Group 3 (yellow)</p></li>
+</ul>
+</div>
+<p>The figure above compares two common validation strategies which we will consider for this tutorial:</p>
+<ul class="simple">
+<li><p><strong>n-Repeated Stratified k-Fold (SKF)</strong>:<br />
+This method ensures that each fold maintains the original label distribution (e.g., equal proportion of <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">−</span></code> classes). However, it does <strong>not</strong> guarantee that data from the same group (e.g., site, subject, scanner) are kept together, potentially leading to data leakage if the same group appears in both train and test splits.</p></li>
+<li><p><strong>Leave p-Groups Out (LPGO)</strong>:<br />
+This method preserves the <strong>group structure</strong> by leaving out entire groups during each iteration. It is particularly suited for evaluating generalization to unseen sites or subjects, as it avoids group leakage. However, it may result in imbalanced label distributions in each fold.</p></li>
+</ul>
+<p>Each method serves a different purpose: stratified k-fold is ideal when label balance is critical, while leave-p-groups-out is better for assessing model robustness under domain shift or site variability. Realistically, LPGO is preferable given real data will most likely not have the same distribution as a model’s training data.</p>
+<div class="exercise admonition" id="find-total-models-produced">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Consider we evaluate a model using SKF with two repetition and five folds or LPGO with ten groups with one group left out for testing, we will need to train a total of ten models. If we evaluate a model using:</p>
+<ul class="simple">
+<li><p>SKF with five repetition and ten folds</p></li>
+<li><p>LPGO with five groups and two groups left out for testing</p></li>
+</ul>
+<p>How many models we have to train for each cases?</p>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For LPGO, given <code class="docutils literal notranslate"><span class="pre">m</span></code> total groups and <code class="docutils literal notranslate"><span class="pre">p</span></code> left out groups, consider it as a combinatorial problem.</p>
+</div>
+</section>
+</div>
+<p>In this tutorial, we specify the following arguments for cross-validation:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">split</span></code></strong>: Defines the cross-validation strategy.</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code>: Stratified K-fold to maintain label balance in each fold.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;lpgo&quot;</span></code>: Leave p-groups out to evaluate generalization across sites by holding out entire groups (e.g., imaging sites).</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_folds</span></code></strong>: The number of folds for <code class="docutils literal notranslate"><span class="pre">&quot;skf&quot;</span></code> or the number of groups to leave out in <code class="docutils literal notranslate"><span class="pre">&quot;lpgo&quot;</span></code>.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">10</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_repeats</span></code></strong>: The number of times the k-fold procedure is repeated to obtain more stable estimates (ignored with <code class="docutils literal notranslate"><span class="pre">&quot;lpgo&quot;</span></code>).</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">5</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">random_state</span></code></strong>: Seed for random number generators for reproducibility.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeavePGroupsOut</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
+
+<span class="c1"># Define the default cross-validation strategy:</span>
+<span class="c1"># Repeated stratified k-fold maintains class distribution across folds and supports multiple repetitions</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span>
+    <span class="c1"># Number of stratified folds</span>
+    <span class="n">n_splits</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">CROSS_VALIDATION</span><span class="o">.</span><span class="n">NUM_FOLDS</span><span class="p">,</span>
+    <span class="c1"># Number of repeat rounds</span>
+    <span class="n">n_repeats</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">CROSS_VALIDATION</span><span class="o">.</span><span class="n">NUM_REPEATS</span><span class="p">,</span>
+    <span class="c1"># Ensures reproducibility, intentionally set to the seed to have the same splits across runs</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">RANDOM_STATE</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Override with leave-p-proups-out if specified</span>
+<span class="c1"># This strategy holds out `p` unique groups (e.g., sites) per fold, enabling group-level generalization</span>
+<span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">CROSS_VALIDATION</span><span class="o">.</span><span class="n">SPLIT</span> <span class="o">==</span> <span class="s2">&quot;lpgo&quot;</span><span class="p">:</span>
+    <span class="c1"># Use group-based CV for domain adaptation or site bias evaluation</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">LeavePGroupsOut</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">CROSS_VALIDATION</span><span class="o">.</span><span class="n">NUM_FOLDS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="embedding-extraction">
+<h3>📥 Embedding Extraction<a class="headerlink" href="#embedding-extraction" title="Link to this heading">#</a></h3>
+<p><strong>Domain adaptation</strong> aims to reduce distributional discrepancies between datasets collected under different conditions (e.g., sites, scanners, protocols). This helps ensure that the learned representations generalize across domains.</p>
+<p><strong>MIDA</strong> was originally proposed by <a class="reference external" href="https://ieeexplore.ieee.org/document/7815350">Yan et al. (2017)</a> in <em>IEEE Transactions on Cybernetics</em> to reduce time-varying drift in sensors, using domain features such as device label and acquisition time.</p>
+<p>Kunda et al. (2022) extended MIDA for neuroimaging studies, enabling multi-domain adaptation for <strong>multi-site data integration</strong>.</p>
+<p>PyKale includes a <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>-style implementation of MIDA in <code class="docutils literal notranslate"><span class="pre">kale.embed.factorization.MIDA</span></code>, adopting a similar interface to <code class="docutils literal notranslate"><span class="pre">KernelPCA</span></code> to ensure interoperability, extensive customization, and ease of use.</p>
+</section>
+<section id="prediction-methods">
+<h3>📡 Prediction Methods<a class="headerlink" href="#prediction-methods" title="Link to this heading">#</a></h3>
+<p>To maintain compatibility and user-friendliness, PyKale supports <strong>linear classifiers</strong> from <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, including:</p>
+<ul class="simple">
+<li><p><strong>Logistic Regression (LR)</strong></p></li>
+<li><p><strong>Support Vector Machines (SVM)</strong></p></li>
+<li><p><strong>Ridge Classifier (Ridge)</strong></p></li>
+</ul>
+<p>These models can be selected easily by passing the appropriate string identifier, streamlining experimentation with different classifiers.</p>
+<p>Linear classifiers are particularly suitable in this context due to their <strong>inherent interpretability</strong>. Its coefficients can be directly inspected to understand the contribution of each feature to the prediction.</p>
+</section>
+<section id="baseline-and-proposed-model">
+<h3>🏎️ Baseline and Proposed Model<a class="headerlink" href="#baseline-and-proposed-model" title="Link to this heading">#</a></h3>
+<p>We define several model configurations used for classification. Each model shares the same base classifier but differs in how domain adaptation is applied:</p>
+<ul class="simple">
+<li><p><strong>Baseline</strong>: A standard model trained directly on functional connectivity features without domain adaptation.</p></li>
+<li><p><strong>Site Only</strong>: A domain-adapted model that uses site labels as the adaptation factor to reduce site-specific bias.</p></li>
+<li><p><strong>All Phenotypes</strong>: An extended domain-adapted model that incorporates multiple phenotypic variables (e.g., age, sex, handedness) to further reduce inter-site variability.</p></li>
+</ul>
+<p>We also specify the hyperparameter search strategy and other training parameters for each configuration, including:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">classifier</span></code></strong>: The base model used for classification.</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;lda&quot;</span></code>: Linear Discriminant Analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;lr&quot;</span></code>: Logistic Regression</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;linear_svm&quot;</span></code>: Linear Support Vector Machine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;svm&quot;</span></code>: Kernel Support Vector Machine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ridge&quot;</span></code>: Ridge Classifier (L2-regularized linear model)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code>: Automatically selects an appropriate model based on data characteristics.</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;lr&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">param_grid</span></code></strong>: The hyperparameter grid used for both the classifier and the MIDA domain adapter.</p>
+<ul>
+<li><p>To specify MIDA’s parameters, each key in the grid must be prefixed with <code class="docutils literal notranslate"><span class="pre">domain_adapter__</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">domain_adapter__mu</span></code>).</p></li>
+<li><p>For classifier parameters, no prefix is needed.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">param_grid</span></code> is set to <code class="docutils literal notranslate"><span class="pre">None</span></code>, PyKale will use its default grid, which spans a broad hyperparameter search space. While this may maximize performance, it significantly increases training time.</p></li>
+<li><p>Therefore, it is <strong>not recommended</strong> to use <code class="docutils literal notranslate"><span class="pre">param_grid=None</span></code> in combination with <code class="docutils literal notranslate"><span class="pre">search_strategy='grid'</span></code>.</p></li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">nonlinear</span></code></strong>: Whether to apply non-linear transformations (non-interpretable).</p>
+<ul>
+<li><p><em>Type:</em> <code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">search_strategy</span></code></strong>: The hyperparameter search method.</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code>: Randomly search over finite iterations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;grid&quot;</span></code>: Search over all possible combinations.</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;random&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_search_iterations</span></code></strong>: The number of hyperparameter combinations to evaluate in randomized search.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1,000</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_solver_iterations</span></code></strong>: The maximum number of iterations allowed for solver convergence.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1,000,000</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">scoring</span></code></strong>: A list of performance metrics used during cross-validation.</p>
+<ul>
+<li><p>Available options:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code>: Accuracy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>: Precision</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;recall&quot;</span></code>: Recall</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;f1&quot;</span></code>: F1-Score</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;roc_auc&quot;</span></code>: Area Under ROC Curve (AUROC)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;matthews_corrcoef&quot;</span></code>: Matthews Correlation Coefficient (MCC)</p></li>
+</ul>
+</li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">[&quot;accuracy&quot;,</span> <span class="pre">&quot;roc_auc&quot;]</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">refit</span></code></strong>: The metric used to refit the best model after hyperparameter tuning.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">num_jobs</span></code></strong>: The number of CPU cores used for training and hyperparameter search.</p>
+<ul>
+<li><p>Set to <code class="docutils literal notranslate"><span class="pre">k</span></code> to use <code class="docutils literal notranslate"><span class="pre">k</span></code> CPU cores, <code class="docutils literal notranslate"><span class="pre">-1</span></code> for all CPU cores, <code class="docutils literal notranslate"><span class="pre">-k</span></code> for all but <code class="docutils literal notranslate"><span class="pre">k</span></code> CPU cores.</p></li>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pre_dispatch</span></code></strong>: Controls job pre-dispatching for parallel execution.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">&quot;2*n_jobs&quot;</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">verbose</span></code></strong>: Controls verbosity of training output.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+</ul>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">random_state</span></code></strong>: Seed for random number generators for reproducibility.</p>
+<ul>
+<li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multi_domain_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_param_grid</span>
+
+<span class="c1"># Configuration with cv and random_state/seed included</span>
+<span class="n">trainer_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;PARAM_GRID&quot;</span><span class="p">}</span>
+<span class="n">trainer_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">trainer_cfg</span><span class="p">,</span> <span class="s2">&quot;cv&quot;</span><span class="p">:</span> <span class="n">cv</span><span class="p">,</span> <span class="s2">&quot;random_state&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">RANDOM_STATE</span><span class="p">}</span>
+
+<span class="c1"># Initialize dictionary for different trainers</span>
+<span class="n">trainers</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Create a baseline trainer without domain adaptation (MIDA disabled)</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="n">parse_param_grid</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">PARAM_GRID</span><span class="p">,</span> <span class="s2">&quot;domain_adapter&quot;</span><span class="p">)</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;baseline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">use_mida</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">param_grid</span><span class="p">,</span> <span class="o">**</span><span class="n">trainer_cfg</span><span class="p">)</span>
+
+<span class="c1"># Create a trainer with MIDA enabled, using site labels as domain adaptation factors</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="n">parse_param_grid</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">PARAM_GRID</span><span class="p">)</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;site_only&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">use_mida</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">trainer_cfg</span><span class="p">)</span>
+
+<span class="c1"># Clone the &#39;site_only&#39; trainer to create &#39;all_phenotypes&#39; trainer</span>
+<span class="c1"># This enables reusing the same training configuration, while modifying only the input domain factors</span>
+<span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;all_phenotypes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">trainers</span><span class="p">[</span><span class="s2">&quot;site_only&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="model-training">
+<h2>🏃 Model Training<a class="headerlink" href="#model-training" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> automatically handles model training and hyperparameter tuning based on the specified cross-validation strategy. To initiate training, simply call the <code class="docutils literal notranslate"><span class="pre">fit(...)</span></code> method, which accepts the following arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: The input features used for training and tuning the model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: The target labels corresponding to each sample.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">groups</span></code>: Group identifiers for each sample, used specifically in group-aware cross-validation methods such as Leave-p-Groups-Out (LPGO).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group_labels</span></code>: Additional metadata or domain features describing each sample (e.g., phenotypes, one-hot encoded site indicators) used by the domain adaptation method.</p></li>
+</ul>
+<p>This interface allows seamless integration of domain information and supports robust validation across multi-site datasets.</p>
+<p>As noted earlier, we evaluate three model variants:</p>
+<ul class="simple">
+<li><p>For the <strong>baseline</strong> model, no additional <code class="docutils literal notranslate"><span class="pre">group_labels</span></code> are required, as domain adaptation is not applied.</p></li>
+<li><p>The <strong>site only</strong> and <strong>all phenotypes</strong> models <strong>do require</strong> <code class="docutils literal notranslate"><span class="pre">group_labels</span></code> to be specified in order to enable domain adaptation using site or phenotypic information.</p></li>
+</ul>
+<p>Given that we have already preprocessed the phenotypic data and extracted site labels, we can pass the appropriate <code class="docutils literal notranslate"><span class="pre">group_labels</span></code> during training:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">sites</span></code> for the <strong>site only</strong> model.</p></li>
+<li><p>Use the full <code class="docutils literal notranslate"><span class="pre">phenotypes</span></code> data (including one-hot encoded site and demographic features) for the <strong>all phenotypes</strong> model.</p></li>
+</ul>
+<p>This demonstrates that the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> provides flexible control over the use of <strong>MIDA</strong>, allowing users to choose whether or not to incorporate domain adaptation based on the available metadata and the specific goals of their analysis.</p>
+<p><em><strong>Estimated Runtime in Google Colab</strong></em>: 18-25 minutes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1"># Define common training arguments for all models: features (X), labels (y), and group info (sites)</span>
+<span class="n">fit_args</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">fc</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">sites</span><span class="p">}</span>
+
+<span class="n">cv_results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">(</span><span class="n">pbar</span> <span class="o">:=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">trainers</span><span class="p">)):</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">fit_args</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;site_only&quot;</span><span class="p">:</span>
+        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;group_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sites</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s2">&quot;all_phenotypes&quot;</span><span class="p">:</span>
+        <span class="n">args</span><span class="p">[</span><span class="s2">&quot;group_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span>
+
+    <span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fitting </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> model&quot;</span><span class="p">)</span>
+    <span class="n">trainers</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">cv_results</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trainers</span><span class="p">[</span><span class="n">model</span><span class="p">]</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████| 3/3 [00:59&lt;00:00, 19.98s/it]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once the models are simultaneously trained and tuned, the cross-validation results are stored in the <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> attribute. These results are automatically sorted according to the metric specified in the <code class="docutils literal notranslate"><span class="pre">refit</span></code> argument.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> object contains comprehensive information, including:</p>
+<ul class="simple">
+<li><p>The hyperparameter configurations explored during tuning.</p></li>
+<li><p>Performance scores for each split.</p></li>
+<li><p>Aggregated statistics such as the mean and standard deviation across folds.</p></li>
+</ul>
+<p>This allows for detailed inspection and comparison of model performance across different hyperparameter settings.</p>
+<p>If we are only interested in a single evaluation metric, we can use the <code class="docutils literal notranslate"><span class="pre">best_score_</span></code> attribute to retrieve the best average performance across all splits based on that metric.</p>
+<p>To facilitate comparison across models, we aggregate each model’s <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> into a <code class="docutils literal notranslate"><span class="pre">dict</span></code> of <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> objects. These can then be compiled into a summary table that highlights the best-tuned performance for each of the three evaluated models.</p>
+<div class="exercise admonition" id="find-the-aggregate-in-cv-results">
+
+<p class="admonition-title"></p>
+<section id="exercise-content">
+<p>Can you mention what are the available aggregates for each metrics found in <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code>?</p>
+<div class="dropdown admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can inspect <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> or <code class="docutils literal notranslate"><span class="pre">cv_results[model]</span></code> just like <code class="docutils literal notranslate"><span class="pre">phenotypes</span></code>.</p>
+</div>
+</section>
+</div>
+</section>
+<section id="evaluation">
+<h2>📈 Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
+<p>After training and tuning the models, we evaluate the performance of the three model configurations using <strong>accuracy</strong> as the primary metric for comparison.</p>
+<p>We compile the top-performing scores from cross-validation for each model, allowing us to assess the effectiveness of different domain adaptation strategies. By comparing models with and without domain adaptation, we can examine the impact of incorporating <strong>site</strong> and <strong>phenotypic</strong> information on multi-site autism classification performance.</p>
+<p>This can be done using the <code class="docutils literal notranslate"><span class="pre">compile_results</span></code> function, which summarizes cross-validation outputs into a clean and comparable format. The function accepts the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cv_results</span></code>: A dictionary that maps model names (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Baseline&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Site</span> <span class="pre">Only&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;All</span> <span class="pre">Phenotypes&quot;</span></code>) to their cross-validation results. These can either be <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> objects or nested dictionaries with performance scores.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sort_by</span></code>: The metric used to select the best-performing configuration for each model. Supported metrics include <code class="docutils literal notranslate"><span class="pre">&quot;accuracy&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;precision&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;recall&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;f1&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;roc_auc&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;matthews_corrcoef&quot;</span></code>.</p></li>
+</ul>
+<p>It returns a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> where each row corresponds to a model, and each column shows the formatted score (e.g., <code class="docutils literal notranslate"><span class="pre">mean</span> <span class="pre">±</span> <span class="pre">std</span></code>) for the selected metric.</p>
+<p>This analysis highlights which configurations generalize best across heterogeneous imaging sites.</p>
+<p>In addition, we report performance from an experiment using <strong>2-repeated stratified 5-fold cross-validation</strong>, which can be run by loading the configuration file at <code class="docutils literal notranslate"><span class="pre">experiments/skf/base.yml</span></code>. As expected, the performance differences are less pronounced in this setting. This is likely because blending data from different sites maintains label distribution but does <strong>not</strong> reflect a realistic evaluation of generalization under domain shift, a scenario encountered when deploying models to unseen sites.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Model</p></th>
+<th class="head text-center"><p>Accuracy</p></th>
+<th class="head text-center"><p>AUROC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Baseline</strong></p></td>
+<td class="text-center"><p>0.6711 ± 0.0330</p></td>
+<td class="text-center"><p>0.7295 ± 0.0238</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Site Only</strong></p></td>
+<td class="text-center"><p>0.6877 ± 0.0357</p></td>
+<td class="text-center"><p>0.7372 ± 0.0228</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>All Phenotypes</strong></p></td>
+<td class="text-center"><p>0.6849 ± 0.0314</p></td>
+<td class="text-center"><p>0.7396 ± 0.0215</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The key question now is: <strong>Does domain adaptation actually improve predictive performance under a leave-one-group-out setting, where generalization to unseen sites is critical?</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_results</span>
+
+<span class="c1"># Compile the cross-validation results into a summary table,</span>
+<span class="c1"># sorting by the model with the highest test accuracy across CV folds</span>
+<span class="n">compiled_results</span> <span class="o">=</span> <span class="n">compile_results</span><span class="p">(</span><span class="n">cv_results</span><span class="p">,</span> <span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display the compiled results DataFrame (models as rows, metrics as formatted strings)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">compiled_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Accuracy</th>
+      <th>AUROC</th>
+    </tr>
+    <tr>
+      <th>Model</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Baseline</th>
+      <td>0.6678 ± 0.0982</td>
+      <td>0.7152 ± 0.0883</td>
+    </tr>
+    <tr>
+      <th>Site Only</th>
+      <td>0.6960 ± 0.0884</td>
+      <td>0.7233 ± 0.0925</td>
+    </tr>
+    <tr>
+      <th>All Phenotypes</th>
+      <td>0.6902 ± 0.0948</td>
+      <td>0.7241 ± 0.0884</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Turns out, domain adaptation indeed helps when evaluated under the <strong>leave-one-group-out (LPGO)</strong> setting.</p>
+<p>We observe a consistent performance improvement when incorporating site and phenotypic information:</p>
+<ul class="simple">
+<li><p>The <strong>Site Only</strong> model achieves the highest accuracy and AUROC, indicating that accounting for site differences is beneficial for generalization.</p></li>
+<li><p>The <strong>All Phenotypes</strong> model also outperforms the <strong>Baseline</strong>, suggesting that additional phenotypic features contribute useful domain information, although the marginal gain over site alone is smaller.</p></li>
+<li><p>The <strong>Baseline</strong> model, which does not use domain adaptation, performs worst, highlighting the challenge of multi-site variability when no adaptation is applied.</p></li>
+</ul>
+<p>These results demonstrate the effectiveness of domain adaptation in improving model generalization across imaging sites, especially in scenarios where each site may exhibit different data distributions.</p>
+</section>
+<section id="interpretation">
+<h2>🕶️ Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h2>
+<p>We interpret the trained models by analyzing the learned weights associated with functional connectivity features. Specifically, we extract the top-weighted ROI pairs that contribute most to the classification decision.</p>
+<p>These weights are visualized using a <strong>connectome plot</strong>, which helps reveal the brain region interactions that are most informative for distinguishing individuals with autism from neurotypical controls. This enhances the <strong>interpretability</strong> of the model and may offer insights into <strong>neurobiological patterns</strong> relevant to autism.</p>
+<p>To support this, <strong>PyKale</strong> extends <code class="docutils literal notranslate"><span class="pre">nilearn</span></code>’s <code class="docutils literal notranslate"><span class="pre">plot_connectome</span></code> through the utility <code class="docutils literal notranslate"><span class="pre">kale.interpret.visualize.visualize_connectome</span></code>. This enhanced version improves interpretability by:</p>
+<ul class="simple">
+<li><p>Adding annotations for each ROI.</p></li>
+<li><p>Visualizing only the top-weighted connections between regions, making the plot more focused and informative.</p></li>
+</ul>
+<p>This visualization aids both in model transparency and in deriving neuroscientific interpretations from machine learning outputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.interpret.visualize</span><span class="w"> </span><span class="kn">import</span> <span class="n">visualize_connectome</span>
+
+<span class="c1"># Fetch model with best performance</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">cv_results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">trainers</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+<span class="c1"># Fetch coefficients to visualize feature importance</span>
+<span class="n">coef</span> <span class="o">=</span> <span class="n">trainers</span><span class="p">[</span><span class="n">best_model</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="c1"># check if coef != features, assumes augmented features with phenotypes/sites</span>
+<span class="k">if</span> <span class="n">coef</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">fc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="n">coef</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="p">[</span><span class="n">fc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># Visualize the coefficients as a connectome plot</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">visualize_connectome</span><span class="p">(</span>
+    <span class="n">coef</span><span class="p">,</span>
+    <span class="n">rois</span><span class="p">,</span>
+    <span class="n">coords</span><span class="p">,</span>
+    <span class="mf">1.5</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># Take top 1.5% of connections</span>
+    <span class="n">legend_params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">3.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">),</span>  <span class="c1"># Align legend outside the plot</span>
+        <span class="s2">&quot;ncol&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="c1"># Display the resulting connectome plot</span>
+<span class="n">display</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x7d009f7d2770&gt;
+</pre></div>
+</div>
+<img alt="../../_images/8f90cd524b453221b5f44bd75ee74e1d41c032b0de749fc0577af87b7295a02c.png" src="../../_images/8f90cd524b453221b5f44bd75ee74e1d41c032b0de749fc0577af87b7295a02c.png" />
+</div>
+</div>
+<p>The figure illustrates the <strong>most discriminative ROI-to-ROI functional connections</strong> that differentiate <strong>Autism Spectrum Disorder (ASD)</strong> participants from <strong>Controls</strong>, based on group-level functional connectivity analysis.</p>
+<ul class="simple">
+<li><p><strong>Blue edges</strong> indicate <strong>stronger functional connectivity in Control</strong> participants.</p></li>
+<li><p><strong>Red edges</strong> (not present in this figure) would indicate <strong>stronger connectivity in ASD</strong>.</p></li>
+<li><p>The <strong>color saturation</strong> and <strong>thickness of the edges</strong> represent the <strong>magnitude of discriminative contribution</strong> of each connection.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>🔍 Key Observations</strong></p>
+<ul class="simple">
+<li><p><strong>Default Mode Network (DMN)</strong></p>
+<ul>
+<li><p>Includes: <em>DefaultMode.MPFC</em>, <em>DefaultMode.PCC</em>, <em>DefaultMode.LP (L/R)</em></p></li>
+<li><p>Several intra-DMN and interhemispheric connections appear weaker in ASD, aligning with known disruptions in <strong>self-referential thinking</strong> and <strong>social cognition</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Fronto-Parietal Network</strong></p>
+<ul>
+<li><p>Includes: <em>FrontoParietal.LPFC (L)</em>, <em>FrontoParietal.PPC (L)</em></p></li>
+<li><p>Weaker connectivity in this network may indicate impaired <strong>executive function</strong> and <strong>cognitive control</strong>, both commonly reported in ASD.</p></li>
+</ul>
+</li>
+<li><p><strong>Language Network</strong></p>
+<ul>
+<li><p>Includes: <em>Language.IFG (R)</em>, <em>Language.pSTG (L)</em></p></li>
+<li><p>Reduced connections involving language-related areas suggest <strong>communication challenges</strong> in ASD.</p></li>
+</ul>
+</li>
+<li><p><strong>Salience and Sensorimotor Networks</strong></p>
+<ul>
+<li><p>Includes: <em>Salience.AInsula (L)</em>, <em>SensoriMotor.Lateral (L/R)</em></p></li>
+<li><p>Altered connectivity in these regions may reflect atypical <strong>sensory integration</strong> and <strong>interoception</strong>, frequently observed in autistic individuals.</p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<p><strong>⚠️ Interpretation Considerations</strong></p>
+<p>While these patterns provide evidence for disrupted <strong>large-scale network integration</strong> in ASD, caution is warranted:</p>
+<ul class="simple">
+<li><p>Regions such as <strong>sensorimotor cortex</strong> are known to be <strong>susceptible to head motion</strong> and <strong>site-related variability</strong>.</p></li>
+<li><p>The presence of domain adaptation and harmonization in the modeling pipeline reduces—but does not fully eliminate—these confounds.</p></li>
+<li><p>Therefore, while findings involving <strong>DMN</strong> and <strong>language networks</strong> are likely robust, sensorimotor findings should be interpreted with care.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>✅ Summary</strong></p>
+<p>This figure underscores a consistent pattern of <strong>reduced functional connectivity</strong> across the <strong>Default Mode</strong>, <strong>Language</strong>, <strong>Fronto-Parietal</strong>, and <strong>Sensorimotor</strong> networks in ASD. These disruptions support the theory of altered <strong>network-level integration</strong> in autism and bolster the potential of <strong>connectivity-based biomarkers</strong> for diagnostic classification.</p>
+</section>
+<section id="extra-tasks">
+<h2>📜 Extra Tasks<a class="headerlink" href="#extra-tasks" title="Link to this heading">#</a></h2>
+<p><strong>Congratulations!</strong> 🎉</p>
+<p>You’ve successfully completed the tutorial! For those eager to explore further or just curious to tweak configurations to enhance performance, we’ve prepared a set of optional tasks. These tasks are designed to encourage experimentation without requiring significant changes to the core code.</p>
+<hr class="docutils" />
+<p><strong>🗺️ Task 1</strong>: Explore Different Atlases and FCs <em>(20–120+ minutes)</em></p>
+<p>We provide multiple brain atlases and functional connectivity (FC) embeddings to experiment with. You can create a new configuration file or simply uncomment the <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.ATLAS</span></code> option in the configuration section.</p>
+<p><strong>Open-ended questions:</strong></p>
+<ul class="simple">
+<li><p>Is selecting an appropriate atlas beneficial for building accurate brain disorder diagnosis models?</p></li>
+<li><p>If so, how much improvement can we expect from choosing the best atlas?</p></li>
+<li><p>Does the best-performing atlas help interpret and localize key ROIs relevant to ASD?</p></li>
+<li><p>Or is the choice of atlas less impactful than the choice of functional connectivity method?</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>📬 Task 2</strong>: Better Phenotypes? <em>(30–60+ minutes)</em></p>
+<p>Our results show that using only <strong>site labels</strong> already leads to performance improvements. In contrast to Kunda et al. (2022) who used site labels for domain adaptation and treated other phenotypic variables merely as additional features, our implementation in <strong>PyKale</strong> allows for <strong>full integration of all available phenotypic variables</strong> into the domain adaptation process when specified.</p>
+<p>This raises a key question: could leveraging <strong>a richer set of phenotypes</strong> beyond site information further enhance multi-site model generalization?</p>
+<p><strong>Questions to explore:</strong></p>
+<ul class="simple">
+<li><p>Is the <strong>site label alone</strong> truly sufficient for effective multi-site data integration?</p></li>
+<li><p>Are there phenotypes with <strong>distinct distributions across sites</strong> that may introduce bias or noise?</p></li>
+<li><p>Can incorporating those phenotypes improve performance beyond site-only models?</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Given that there are many missing values as seen previously, this task might be challenging for users who are unfamiliar with Python and <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, as it may require manual crafting for encoding or imputation as done in <code class="docutils literal notranslate"><span class="pre">preprocess_phenotypic_data</span></code>.</p>
+</div>
+<hr class="docutils" />
+<p><strong>📊 Task 3</strong>: More Sites → Better Generalization? <em>(20–60+ minutes)</em></p>
+<p>With ten sites, domain adaptation shows improved generalization under the <strong>leave-one-group-out (LPGO)</strong> setting. This raises new questions:</p>
+<p><strong>Things to consider:</strong></p>
+<ul class="simple">
+<li><p>Does domain adaptation continue to help as we include <strong>more sites</strong>, or is the benefit limited to fewer-site scenarios?</p></li>
+<li><p>Is there a <strong>saturation point</strong> where adding more sites stops improving generalization, or even worsens it?</p></li>
+<li><p>Could fewer but more homogeneous sites be better than many heterogeneous ones?</p></li>
+</ul>
+<hr class="docutils" />
+<p>These tasks are designed to help you dive deeper into model robustness, generalizability, and interpretability in real-world neuroimaging settings. Feel free to explore, question, and iterate!</p>
+<p>Hope you enjoy this tutorial! 😊</p>
+</section>
+<section id="exercise-solutions">
+<h2>✍️ Exercise Solutions<a class="headerlink" href="#exercise-solutions" title="Link to this heading">#</a></h2>
+<div class="solution dropdown admonition" id="solution-find-number-of-samples">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-samples"> Exercise </a></p>
+<section id="solution-content">
+<p>There are 722 samples found. To find the number of samples,
+we can use <code class="docutils literal notranslate"><span class="pre">len(phenotypes)</span></code> which will output 722.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="solution-find-roi-count">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-roi-count"> Exercise </a></p>
+<section id="solution-content">
+<p>There are 32 ROIs found. To find the number of ROIs,
+we can use <code class="docutils literal notranslate"><span class="pre">len(rois)</span></code> which will output 32.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="solution-find-number-of-phenotypes">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-phenotypes"> Exercise </a></p>
+<section id="solution-content">
+<p>Looking at the dataframe, there are 104 phenotypes based on
+the number of columns.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="solution-find-number-of-phenotypes-after-preprocess">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-phenotypes-after-preprocess"> Exercise </a></p>
+<section id="solution-content">
+<p>By calling <code class="docutils literal notranslate"><span class="pre">phenotypes.shape</span></code>, we can inspect the number
+of rows and columns. We can see that there are 19 encoded
+phenotypes.</p>
+<p>If we breakdown the encoded phenotypes:</p>
+<ul class="simple">
+<li><p>Two are continuous variables of <code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code> and <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>.</p></li>
+<li><p>Ten from the encoded <code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code> variable.</p></li>
+<li><p>Two from the encoded <code class="docutils literal notranslate"><span class="pre">SEX</span></code> variable.</p></li>
+<li><p>Three from the encoded <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code> variable.</p></li>
+<li><p>Two from the encoded <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code> variable.</p></li>
+</ul>
+<p>Thus, in total we have 19 encoded phenotypes.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="solution-understanding-one-hot-encoding">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#understanding-one-hot-encoding"> Exercise </a></p>
+<section id="solution-content">
+<p>One-hot encoding essentially maps the categories into a binary vector space where each category is represented by a unique vector with a single high (commonly set to one) value and all other positions set to zero. It will increase the dimension given the number of categories found within a categorical variable.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="solution-find-total-models-produced">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-total-models-produced"> Exercise </a></p>
+<section id="solution-content">
+<p>To estimate the total number of models trained:</p>
+<ul class="simple">
+<li><p>SKF: <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of repetition and <code class="docutils literal notranslate"><span class="pre">k</span></code> is the fold.</p></li>
+<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">C(m,</span> <span class="pre">p)</span> <span class="pre">=</span> <span class="pre">m!</span> <span class="pre">/</span> <span class="pre">(p!</span> <span class="pre">*</span> <span class="pre">(m-p)!)</span></code>, where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the total number of groups and <code class="docutils literal notranslate"><span class="pre">p</span></code> is the number of group left out for testing.</p></li>
+</ul>
+<p>Following this formula we can obtain:</p>
+<ul class="simple">
+<li><p>SKF: <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">10</span> <span class="pre">=</span> <span class="pre">50</span></code></p></li>
+<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">5!</span> <span class="pre">/</span> <span class="pre">(5!</span> <span class="pre">*</span> <span class="pre">(5-2)!)</span> <span class="pre">=</span> <span class="pre">10</span></code></p></li>
+</ul>
+</section>
+</div>
+<div class="solution dropdown admonition" id="solution-find-the-aggregate-in-cv-results">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-the-aggregate-in-cv-results"> Exercise </a></p>
+<section id="solution-content">
+<p>Some notable examples found in <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mean_test_&lt;metric&gt;</span></code>: The mean performance score of the specified metric across all validation folds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std_test_&lt;metric&gt;</span></code>: The standard deviation of the metric across the folds, providing a measure of variability.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rank_test_&lt;metric&gt;</span></code>: The rank of each hyperparameter configuration based on <code class="docutils literal notranslate"><span class="pre">mean_test_&lt;metric&gt;</span></code>, with lower values indicating better performance.</p></li>
+</ul>
+<p>These entries allow for easy comparison and selection of the best-performing model configuration with different trade-offs, even when having <code class="docutils literal notranslate"><span class="pre">refit</span></code> set to a specific metric.</p>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/brain-disorder-diagnosis"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">💭 Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">📖 Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">📝 Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-preparation">🏞️ Environment Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">📦 Package Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">🪛 Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">🧑‍🍳 Data Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">🚚 Data Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">🛠️ Data Preprocessing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">🧶 Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-split">🤼 Cross-Validation Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">📥 Embedding Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-methods">📡 Prediction Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-and-proposed-model">🏎️ Baseline and Proposed Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">🏃 Model Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">📈 Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">🕶️ Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-tasks">📜 Extra Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-solutions">✍️ Exercise Solutions</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By PyKale Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
