@@ -62,7 +62,7 @@
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Cardiothoracic Abnormality Assessment" href="../cardiac-hemodynamics-assessment/tutorial.html" />
+    <link rel="next" title="Helper Functions" href="extend-reading/helper-functions.html" />
     <link rel="prev" title="Introduction" href="../../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,7 +183,9 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/helper-functions.html">Helper functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/data-config.html">Data &amp; Config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
@@ -579,7 +581,7 @@ Additionally, due to the limited computational resources available in **Google C
 </div>
 </details>
 </div>
-<p>(Optional) Learn more about the <a class="reference internal" href="#extend-reading/helper-functions.md"><span class="xref myst">helper functions</span></a> used in this tutorial.</p>
+<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/helper-functions.html"><span class="std std-doc">helper functions</span></a> used in this tutorial.</p>
 <section id="install-required-packages">
 <h3>Install Required Packages<a class="headerlink" href="#install-required-packages" title="Link to this heading">#</a></h3>
 <p>Run the cell below to install the required packages for this tutorial. <em><strong>Estimated Runtime in Google Colab</strong></em>: 3-5 minutes</p>
@@ -731,7 +733,7 @@ TRAINER:
 <h3>Data Loading<a class="headerlink" href="#data-loading" title="Link to this heading">#</a></h3>
 <p>As mentioned earlier, we provide a <code class="docutils literal notranslate"><span class="pre">load_data</span></code> function to load <strong>pre-computed functional connectivity (FC)</strong> embeddings along with associated phenotypic information.<br />
 This function supports automated downloading via <a class="reference external" href="https://pypi.org/project/gdown/">gdown</a> by reading from manifest files if the data is not found locally.</p>
-<p>(Optional) Learn more about the <a class="reference internal" href="#extend-reading/data-config.md#configuration-arguments-for-data-loading"><span class="xref myst">configuration arguments for data loading</span></a>.</p>
+<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-data-loading"><span class="std std-ref">configuration arguments for data loading</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
@@ -1067,7 +1069,7 @@ available ROI.</p></li>
 <section id="data-preprocessing">
 <h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
 <p>Before modeling, we need to preprocess the phenotypic variables to ensure they are in a usable format. This includes handling missing values, encoding categorical variables, and optionally standardizing continuous ones.</p>
-<p>(Optional) Learn more about the <a class="reference internal" href="#extend-reading/data-config.md#categorical-variables-from-phenotypic-data"><span class="xref myst">categorical variables from phenotypic data</span></a> used in this tutorial.</p>
+<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#categorical-variables-from-phenotypic-data"><span class="std std-ref">categorical variables from phenotypic data</span></a> used in this tutorial.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_phenotypic_data</span>
@@ -1373,7 +1375,7 @@ variables have been one-hot-encoded.</p>
 <h3>Cross-Validation Split<a class="headerlink" href="#cross-validation-split" title="Link to this heading">#</a></h3>
 <p>The choice of cross-validation strategy can significantly impact how can we evaluate of a model’s robustness and generalizability, especially when dealing with multi-site or grouped data.</p>
 <figure class="align-default" id="id2">
-<img alt="tutorials/brain-disorder-diagnosis/images/cross-validation.png" src="tutorials/brain-disorder-diagnosis/images/cross-validation.png" />
+<img alt="../../_images/cross-validation.png" src="../../_images/cross-validation.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 2 </span><span class="caption-text">Illustrative comparison between random k-fold and leave-one-site-out [4].</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
@@ -1402,7 +1404,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 </div>
 </section>
 </div>
-<p>(Optional) Learn more about the <a class="reference internal" href="#extend-reading/data-config.md#configuration-arguments-for-cross-validation"><span class="xref myst">configuration arguments for cross-validation</span></a> used in this tutorial.</p>
+<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-cross-validation"><span class="std std-ref">configuration arguments for cross-validation</span></a> used in this tutorial.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeavePGroupsOut</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
@@ -1454,7 +1456,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <li><p><strong>Site Only</strong>: A domain-adapted model that uses site labels as the adaptation factor to reduce site-specific bias.</p></li>
 <li><p><strong>All Phenotypes</strong>: An extended domain-adapted model that incorporates multiple phenotypic variables (e.g., age, sex, handedness) to further reduce inter-site variability.</p></li>
 </ul>
-<p>(Optional) Learn more about the <a class="reference internal" href="#extend-reading/data-config.md#hyperparameter-grid"><span class="xref myst">hyperparameter grid</span></a> used in this tutorial.</p>
+<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#hyperparameter-grid"><span class="std std-ref">hyperparameter grid</span></a> used in this tutorial.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
@@ -1930,11 +1932,11 @@ phenotypes.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../cardiac-hemodynamics-assessment/tutorial.html"
+       href="extend-reading/helper-functions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Cardiothoracic Abnormality Assessment</p>
+        <p class="prev-next-title">Helper Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
