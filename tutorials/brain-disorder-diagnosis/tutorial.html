@@ -1937,8 +1937,8 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <p>Turns out, domain adaptation indeed helps when evaluated under the <strong>leave-one-group-out (LPGO)</strong> setting.</p>
 <p>We observe a consistent performance improvement when incorporating site and phenotypic information:</p>
 <ul class="simple">
-<li><p>The <strong>Site Only</strong> model achieves the highest accuracy and AUROC, indicating that accounting for site differences is beneficial for generalization.</p></li>
-<li><p>The <strong>All Phenotypes</strong> model also outperforms the <strong>Baseline</strong>, suggesting that additional phenotypic features contribute useful domain information, although the marginal gain over site alone is smaller.</p></li>
+<li><p>The <strong>Site Only</strong> model achieves the highest accuracy, indicating that accounting for site differences is beneficial for generalization.</p></li>
+<li><p>The <strong>All Phenotypes</strong> model also outperforms the <strong>Baseline</strong>, suggesting that additional phenotypic features contribute useful domain information, although the performance difference over site alone is marginal given the accuracy and AUROC.</p></li>
 <li><p>The <strong>Baseline</strong> model, which does not use domain adaptation, performs worst, highlighting the challenge of multi-site variability when no adaptation is applied.</p></li>
 </ul>
 <p>These results demonstrate the effectiveness of domain adaptation in improving model generalization across imaging sites, especially in scenarios where each site may exhibit different data distributions.</p>
