@@ -2135,12 +2135,12 @@ phenotypes.</p>
 <p>To estimate the total number of models trained:</p>
 <ul class="simple">
 <li><p>SKF: <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of repetition and <code class="docutils literal notranslate"><span class="pre">k</span></code> is the fold.</p></li>
-<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">C(m,</span> <span class="pre">p)</span> <span class="pre">=</span> <span class="pre">m!</span> <span class="pre">/</span> <span class="pre">(p!</span> <span class="pre">*</span> <span class="pre">(m-p)!)</span></code>, where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the total number of groups and <code class="docutils literal notranslate"><span class="pre">p</span></code> is the number of group left out for testing.</p></li>
+<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">C(m,</span> <span class="pre">p)</span> <span class="pre">=</span> <span class="pre">m!</span> <span class="pre">/</span> <span class="pre">(p!</span> <span class="pre">*</span> <span class="pre">(m</span> <span class="pre">-</span> <span class="pre">p)!)</span></code>, where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the total number of groups and <code class="docutils literal notranslate"><span class="pre">p</span></code> is the number of group left out for testing.</p></li>
 </ul>
 <p>Following this formula we can obtain:</p>
 <ul class="simple">
 <li><p>SKF: <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">10</span> <span class="pre">=</span> <span class="pre">50</span></code></p></li>
-<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">5!</span> <span class="pre">/</span> <span class="pre">(2!</span> <span class="pre">*</span> <span class="pre">(5-2)!)</span> <span class="pre">=</span> <span class="pre">10</span></code></p></li>
+<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">5!</span> <span class="pre">/</span> <span class="pre">(2!</span> <span class="pre">*</span> <span class="pre">(5</span> <span class="pre">-</span> <span class="pre">2)!)</span> <span class="pre">=</span> <span class="pre">10</span></code></p></li>
 </ul>
 </section>
 </div>
