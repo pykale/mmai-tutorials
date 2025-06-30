@@ -6,10 +6,10 @@ When using configuration files, remember that all parameter names must be specif
 
 The available argument we mainly focused on includes:
 
-- **`data_dir`**: Local directory to store and load the dataset. If files are missing, they will be automatically downloaded.  
+- **`data_dir`**: Local directory to store and load the dataset. If files are missing, they will be automatically downloaded.
   - *Default:* Current working directory + `/data`
 
-- **`atlas`**: The name of the brain atlas used to extract ROI time series. This corresponds to a subfolder inside `fc/`.  
+- **`atlas`**: The name of the brain atlas used to extract ROI time series. This corresponds to a subfolder inside `fc/`.
   - Available options:
     - `"aal"`: AAL Atlas
     - `"cc200"`: Craddock 200 ROI Atlas
@@ -18,20 +18,20 @@ The available argument we mainly focused on includes:
     - `"dos160"`: Dosenbach 160 Atlas
     - `"hcp-ica"`: HCP ICA-based components
     - `"ho"`: Harvard-Oxford Atlas
-    - `"tt"`: Talairach-Tournoux  
+    - `"tt"`: Talairach-Tournoux
   - *Default:* `"cc200"`
 
-- **`fc`**: The type of functional connectivity embedding to load (file name without extension).  
+- **`fc`**: The type of functional connectivity embedding to load (file name without extension).
   - Available options:
     - `"pearson"`: Pearson correlation
     - `"partial"`: Partial correlation
     - `"tangent"`: Tangent embedding
     - `"precision"`: Precision (inverse covariance)
     - `"covariance"`: Sample covariance
-    - `"tangent-pearson"`: Hybrid of tangent embedding and Pearson correlation  
+    - `"tangent-pearson"`: Hybrid of tangent embedding and Pearson correlation
   - *Default:* `"tangent-pearson"`
 
-- **`top_k_sites`**: Optionally restrict the dataset to the top *K* sites (by number of subjects). If `None`, all sites are included.  
+- **`top_k_sites`**: Optionally restrict the dataset to the top *K* sites (by number of subjects). If `None`, all sites are included.
   - *Default:* `None`
 
 It returns four values, including:
@@ -94,39 +94,39 @@ This binary label is suitable for supervised learning tasks focused on ASD detec
 To do this, the `preprocess_phenotypic_data` function handles this functionality for us.
 The main arguments for `preprocess_phenotypic_data` include:
 
-- **`data`**:  
-  A DataFrame containing the phenotypic information for each subject. Must include all selected phenotypes such as `SEX`, `AGE_AT_SCAN`, `FIQ`, `HANDEDNESS_CATEGORY`, `EYE_STATUS_AT_SCAN`, and `DX_GROUP`.  
-  - *Type:* `pd.DataFrame` of shape `(n_subjects, n_phenotypes)`  
+- **`data`**:
+  A DataFrame containing the phenotypic information for each subject. Must include all selected phenotypes such as `SEX`, `AGE_AT_SCAN`, `FIQ`, `HANDEDNESS_CATEGORY`, `EYE_STATUS_AT_SCAN`, and `DX_GROUP`.
+  - *Type:* `pd.DataFrame` of shape `(n_subjects, n_phenotypes)`
   - *Required*
 
-- **`standardize`**:  
-  Whether to standardize continuous variables (`AGE_AT_SCAN` and `FIQ`). This helps remove scale-related bias before modeling.  
+- **`standardize`**:
+  Whether to standardize continuous variables (`AGE_AT_SCAN` and `FIQ`). This helps remove scale-related bias before modeling.
   - Available options:
-    - `False`: No standardization (raw values retained)  
-    - `True` or `"all"`: Standardize across all subjects  
-    - `"site"`: Standardize within each acquisition site  
+    - `False`: No standardization (raw values retained)
+    - `True` or `"all"`: Standardize across all subjects
+    - `"site"`: Standardize within each acquisition site
   - *Default:* `False`
 
-- **`one_hot_encode`**:  
-  Whether to one-hot encode categorical variables (`SITE_ID`, `SEX`, `HANDEDNESS_CATEGORY`, `EYE_STATUS_AT_SCAN`). This is typically used when feeding the data into machine learning models.  
-  - *Type:* `bool`  
+- **`one_hot_encode`**:
+  Whether to one-hot encode categorical variables (`SITE_ID`, `SEX`, `HANDEDNESS_CATEGORY`, `EYE_STATUS_AT_SCAN`). This is typically used when feeding the data into machine learning models.
+  - *Type:* `bool`
   - *Default:* `True`
 
 The function returns the following:
 
-- **`labels`** (`array-like`):  
-  The encoded diagnostic labels derived from `DX_GROUP`.  
-  - `0`: CONTROL  
-  - `1`: ASD  
+- **`labels`** (`array-like`):
+  The encoded diagnostic labels derived from `DX_GROUP`.
+  - `0`: CONTROL
+  - `1`: ASD
   - *Shape:* `(n_subjects,)`
 
-- **`sites`** (`array-like`):  
-  Site identifiers corresponding to each subject, useful for site-wise stratification or harmonization.  
+- **`sites`** (`array-like`):
+  Site identifiers corresponding to each subject, useful for site-wise stratification or harmonization.
   - *Shape:* `(n_subjects,)`
 
-- **`phenotypes`** (`pd.DataFrame`):  
-  The cleaned and processed phenotype DataFrame with missing values imputed, categorical variables mapped (and optionally one-hot encoded), and continuous variables optionally standardized.  
-  - *Shape:* `(n_subjects, n_selected_phenotypes)`  
+- **`phenotypes`** (`pd.DataFrame`):
+  The cleaned and processed phenotype DataFrame with missing values imputed, categorical variables mapped (and optionally one-hot encoded), and continuous variables optionally standardized.
+  - *Shape:* `(n_subjects, n_selected_phenotypes)`
   - *Note:* The selected phenotypes include:
     - `SITE_ID`
     - `SEX`
@@ -141,7 +141,7 @@ The function returns the following:
 
 In this tutorial, we specify the following arguments for cross-validation:
 - **`split`**: Defines the cross-validation strategy.
-  - Available options: 
+  - Available options:
     - `"skf"`: Stratified K-fold to maintain label balance in each fold.
     - `"lpgo"`: Leave p-groups out to evaluate generalization across sites by holding out entire groups (e.g., imaging sites).
   - *Default:* `"skf"`
