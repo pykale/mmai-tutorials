@@ -505,14 +505,14 @@ document.write(`
 <p>To do this, the <code class="docutils literal notranslate"><span class="pre">preprocess_phenotypic_data</span></code> function handles this functionality for us.
 The main arguments for <code class="docutils literal notranslate"><span class="pre">preprocess_phenotypic_data</span></code> include:</p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">data</span></code></strong>:<br />
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">data</span></code></strong>:
 A DataFrame containing the phenotypic information for each subject. Must include all selected phenotypes such as <code class="docutils literal notranslate"><span class="pre">SEX</span></code>, <code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code>, <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>, <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>, <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code>, and <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code>.</p>
 <ul>
 <li><p><em>Type:</em> <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> of shape <code class="docutils literal notranslate"><span class="pre">(n_subjects,</span> <span class="pre">n_phenotypes)</span></code></p></li>
 <li><p><em>Required</em></p></li>
 </ul>
 </li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">standardize</span></code></strong>:<br />
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">standardize</span></code></strong>:
 Whether to standardize continuous variables (<code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code> and <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>). This helps remove scale-related bias before modeling.</p>
 <ul>
 <li><p>Available options:</p>
@@ -525,7 +525,7 @@ Whether to standardize continuous variables (<code class="docutils literal notra
 <li><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ul>
 </li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">one_hot_encode</span></code></strong>:<br />
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">one_hot_encode</span></code></strong>:
 Whether to one-hot encode categorical variables (<code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">SEX</span></code>, <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>, <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code>). This is typically used when feeding the data into machine learning models.</p>
 <ul>
 <li><p><em>Type:</em> <code class="docutils literal notranslate"><span class="pre">bool</span></code></p></li>
@@ -535,7 +535,7 @@ Whether to one-hot encode categorical variables (<code class="docutils literal n
 </ul>
 <p>The function returns the following:</p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">labels</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">array-like</span></code>):<br />
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">labels</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">array-like</span></code>):
 The encoded diagnostic labels derived from <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code>.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: CONTROL</p></li>
@@ -543,13 +543,13 @@ The encoded diagnostic labels derived from <code class="docutils literal notrans
 <li><p><em>Shape:</em> <code class="docutils literal notranslate"><span class="pre">(n_subjects,)</span></code></p></li>
 </ul>
 </li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">sites</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">array-like</span></code>):<br />
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sites</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">array-like</span></code>):
 Site identifiers corresponding to each subject, useful for site-wise stratification or harmonization.</p>
 <ul>
 <li><p><em>Shape:</em> <code class="docutils literal notranslate"><span class="pre">(n_subjects,)</span></code></p></li>
 </ul>
 </li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">phenotypes</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>):<br />
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">phenotypes</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>):
 The cleaned and processed phenotype DataFrame with missing values imputed, categorical variables mapped (and optionally one-hot encoded), and continuous variables optionally standardized.</p>
 <ul>
 <li><p><em>Shape:</em> <code class="docutils literal notranslate"><span class="pre">(n_subjects,</span> <span class="pre">n_selected_phenotypes)</span></code></p></li>
