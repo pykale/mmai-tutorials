@@ -18,7 +18,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install pip dependencies.
-        run: pip install -r requirements.txt
+        run: pip install jupyter-book==1.0.4.post1 sphinx-exercise==1.0.1
 
       - name: Build the book
         run: jupyter-book build . --all
