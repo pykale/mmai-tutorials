@@ -23,6 +23,11 @@ parts:
 - caption: Tutorials
   chapters:
   - file: tutorials/brain-disorder-diagnosis/tutorial
-  - file: tutorials/cardiac-hemodynamics-assesment/tutorial
+    sections:
+    - file: tutorials/brain-disorder-diagnosis/extend-reading/helper-functions
+      title: Helper functions
+    - file: tutorials/brain-disorder-diagnosis/extend-reading/data-config
+      title: Data & Config
+  - file: tutorials/cardiac-hemodynamics-assessment/tutorial
   - file: tutorials/drug-target-interaction/notebook-cross-domain
   - file: tutorials/multiomics-cancer-classification/notebook
