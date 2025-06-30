@@ -62,6 +62,8 @@
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cardiothoracic Abnormality Assessment" href="../cardiac-hemodynamics-assesment/tutorial.html" />
+    <link rel="prev" title="Introduction" href="../../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -182,7 +182,9 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">🧠 Brain Disorder Diagnosis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assesment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
 </ul>
@@ -480,7 +482,7 @@ document.write(`
 <figure class="align-default" id="id1">
 <img alt="../../_images/abide.png" src="../../_images/abide.png" />
 <figcaption>
-<p><span class="caption-text">Autism Brain Imaging Data Exchange</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Autism Brain Imaging Data Exchange</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>However, MRI data collected from a single site (e.g., a research institution or hospital) typically involve a limited number of subjects, due to the high cost of MRI scans and the challenge of recruiting patients. To overcome this limitation, large-scale collaborative efforts are often established. One such effort is the <a class="reference external" href="https://fcon_1000.projects.nitrc.org/indi/abide/">Autism Brain Imaging Data Exchange (ABIDE)</a>, a publicly available multi-site dataset that aggregates data from over 16 independent sites, comprising over 1,035 subjects.</p>
@@ -505,7 +507,7 @@ document.write(`
 <figure class="align-default" id="id2">
 <img alt="../../_images/flowchart.png" src="../../_images/flowchart.png" />
 <figcaption>
-<p><span class="caption-text">Machine learning pipeline to predict ASD vs control subjects.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Machine learning pipeline to predict ASD vs control subjects.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The figure above outlines the pipeline used in this tutorial:</p>
@@ -797,7 +799,7 @@ This function supports automated downloading via <a class="reference external" h
 </div>
 <div class="exercise admonition" id="find-number-of-samples">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 1 </span></p>
 <section id="exercise-content">
 <p>How many samples are found in the sub-sampled ABIDE dataset?</p>
 <div class="dropdown admonition hint">
@@ -857,7 +859,7 @@ Indicates the range of connectivity values, with stronger connections lying at t
 <p>This representation is widely used in neuroimaging studies for subject-level modeling, feature extraction, and biomarker discovery.</p>
 <div class="exercise admonition" id="find-roi-count">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 2 </span></p>
 <section id="exercise-content">
 <p>How many ROIs are defined in the FC matrix?</p>
 <div class="dropdown admonition hint">
@@ -1055,7 +1057,7 @@ available ROI.</p></li>
 <p>As we can see, there is a wide range of phenotypic information available for each subject ranging from patient descriptors such as site (<code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code>), diagnostic group (<code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code>), and age at scan (<code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code>), to quality control metrics for individual scans (e.g., columns starting with <code class="docutils literal notranslate"><span class="pre">qc</span></code>).</p>
 <div class="exercise admonition" id="find-number-of-phenotypes">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 3 </span></p>
 <section id="exercise-content">
 <p>How many phenotypic variables are available in the ABIDE dataset?</p>
 </section>
@@ -1418,7 +1420,7 @@ The cleaned and processed phenotype DataFrame with missing values imputed, categ
 <p>Now we can see that the number of phenotypes are now reduced, the continuous and categorical variables are now standardized and one-hot encoded respectively.</p>
 <div class="exercise admonition" id="find-number-of-phenotypes-after-preprocess">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 4 </span></p>
 <section id="exercise-content">
 <p>How many phenotypes are there once we have preprocessed the phenotypes?</p>
 <div class="dropdown admonition hint">
@@ -1433,7 +1435,7 @@ The cleaned and processed phenotype DataFrame with missing values imputed, categ
 </div>
 <div class="exercise admonition" id="understanding-one-hot-encoding">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 5 </span></p>
 <section id="exercise-content">
 <p>We have seen the preprocessed phenotypes and noted that the categorical
 variables have been one-hot-encoded.</p>
@@ -1521,7 +1523,7 @@ variables have been one-hot-encoded.</p>
 <figure class="align-default" id="id3">
 <img alt="../../_images/split-comparison.png" src="../../_images/split-comparison.png" />
 <figcaption>
-<p><span class="caption-text">Illustrative comparison between n-repeated stratified k-fold and leave p-groups out</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Illustrative comparison between n-repeated stratified k-fold and leave p-groups out</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-legend-description admonition">
@@ -1543,7 +1545,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <p>Each method serves a different purpose: stratified k-fold is ideal when label balance is critical, while leave-p-groups-out is better for assessing model robustness under domain shift or site variability. Realistically, LPGO is preferable given real data will most likely not have the same distribution as a model’s training data.</p>
 <div class="exercise admonition" id="find-total-models-produced">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 6 </span></p>
 <section id="exercise-content">
 <p>Consider we evaluate a model using SKF with two repetition and five folds or LPGO with ten groups with one group left out for testing, we will need to train a total of ten models. If we evaluate a model using:</p>
 <ul class="simple">
@@ -1825,7 +1827,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <p>To facilitate comparison across models, we aggregate each model’s <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> into a <code class="docutils literal notranslate"><span class="pre">dict</span></code> of <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> objects. These can then be compiled into a summary table that highlights the best-tuned performance for each of the three evaluated models.</p>
 <div class="exercise admonition" id="find-the-aggregate-in-cv-results">
 
-<p class="admonition-title"></p>
+<p class="admonition-title"><span class="caption-number">Exercise 7 </span></p>
 <section id="exercise-content">
 <p>Can you mention what are the available aggregates for each metrics found in <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code>?</p>
 <div class="dropdown admonition hint">
@@ -2079,7 +2081,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <h2>✍️ Exercise Solutions<a class="headerlink" href="#exercise-solutions" title="Link to this heading">#</a></h2>
 <div class="solution dropdown admonition" id="solution-find-number-of-samples">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-samples"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-samples"> Exercise 1</a></p>
 <section id="solution-content">
 <p>There are 722 samples found. To find the number of samples,
 we can use <code class="docutils literal notranslate"><span class="pre">len(phenotypes)</span></code> which will output 722.</p>
@@ -2087,7 +2089,7 @@ we can use <code class="docutils literal notranslate"><span class="pre">len(phen
 </div>
 <div class="solution dropdown admonition" id="solution-find-roi-count">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#find-roi-count"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-roi-count"> Exercise 2</a></p>
 <section id="solution-content">
 <p>There are 32 ROIs found. To find the number of ROIs,
 we can use <code class="docutils literal notranslate"><span class="pre">len(rois)</span></code> which will output 32.</p>
@@ -2095,7 +2097,7 @@ we can use <code class="docutils literal notranslate"><span class="pre">len(rois
 </div>
 <div class="solution dropdown admonition" id="solution-find-number-of-phenotypes">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-phenotypes"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-phenotypes"> Exercise 3</a></p>
 <section id="solution-content">
 <p>Looking at the dataframe, there are 104 phenotypes based on
 the number of columns.</p>
@@ -2103,7 +2105,7 @@ the number of columns.</p>
 </div>
 <div class="solution dropdown admonition" id="solution-find-number-of-phenotypes-after-preprocess">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-phenotypes-after-preprocess"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-number-of-phenotypes-after-preprocess"> Exercise 4</a></p>
 <section id="solution-content">
 <p>By calling <code class="docutils literal notranslate"><span class="pre">phenotypes.shape</span></code>, we can inspect the number
 of rows and columns. We can see that there are 19 encoded
@@ -2121,14 +2123,14 @@ phenotypes.</p>
 </div>
 <div class="solution dropdown admonition" id="solution-understanding-one-hot-encoding">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#understanding-one-hot-encoding"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#understanding-one-hot-encoding"> Exercise 5</a></p>
 <section id="solution-content">
 <p>One-hot encoding essentially maps the categories into a binary vector space where each category is represented by a unique vector with a single high (commonly set to one) value and all other positions set to zero. It will increase the dimension given the number of categories found within a categorical variable.</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="solution-find-total-models-produced">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#find-total-models-produced"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-total-models-produced"> Exercise 6</a></p>
 <section id="solution-content">
 <p>To estimate the total number of models trained:</p>
 <ul class="simple">
@@ -2144,7 +2146,7 @@ phenotypes.</p>
 </div>
 <div class="solution dropdown admonition" id="solution-find-the-aggregate-in-cv-results">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="#find-the-aggregate-in-cv-results"> Exercise </a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="#find-the-aggregate-in-cv-results"> Exercise 7</a></p>
 <section id="solution-content">
 <p>Some notable examples found in <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> include:</p>
 <ul class="simple">
@@ -2188,6 +2190,24 @@ phenotypes.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../cardiac-hemodynamics-assesment/tutorial.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cardiothoracic Abnormality Assessment</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
