@@ -53,7 +53,7 @@ This session introduces key concepts in multimodal AI and open research, followe
 
 3. **Cancer Classification**
    - **Data**: TCGA (The Cancer Genome Atlas)
-   - **Goal**: Combine genomics and histopathology for cancer subtype classification
+   - **Goal**: Combine genomics and transcriptomics data for cancer subtype classification
 
 4. **Drug–Target Interaction Prediction**
    - **Data**: BindingDB and BioSNAP
