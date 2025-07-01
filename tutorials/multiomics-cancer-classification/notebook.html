@@ -64,7 +64,7 @@
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/notebook-cross-domain.html" />
+    <link rel="prev" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/notebook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,8 +156,8 @@
       
     
     
-    <img src="../../_static/embc_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
-    <script>document.write(`<img src="../../_static/embc_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+    <img src="../../_static/BioMedMMAI_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../../_static/BioMedMMAI_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
   
   
 </a></div>
@@ -185,12 +185,13 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../brain-disorder-diagnosis/tutorial.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Multiomics Cancer Classification</a></li>
 </ul>
 
@@ -441,7 +442,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-pre-processing">Step 1: Data Loading and Pre-processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
@@ -457,18 +458,18 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here">What Happens Here?</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-model-evaluation">Step 4: Model Evaluation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation-study-identify-important-biomarkers">Step 5: Interpretation Study - Identify Important Biomarkers</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-feature-importance-is-computed">How Feature Importance Is Computed?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-results-of-interpretation-study">Full results of interpretation study</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-tasks">Extra Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-tasks">Extension Tasks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
 </ul>
@@ -501,8 +502,8 @@ We use <strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<st
 <p>To prepare the helper functions and necessary materials, we download them from the GitHub repository.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!rm -rf /content/mmai-tutorial
-!git clone https://github.com/pykale/mmai-tutorial.git
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!rm -rf /content/mmai-tutorials
+!git clone https://github.com/pykale/mmai-tutorials.git
 </pre></div>
 </div>
 </div>
@@ -539,9 +540,9 @@ os.environ[&#39;TORCH&#39;] = torch.__version__
 <p>Then, we install other required packages in <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">mmai-tutorial/requirements.txt</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorial/tutorials/multiomics-cancer-classification
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/multiomics-cancer-classification
 
-!pip install --quiet -r /content/mmai-tutorial/requirements.txt \
+!pip install --quiet -r /content/mmai-tutorials/requirements.txt \
     &amp;&amp; echo &quot;Required packages installed successfully ✅&quot; \
     || echo &quot;Failed to install required packages ❌&quot;
 !pip install yacs
@@ -580,7 +581,7 @@ os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 <p>First, we load the configuration from <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/base.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorial/tutorials/multiomics-cancer-classification
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/multiomics-cancer-classification
 
 from config import get_cfg_defaults
 
@@ -624,8 +625,8 @@ cfg.DATASET.NUM_MODALITIES = 3
 </div>
 </section>
 </section>
-<section id="step-1-data-loading-and-pre-processing">
-<h2>Step 1: Data Loading and Pre-processing<a class="headerlink" href="#step-1-data-loading-and-pre-processing" title="Link to this heading">#</a></h2>
+<section id="step-1-data-loading-and-preparation">
+<h2>Step 1: Data Loading and Preparation<a class="headerlink" href="#step-1-data-loading-and-preparation" title="Link to this heading">#</a></h2>
 <p>We use two multiomics benchmarks in this tutorial, BRCA and ROSMAP, which have been provided by the authors of MOGONET paper in <a class="reference external" href="https://github.com/txWang/MOGONET">their repository</a>.
 A brief description of BRCA and ROSMAP dataset is shown in the following
 table.</p>
@@ -866,11 +867,12 @@ trainer = pl.Trainer(
 </div>
 </section>
 </section>
-<section id="step-4-model-evaluation">
-<h3>Step 4: Model Evaluation<a class="headerlink" href="#step-4-model-evaluation" title="Link to this heading">#</a></h3>
+</section>
+<section id="step-4-evaluation">
+<h2>Step 4: Evaluation<a class="headerlink" href="#step-4-evaluation" title="Link to this heading">#</a></h2>
 <p>Once training is complete, we evaluate the model on the test set using <code class="docutils literal notranslate"><span class="pre">trainer.test()</span></code>.</p>
 <section id="what-is-included-in-this-step">
-<h4>What is included in this step?<a class="headerlink" href="#what-is-included-in-this-step" title="Link to this heading">#</a></h4>
+<h3>What is included in this step?<a class="headerlink" href="#what-is-included-in-this-step" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Load the best model checkpoint.</p></li>
 <li><p>Run the model on the test split from the dataset.</p></li>
@@ -885,10 +887,9 @@ trainer = pl.Trainer(
 </div>
 </section>
 </section>
-</section>
-<section id="step-5-interpretation-study-identify-important-biomarkers">
-<h2>Step 5: Interpretation Study - Identify Important Biomarkers<a class="headerlink" href="#step-5-interpretation-study-identify-important-biomarkers" title="Link to this heading">#</a></h2>
-<p>To better understand which features among multiomics data are the key biomarkers in cancer subtype classification and how decisions are maken by the model, we perform an interpretaiton study.
+<section id="step-5-interpretation">
+<h2>Step 5: Interpretation<a class="headerlink" href="#step-5-interpretation" title="Link to this heading">#</a></h2>
+<p>To better understand which features among multiomics data are the key biomarkers in cancer subtype classification and how decisions were made by the model, we perform an interpretation study to identify important biomarkers.
 We identify the most influential features (biomarkers) using <strong>feature-masking-based importance analysis</strong>.</p>
 <p>We use <code class="docutils literal notranslate"><span class="pre">kale.interpret</span></code> to perform interpretation, where a function that systematically masks input features and observes the effect on performance—highlighting which features are most important for classification is provided.</p>
 <section id="how-feature-importance-is-computed">
@@ -1004,8 +1005,8 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
 </div>
 </section>
 </section>
-<section id="extra-tasks">
-<h2>Extra Tasks<a class="headerlink" href="#extra-tasks" title="Link to this heading">#</a></h2>
+<section id="extension-tasks">
+<h2>Extension Tasks<a class="headerlink" href="#extension-tasks" title="Link to this heading">#</a></h2>
 <section id="task-1-unimodal-v-s-multimodal">
 <h3>Task 1 - Unimodal v.s. Multimodal<a class="headerlink" href="#task-1-unimodal-v-s-multimodal" title="Link to this heading">#</a></h3>
 <p>Users can try to set the <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.NUM_MODALITIES=1</span></code> to try only using single mRNA experission for prediction and compare its results with the ones using all three modalities.</p>
@@ -1051,7 +1052,7 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../drug-target-interaction/notebook-cross-domain.html"
+       href="../drug-target-interaction/notebook.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -1080,7 +1081,7 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-pre-processing">Step 1: Data Loading and Pre-processing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
@@ -1096,18 +1097,18 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here">What Happens Here?</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-model-evaluation">Step 4: Model Evaluation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation-study-identify-important-biomarkers">Step 5: Interpretation Study - Identify Important Biomarkers</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-feature-importance-is-computed">How Feature Importance Is Computed?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-results-of-interpretation-study">Full results of interpretation study</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-tasks">Extra Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-tasks">Extension Tasks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
 </ul>

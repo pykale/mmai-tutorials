@@ -2,7 +2,7 @@
 
 ## Open Biomedical Multimodal AI Research Workshop
 
-**EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark**
+<!-- **EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark** -->
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It focuses on two main goals:
 
@@ -19,28 +19,12 @@ This workshop offers practical, hands-on tutorials in **open biomedical multimod
 
 ---
 
-[//]: # (**Target Audience and Prerequisites**)
-
-[//]: # ()
-[//]: # (This tutorial is designed for researchers, students, and practitioners in biomedical engineering, healthcare AI, and related fields who:)
-
-[//]: # ()
-[//]: # (- Have basic proficiency in Python programming)
-
-[//]: # (- Are familiar with Google Colaboratory &#40;or willing to learn&#41;)
-
-[//]: # (- Are interested in multimodal AI and open, reproducible research)
-
-[//]: # (- Can bring a laptop with internet access to participate fully)
-[//]: # ()
-[//]: # (---)
-
 ## Overview of the Materials
 
 This workshop covers the tutorials for **four biomedical applications** using the **[PyKale multimodal AI library](https://github.com/pykale/pykale)**. You are welcome to focus on one application with exploration tasks or explore all four applications.
 
-
 **Tutorial Topics:**
+
 1. **Brain Disorder Diagnosis**
    - **Data**: ABIDE (Autism Brain Imaging Data Exchange)
    - **Goal**: Use neuroimaging and phenotypic data for autism classification
@@ -96,35 +80,6 @@ Using a configuration file offers several benefits:
 
 Please refer to the provided configuration files for details on how to customize your experiment.
 
-
-[//]: # (### Resources Provided)
-
-[//]: # (- All notebooks and data access links)
-
-[//]: # (- PyKale documentation and example pipelines)
-
-[//]: # (- Open discussion forum for continued collaboration)
-
-[//]: # ()
-[//]: # (### Structure)
-
-
-[//]: # ()
-[//]: # (### Part 1: Foundational Tutorials with Practical Examples)
-
-[//]: # (This session introduces key concepts in multimodal AI and open research, followed by four focused, hands-on tutorials using **public biomedical datasets** and the **PyKale multimodal AI library**. Each tutorial follows a common pipeline:)
-
-[//]: # ()
-[//]: # ()
-[//]: # ()
-[//]: # ()
-[//]: # ()
-[//]: # (All tutorials run in **Google Colaboratory** and are designed for **ease of reproducibility and extension**.)
-
-[//]: # ()
-[//]: # (---)
-
-[//]: # ()
 [//]: # (### Part 2: Group Work)
 
 [//]: # (Participants will form small groups and select **one of the four domains** &#40;Brain, Heart, Cancer, or Drug&#41; to explore deeper:)

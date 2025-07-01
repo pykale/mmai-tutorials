@@ -62,7 +62,7 @@
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/notebook-cross-domain.html" />
+    <link rel="next" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/notebook.html" />
     <link rel="prev" title="Data and Configuration Arguments" href="../brain-disorder-diagnosis/extend-reading/data-config.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,8 +155,8 @@
       
     
     
-    <img src="../../_static/embc_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
-    <script>document.write(`<img src="../../_static/embc_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+    <img src="../../_static/BioMedMMAI_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../../_static/BioMedMMAI_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
   
   
 </a></div>
@@ -184,12 +184,13 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../brain-disorder-diagnosis/tutorial.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiothoracic Abnormality Assessment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook-cross-domain.html">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/notebook.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/notebook.html">Multiomics Cancer Classification</a></li>
 </ul>
 
@@ -435,8 +436,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem Formulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment Preparation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package installation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
@@ -465,7 +465,7 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model training</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model Training</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">Multimodal Pretraining</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning">Multimodal Fine-tuning</a></li>
 </ul>
@@ -486,20 +486,16 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="cardiothoracic-abnormality-assessment">
 <h1>Cardiothoracic Abnormality Assessment<a class="headerlink" href="#cardiothoracic-abnormality-assessment" title="Link to this heading">#</a></h1>
 <p><img alt="" src="../../_images/embc_heart_tutorial_fig.png" /></p>
-<p>In this tutorial, we demonstrate how to use low-cost, non-invasive modalities <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong> to assess <strong>Cardiothoracic Abnormalities</strong>.</p>
+<p>In this tutorial, we demonstrate how to use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> to train models on two low-cost, non-invasive modalities, <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>, for assessing <strong>Cardiothoracic Abnormalities</strong>.</p>
 <p><strong>Estimated runtime:</strong> Completing the steps in this tutorial will take approximately 10 minutes.</p>
-<section id="problem-formulation">
-<h2>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Link to this heading">#</a></h2>
 <p>We will use a multimodal dataset derived from MIMIC-CXR and MIMIC-IV-ECG, which contains approximately 50K paired CXR and ECG samples. In this tutorial, we pretrain a multimodal <strong>CardioVAE</strong> model using ~49K CXR-ECG pairs via a tri-stream pretraining method. We then fine-tune this pretrained CardioVAE model on a smaller subset (~1K paired samples) with binary labels: <strong>Healthy</strong> and <strong>Cardiothoracic Abnormality</strong>. Lastly, we demonstrate how to interpret the trained CardioVAE model on both the CXR and ECG modalities.</p>
-<p>This notebook is based on the work of <strong>Suvon et al. (MICCAI 2024)</strong>, which introduced a tri-stream pretraining strategy using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations for assessing <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a critical indicator of cardiac hemodynamics. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale">PyKale</a> library. Here, we provide a concise example of how to use this model through PyKale’s APIs—from pretraining and fine-tuning to model interpretation.</p>
-</section>
+<p>This notebook is based on the work of <strong>Suvon et al. (MICCAI 2024)</strong>, which introduced a tri-stream pretraining strategy using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations for assessing <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a critical indicator of cardiac hemodynamics. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a> library. Here, we provide a concise example of how to use this model through <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>’s APIs—from pretraining and fine-tuning to model interpretation.</p>
 <section id="step-0-environment-preparation">
-<h2>Step 0: Environment preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
+<h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
 <section id="package-installation">
 <h3>Package installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
-<p>The main packages required for this tutorial are:</p>
+<p>The main packages required (excluding <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>) for this tutorial are:</p>
 <ul class="simple">
-<li><p><strong>pykale</strong>: An open-source machine learning library developed at the University of Sheffield, focused on biomedical and scientific applications. It supports multimodal learning, domain adaptation, and interpretability.</p></li>
 <li><p><strong>wfdb</strong>: A toolkit for reading, writing, and processing physiological signal data, especially useful for ECG waveform analysis.</p></li>
 <li><p><strong>yacs</strong>: A lightweight configuration management library that helps organize experimental settings in a structured, readable format.</p></li>
 <li><p><strong>pytorch-lightning</strong>: A high-level framework built on PyTorch that simplifies training workflows, making code cleaner and easier to scale.</p></li>
@@ -788,7 +784,7 @@ This setup is optimised for clinical prediction tasks, such as binary or multi-l
 </section>
 </section>
 <section id="step-3-model-training">
-<h2>Step 3: Model training<a class="headerlink" href="#step-3-model-training" title="Link to this heading">#</a></h2>
+<h2>Step 3: Model Training<a class="headerlink" href="#step-3-model-training" title="Link to this heading">#</a></h2>
 <section id="multimodal-pretraining">
 <h3>Multimodal Pretraining<a class="headerlink" href="#multimodal-pretraining" title="Link to this heading">#</a></h3>
 <p>We pretraind a CardioVAE model using the <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code> class from <strong>PyKale</strong> to jointly model paired CXR and ECG data. The goal is to learn <strong>shared and modality-specific representations</strong> in an <strong>unsupervised</strong> manner via reconstruction.</p>
@@ -1169,7 +1165,7 @@ This method helps identify which regions in each modality, such as specific wave
       </div>
     </a>
     <a class="right-next"
-       href="../drug-target-interaction/notebook-cross-domain.html"
+       href="../drug-target-interaction/notebook.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
@@ -1193,8 +1189,7 @@ This method helps identify which regions in each modality, such as specific wave
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem Formulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment Preparation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package installation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
@@ -1223,7 +1218,7 @@ This method helps identify which regions in each modality, such as specific wave
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model training</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model Training</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-pretraining">Multimodal Pretraining</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimodal-fine-tuning">Multimodal Fine-tuning</a></li>
 </ul>
