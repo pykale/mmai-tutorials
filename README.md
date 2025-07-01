@@ -1,6 +1,6 @@
-# EMBC and MMAI 25' Workshop Repository
+# Multimodal AI tutorials repository
 
-This repository contains materials and resources for EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark.
+<!-- This repository contains materials and resources for EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark. -->
 
 ## Structure
 
