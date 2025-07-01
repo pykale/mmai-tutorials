@@ -245,7 +245,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/pykale/embc-mmai25/main?urlpath=tree/tutorials/drug-target-interaction/notebook-cross-domain.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/pykale/mmai-tutorials/main?urlpath=tree/tutorials/drug-target-interaction/notebook-cross-domain.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -263,7 +263,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/notebook-cross-domain.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/drug-target-interaction/notebook-cross-domain.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -294,7 +294,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/embc-mmai25" target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/embc-mmai25/issues/new?title=Issue%20on%20page%20%2Ftutorials/drug-target-interaction/notebook-cross-domain.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/drug-target-interaction/notebook-cross-domain.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -512,7 +512,7 @@ In this tutorial, we demonstrate the standard pipeline in <code class="docutils 
 <p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
 <p>Moreover, we provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. The additional helper script is:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>: Defines the base configuration settings, which can be overridden using a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>: Defines the base configuration settings, which can be overridden using a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.</p></li>
 </ul>
 <section id="package-installation">
 <h3>Package Installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
@@ -522,7 +522,7 @@ In this tutorial, we demonstrate the standard pipeline in <code class="docutils 
 <li><p><strong>PyG</strong> (PyTorch Geometric) is a library built on top of PyTorch for building and training Graph Neural Networks (GNNs) on structured data.</p></li>
 <li><p><strong>RDKit</strong> is a cheminformatics toolkit for handling and processing molecular structures, particularly useful for working with SMILES strings and molecular graphs.</p></li>
 </ul>
-<p>Other required packages can be found in <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">embc-mmai25/requirements.txt</span></code></a>.</p>
+<p>Other required packages can be found in <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">mmai-tutorials/requirements.txt</span></code></a>.</p>
 <hr class="docutils" />
 <section id="warnings">
 <h4><strong>WARNINGS</strong><a class="headerlink" href="#warnings" title="Link to this heading">#</a></h4>
@@ -535,10 +535,10 @@ import warnings
 warnings.filterwarnings(&quot;ignore&quot;)
 os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 
-!git clone https://github.com/pykale/embc-mmai25.git
-%cd /content/embc-mmai25/tutorials/drug-target-interaction
+!git clone https://github.com/pykale/mmai-tutorials
+%cd /content/mmai-tutorials/tutorials/drug-target-interaction
 
-!pip install --quiet -r /content/embc-mmai25/requirements.txt \
+!pip install --quiet -r /content/mmai-tutorials/requirements.txt \
     &amp;&amp; echo &quot;Required packages installed successfully ✅&quot; \
     || echo &quot;Failed to install required packages ❌&quot;
 
@@ -752,7 +752,7 @@ biosnap
 <p>As a quick exercise, please take a moment to review and understand the parameters in <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/embc-mmai25/tutorials/drug-target-interaction
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/drug-target-interaction
 
 from configs import get_cfg_defaults
 
@@ -1180,21 +1180,21 @@ INFO:pytorch_lightning.callbacks.model_summary:
 4.847     Total estimated model params size (MB)
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "de1e5fc3654547e4b7078fd9511d4764"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/pytorch_lightning/utilities/data.py:78: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 9280. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "de1e5fc3654547e4b7078fd9511d4764", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/pytorch_lightning/utilities/data.py:78: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 9280. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
 /usr/local/lib/python3.11/dist-packages/torchmetrics/utilities/prints.py:43: TorchMetricsUserWarning: You are trying to use a metric in deterministic mode on GPU that uses `torch.cumsum`, which is currently not supported. The tensor will be copied to the CPU memory to compute it and then copied back to GPU. Expect some slowdowns.
   warnings.warn(*args, **kwargs)
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8ef34bbc1d944d8398a243f6c45ab415"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[15:53:49] Unusual charge on atom 0 number of radical electrons set to zero
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "8ef34bbc1d944d8398a243f6c45ab415", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[15:53:49] Unusual charge on atom 0 number of radical electrons set to zero
 [15:53:55] Unusual charge on atom 0 number of radical electrons set to zero
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "fc8cb437cdc34a5eb335d42c56f2975c"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/pytorch_lightning/utilities/data.py:78: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 3190. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "fc8cb437cdc34a5eb335d42c56f2975c", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/pytorch_lightning/utilities/data.py:78: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 3190. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
 [15:54:38] Unusual charge on atom 0 number of radical electrons set to zero
 [15:55:25] Unusual charge on atom 0 number of radical electrons set to zero
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7d6c70a42d194a1f956778d4543fe9ff"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=2` reached.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7d6c70a42d194a1f956778d4543fe9ff", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=2` reached.
 </pre></div>
 </div>
 </div>
@@ -1223,7 +1223,7 @@ INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [
 INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpoint at /content/embc-mmai25/tutorials/drug-target-interaction/lightning_logs/version_0/checkpoints/epoch=1-step=1220-val_BinaryAUROC=0.5640.ckpt
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "4fb3eaa50982466696a329fb30165511"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/kale/pipeline/drugban_trainer.py:377: RuntimeWarning: invalid value encountered in divide
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4fb3eaa50982466696a329fb30165511", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.11/dist-packages/kale/pipeline/drugban_trainer.py:377: RuntimeWarning: invalid value encountered in divide
   precision = tpr / (tpr + fpr)
 /usr/local/lib/python3.11/dist-packages/torchmetrics/utilities/prints.py:43: TorchMetricsUserWarning: You are trying to use a metric in deterministic mode on GPU that uses `torch.cumsum`, which is currently not supported. The tensor will be copied to the CPU memory to compute it and then copied back to GPU. Expect some slowdowns.
   warnings.warn(*args, **kwargs)
