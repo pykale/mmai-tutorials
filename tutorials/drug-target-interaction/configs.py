@@ -93,7 +93,9 @@ _C.DA.USE_ENTROPY = True  # Whether to use entropy-based weighting when computin
 # Comet config, ignore it If not installed.
 # ---------------------------------------------------------------------------- #
 _C.COMET = CfgNode()
-_C.COMET.USE = False  # Enable Comet logging (set True if Comet is installed and configured)
+_C.COMET.USE = (
+    False  # Enable Comet logging (set True if Comet is installed and configured)
+)
 _C.COMET.PROJECT_NAME = "drugban-23-May"  # Comet project name (if applicable)
 _C.COMET.EXPERIMENT_NAME = None  # Optional experiment name (e.g., 'drugban-run-1')
 _C.COMET.TAG = None  # Comet tags (optional)
