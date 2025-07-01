@@ -624,8 +624,8 @@ Note: you may need to restart the kernel to use updated packages.
 </section>
 <section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
-<p>To minimize complexity and reduce clutter within the notebook, we externalize experiment settings using a configuration system. A default set of parameters is defined in the <code class="docutils literal notranslate"><span class="pre">config.py</span></code> script, and these can be overridden by supplying an external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> configuration file.</p>
-<p>For example, <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/brain-disorder-diagnosis/configs/lpgo/base.yml"><code class="docutils literal notranslate"><span class="pre">configs/lpgo/base.yml</span></code></a> provides a lightweight setup suitable for quick experimentation. <strong>Note</strong> that this configuration file is used to describe the outputs shown in this notebook.</p>
+<p>Please refer to the <a class="reference internal" href="../../intro.html#configuration"><span class="std std-ref">configuration overview</span></a> for general setup instructions for this workshop.</p>
+<p>In this tutorial, <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/brain-disorder-diagnosis/configs/lpgo/base.yml"><code class="docutils literal notranslate"><span class="pre">configs/lpgo/base.yml</span></code></a> provides a lightweight setup suitable for quick experimentation. <strong>Note</strong> that this configuration file is used to describe the outputs shown in this notebook.</p>
 <p>Therefore, if a different configuration is used during execution, some of the descriptions or assumptions in the notebook may no longer apply and should be interpreted with caution, as they may become misleading.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -633,15 +633,7 @@ Note: you may need to restart the kernel to use updated packages.
 <p>For more extensive experimentation, the default hyperparameter grid in <code class="docutils literal notranslate"><span class="pre">config.py</span></code> provides a broader search space, which may yield improved results at the cost of increased runtime.</p>
 <p>If you wish to replicate the exact settings used in <a class="reference external" href="https://eprints.whiterose.ac.uk/id/eprint/191961/1/MultisiteASD_TMI_2022.pdf">Kunda et al. (2022)</a>, the <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/brain-disorder-diagnosis/configs/lpgo/tmi2022.yml"><code class="docutils literal notranslate"><span class="pre">configs/lpgo/tmi2022.yml</span></code></a> and <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/brain-disorder-diagnosis/configs/skf/tmi2022.yml"><code class="docutils literal notranslate"><span class="pre">configs/skf/tmi2022.yml</span></code></a> files includes the hyperparameter grid taken directly from their <a class="reference external" href="https://github.com/kundaMwiza/fMRI-site-adaptation">original source code</a>.</p>
 </div>
-<p>Using a configuration file offers several benefits:</p>
-<ul class="simple">
-<li><p><strong>Separation of concerns</strong>: Keeps the notebook focused on analysis and results, while experiment parameters are managed externally.</p></li>
-<li><p><strong>Reproducibility</strong>: Ensures that all experiment settings are recorded, making it easier to reproduce results consistently.</p></li>
-<li><p><strong>Flexibility</strong>: Allows rapid switching between different configurations without modifying the core implementation.</p></li>
-<li><p><strong>Scalability</strong>: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.</p></li>
-</ul>
-<p>Please refer to the provided configuration files for details on how to customize your experiment.<br />
-A description of each configurable option is provided in the following sections.</p>
+<p>A detailed description of each configurable option is provided as optional extended reading in the following sections.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">

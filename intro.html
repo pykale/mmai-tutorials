@@ -389,16 +389,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-audience-and-prerequisites">Target Audience and Prerequisites</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-go-through-the-tutorial">How to go through the tutorial</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-provided">Resources Provided</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-foundational-tutorials-with-practical-examples">Part 1: Foundational Tutorials with Practical Examples</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-group-work">Part 2: Group Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-biomedical-multimodal-ai-research-workshop">Open Biomedical Multimodal AI Research Workshop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-materials">Overview of the Materials</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributors">Contributors</a></li>
@@ -415,75 +408,26 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<section id="open-biomedical-multimodal-ai-research-workshop">
+<h2>Open Biomedical Multimodal AI Research Workshop<a class="headerlink" href="#open-biomedical-multimodal-ai-research-workshop" title="Link to this heading">#</a></h2>
 <p><strong>EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark</strong></p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>This workshop provides a practical and hands-on introduction to <strong>open biomedical multimodal AI research</strong>, empowering participants to apply state-of-the-art machine learning techniques across diverse biomedical data types. The workshop is designed around two main objectives:</p>
+<p>This workshop offers practical, hands-on tutorials in <strong>open biomedical multimodal AI research</strong>, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It focuses on two main goals:</p>
 <ol class="arabic simple">
-<li><p>Building foundational knowledge and skills in multimodal AI using open tools and datasets.</p></li>
-<li><p>Fostering collaborative exploration of real-world challenges in biomedical domains.</p></li>
+<li><p>Building foundational knowledge and skills in multimodal AI.</p></li>
+<li><p>Fostering open research practices to promote reproducible, reusable, and reliable AI.</p></li>
 </ol>
 <hr class="docutils" />
-<section id="learning-outcomes">
-<h3>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading">#</a></h3>
-<p>By the end of the tutorial, participants will:</p>
+<p><strong>Expected Outcomes</strong></p>
 <ul class="simple">
 <li><p>Explore approaches of leveraging multimodal data in biomedical AI research</p></li>
 <li><p>Gain hands-on experience with open-source tools and public datasets</p></li>
-<li><p>Learn reproducible machine learning workflows for multiple biomedical modalities</p></li>
-<li><p>Be equipped to adapt and apply multimodal AI methods in their own research</p></li>
+<li><p>Learn reproducible and reusable machine learning workflows for multiple biomedical modalities</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="target-audience-and-prerequisites">
-<h3>Target Audience and Prerequisites<a class="headerlink" href="#target-audience-and-prerequisites" title="Link to this heading">#</a></h3>
-<p>This tutorial is designed for researchers, students, and practitioners in biomedical engineering, healthcare AI, and related fields who:</p>
-<ul class="simple">
-<li><p>Have basic proficiency in Python programming</p></li>
-<li><p>Are familiar with Google Colaboratory (or willing to learn)</p></li>
-<li><p>Are interested in multimodal AI and open, reproducible research</p></li>
-<li><p>Can bring a laptop with internet access to participate fully</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="how-to-go-through-the-tutorial">
-<h3>How to go through the tutorial<a class="headerlink" href="#how-to-go-through-the-tutorial" title="Link to this heading">#</a></h3>
-<p>The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook—preferably in Google Colab—by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.</p>
-</section>
-<section id="resources-provided">
-<h3>Resources Provided<a class="headerlink" href="#resources-provided" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>All notebooks and data access links</p></li>
-<li><p>PyKale documentation and example pipelines</p></li>
-<li><p>Open discussion forum for continued collaboration</p></li>
-</ul>
-</section>
-</section>
-<section id="structure">
-<h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">#</a></h2>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
-    ├───config.py
-    ├───configs
-    │   ├───base.yml
-    │   ├───**.yml
-    ├───model.py
-    ├───models
-    │   ├───**.pt
-    ├───data
-    │   ├───**.csv
-    │   ├───**.**
-    ├───images
-    │   ├───**.png
-    │   ├───**.jpg
-    ├───**.py
-</pre></div>
-</div>
-<section id="part-1-foundational-tutorials-with-practical-examples">
-<h3>Part 1: Foundational Tutorials with Practical Examples<a class="headerlink" href="#part-1-foundational-tutorials-with-practical-examples" title="Link to this heading">#</a></h3>
-<p>This session introduces key concepts in multimodal AI and open research, followed by four focused, hands-on tutorials using <strong>public biomedical datasets</strong> and the <strong>PyKale multimodal AI library</strong>. Each tutorial follows a common pipeline:</p>
-<blockquote>
-<div><p><strong>Data loading → Preprocessing → Embedding → Prediction → Evaluation → Interpretation</strong></p>
-</div></blockquote>
+<section id="overview-of-the-materials">
+<h2>Overview of the Materials<a class="headerlink" href="#overview-of-the-materials" title="Link to this heading">#</a></h2>
+<p>This workshop covers the tutorials for <strong>four biomedical applications</strong> using the <strong><a class="reference external" href="https://github.com/pykale/pykale">PyKale multimodal AI library</a></strong>. You are welcome to focus on one application with exploration tasks or explore all four applications.</p>
 <p><strong>Tutorial Topics:</strong></p>
 <ol class="arabic simple">
 <li><p><strong>Brain Disorder Diagnosis</strong></p>
@@ -511,20 +455,40 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p>All tutorials run in <strong>Google Colaboratory</strong> and are designed for <strong>ease of reproducibility and extension</strong>.</p>
-</section>
-<hr class="docutils" />
-<section id="part-2-group-work">
-<h3>Part 2: Group Work<a class="headerlink" href="#part-2-group-work" title="Link to this heading">#</a></h3>
-<p>Participants will form small groups and select <strong>one of the four domains</strong> (Brain, Heart, Cancer, or Drug) to explore deeper:</p>
+<p>The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.</p>
+<p>The tutorials are organized as standardized file structure, which is shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+    ├───model.py
+    ├───models
+    │   ├───**.pt
+    ├───data
+    │   ├───**.csv
+    │   ├───**.**
+    ├───images
+    │   ├───**.png
+    │   ├───**.jpg
+    ├───**.py
+</pre></div>
+</div>
+<p>Each tutorial follows standardized machine learning pipelines:</p>
+<blockquote>
+<div><p><strong>Data loading → Preprocessing → Embedding → Prediction → Evaluation → Interpretation</strong></p>
+</div></blockquote>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>As shown in the file structure above, each tutorial has a <code class="docutils literal notranslate"><span class="pre">config.py</span></code> script that defines the base configuration settings. These settings can be customized or overridden using external <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files located in the <code class="docutils literal notranslate"><span class="pre">configs</span></code> directory. The configuration system allows for easy parameter tuning and reproducibility across different runs of the tutorials.</p>
+<p>Using a configuration file offers several benefits:</p>
 <ul class="simple">
-<li><p>Identify specific challenges (e.g., data integration, model generalisation, interpretability)</p></li>
-<li><p>Extend existing tutorial pipelines or propose alternative solutions</p></li>
-<li><p>Present findings and ideas to the group for discussion</p></li>
+<li><p><strong>Separation of concerns</strong>: Keeps the notebook focused on analysis and results, while experiment parameters are managed externally.</p></li>
+<li><p><strong>Reproducibility</strong>: Ensures that all experiment settings are recorded, making it easier to reproduce results consistently.</p></li>
+<li><p><strong>Flexibility</strong>: Allows rapid switching between different configurations without modifying the core implementation.</p></li>
+<li><p><strong>Scalability</strong>: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.</p></li>
 </ul>
-<p>Facilitators and demonstrators will provide support throughout, encouraging <strong>open sharing, creativity, and peer learning</strong>.</p>
-<hr class="docutils" />
-<p>This tutorial forms a <strong>launchpad for open, collaborative, and impactful biomedical AI research</strong>, aligning with the broader vision of EMBC and the global scientific community.</p>
+<p>Please refer to the provided configuration files for details on how to customize your experiment.</p>
 </section>
 </section>
 <section id="contributors">
@@ -545,9 +509,9 @@ document.write(`
 <!-- ```{tableofcontents}
 ``` -->
 </section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -604,16 +568,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-audience-and-prerequisites">Target Audience and Prerequisites</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-go-through-the-tutorial">How to go through the tutorial</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources-provided">Resources Provided</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-foundational-tutorials-with-practical-examples">Part 1: Foundational Tutorials with Practical Examples</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-group-work">Part 2: Group Work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-biomedical-multimodal-ai-research-workshop">Open Biomedical Multimodal AI Research Workshop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-materials">Overview of the Materials</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributors">Contributors</a></li>
