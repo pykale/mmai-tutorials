@@ -24,7 +24,7 @@ Consider the following questions to help familiarize yourself with the key conce
 
 - Have you practiced reproducible research methods?
 
-Consider the following questions to reflect on your experience and provide feedback:
+Consider the following questions, choose those that apply to you, to reflect on your experience:
 
 - Which multimodal AI applications are you most interested in?
 - What aspects of the tutorials did you find most helpful or challenging?
