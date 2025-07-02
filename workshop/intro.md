@@ -26,12 +26,10 @@ Consider the following questions to help familiarize yourself with the key conce
 
 Consider the following questions, choose those that apply to you, to reflect on your experience:
 
-- Which multimodal AI applications are you most interested in?
+- Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?
 - What aspects of the tutorials did you find most helpful or challenging?
 - How do you envision multimodal AI contributing to your own research?
 - What challenges do you currently face when working with multimodal data or methods?
-- Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?
-- Are there any specific tools or features you wish our AI Research Engineering team would develop to support your work?
 
 ### Discussion forum for Q&A etc
 
