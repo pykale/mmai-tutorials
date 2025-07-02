@@ -2,14 +2,15 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
-title: Introduction
+root: overview
+title: Overview
 options:
   numbered: true
 parts:
-#- caption: Workshops
-#  chapters:
-#  - file: workshops/embc2025/intro
+- caption: Workshop
+  chapters:
+  - file: workshop/intro
+  - file: workshop/schedule
 #    sections:
 #    - file: workshops/embc2025/aims
 #    - file: workshops/embc2025/synopsis
@@ -32,5 +33,5 @@ parts:
     - file: tutorials/brain-disorder-diagnosis/extend-reading/data-config
       title: Data & Config
   - file: tutorials/cardiac-hemodynamics-assessment/tutorial
-  - file: tutorials/drug-target-interaction/notebook
-  - file: tutorials/multiomics-cancer-classification/notebook
+  - file: tutorials/drug-target-interaction/tutorial
+  - file: tutorials/multiomics-cancer-classification/tutorial

@@ -1,21 +1,41 @@
 # Introduction
 
-## Open Biomedical Multimodal AI Research Workshop
+## Welcome
+
+### Open Biomedical Multimodal AI Research Workshop
 
 <!-- **EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark** -->
 
-This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It focuses on two main goals:
+This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
 
-1. Building foundational knowledge and skills in multimodal AI.
-2. Fostering open research practices to promote reproducible, reusable, and reliable AI.
+1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in leveraging multimodal data, including fusion, regularization, and interaction techniques for biomedical research.
+2. **Open research**: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the [GitHub repository](https://github.com/pykale/mmai-tutorials).
+3. **Reproducible pipelines with PyKale**: Promoting open research practices using `PyKale`, which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.
 
 ---
 
-**Expected Outcomes**
+### Questions to Consider
 
-- Explore approaches of leveraging multimodal data in biomedical AI research
-- Gain hands-on experience with open-source tools and public datasets
-- Learn reproducible and reusable machine learning workflows for multiple biomedical modalities
+Consider the following questions to help familiarize yourself with the key concepts of this workshop:
+
+- Have you used publicly available data or code in your work?
+
+- Have you ever shared data or code from your own research?
+
+- Have you practiced reproducible research methods?
+
+Consider the following questions to reflect on your experience and provide feedback:
+
+- Which multimodal AI applications are you most interested in?
+- What aspects of the tutorials did you find most helpful or challenging?
+- How do you envision multimodal AI contributing to your own research?
+- What challenges do you currently face when working with multimodal data or methods?
+- Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?
+- Are there any specific tools or features you wish our AI Research Engineering team would develop to support your work?
+
+### Discussion forum for Q&A etc
+
+We have a [discussion forum](https://github.com/pykale/mmai-tutorials/discussions) as our primary communication channel, e.g. for Q&A, information sharing, and discussion. Please ask questions or post information there, rather than emailing the organisers directly. This will help others to benefit from the answers and help build an engaging community. You will need a [GitHub account](https://github.com/join) to post questions.
 
 ---
 
@@ -79,43 +99,3 @@ Using a configuration file offers several benefits:
 - **Scalability**: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.
 
 Please refer to the provided configuration files for details on how to customize your experiment.
-
-[//]: # (### Part 2: Group Work)
-
-[//]: # (Participants will form small groups and select **one of the four domains** &#40;Brain, Heart, Cancer, or Drug&#41; to explore deeper:)
-
-[//]: # ()
-[//]: # (- Identify specific challenges &#40;e.g., data integration, model generalisation, interpretability&#41;)
-
-[//]: # (- Extend existing tutorial pipelines or propose alternative solutions)
-
-[//]: # (- Present findings and ideas to the group for discussion)
-
-[//]: # ()
-[//]: # (Facilitators and demonstrators will provide support throughout, encouraging **open sharing, creativity, and peer learning**.)
-
-[//]: # ()
-[//]: # (---)
-
-[//]: # ()
-[//]: # (This tutorial forms a **launchpad for open, collaborative, and impactful biomedical AI research**, aligning with the broader vision of EMBC and the global scientific community.)
-
-[//]: # ()
-
-## Contributors
-
-This workshop is made possible by contributions from:
-
-- **[Shuo Zhou](https://github.com/shuo-zhou)**
-- **[Xianyuan Liu](https://github.com/xianyuanliu)**
-- **[L. M. Riza Rizky](https://github.com/zaRizk7)**
-- **[Mohammod Naimul Islam Suvon](https://github.com/Mdnaimulislam)**
-- **[Kelly Ding](https://github.com/kellydingzx)**
-- **[Peter Charlton](https://github.com/peterhcharlton)**
-- **[Wenrui Fan](https://github.com/orgs/Shef-AIRE/people/wenruifan)**
-- **[Sina Tabakhi](https://github.com/SinaTabakhi)**
-- **[Jiayang Zhang](https://github.com/jiayang-zhang)**
-- **[Haiping Lu](https://github.com/haipinglu)**
-
-<!-- ```{tableofcontents}
-``` -->
