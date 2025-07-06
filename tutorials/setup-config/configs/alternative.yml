@@ -1,0 +1,4 @@
+DATASET:
+  DATA_DIR: "/data"
+MODEL:
+  NAME: "Transformer"

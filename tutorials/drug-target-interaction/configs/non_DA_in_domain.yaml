@@ -1,4 +1,4 @@
-# This is for in-domain experiments using DrugBAN without domain adaptation.
+# This is for in-domain configs using DrugBAN without domain adaptation.
 
 DATA:
   DATASET: "bindingdb"  # bindingdb, biosnap

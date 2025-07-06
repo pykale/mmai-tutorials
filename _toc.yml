@@ -24,6 +24,8 @@ parts:
 #    - file: workshops/ukomain2025/preparation
 - caption: Tutorials
   chapters:
+  - file: tutorials/setup-config/tutorial-0
+    title: Setup & Configuration
   - file: tutorials/cardiac-hemodynamics-assessment/tutorial
   - file: tutorials/brain-disorder-diagnosis/tutorial
     sections:
