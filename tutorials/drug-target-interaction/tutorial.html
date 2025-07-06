@@ -188,6 +188,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../brain-disorder-diagnosis/tutorial.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
@@ -248,24 +249,6 @@
     <i class="fas fa-rocket"></i>
   </button>
   <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/pykale/mmai-tutorials/main?urlpath=tree/tutorials/drug-target-interaction/tutorial.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Binder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="btn__text-container">Binder</span>
-</a>
-</li>
-      
       
       
       
@@ -604,7 +587,7 @@ print(&quot;NumPy version:&quot;, np.__version__)  # numpy should be 2.0.0
 </section>
 <section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
-<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/experiments/DA_cross_domain.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/DA_cross_domain.yaml</span></code></a> as an example.</p>
+<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs/DA_cross_domain.yaml"><code class="docutils literal notranslate"><span class="pre">configs/DA_cross_domain.yaml</span></code></a> as an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/drug-target-interaction
@@ -613,7 +596,7 @@ from configs import get_cfg_defaults
 
 cfg = get_cfg_defaults()  # Load the default settings from config.py
 cfg.merge_from_file(
-    &quot;experiments/DA_cross_domain.yaml&quot;
+    &quot;configs/DA_cross_domain.yaml&quot;
 )  # Update (or override) some of those settings using a custom YAML file
 </pre></div>
 </div>
@@ -1034,8 +1017,8 @@ trainer = pl.Trainer(
 <section id="task-2">
 <h3>Task 2<a class="headerlink" href="#task-2" title="Link to this heading">#</a></h3>
 <p>Turn off domain adaptation by updating the config file and re-running training and testing.</p>
-<p>Replace <code class="docutils literal notranslate"><span class="pre">experiments/DA_cross_domain.yaml</span></code> with <code class="docutils literal notranslate"><span class="pre">experiments/non_DA_cross_domain.yaml</span></code> in the Configuration section of Step 0 as shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;experiments/non_DA_cross_domain.yaml&quot;</span><span class="p">)</span>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">configs/DA_cross_domain.yaml</span></code> with <code class="docutils literal notranslate"><span class="pre">configs/non_DA_cross_domain.yaml</span></code> in the Configuration section of Step 0 as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/non_DA_cross_domain.yaml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <blockquote>
