@@ -36,4 +36,13 @@ parts:
     - file: tutorials/brain-disorder-diagnosis/extend-reading/data-config
       title: Data & Config
   - file: tutorials/drug-target-interaction/tutorial
-  - file: tutorials/multiomics-cancer-classification/tutorial
+  - file: tutorials/multiomics-cancer-classification/cancer-tutorial
+    sections:
+    - file: tutorials/multiomics-cancer-classification/extend-reading/data
+      title: Data
+    - file: tutorials/multiomics-cancer-classification/extend-reading/helper-functions
+      title: Helper Functions & Model Details
+    - file: tutorials/multiomics-cancer-classification/extend-reading/interpretation-study
+      title: Interpretation Study
+    - file: tutorials/multiomics-cancer-classification/extend-reading/extension-tasks
+      title: Extension Tasks
