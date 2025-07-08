@@ -62,7 +62,7 @@
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multiomics Cancer Classification" href="../multiomics-cancer-classification/tutorial.html" />
+    <link rel="next" title="Multiomics Cancer Classification" href="../multiomics-cancer-classification/cancer-tutorial.html" />
     <link rel="prev" title="Data and Configuration Arguments" href="../brain-disorder-diagnosis/extend-reading/data-config.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -197,7 +197,13 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Drug–Target Interaction Prediction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../multiomics-cancer-classification/tutorial.html">Multiomics Cancer Classification</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/cancer-tutorial.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -501,63 +507,17 @@ document.write(`
 <h3>Package Installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
 <p>The main package required for this tutorial is <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> is an open-source interdisciplinary machine learning library developed at the University of Sheffield, with a focus on applications in biomedical and scientific domains.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install --quiet git+https://github.com/pykale/pykale@main\
-    &amp;&amp; echo &quot;PyKale installed successfully ✅&quot; \
-    || echo &quot;Failed to install PyKale ❌&quot;
-</pre></div>
-</div>
-</div>
-</div>
 <p>Then, we install <code class="docutils literal notranslate"><span class="pre">PyG</span></code> (PyTorch Geometric) and related packages.</p>
 <p>Please <strong>do not</strong> re-run this session after installation completed. Runing this installation multiple times will trigger issues related to <code class="docutils literal notranslate"><span class="pre">PyG</span></code>. If you want to re-run this installation, please click the <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> on the top menu and choose <code class="docutils literal notranslate"><span class="pre">Disconnect</span> <span class="pre">and</span> <span class="pre">delete</span> <span class="pre">runtime</span></code> before installing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-import os
-os.environ[&#39;TORCH&#39;] = torch.__version__
-!pip install -q torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}.html
-!pip install -q torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}.html
-
-!pip install -q git+https://github.com/pyg-team/pytorch_geometric.git \
-    &amp;&amp; echo &quot;PyG installed successfully ✅&quot; \
-    || echo &quot;Failed to install PyG ❌&quot;
-
-!pip install rdkit-pypi \
-    &amp;&amp; echo &quot;rdkit installed successfully ✅&quot; \
-    || echo &quot;Failed to install rdkit ❌&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<p>Then, we install other required packages in <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">mmai-tutorials/requirements.txt</span></code></a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/drug-target-interaction
-
-!pip install --quiet -r /content/mmai-tutorials/requirements.txt \
-    &amp;&amp; echo &quot;Required packages installed successfully ✅&quot; \
-    || echo &quot;Failed to install required packages ❌&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<p>Please run the following block to reinstall <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> to avoid bugs.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
-
-!pip install --upgrade --force-reinstall numpy==2.0.0
-os.kill(os.getpid(), 9)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Install yacs</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install yacs
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install --quiet \
+    git+https://github.com/pykale/pykale@main \
+    yacs==0.1.8 \
+    torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric \
+    -f https://data.pyg.org/whl/torch-2.6.0+cu124.html \
+    &amp;&amp; echo &quot;pykale,yacs and wfdb installed successfully ✅&quot; \
+    || echo &quot;Failed to install pykale,yacs ❌&quot;
 </pre></div>
 </div>
 </div>
@@ -1068,7 +1028,7 @@ trainer = pl.Trainer(
       </div>
     </a>
     <a class="right-next"
-       href="../multiomics-cancer-classification/tutorial.html"
+       href="../multiomics-cancer-classification/cancer-tutorial.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

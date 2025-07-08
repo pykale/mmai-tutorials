@@ -60,10 +60,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multiomics-cancer-classification/tutorial';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multiomics-cancer-classification/cancer-tutorial';</script>
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Data" href="extend-reading/data.html" />
     <link rel="prev" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/tutorial.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -198,7 +199,13 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial.html">Drug–Target Interaction Prediction</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multiomics Cancer Classification</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Multiomics Cancer Classification</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/interpretation-study.html">Interpretation Study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/extension-tasks.html">Extension Tasks</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -253,7 +260,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/tutorial.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/cancer-tutorial.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -301,7 +308,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/multiomics-cancer-classification/tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/multiomics-cancer-classification/cancer-tutorial.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -331,7 +338,7 @@
       
       
       
-      <li><a href="../../_sources/tutorials/multiomics-cancer-classification/tutorial.ipynb" target="_blank"
+      <li><a href="../../_sources/tutorials/multiomics-cancer-classification/cancer-tutorial.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -431,37 +438,14 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-of-other-apis-in-model-py">Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model Training</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretrain-unimodal-encoders">Pretrain Unimodal Encoders</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-in-pretraining">What Happens in Pretraining?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretrain-unimodal-encoders">Pretrain Unimodal Encoders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-multimodal-model">Train the Multimodal Model</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-multimodal-model">Train the Multimodal Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here">What Happens Here?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-feature-importance-is-computed">How Feature Importance Is Computed?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-results-of-interpretation-study">Full results of interpretation study</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-tasks">Extension Tasks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation-study">Step 5: Interpretation Study</a></li>
 </ul>
             </nav>
         </div>
@@ -482,11 +466,6 @@ We use <strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<st
 <section id="step-0-environment-preparation">
 <h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
 <p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
-<p>Moreover, we provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. Two additional helper scripts are:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>: Defines the base configuration settings, which can be overridden using a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.</p></li>
-<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>: Defines the network structure of MOGONET.</p></li>
-</ul>
 <p>To prepare the helper functions and necessary materials, we download them from the GitHub repository.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -500,52 +479,18 @@ We use <strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<st
 <h3>Package Installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
 <p>The main package required for this tutorial is <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> is an open-source interdisciplinary machine learning library developed at the University of Sheffield, with a focus on applications in biomedical and scientific domains.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install --quiet git+https://github.com/pykale/pykale@main\
-    &amp;&amp; echo &quot;PyKale installed successfully ✅&quot; \
-    || echo &quot;Failed to install PyKale ❌&quot;
-</pre></div>
-</div>
-</div>
-</div>
 <p>Then, we install <code class="docutils literal notranslate"><span class="pre">PyG</span></code> (PyTorch Geometric) and related packages.</p>
-<p>[<strong>WARNING</strong>] Please don’t re-run this session after installation completed. Runing this installation multiple times will trigger issues related to <code class="docutils literal notranslate"><span class="pre">PyG</span></code>. If you want to re-run this installation, please click the <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> on the top menu and choose <code class="docutils literal notranslate"><span class="pre">Disconnect</span> <span class="pre">and</span> <span class="pre">delete</span> <span class="pre">runtime</span></code> before installing.</p>
+<p>[<strong>WARNING</strong>] Please <strong>do not</strong> re-run this session after installation completed. Runing this installation multiple times will trigger issues related to <code class="docutils literal notranslate"><span class="pre">PyG</span></code>. If you want to re-run this installation, please click the <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> on the top menu and choose <code class="docutils literal notranslate"><span class="pre">Disconnect</span> <span class="pre">and</span> <span class="pre">delete</span> <span class="pre">runtime</span></code> before installing.</p>
+<p>[Estimated running time] 3 mins</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-import os
-os.environ[&#39;TORCH&#39;] = torch.__version__
-!pip install -q torch-scatter -f https://data.pyg.org/whl/torch-${TORCH}.html
-!pip install -q torch-sparse -f https://data.pyg.org/whl/torch-${TORCH}.html
-!pip install -q git+https://github.com/pyg-team/pytorch_geometric.git \
-    &amp;&amp; echo &quot;PyG installed successfully ✅&quot; \
-    || echo &quot;Failed to install PyG ❌&quot;
-</pre></div>
-</div>
-</div>
-</div>
-<p>Then, we install other required packages in <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">mmai-tutorial/requirements.txt</span></code></a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/multiomics-cancer-classification
-
-!pip install --quiet -r /content/mmai-tutorials/requirements.txt \
-    &amp;&amp; echo &quot;Required packages installed successfully ✅&quot; \
-    || echo &quot;Failed to install required packages ❌&quot;
-!pip install yacs
-</pre></div>
-</div>
-</div>
-</div>
-<p>[optional] For Colab users, please run the following block to reinstall <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> to avoid bugs.</p>
-<p>[<strong>NOTE</strong>] It is normal to have a crash message after running the following block. That is because we replace the version of <code class="docutils literal notranslate"><span class="pre">NumPy</span></code>. Please ignore it and continue running the blocks behind. <strong>Please don’t re-run the above blocks after the crashing message.</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
-
-!pip install --upgrade --force-reinstall numpy==2.0.0
-os.kill(os.getpid(), 9)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install --quiet \
+    git+https://github.com/pykale/pykale@main \
+    yacs==0.1.8 \
+    torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric \
+    -f https://data.pyg.org/whl/torch-2.6.0+cu124.html \
+    &amp;&amp; echo &quot;pykale,yacs and wfdb installed successfully ✅&quot; \
+    || echo &quot;Failed to install pykale,yacs ❌&quot;
 </pre></div>
 </div>
 </div>
@@ -565,8 +510,8 @@ os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 </section>
 <section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
-<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/base.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a> as an example.</p>
-<p>First, we load the configuration from <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/base.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a>.</p>
+<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a> as an example.</p>
+<p>First, we load the configuration from <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/multiomics-cancer-classification
@@ -579,7 +524,7 @@ cfg.merge_from_file(&quot;experiments/BRCA.yaml&quot;)
 </div>
 </div>
 </div>
-<p>Besides, we also provide a configuration file for another dataset <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/experiments/MOGONET_ROSMAP_quick_test.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/ROSMAP.yaml</span></code></a>. Users can try with this dataset later.</p>
+<p>Besides, we also provide a configuration file for another dataset <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/experiments/ROSMAP.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/ROSMAP.yaml</span></code></a>. Users can try with this dataset later.</p>
 <p>In this tutorial, we list the hyperparameters we would like users to play with outside the <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cfg.SOLVER.MAX_EPOCHS_PRETRAIN</span></code>: Number of epochs in pre-training stage.</p></li>
@@ -615,69 +560,8 @@ cfg.DATASET.NUM_MODALITIES = 3
 </section>
 <section id="step-1-data-loading-and-preparation">
 <h2>Step 1: Data Loading and Preparation<a class="headerlink" href="#step-1-data-loading-and-preparation" title="Link to this heading">#</a></h2>
-<p>We use two multiomics benchmarks in this tutorial, BRCA and ROSMAP, which have been provided by the authors of MOGONET paper in <a class="reference external" href="https://github.com/txWang/MOGONET">their repository</a>.
-A brief description of BRCA and ROSMAP dataset is shown in the following
-table.</p>
-<p><strong>Table 1</strong>: Characteristics of the preprocessed BRCA multiomics dataset.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>Omics</p></th>
-<th class="head text-center"><p>#Training samples</p></th>
-<th class="head text-center"><p>#Test samples</p></th>
-<th class="head text-center"><p>#Features</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>mRNA expression</p></td>
-<td class="text-center"><p>612</p></td>
-<td class="text-center"><p>263</p></td>
-<td class="text-center"><p>1000</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>DNA methylation</p></td>
-<td class="text-center"><p>612</p></td>
-<td class="text-center"><p>263</p></td>
-<td class="text-center"><p>1000</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>miRNA expression</p></td>
-<td class="text-center"><p>612</p></td>
-<td class="text-center"><p>263</p></td>
-<td class="text-center"><p>503</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Table 2</strong>: Characteristics of the preprocessed ROSMAP multiomics dataset.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>Omics</p></th>
-<th class="head text-center"><p>#Training samples</p></th>
-<th class="head text-center"><p>#Test samples</p></th>
-<th class="head text-center"><p>#Features</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>mRNA expression</p></td>
-<td class="text-center"><p>245</p></td>
-<td class="text-center"><p>106</p></td>
-<td class="text-center"><p>200</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>DNA methylation</p></td>
-<td class="text-center"><p>245</p></td>
-<td class="text-center"><p>106</p></td>
-<td class="text-center"><p>200</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>miRNA expression</p></td>
-<td class="text-center"><p>245</p></td>
-<td class="text-center"><p>106</p></td>
-<td class="text-center"><p>200</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The data downloading function has been integrated in <code class="docutils literal notranslate"><span class="pre">kale.loaddata.multiomics_datasets.SparseMultiomicsDataset</span></code>, which also included loading data from the raw <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files and pre-processing data to the graphs we needed.</p>
-<p>This function transforms tabular multiomics data into graph datasets by treating each patient sample as a node and using molecular measurements as node features. For each modality, it reads feature matrices and labels from <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files, splits them into training and test sets.</p>
-<p>Then, it samples similaity networks from the graphs as shown in the top figure. It computes sample similarities to define edges between nodes. These similarities are used to construct sparse adjacency matrices, where only the most relevant connections are retained.</p>
-<p>Next, each graph is represented with node features, edge connections, and labels, encapsulating both feature and relational structure for downstream graph-based learning.</p>
+<p>We use two multiomics benchmarks in this tutorial, BRCA and ROSMAP, which have been provided by the authors of MOGONET paper in <a class="reference external" href="https://github.com/txWang/MOGONET">their repository</a>.</p>
+<p>If users are interested in more details regarding <strong>data organization, downloading, loading, and pre-processing</strong>, please refer to the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/data.html">Data page</a> of the tutorial.</p>
 <p>Delete the potential existing data and download new version:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -701,6 +585,7 @@ for modality in range(1, cfg.DATASET.NUM_MODALITIES + 1):
 </div>
 </div>
 <p>Then, we download, load, and pre-process the data by <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>.</p>
+<p>[Estimated running time] 20s</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
@@ -734,31 +619,8 @@ multiomics_data = SparseMultiomicsDataset(
 </section>
 <section id="step-2-model-definition">
 <h2>Step 2: Model Definition<a class="headerlink" href="#step-2-model-definition" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> applies <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code> and <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code> to define <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> class in <code class="docutils literal notranslate"><span class="pre">model.py</span></code>, which wraps all the necessary components of the MOGONET pipeline based on the configuration.</p>
-<p>This wrapper takes care of:</p>
-<ul class="simple">
-<li><p>Building GCN encoders for each omics modality.</p></li>
-<li><p>Creating linear classifiers for modality-specific outputs.</p></li>
-<li><p>Optionally initializing a VCDN decoder for multimodal fusion.</p></li>
-</ul>
-<p>MOGONET consists of two major sections: modality-specific encoders to encode graph data into latent space, and View Correlation Discovery Network (VCDN) for multimodal feature fusion, as shown in the top figure.
-The modalitity-specific encoders is called from <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code> and VCDN along with the prediction head is integrated in <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code>.</p>
-<section id="embedding-extraction">
-<h3>Embedding Extraction<a class="headerlink" href="#embedding-extraction" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> support graph convolutional neural networks (GCNs) in <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code>, which is used as the modality-specific encoders for MOGONET.
-GCNs are neural networks designed for graph data, which generalize convolution operations to graph-structured data by aggregating feature information from neighboring nodes.
-Through GCN encoders in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>, we can encode the raw data to graph embeddings.</p>
-</section>
-<section id="prediction-of-cancer-subtypes">
-<h3>Prediction of Cancer Subtypes<a class="headerlink" href="#prediction-of-cancer-subtypes" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> support prediction layers that output the final prediction of cancer subtypes according to the input embeddings.
-In <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code>, the VCDN of MOGONET fuses modality-specific predictions for final classification and captures correlations between different modalities at the decision level.
-Besides, <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> also call the linear classifier layer from <code class="docutils literal notranslate"><span class="pre">kale.predict.decode.LinearClassifier</span></code> to implement MOGONET.</p>
-</section>
-<section id="descriptions-of-other-apis-in-model-py">
-<h3>Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code><a class="headerlink" href="#descriptions-of-other-apis-in-model-py" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">model.py</span></code> also calls <code class="docutils literal notranslate"><span class="pre">kale.pipeline.multiomics_trainer</span></code>, which provides <code class="docutils literal notranslate"><span class="pre">MultiomicsTrainer</span></code>, the training and evaluation engine that orchestrates how unimodal encoders and the multimodal VCDN fusion layer work together. It supports pretraining and full training regimes.</p>
-<p>To initialize the model, we firstly call <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> from <code class="docutils literal notranslate"><span class="pre">model.py</span></code>.</p>
+<p>If users are interested in more details regarding the model, please refer to the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Function &amp; Model Definition</a> of the tutorial.</p>
+<p>To initialize the model, we firstly call <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> from <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from model import MogonetModel
@@ -776,7 +638,6 @@ mogonet_model = MogonetModel(cfg, dataset=multiomics_data)
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="step-3-model-training">
 <h2>Step 3: Model Training<a class="headerlink" href="#step-3-model-training" title="Link to this heading">#</a></h2>
@@ -800,16 +661,8 @@ trainer_pretrain = pl.Trainer(
 </div>
 </div>
 </div>
-<section id="what-happens-in-pretraining">
-<h4>What Happens in Pretraining?<a class="headerlink" href="#what-happens-in-pretraining" title="Link to this heading">#</a></h4>
-<p>During this phase:</p>
-<ul class="simple">
-<li><p>Encoders for each modality are trained separately using its own GCN and classifier.</p></li>
-<li><p>No information is shared across modalities yet.</p></li>
-<li><p>This step ensures omics-specific features are well-learned before fusion.</p></li>
-</ul>
-<p>Once pretrained, the model is ready for multimodal fusion training using the VCDN decoder.</p>
 <p>We pretrain the model by:</p>
+<p>[Estimated running time] 15s for 100 epochs</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer_pretrain.fit(network)
@@ -817,7 +670,6 @@ trainer_pretrain = pl.Trainer(
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="train-the-multimodal-model">
 <h3>Train the Multimodal Model<a class="headerlink" href="#train-the-multimodal-model" title="Link to this heading">#</a></h3>
@@ -838,14 +690,8 @@ trainer = pl.Trainer(
 </div>
 </div>
 </div>
-<section id="what-happens-here">
-<h4>What Happens Here?<a class="headerlink" href="#what-happens-here" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p>The pretrained unimodal encoders are reused as feature extractors.</p></li>
-<li><p>The VCDN decoder is trained to integrate outputs across all modalities.</p></li>
-<li><p>This setup allows joint learning from all omics data types for improved cancer classification performance.</p></li>
-</ul>
 <p>We start the multimodal training by:</p>
+<p>[Estimated running time] 1 min for 500 epochs</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer.fit(network)
@@ -855,17 +701,9 @@ trainer = pl.Trainer(
 </div>
 </section>
 </section>
-</section>
 <section id="step-4-evaluation">
 <h2>Step 4: Evaluation<a class="headerlink" href="#step-4-evaluation" title="Link to this heading">#</a></h2>
 <p>Once training is complete, we evaluate the model on the test set using <code class="docutils literal notranslate"><span class="pre">trainer.test()</span></code>.</p>
-<section id="what-is-included-in-this-step">
-<h3>What is included in this step?<a class="headerlink" href="#what-is-included-in-this-step" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Load the best model checkpoint.</p></li>
-<li><p>Run the model on the test split from the dataset.</p></li>
-<li><p>Return classification metrics such as accuracy, F1 score, etc.</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer.test(network)
@@ -874,26 +712,11 @@ trainer = pl.Trainer(
 </div>
 </div>
 </section>
-</section>
-<section id="step-5-interpretation">
-<h2>Step 5: Interpretation<a class="headerlink" href="#step-5-interpretation" title="Link to this heading">#</a></h2>
-<p>To better understand which features among multiomics data are the key biomarkers in cancer subtype classification and how decisions were made by the model, we perform an interpretation study to identify important biomarkers.
-We identify the most influential features (biomarkers) using <strong>feature-masking-based importance analysis</strong>.</p>
-<p>We use <code class="docutils literal notranslate"><span class="pre">kale.interpret</span></code> to perform interpretation, where a function that systematically masks input features and observes the effect on performance—highlighting which features are most important for classification is provided.</p>
-<section id="how-feature-importance-is-computed">
-<h3>How Feature Importance Is Computed?<a class="headerlink" href="#how-feature-importance-is-computed" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">select_top_features_by_masking</span></code> function in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> implements a feature ablation approach to estimate feature importance for multi-omics data.</p>
-<p>For each feature in each modality:</p>
-<ul class="simple">
-<li><p>Temporarily mask (zero out) the feature.</p></li>
-<li><p>Evaluate the model on the test set.</p></li>
-<li><p>Measure the performance drop (e.g., in F1 score). The larger the drop, the more important the feature is.</p></li>
-<li><p>Importance is calculated as <span class="math notranslate nohighlight">\(Importance_j=(FullMetric-MaskedMetric_j)\times d\)</span>,
-where <span class="math notranslate nohighlight">\(j\)</span> is the feature index and <span class="math notranslate nohighlight">\(d\)</span> is the number of features in the modality (to scale the effect)
-For demonstration, we use <strong>F1 score</strong> as the metric to calculate feature importance.</p></li>
-</ul>
+<section id="step-5-interpretation-study">
+<h2>Step 5: Interpretation Study<a class="headerlink" href="#step-5-interpretation-study" title="Link to this heading">#</a></h2>
+<p>We use <code class="docutils literal notranslate"><span class="pre">kale.interpret</span></code> to perform interpretation, where a function that systematically masks input features and observes the effect on performance—highlighting which features are most important for classification is provided. Please refer to <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpret Study page</a> for more details.</p>
 <p>Because the interpretation study needs us to mask one feature and observe the performance drop, we firstly define the trainer for the interpretation experiments.</p>
-<p>[<strong>NOTE</strong>] To reduce the running time in the tutorial, we set <code class="docutils literal notranslate"><span class="pre">cfg.SOLVER.MAX_EPOCHS</span></code> to 1. Therefore, the final results may be different from what they should be. Users can try to increase <code class="docutils literal notranslate"><span class="pre">cfg.SOLVER.MAX_EPOCHS</span></code> later.</p>
+<p>[<strong>NOTE</strong>] The final results may be different from what they should be because we only train the model for a few epochs to reduce waiting time in this tutorial.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.interpret.model_weights import select_top_features_by_masking
@@ -921,7 +744,7 @@ logging.getLogger(&quot;pytorch_lightning&quot;).setLevel(logging.ERROR)
 </div>
 </div>
 <p>Run the interpretation experiments:</p>
-<p>[<strong>WARNING</strong>] Because the following block will train the model for 2,503 times for BRCA dataset, the following block may take about 6 minutes.</p>
+<p>[Estimated running time] Because the following block will train the model for 2,503 times for BRCA dataset, the following block may take about 6 minutes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>f1_key = &quot;F1&quot; if multiomics_data.num_classes == 2 else &quot;F1 macro&quot;
@@ -948,65 +771,8 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
 </div>
 </div>
 </section>
-<section id="full-results-of-interpretation-study">
-<h3>Full results of interpretation study<a class="headerlink" href="#full-results-of-interpretation-study" title="Link to this heading">#</a></h3>
-<p>We attach the full results of most important features reported in the original paper for reference:</p>
-<p><strong>Table 3</strong>: Important features in BRCA dataset.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>Omics</p></th>
-<th class="head text-center"><p>Importance features</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>mRNA expression</p></td>
-<td class="text-center"><p>SOX11, AMY1A, SLC6A15, FABP7, SLC6A14, SLC6A2, FGFBP1, DSG1, UGT8, ANKRD45, PI3, SERPINB5, COL11A2, ARHGEF4, SOX10</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>DNA methylation</p></td>
-<td class="text-center"><p>GPR37L1, MIR563, OR1J4, ATP10B, KRTAP3-3, FLJ41941, TMEM207, CDH26, MT1DP</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>miRNA expression</p></td>
-<td class="text-center"><p>hsa-mir-205, hsa-mir-187, hsa-mir-452, hsa-mir-20b, hsa-mir-224, hsa-mir-204</p></td>
-</tr>
-</tbody>
-</table>
+<div class="toctree-wrapper compound">
 </div>
-<p><strong>Table 4</strong>: Important features in ROSMAP dataset.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-center"><p>Omics</p></th>
-<th class="head text-center"><p>Importance features</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-center"><p>mRNA expression</p></td>
-<td class="text-center"><p>NPNT, CDK18, KIF5A, SPACA6, TCEA3, SYTL1, ARRDC2, APLN</p></td>
-</tr>
-<tr class="row-odd"><td class="text-center"><p>DNA methylation</p></td>
-<td class="text-center"><p>TMC4, AGA, HYAL2, CCL3, TTC15</p></td>
-</tr>
-<tr class="row-even"><td class="text-center"><p>miRNA expression</p></td>
-<td class="text-center"><p>hsa-miR-423-3p, hsa-miR-33a, hsa-miR-640, hsa-miR-362-3p, hsa-miR-491-5p, hsa-miR-206, hsa-miR-548b-3p, hsa-miR-127-3p, hsa-miR-106a_hsa-miR-17, hsa-miR-424, hsa-miR-577, hsa-miR-873, hsa-miR-651, hsa-miR-199b-5p, hsa-miR-192, hsa-miR-199a-5p, hsv1-miR-H1</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-</section>
-<section id="extension-tasks">
-<h2>Extension Tasks<a class="headerlink" href="#extension-tasks" title="Link to this heading">#</a></h2>
-<section id="task-1-unimodal-v-s-multimodal">
-<h3>Task 1 - Unimodal v.s. Multimodal<a class="headerlink" href="#task-1-unimodal-v-s-multimodal" title="Link to this heading">#</a></h3>
-<p>Users can try to set the <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.NUM_MODALITIES=1</span></code> to try only using single mRNA experission for prediction and compare its results with the ones using all three modalities.</p>
-</section>
-<section id="task-2-try-another-dataset">
-<h3>Task 2 - Try another dataset<a class="headerlink" href="#task-2-try-another-dataset" title="Link to this heading">#</a></h3>
-<p>To try ROSMAP dataset, replace <code class="docutils literal notranslate"><span class="pre">&quot;experiments/BRCA.yaml&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;experiments/ROSMAP.yaml&quot;</span></code> in the following line under Configuration section and run the pipeline again.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;experiments/BRCA.yaml&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1048,6 +814,15 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
         <p class="prev-next-title">Drug–Target Interaction Prediction</p>
       </div>
     </a>
+    <a class="right-next"
+       href="extend-reading/data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1070,37 +845,14 @@ for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-of-other-apis-in-model-py">Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model Training</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretrain-unimodal-encoders">Pretrain Unimodal Encoders</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-in-pretraining">What Happens in Pretraining?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretrain-unimodal-encoders">Pretrain Unimodal Encoders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-multimodal-model">Train the Multimodal Model</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-multimodal-model">Train the Multimodal Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here">What Happens Here?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-feature-importance-is-computed">How Feature Importance Is Computed?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-results-of-interpretation-study">Full results of interpretation study</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-tasks">Extension Tasks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation-study">Step 5: Interpretation Study</a></li>
 </ul>
   </nav></div>
 

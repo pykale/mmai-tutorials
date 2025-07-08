@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Extended Exploration &#8212; PyKale</title>
+    <title>Helper Functions and Model Definition &#8212; PyKale</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/brain-disorder-diagnosis/extend-reading/extension-tasks';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multiomics-cancer-classification/extend-reading/helper-functions';</script>
     <link rel="icon" href="../../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Helper Functions" href="helper-functions.html" />
-    <link rel="prev" title="Brain Disorder Diagnosis" href="../tutorial.html" />
+    <link rel="next" title="Interpretation Study - Feature Masking Importance Analysis" href="interpretation-study.html" />
+    <link rel="prev" title="Data" href="data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,18 +190,18 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tutorial.html">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data-config.html">Data &amp; Config</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../brain-disorder-diagnosis/tutorial.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drug-target-interaction/tutorial.html">Drug–Target Interaction Prediction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../multiomics-cancer-classification/cancer-tutorial.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../cancer-tutorial.html">Multiomics Cancer Classification</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Helper Functions &amp; Model Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interpretation-study.html">Interpretation Study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
 </ul>
@@ -275,7 +275,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/brain-disorder-diagnosis/extend-reading/extension-tasks.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/multiomics-cancer-classification/extend-reading/helper-functions.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +305,7 @@
       
       
       
-      <li><a href="../../../_sources/tutorials/brain-disorder-diagnosis/extend-reading/extension-tasks.md" target="_blank"
+      <li><a href="../../../_sources/tutorials/multiomics-cancer-classification/extend-reading/helper-functions.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -389,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Extended Exploration</h1>
+    <h1>Helper Functions and Model Definition</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,10 +399,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-different-atlases-and-fcs-20120-minutes">Task 1: Explore Different Atlases and FCs <em>(20–120+ minutes)</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-better-phenotypes-3060-minutes">Task 2: Better Phenotypes? <em>(30–60+ minutes)</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-more-sites-better-generalization-2060-minutes">Task 3: More Sites → Better Generalization? <em>(20–60+ minutes)</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-solutions">Exercise Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition-in-model-py">Model Definition in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-of-other-apis-in-model-py">Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -414,131 +417,43 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="extended-exploration">
-<h1>Extended Exploration<a class="headerlink" href="#extended-exploration" title="Link to this heading">#</a></h1>
-<p>For those eager to explore further or just curious to tweak configurations to enhance performance, we’ve prepared a set of optional tasks. These tasks are designed to encourage experimentation without requiring significant changes to the core code.</p>
-<hr class="docutils" />
-<section id="task-1-explore-different-atlases-and-fcs-20120-minutes">
-<h2>Task 1: Explore Different Atlases and FCs <em>(20–120+ minutes)</em><a class="headerlink" href="#task-1-explore-different-atlases-and-fcs-20120-minutes" title="Link to this heading">#</a></h2>
-<p>We provide multiple brain atlases and functional connectivity (FC) embeddings to experiment with. You can create a new configuration file or simply uncomment the <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.ATLAS</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.FC</span></code> options in the configuration section.</p>
-<p><strong>Open-ended questions:</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="helper-functions-and-model-definition">
+<h1>Helper Functions and Model Definition<a class="headerlink" href="#helper-functions-and-model-definition" title="Link to this heading">#</a></h1>
+<section id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">#</a></h2>
+<p>We provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. Two additional helper scripts are:</p>
 <ul class="simple">
-<li><p>Is selecting an appropriate atlas beneficial for building accurate brain disorder diagnosis models?</p></li>
-<li><p>If so, how much improvement can we expect from choosing the best atlas?</p></li>
-<li><p>Does the best-performing atlas help interpret and localize key ROIs relevant to ASD?</p></li>
-<li><p>Or is the choice of atlas less impactful than the choice of functional connectivity method?</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>: Defines the base configuration settings, which can be overridden using a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>: Defines the network structure of MOGONET.</p></li>
 </ul>
 </section>
-<hr class="docutils" />
-<section id="task-2-better-phenotypes-3060-minutes">
-<h2>Task 2: Better Phenotypes? <em>(30–60+ minutes)</em><a class="headerlink" href="#task-2-better-phenotypes-3060-minutes" title="Link to this heading">#</a></h2>
-<p>Our results show that using only <strong>site labels</strong> already leads to performance improvements. In contrast to Kunda et al. (2022) who used site labels for domain adaptation and treated other phenotypic variables merely as additional features, our implementation in <strong>PyKale</strong> allows for <strong>full integration of all available phenotypic variables</strong> into the domain adaptation process when specified.</p>
-<p>This raises a key question: could leveraging <strong>a richer set of phenotypes</strong> beyond site information further enhance multi-site model generalization?</p>
-<p><strong>Questions to explore:</strong></p>
+<section id="model-definition-in-model-py">
+<h2>Model Definition in <code class="docutils literal notranslate"><span class="pre">model.py</span></code><a class="headerlink" href="#model-definition-in-model-py" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> applies <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code> and <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code> to define <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> class in <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>, which wraps all the necessary components of the MOGONET pipeline based on the configuration.</p>
+<p>This wrapper takes care of:</p>
 <ul class="simple">
-<li><p>Is the <strong>site label alone</strong> truly sufficient for effective multi-site data integration?</p></li>
-<li><p>Are there phenotypes with <strong>distinct distributions across sites</strong> that may introduce bias or noise?</p></li>
-<li><p>Can incorporating those phenotypes improve performance beyond site-only models?</p></li>
+<li><p>Building GCN encoders for each omics modality.</p></li>
+<li><p>Creating linear classifiers for modality-specific outputs.</p></li>
+<li><p>Optionally initializing a VCDN decoder for multimodal fusion.</p></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Given that there are many missing values as seen previously, this task might be challenging for users who are unfamiliar with Python and <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, as it may require manual crafting for encoding or imputation as done in <code class="docutils literal notranslate"><span class="pre">preprocess_phenotypic_data</span></code>.</p>
-</div>
+<p>MOGONET consists of two major sections: modality-specific encoders to encode graph data into latent space, and View Correlation Discovery Network (VCDN) for multimodal feature fusion, as shown in the top figure.
+The modalitity-specific encoders is called from <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code> and VCDN along with the prediction head is integrated in <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code>.</p>
+<section id="embedding-extraction">
+<h3>Embedding Extraction<a class="headerlink" href="#embedding-extraction" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> support graph convolutional neural networks (GCNs) in <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code>, which is used as the modality-specific encoders for MOGONET.
+GCNs are neural networks designed for graph data, which generalize convolution operations to graph-structured data by aggregating feature information from neighboring nodes.
+Through GCN encoders in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>, we can encode the raw data to graph embeddings.</p>
 </section>
-<hr class="docutils" />
-<section id="task-3-more-sites-better-generalization-2060-minutes">
-<h2>Task 3: More Sites → Better Generalization? <em>(20–60+ minutes)</em><a class="headerlink" href="#task-3-more-sites-better-generalization-2060-minutes" title="Link to this heading">#</a></h2>
-<p>With ten sites, domain adaptation shows improved generalization under the <strong>leave-one-group-out (LPGO)</strong> setting. This raises new questions:</p>
-<p><strong>Things to consider:</strong></p>
-<ul class="simple">
-<li><p>Does domain adaptation continue to help as we include <strong>more sites</strong>, or is the benefit limited to fewer-site scenarios?</p></li>
-<li><p>Is there a <strong>saturation point</strong> where adding more sites stops improving generalization, or even worsens it?</p></li>
-<li><p>Could fewer but more homogeneous sites be better than many heterogeneous ones?</p></li>
-</ul>
-<hr class="docutils" />
-<p>These tasks are designed to help you dive deeper into model robustness, generalizability, and interpretability in real-world neuroimaging settings. Feel free to explore, question, and iterate!</p>
-<p>Hope you enjoy this tutorial!</p>
+<section id="prediction-of-cancer-subtypes">
+<h3>Prediction of Cancer Subtypes<a class="headerlink" href="#prediction-of-cancer-subtypes" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> support prediction layers that output the final prediction of cancer subtypes according to the input embeddings.
+In <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code>, the VCDN of MOGONET fuses modality-specific predictions for final classification and captures correlations between different modalities at the decision level.
+Besides, <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> also call the linear classifier layer from <code class="docutils literal notranslate"><span class="pre">kale.predict.decode.LinearClassifier</span></code> to implement MOGONET.</p>
 </section>
-<section id="exercise-solutions">
-<h2>Exercise Solutions<a class="headerlink" href="#exercise-solutions" title="Link to this heading">#</a></h2>
-<div class="solution dropdown admonition" id="solution-find-number-of-samples">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-number-of-samples"> Exercise 1</a></p>
-<section id="solution-content">
-<p>There are 722 samples found. To find the number of samples,
-we can use <code class="docutils literal notranslate"><span class="pre">len(phenotypes)</span></code> which will output 722.</p>
+<section id="descriptions-of-other-apis-in-model-py">
+<h3>Descriptions of Other APIs in <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a><a class="headerlink" href="#descriptions-of-other-apis-in-model-py" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a> also calls <code class="docutils literal notranslate"><span class="pre">kale.pipeline.multiomics_trainer</span></code>, which provides <code class="docutils literal notranslate"><span class="pre">MultiomicsTrainer</span></code>, the training and evaluation engine that orchestrates how unimodal encoders and the multimodal VCDN fusion layer work together. It supports pretraining and full training regimes.</p>
 </section>
-</div>
-<div class="solution dropdown admonition" id="solution-find-roi-count">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-roi-count"> Exercise 2</a></p>
-<section id="solution-content">
-<p>There are 32 ROIs found. To find the number of ROIs,
-we can use <code class="docutils literal notranslate"><span class="pre">len(rois)</span></code> which will output 32.</p>
-</section>
-</div>
-<div class="solution dropdown admonition" id="solution-find-number-of-phenotypes">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-number-of-phenotypes"> Exercise 3</a></p>
-<section id="solution-content">
-<p>Looking at the dataframe, there are 104 phenotypes based on
-the number of columns.</p>
-</section>
-</div>
-<div class="solution dropdown admonition" id="solution-find-number-of-phenotypes-after-preprocess">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-number-of-phenotypes-after-preprocess"> Exercise 4</a></p>
-<section id="solution-content">
-<p>By calling <code class="docutils literal notranslate"><span class="pre">phenotypes.shape</span></code>, we can inspect the number
-of rows and columns. We can see that there are 19 encoded
-phenotypes.</p>
-<p>If we breakdown the encoded phenotypes:</p>
-<ul class="simple">
-<li><p>Two are continuous variables of <code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code> and <code class="docutils literal notranslate"><span class="pre">FIQ</span></code>.</p></li>
-<li><p>Ten from the encoded <code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code> variable.</p></li>
-<li><p>Two from the encoded <code class="docutils literal notranslate"><span class="pre">SEX</span></code> variable.</p></li>
-<li><p>Three from the encoded <code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code> variable.</p></li>
-<li><p>Two from the encoded <code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code> variable.</p></li>
-</ul>
-<p>Thus, in total we have 19 encoded phenotypes.</p>
-</section>
-</div>
-<div class="solution dropdown admonition" id="solution-understanding-one-hot-encoding">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#understanding-one-hot-encoding"> Exercise 5</a></p>
-<section id="solution-content">
-<p>One-hot encoding essentially maps the categories into a binary vector space where each category is represented by a unique vector with a single high (commonly set to one) value and all other positions set to zero. It will increase the dimension given the number of categories found within a categorical variable.</p>
-</section>
-</div>
-<div class="solution dropdown admonition" id="solution-find-total-models-produced">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-total-models-produced"> Exercise 6</a></p>
-<section id="solution-content">
-<p>To estimate the total number of models trained:</p>
-<ul class="simple">
-<li><p>SKF: <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of repetition and <code class="docutils literal notranslate"><span class="pre">k</span></code> is the fold.</p></li>
-<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">C(m,</span> <span class="pre">p)</span> <span class="pre">=</span> <span class="pre">m!</span> <span class="pre">/</span> <span class="pre">(p!</span> <span class="pre">*</span> <span class="pre">(m</span> <span class="pre">-</span> <span class="pre">p)!)</span></code>, where <code class="docutils literal notranslate"><span class="pre">m</span></code> is the total number of groups and <code class="docutils literal notranslate"><span class="pre">p</span></code> is the number of group left out for testing.</p></li>
-</ul>
-<p>Following this formula we can obtain:</p>
-<ul class="simple">
-<li><p>SKF: <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">*</span> <span class="pre">10</span> <span class="pre">=</span> <span class="pre">50</span></code></p></li>
-<li><p>LPGO: <code class="docutils literal notranslate"><span class="pre">5!</span> <span class="pre">/</span> <span class="pre">(2!</span> <span class="pre">*</span> <span class="pre">(5</span> <span class="pre">-</span> <span class="pre">2)!)</span> <span class="pre">=</span> <span class="pre">10</span></code></p></li>
-</ul>
-</section>
-</div>
-<div class="solution dropdown admonition" id="solution-find-the-aggregate-in-cv-results">
-
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-the-aggregate-in-cv-results"> Exercise 7</a></p>
-<section id="solution-content">
-<p>Some notable examples found in <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> include:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mean_test_&lt;metric&gt;</span></code>: The mean performance score of the specified metric across all validation folds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">std_test_&lt;metric&gt;</span></code>: The standard deviation of the metric across the folds, providing a measure of variability.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rank_test_&lt;metric&gt;</span></code>: The rank of each hyperparameter configuration based on <code class="docutils literal notranslate"><span class="pre">mean_test_&lt;metric&gt;</span></code>, with lower values indicating better performance.</p></li>
-</ul>
-<p>These entries allow for easy comparison and selection of the best-performing model configuration with different trade-offs, even when having <code class="docutils literal notranslate"><span class="pre">refit</span></code> set to a specific metric.</p>
-</section>
-</div>
 </section>
 </section>
 
@@ -555,7 +470,7 @@ phenotypes.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./tutorials/brain-disorder-diagnosis/extend-reading"
+            path: "./tutorials/multiomics-cancer-classification/extend-reading"
         },
         predefinedOutput: true
     }
@@ -573,20 +488,20 @@ phenotypes.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../tutorial.html"
+       href="data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Brain Disorder Diagnosis</p>
+        <p class="prev-next-title">Data</p>
       </div>
     </a>
     <a class="right-next"
-       href="helper-functions.html"
+       href="interpretation-study.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Helper Functions</p>
+        <p class="prev-next-title">Interpretation Study - Feature Masking Importance Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -606,10 +521,13 @@ phenotypes.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-different-atlases-and-fcs-20120-minutes">Task 1: Explore Different Atlases and FCs <em>(20–120+ minutes)</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-better-phenotypes-3060-minutes">Task 2: Better Phenotypes? <em>(30–60+ minutes)</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-more-sites-better-generalization-2060-minutes">Task 3: More Sites → Better Generalization? <em>(20–60+ minutes)</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-solutions">Exercise Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition-in-model-py">Model Definition in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-of-other-apis-in-model-py">Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
