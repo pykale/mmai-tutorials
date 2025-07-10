@@ -60,7 +60,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multiomics-cancer-classification/cancer-tutorial';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multiomics-cancer-classification/tutorial-cancer';</script>
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -260,7 +260,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/cancer-tutorial.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/tutorial-cancer.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +308,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/multiomics-cancer-classification/cancer-tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/multiomics-cancer-classification/tutorial-cancer.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -338,7 +338,7 @@
       
       
       
-      <li><a href="../../_sources/tutorials/multiomics-cancer-classification/cancer-tutorial.ipynb" target="_blank"
+      <li><a href="../../_sources/tutorials/multiomics-cancer-classification/tutorial-cancer.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -510,8 +510,8 @@ os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 </section>
 <section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
-<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a> as an example.</p>
-<p>First, we load the configuration from <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/experiments/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/BRCA.yaml</span></code></a>.</p>
+<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/configs/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">configs/BRCA.yaml</span></code></a> as an example.</p>
+<p>First, we load the configuration from <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/configs/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">configs/BRCA.yaml</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%cd /content/mmai-tutorials/tutorials/multiomics-cancer-classification
@@ -519,12 +519,12 @@ os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 from config import get_cfg_defaults
 
 cfg = get_cfg_defaults()
-cfg.merge_from_file(&quot;experiments/BRCA.yaml&quot;)
+cfg.merge_from_file(&quot;configs/BRCA.yaml&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Besides, we also provide a configuration file for another dataset <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/experiments/ROSMAP.yaml"><code class="docutils literal notranslate"><span class="pre">experiments/ROSMAP.yaml</span></code></a>. Users can try with this dataset later.</p>
+<p>Besides, we also provide a configuration file for another dataset <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/configs/ROSMAP.yaml"><code class="docutils literal notranslate"><span class="pre">configs/ROSMAP.yaml</span></code></a>. Users can try with this dataset later.</p>
 <p>In this tutorial, we list the hyperparameters we would like users to play with outside the <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cfg.SOLVER.MAX_EPOCHS_PRETRAIN</span></code>: Number of epochs in pre-training stage.</p></li>

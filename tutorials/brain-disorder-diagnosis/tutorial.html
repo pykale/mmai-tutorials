@@ -197,7 +197,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial.html">Drug–Target Interaction Prediction</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/cancer-tutorial.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study</a></li>
@@ -660,7 +660,7 @@ This function supports automated downloading via <a class="reference external" h
 <p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-data-loading"><span class="std std-ref">configuration arguments for data loading</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">data</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
 
 <span class="n">fc</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">,</span> <span class="n">rois</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span>
     <span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">DATA_DIR</span><span class="p">,</span>
@@ -703,7 +703,7 @@ describing the subjects.</p></li>
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_connectivity_matrix</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_connectivity_matrix</span>
 
 <span class="n">sub_idx</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">sub_id</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sub_idx</span><span class="p">][</span><span class="s2">&quot;SUB_ID&quot;</span><span class="p">]</span>
@@ -952,7 +952,7 @@ available ROI.</p></li>
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
 
 <span class="c1"># Prepare phenotypic values for plotting</span>
 <span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
@@ -996,7 +996,7 @@ available ROI.</p></li>
 <p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#categorical-variables-from-phenotypic-data"><span class="std std-ref">categorical variables from phenotypic data</span></a> used in this tutorial.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_phenotypic_data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_phenotypic_data</span>
 
 <span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">preprocess_phenotypic_data</span><span class="p">(</span>
     <span class="n">phenotypes</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">PHENOTYPE</span><span class="o">.</span><span class="n">STANDARDIZE</span>
@@ -1228,7 +1228,7 @@ variables have been one-hot-encoded.</p>
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
 
 
 <span class="c1"># Mapping from column names to readable labels</span>
@@ -1386,7 +1386,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multi_domain_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_param_grid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">helpers.parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_param_grid</span>
 
 <span class="c1"># Configuration with cv and random_state/seed included</span>
 <span class="n">trainer_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;PARAM_GRID&quot;</span><span class="p">}</span>
@@ -1522,7 +1522,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <p>The key question now is: <strong>Does domain adaptation actually improve predictive performance under a leave-one-group-out setting, where generalization to unseen sites is critical?</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_results</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">compile_results</span>
 
 <span class="c1"># Compile the cross-validation results into a summary table,</span>
 <span class="c1"># sorting by the model with the highest test accuracy across CV folds</span>
