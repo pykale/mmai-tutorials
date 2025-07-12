@@ -27,7 +27,7 @@ parts:
   - file: tutorials/setup-config/tutorial-0
     title: Setup & Configuration
   - file: tutorials/cardiac-hemodynamics-assessment/tutorial
-  - file: tutorials/brain-disorder-diagnosis/tutorial
+  - file: tutorials/brain-disorder-diagnosis/tutorial-brain
     sections:
     - file: tutorials/brain-disorder-diagnosis/extend-reading/extension-tasks
       title: Extension Tasks
