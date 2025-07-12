@@ -44,7 +44,7 @@ It returns four values, including:
 
 - **`coords`** (`np.ndarray`): ROI coordinates for visualization purposes.
 
-[Back to the main tutorial](../tutorial.ipynb#data-loading)
+[Back to the main tutorial](https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial.html#data-loading)
 
 ## Categorical Variables from Phenotypic Data
 
@@ -135,7 +135,7 @@ The function returns the following:
     - `HANDEDNESS_CATEGORY`
     - `EYE_STATUS_AT_SCAN`
 
-[Back to the main tutorial](../tutorial.ipynb#data-preprocessing)
+[Back to the main tutorial](https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial.html#data-preprocessing)
 
 ## Configuration Arguments for Cross-Validation
 
@@ -155,7 +155,7 @@ In this tutorial, we specify the following arguments for cross-validation:
 - **`random_state`**: Seed for random number generators for reproducibility.
   - *Default:* `None`
 
-[Back to the main tutorial](../tutorial.ipynb#cross-validation-split)
+[Back to the main tutorial](https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial.html#cross-validation-split)
 
 ## Hyperparameter Grid
 
@@ -220,4 +220,4 @@ We also specify the hyperparameter search strategy and other training parameters
 - **`random_state`**: Seed for random number generators for reproducibility.
   - *Default:* `None`
 
-[Back to the main tutorial](../tutorial.ipynb#baseline-and-proposed-model)
+[Back to the main tutorial](https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial.html#baseline-and-proposed-model)
