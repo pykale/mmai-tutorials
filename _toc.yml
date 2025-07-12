@@ -35,7 +35,7 @@ parts:
       title: Helper Functions
     - file: tutorials/brain-disorder-diagnosis/extend-reading/data-config
       title: Data & Config
-  - file: tutorials/drug-target-interaction/tutorial
+  - file: tutorials/drug-target-interaction/tutorial-drug
   - file: tutorials/multiomics-cancer-classification/tutorial-cancer
     sections:
     - file: tutorials/multiomics-cancer-classification/extend-reading/data
