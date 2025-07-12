@@ -68,28 +68,6 @@ This repository uses pre-commit hooks to ensure code quality and consistency. To
    pre-commit run --all-files
    ```
 
-[//]: # (### Part 2: Group Work)
-
-[//]: # (Participants will form small groups and select **one of the four domains** &#40;Brain, Heart, Cancer, or Drug&#41; to explore deeper:)
-
-[//]: # ()
-[//]: # (- Identify specific challenges &#40;e.g., data integration, model generalisation, interpretability&#41;)
-
-[//]: # (- Extend existing tutorial pipelines or propose alternative solutions)
-
-[//]: # (- Present findings and ideas to the group for discussion)
-
-[//]: # ()
-[//]: # (Facilitators and demonstrators will provide support throughout, encouraging **open sharing, creativity, and peer learning**.)
-
-[//]: # ()
-[//]: # (---)
-
-[//]: # ()
-[//]: # (This tutorial forms a **launchpad for open, collaborative, and impactful biomedical AI research**, aligning with the broader vision of EMBC and the global scientific community.)
-
-[//]: # ()
-
 ## Contributors
 
 This workshop is made possible by contributions from:

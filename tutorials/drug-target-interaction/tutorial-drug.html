@@ -1,0 +1,1149 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Drug–Target Interaction Prediction &#8212; PyKale</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/drug-target-interaction/tutorial-drug';</script>
+    <link rel="icon" href="../../_static/icon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multiomics Cancer Classification" href="../multiomics-cancer-classification/tutorial-cancer.html" />
+    <link rel="prev" title="Data and Configuration Arguments" href="../brain-disorder-diagnosis/extend-reading/data-config.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../overview.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/BioMedMMAI_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../../_static/BioMedMMAI_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../overview.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workshop</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/schedule.html">Schedule</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../brain-disorder-diagnosis/tutorial.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/drug-target-interaction/tutorial-drug.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pykale/mmai-tutorials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/drug-target-interaction/tutorial-drug.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/tutorials/drug-target-interaction/tutorial-drug.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Drug–Target Interaction Prediction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-downloading">Data downloading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-dataset-inspection">Exercise: Dataset Inspection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed">Embed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">Predict</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model Training</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train">Train</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here">What Happens Here?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-comparison">Performance comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-tasks">Extension Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1">Task 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2">Task 2</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="drugtarget-interaction-prediction">
+<h1>Drug–Target Interaction Prediction<a class="headerlink" href="#drugtarget-interaction-prediction" title="Link to this heading">#</a></h1>
+<p><img alt="" src="../../_images/drugban-pyakle-api.png" /></p>
+<p>In this tutorial, we will train models to predict the interaction between <strong>two data modalities</strong>: <strong>molecules (drug)</strong> and <strong>proteins (target)</strong> using <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>. Drug-target interaction (DTI) plays a key role in drug discovery and identifying potential therapeutic targets. This example is based on the <strong>DrugBAN</strong> framework by <a class="reference external" href="https://www.nature.com/articles/s42256-022-00605-1"><strong>Bai et al. (<em>Nature Machine Intelligence</em>, 2023)</strong></a>.</p>
+<p>The DTI prediction problem is formulated as a <strong>binary classification task</strong>, where the goal is to predict whether a given <strong>drug–protein pair interacts or not</strong>. The DrugBAN framework tackles this problem using two key ideas:</p>
+<ul class="simple">
+<li><p><strong>Bilinear Attention Network (BAN)</strong>, which learns detailed feature representations for both drugs and proteins and captures local interaction patterns between them.</p></li>
+<li><p><strong>Adversarial Domain Adaptation</strong>, which helps the model generalise to out-of-distribution datasets, i.e., in clustering-based cross-validation instead of random splits, improving its ability to predict interactions on unseen drug–target pairs.</p></li>
+</ul>
+<p>With <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>, implementing such a multimodal DTI prediction pipeline is straightforward. The library provides ready-to-use modules and configuration support, making it easy to apply advanced techniques with minimal custom coding.</p>
+<section id="step-0-environment-preparation">
+<h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
+<p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial.</p>
+<p>To prepare the helper functions and necessary materials, we download them from the GitHub repository.</p>
+<p>Moreover, we provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. The additional helper script is:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>: Defines the base configuration settings, which can be overridden using a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
+<span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">single</span><span class="o">-</span><span class="n">branch</span> <span class="o">-</span><span class="n">b</span> <span class="n">main</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">.</span><span class="n">git</span>
+<span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Changed working directory to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="package-installation">
+<h3>Package Installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
+<p>The main package required for this tutorial is <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> is an open-source interdisciplinary machine learning library developed at the University of Sheffield, with a focus on applications in biomedical and scientific domains.</p>
+<p>Then, we install <code class="docutils literal notranslate"><span class="pre">PyG</span></code> (PyTorch Geometric) and related packages.</p>
+<p>Please <strong>do not</strong> re-run this session after installation completed. Runing this installation multiple times will trigger issues related to <code class="docutils literal notranslate"><span class="pre">PyG</span></code>. If you want to re-run this installation, please click the <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> on the top menu and choose <code class="docutils literal notranslate"><span class="pre">Disconnect</span> <span class="pre">and</span> <span class="pre">delete</span> <span class="pre">runtime</span></code> before installing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
+    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
+    <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> \
+    <span class="n">torch</span><span class="o">-</span><span class="n">scatter</span> <span class="n">torch</span><span class="o">-</span><span class="n">sparse</span> <span class="n">torch</span><span class="o">-</span><span class="n">cluster</span> <span class="n">torch</span><span class="o">-</span><span class="n">spline</span><span class="o">-</span><span class="n">conv</span> <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cu124</span><span class="o">.</span><span class="n">html</span> \
+    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale,yacs and wfdb installed successfully ✅&quot;</span> \
+    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale,yacs ❌&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then hide the warnings messages to get a clear output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Exercise: Check NumPy Version</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy version:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>  <span class="c1"># numpy should be 2.0.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs/DA_cross_domain.yaml"><code class="docutils literal notranslate"><span class="pre">configs/DA_cross_domain.yaml</span></code></a> as an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
+
+<span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span>
+
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>  <span class="c1"># Load the default settings from config.py</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span>
+    <span class="s2">&quot;configs/DA_cross_domain.yaml&quot;</span>
+<span class="p">)</span>  <span class="c1"># Update (or override) some of those settings using a custom YAML file</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this tutorial, we list the hyperparameters we would like users to play with outside the <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cfg.SOLVER.MAX_EPOCH</span></code>: Number of epochs in training stage. You can reduce the number of training epochs to shorten runtime.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cfg.DATA.DATASET</span></code>: The dataset used in the study. This can be <code class="docutils literal notranslate"><span class="pre">bindingdb</span></code> or <code class="docutils literal notranslate"><span class="pre">biosnap</span></code>.</p></li>
+</ul>
+<p>As a quick exercise, please take a moment to review and understand the parameters in <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCH</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also switch to a different dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATASET</span> <span class="o">=</span> <span class="s2">&quot;biosnap&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Exercise: Now print the full configuration to check all current hyperparameter and dataset settings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-1-data-loading-and-preparation">
+<h2>Step 1: Data Loading and Preparation<a class="headerlink" href="#step-1-data-loading-and-preparation" title="Link to this heading">#</a></h2>
+<p>In this tutorial, we use the <strong>Biosnap</strong> dataset for the main demonstration and the <strong>BindingDB</strong> dataset for the exercise at the end.</p>
+<section id="data-downloading">
+<h3>Data downloading<a class="headerlink" href="#data-downloading" title="Link to this heading">#</a></h3>
+<p>Please run the following cell to download necessary datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">data</span>
+<span class="err">!</span><span class="n">mkdir</span> <span class="n">data</span>
+<span class="err">!</span><span class="n">cd</span> <span class="n">data</span>
+
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">gdown</span>
+<span class="err">!</span><span class="n">gdown</span> <span class="o">--</span><span class="nb">id</span> <span class="mi">1</span><span class="n">ogOcxZn</span><span class="o">-</span><span class="mi">1</span><span class="n">q418LOT</span><span class="o">-</span><span class="n">gQ94aHQV0Y1sOmk</span> <span class="o">--</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">.</span><span class="n">zip</span>
+<span class="err">!</span><span class="n">unzip</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">d</span> <span class="n">data</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Exercise: Check the data is ready</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of the folder:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/drug-target-interaction&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Each dataset folder follows the structure:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>├───dataset_name
+<span class="w">    </span>│<span class="w">   </span>├───cluster
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├───source_train.csv
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├───target_train.csv
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├───target_test.csv
+<span class="w">    </span>│<span class="w">   </span>├───random
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├───test.csv
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├───train.csv
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>├───val.csv
+<span class="w">    </span>│<span class="w">   </span>├───full.csv
+</pre></div>
+</div>
+<p>We use the cluster dataset folder for cross-domain prediction, containing three parts:</p>
+<ul class="simple">
+<li><p>Train samples from the source domain: Drug–protein pairs the model learns from.</p></li>
+<li><p>Train samples from the target domain: Additional training data from a different distribution to improve generalisation.</p></li>
+<li><p>Test samples from the target domain: Unseen drug–protein pairs used to evaluate model performance on new data.</p></li>
+</ul>
+<p>The source and target sets are defined based on the clustering results.</p>
+</section>
+<section id="data-loading">
+<h3>Data loading<a class="headerlink" href="#data-loading" title="Link to this heading">#</a></h3>
+<p>Here’s what each csv file looks like in a table format:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>SMILES</p></th>
+<th class="head"><p>Protein Sequence</p></th>
+<th class="head"><p>Y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fc1ccc(C2(COC…)</p></td>
+<td><p>MDNVLPVDSDLS…</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>O=c1oc2c(O)c(…)</p></td>
+<td><p>MMYSKLLTLTTL…</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>CC(C)Oc1cc(N…)</p></td>
+<td><p>MGMACLTMTEME…</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Each row of the dataset contains three key pieces of information:</p>
+<p><strong>Drugs</strong>:<br />
+Drugs are often written as SMILES strings, which are like chemical formulas in text format (for example, <code class="docutils literal notranslate"><span class="pre">&quot;CC(=O)OC1=CC=CC=C1C(=O)O&quot;</span></code> is aspirin).</p>
+<p><strong>Protein Sequence</strong><br />
+This is a string of letters where each letter stands for an amino acid, the building blocks of proteins. For example, <code class="docutils literal notranslate"><span class="pre">MGYTSLLT...</span></code> is a short protein sequence.</p>
+<p><strong>Y (Labels)</strong>:<br />
+Each drug–protein pair is given a label:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> if they interact</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> if they do not</p></li>
+</ul>
+<p>Each row shows one drug–protein pair. The goal of our machine learning model is to predict the last column (<strong>Y</strong>) — whether or not the drug and protein interact.</p>
+<p>You can load CSV files into Python using tools like <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">dataFolder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;data/drug-target-interaction/</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATASET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">SPLIT</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">df_train_source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;source_train.csv&quot;</span><span class="p">))</span>
+<span class="n">df_train_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;target_train.csv&quot;</span><span class="p">))</span>
+<span class="n">df_test_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;target_test.csv&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preprocessing">
+<h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
+<p>We convert drug SMILES strings into molecular graphs using <code class="docutils literal notranslate"><span class="pre">kale.loaddata.molecular_datasets.smiles_to_graph</span></code>, encoding atom-level features as node attributes and bond types as edges.</p>
+<p>Protein sequences are transformed into fixed-length integer arrays using <code class="docutils literal notranslate"><span class="pre">kale.prepdata.chem_transform.integer_label_protein</span></code>, with each amino acid mapped to an integer and sequences padded or truncated to a uniform length.</p>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">kale.loaddata.molecular_datasets.DTIDataset</span></code> class packages drugs, proteins, and labels into a PyTorch-ready dataset.</p>
+<p><strong>Note:</strong> If you encounter an error related to requiring numpy <code class="docutils literal notranslate"><span class="pre">&lt;2.0</span></code>, simply ignore it and re-run this block until it completes successfully.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.molecular_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTIDataset</span>
+
+<span class="c1"># Create preprocessed datasets</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_train_source</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_train_source</span><span class="p">)</span>
+<span class="n">train_target_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_train_target</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_train_target</span><span class="p">)</span>
+<span class="n">test_target_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_test_target</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_test_target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We load data in small, manageable pieces called batches to save memory and speed up training. We use <code class="docutils literal notranslate"><span class="pre">kale.loaddata.sampler.MultiDataLoader</span></code> from PyKale to load one batch from the source domain and one from the target domain at each training step.</p>
+<p>First, we specify a few DataLoader parameters:</p>
+<ul class="simple">
+<li><p>Batch size: Number of samples per batch</p></li>
+<li><p>Shuffle: Randomly shuffle data</p></li>
+<li><p>Number of workers: Parallel data loading</p></li>
+<li><p>Drop last: Discard the last incomplete batch for consistent batch sizes</p></li>
+<li><p>Collate function: Use graph_collate_func to batch variable-sized molecular graphs</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.molecular_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">graph_collate_func</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.sampler</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiDataLoader</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+    <span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;num_workers&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
+    <span class="s2">&quot;drop_last&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;collate_fn&quot;</span><span class="p">:</span> <span class="n">graph_collate_func</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, we create a DataLoader from both the source and target datasets for training.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">:</span>
+    <span class="n">training_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">source_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">target_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_target_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># Get the number of batches in the longer dataset to align both</span>
+    <span class="n">n_batches</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">source_generator</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_generator</span><span class="p">))</span>
+
+    <span class="c1"># Combine the source and target data loaders using MultiDataLoader</span>
+    <span class="n">training_generator</span> <span class="o">=</span> <span class="n">MultiDataLoader</span><span class="p">(</span>
+        <span class="n">dataloaders</span><span class="o">=</span><span class="p">[</span><span class="n">source_generator</span><span class="p">,</span> <span class="n">target_generator</span><span class="p">],</span> <span class="n">n_batches</span><span class="o">=</span><span class="n">n_batches</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lastly, we set up DataLoaders for validation and testing. Since we don’t want to shuffle or drop any samples, we adjust the parameters accordingly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update parameters for validation/testing (no shuffling, keep all data)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;drop_last&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+<span class="c1"># Create validation and test data loaders</span>
+<span class="n">valid_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_target_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_target_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-dataset-inspection">
+<h3>Exercise: Dataset Inspection<a class="headerlink" href="#exercise-dataset-inspection" title="Link to this heading">#</a></h3>
+<p>Once the dataset is ready, let’s inspect one sample from the training data to check the input graph, protein sequence, and label format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first batch (contains one batch from source and one from target)</span>
+<span class="n">first_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">training_generator</span><span class="p">))</span>
+
+<span class="c1"># Unpack source and target batches</span>
+<span class="n">source_batch</span><span class="p">,</span> <span class="n">target_batch</span> <span class="o">=</span> <span class="n">first_batch</span>
+
+<span class="c1"># Inspect the first sample from the source batch</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First sample from source batch:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Drug graph:&quot;</span><span class="p">,</span> <span class="n">source_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Protein sequence:&quot;</span><span class="p">,</span> <span class="n">source_batch</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label:&quot;</span><span class="p">,</span> <span class="n">source_batch</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This sample is a tuple with three parts:</p>
+<ol class="arabic simple">
+<li><p><strong>Drug Graph</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x=[290,</span> <span class="pre">7]</span></code>: Feature matrix with 290 atoms (nodes) and 7 features per atom.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_index=[2,</span> <span class="pre">58]</span></code>: Shows 146 edges, with source and target node indices.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edge_attr=[58,</span> <span class="pre">1]</span></code>: Each edge has 1 bond feature, such as bond type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_nodes=290</span></code>: Confirms the graph has 290 nodes.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Protein Features (array)</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Example values: <code class="docutils literal notranslate"><span class="pre">[11.,</span>&#160; <span class="pre">1.,</span> <span class="pre">18.,</span> <span class="pre">...,</span>&#160; <span class="pre">0.,</span>&#160; <span class="pre">0.,</span>&#160; <span class="pre">0.]</span></code>: A fixed-length numeric array representing the protein sequence. Each position holds an integer-encoded amino acid, with zeros for padding.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Label (float)</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code>; The ground-truth interaction label indicating no interaction.</p></li>
+</ul>
+</section>
+</section>
+<section id="step-2-model-definition">
+<h2>Step 2: Model Definition<a class="headerlink" href="#step-2-model-definition" title="Link to this heading">#</a></h2>
+<section id="embed">
+<h3>Embed<a class="headerlink" href="#embed" title="Link to this heading">#</a></h3>
+<p>DrugBAN consists of three main components: a Graph Convolutional Network (GCN) for extracting structural features from drug molecular graphs, a Convolutional Neural Network (CNN) for encoding protein sequences, and a Bilinear Attention Network (BAN) for fusing drug and protein features. The fused representation is then passed through a Multi-Layer Perceptron (MLP) classifier to predict interaction scores.</p>
+<p>We define the DrugBAN class in <code class="docutils literal notranslate"><span class="pre">kale.embed.ban</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.embed.ban</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugBAN</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="predict">
+<h3>Predict<a class="headerlink" href="#predict" title="Link to this heading">#</a></h3>
+<p>We use the training class <code class="docutils literal notranslate"><span class="pre">kale.pipeline.drugban_trainer</span></code>, which handles model training, domain adaptation, and evaluation for DrugBAN.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.drugban_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugbanTrainer</span>
+
+<span class="n">drugban_trainer</span> <span class="o">=</span> <span class="n">DrugbanTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">),</span>
+    <span class="n">solver_lr</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;SOLVER&quot;</span><span class="p">][</span><span class="s2">&quot;LEARNING_RATE&quot;</span><span class="p">],</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DECODER&quot;</span><span class="p">][</span><span class="s2">&quot;BINARY&quot;</span><span class="p">],</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;SOLVER&quot;</span><span class="p">][</span><span class="s2">&quot;BATCH_SIZE&quot;</span><span class="p">],</span>
+    <span class="n">is_da</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;USE&quot;</span><span class="p">],</span>
+    <span class="n">solver_da_lr</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;SOLVER&quot;</span><span class="p">][</span><span class="s2">&quot;DA_LEARNING_RATE&quot;</span><span class="p">],</span>
+    <span class="n">da_init_epoch</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;INIT_EPOCH&quot;</span><span class="p">],</span>
+    <span class="n">da_method</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;METHOD&quot;</span><span class="p">],</span>
+    <span class="n">original_random</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;ORIGINAL_RANDOM&quot;</span><span class="p">],</span>
+    <span class="n">use_da_entropy</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;USE_ENTROPY&quot;</span><span class="p">],</span>
+    <span class="n">da_random_layer</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;RANDOM_LAYER&quot;</span><span class="p">],</span>
+    <span class="n">da_random_dim</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DA&quot;</span><span class="p">][</span><span class="s2">&quot;RANDOM_DIM&quot;</span><span class="p">],</span>
+    <span class="n">decoder_in_dim</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;DECODER&quot;</span><span class="p">][</span><span class="s2">&quot;IN_DIM&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want to save the best model during training so we can reuse it later without needing to retrain. PyTorch Lightning’s <code class="docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code> does this by automatically saving the model whenever it achieves a new best validation AUROC score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pytorch_lightning.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+
+<span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{epoch}</span><span class="s2">-</span><span class="si">{step}</span><span class="s2">-</span><span class="si">{val_BinaryAUROC:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_BinaryAUROC&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now create the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">],</span>
+    <span class="n">devices</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;SOLVER&quot;</span><span class="p">][</span><span class="s2">&quot;MAX_EPOCH&quot;</span><span class="p">],</span>
+    <span class="n">deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3-model-training">
+<h2>Step 3: Model Training<a class="headerlink" href="#step-3-model-training" title="Link to this heading">#</a></h2>
+<section id="train">
+<h3>Train<a class="headerlink" href="#train" title="Link to this heading">#</a></h3>
+<p>After setting up the model and data loaders, we now start training the full DrugBAN model using the PyTorch Lightning Trainer via calling <code class="docutils literal notranslate"><span class="pre">trainer.fit()</span></code>.</p>
+<section id="what-happens-here">
+<h4>What Happens Here?<a class="headerlink" href="#what-happens-here" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The model receives batches of drug-protein pairs from the training data loader.</p></li>
+<li><p>During each step, the GCN, CNN, BAN layer, and MLP classifier are updated to improve interaction prediction.</p></li>
+<li><p>Validation is automatically run at the end of each epoch to track performance and save the best model based on AUROC.</p></li>
+</ul>
+<p>This code block takes approximately 5 minutes to complete.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">drugban_trainer</span><span class="p">,</span>
+    <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">training_generator</span><span class="p">,</span>
+    <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">valid_generator</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="step-4-evaluation">
+<h2>Step 4: Evaluation<a class="headerlink" href="#step-4-evaluation" title="Link to this heading">#</a></h2>
+<p>Once training is complete, we evaluate the model on the test set using <code class="docutils literal notranslate"><span class="pre">trainer.test()</span></code>.</p>
+<section id="what-is-included-in-this-step">
+<h3>What is included in this step?<a class="headerlink" href="#what-is-included-in-this-step" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The best model checkpoint (based on validation AUROC) is automatically loaded.</p></li>
+<li><p>The model runs on the test data to generate predictions.</p></li>
+<li><p>Final classification metrics, including AUROC, F1 score, accuracy, sensitivity, and specificity, are calculated and logged.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">drugban_trainer</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_generator</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="performance-comparison">
+<h3>Performance comparison<a class="headerlink" href="#performance-comparison" title="Link to this heading">#</a></h3>
+<p>The earlier example was a simple demonstration. To properly evaluate DrugBAN against baseline models, we train it for 100 epochs across multiple random seeds.</p>
+<p>The figure below shows the performance of different models on the BioSNAP and BindingDB datasets:</p>
+<ul class="simple">
+<li><p>Left plot: AUROC (Area Under the ROC Curve)</p></li>
+<li><p>Right plot: AUPRC (Area Under the Precision–Recall Curve)</p></li>
+</ul>
+<p><img alt="" src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs42256-022-00605-1/MediaObjects/42256_2022_605_Fig3_HTML.png?as=webp" /></p>
+<p>The box plots show the median as the centre lines and the mean as green triangles. The minima and lower percentile represent the worst and second-worst scores. The maxima and upper percentile indicate the best and second-best scores. Supplementary Table 2 provides the data statistics of the BindingDB and BioSNAP datasets.</p>
+</section>
+</section>
+<section id="step-5-interpretation">
+<h2>Step 5: Interpretation<a class="headerlink" href="#step-5-interpretation" title="Link to this heading">#</a></h2>
+<p>Although we don’t perform this step in the tutorial, for your information, it is possible to explore how DrugBAN internally represents drugs and proteins by extracting intermediate embeddings.</p>
+<p>The model first processes drug graphs and protein sequences through separate modules, then fuses them using bilinear attention to create a joint representation. These embeddings—drug embedding, protein embedding, and joint interaction embedding—help reveal what structural and sequence features the model has learned and how it encodes drug-protein interactions.</p>
+<p>This is typically done during the evaluation phase to avoid affecting the model’s weights or training behaviour.</p>
+</section>
+<section id="extension-tasks">
+<h2>Extension Tasks<a class="headerlink" href="#extension-tasks" title="Link to this heading">#</a></h2>
+<section id="task-1">
+<h3>Task 1<a class="headerlink" href="#task-1" title="Link to this heading">#</a></h3>
+<p>To use the BindingDB dataset, modify the relevant line in the Configuration section of Step 0 as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATASET</span> <span class="o">=</span> <span class="s2">&quot;bindingdb&quot;</span>
+</pre></div>
+</div>
+<p>Reload the dataset and re-run training and testing.</p>
+<blockquote>
+<div><p>Tip: See if the model struggles more or less with the new dataset. It can reveal how generalisable DrugBAN is.</p>
+</div></blockquote>
+</section>
+<section id="task-2">
+<h3>Task 2<a class="headerlink" href="#task-2" title="Link to this heading">#</a></h3>
+<p>Turn off domain adaptation by updating the config file and re-running training and testing.</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">configs/DA_cross_domain.yaml</span></code> with <code class="docutils literal notranslate"><span class="pre">configs/non_DA_cross_domain.yaml</span></code> in the Configuration section of Step 0 as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/non_DA_cross_domain.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Tip: Compare the results with and without domain adaptation to see how it affects model performance.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/drug-target-interaction"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../brain-disorder-diagnosis/extend-reading/data-config.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data and Configuration Arguments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../multiomics-cancer-classification/tutorial-cancer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Multiomics Cancer Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-downloading">Data downloading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-dataset-inspection">Exercise: Dataset Inspection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-model-definition">Step 2: Model Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed">Embed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">Predict</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-training">Step 3: Model Training</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train">Train</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here">What Happens Here?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-included-in-this-step">What is included in this step?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-comparison">Performance comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-tasks">Extension Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1">Task 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2">Task 2</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By PyKale Contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -196,7 +196,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial.html">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
@@ -480,10 +480,10 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="cardiothoracic-abnormality-assessment">
 <h1>Cardiothoracic Abnormality Assessment<a class="headerlink" href="#cardiothoracic-abnormality-assessment" title="Link to this heading">#</a></h1>
 <p><img alt="" src="../../_images/embc_heart_tutorial_fig.png" /></p>
-<p>In this tutorial, we demonstrate how to use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> to train models on two low-cost, non-invasive modalities, <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>, for assessing <strong>Cardiothoracic Abnormalities</strong>.</p>
+<p>In this tutorial, we demonstrate how to use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> to pretrain, fine-tune, evaluate, and interpret deep learning models on two low-cost, non-invasive modalities: <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>, for assessing <strong>cardiothoracic abnormalities</strong>.</p>
 <p><strong>Estimated runtime:</strong> Completing the steps in this tutorial will take approximately 10 minutes.</p>
 <p>We will use a multimodal dataset derived from MIMIC-CXR and MIMIC-IV-ECG, which contains approximately 50K paired CXR and ECG samples. In this tutorial, we pretrain a multimodal <strong>CardioVAE</strong> model using ~49K CXR-ECG pairs via a tri-stream pretraining method. We then fine-tune this pretrained CardioVAE model on a smaller subset (~1K paired samples) with binary labels: <strong>Healthy</strong> and <strong>Cardiothoracic Abnormality</strong>. Lastly, we demonstrate how to interpret the trained CardioVAE model on both the CXR and ECG modalities.</p>
-<p>This notebook is based on the work of <strong>Suvon et al. (MICCAI 2024)</strong>, which introduced a tri-stream pretraining strategy using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations for assessing <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a critical indicator of cardiac hemodynamics. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a> library. Here, we provide a concise example of how to use this model through <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>’s APIs—from pretraining and fine-tuning to model interpretation.</p>
+<p>This notebook is based on the work of <a class="reference external" href="https://link.springer.com/chapter/10.1007/978-3-031-72378-0_28">Suvon et al. (MICCAI 2024)</a>, which introduced a tri-stream pretraining strategy using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations for assessing <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a critical indicator of cardiac hemodynamics. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a> library. Here, we provide a concise example of how to use this model through <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>’s APIs—from pretraining and fine-tuning to model interpretation.</p>
 <section id="step-0-environment-preparation">
 <h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
 <section id="package-installation">
@@ -496,7 +496,8 @@ document.write(`
 <li><p><strong>tabulate</strong>: Used to print tabular data in a readable format, helpful for summarizing results or configuration parameters.</p></li>
 </ul>
 <p><strong>Additional Notes for Colab</strong>
-Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the below installation step. Also an autometic crash and reset has been added as after installing this depedencies you need to restart the session. <strong>Don’t run this block again if you already did once</strong></p>
+Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the installation step below. An automatic crash and reset have also been added, as the session needs to be restarted after installing these dependencies. <strong>Do not run this block again if you have already run it once.</strong></p>
+<p>In addition, when using Google Colab, please select the <strong>T4 GPU</strong> hardware accelerator to ensure the tutorial runs smoothly. To do this, click the <strong>“Runtime”</strong> option in the top-left menu, then select <strong>“Change runtime type”</strong> and choose <strong>T4 GPU</strong> as the hardware accelerator.</p>
 <p><strong>Estimated runtime:</strong> 4 minutes</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -628,8 +629,14 @@ External YAML files like <code class="docutils literal notranslate"><span class=
 <li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.image_access.load_images_from_dir</span></code> offers an easy-to-use utility for loading image datasets from directory hierarchies. It supports standard image formats and returns PyTorch tensors, performing essential preprocessing steps such as resizing and normalisation. This function is suitable for image classification, computer vision, and multimodal learning tasks.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_image_access.SignalImageDataset</span></code> defines a unified dataset class designed for paired signal (e.g., ECG) and image (e.g., CXR) modalities. It facilitates synchronized access to multi-source data, providing ready-to-use PyTorch datasets that can be directly utilised for multimodal training, evaluation, and downstream applications.</p></li>
 </ul>
-<p><strong>Note:</strong> Please create a shortcut to the following Google Drive folder in your <strong>MyDrive</strong>:<br />
-<a class="reference external" href="https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing">Google Drive Link</a></p>
+<p><strong>Note:</strong> Please create a shortcut to the following Google Drive folder in your <strong>MyDrive</strong>.<br />
+To create a shortcut:<br />
+(i) Click the link to open the Google Drive folder.<br />
+(ii) Click the folder name at the top to reveal a <strong>drop-down menu</strong>.<br />
+(iii) From the drop-down menu, select <strong>Organise &gt; Add shortcut</strong>.<br />
+(iv) A dialog box titled <em>“Add shortcut to ‘EMBC_workshop_data’”</em> will appear — click the <strong>“All locations”</strong> tab, then select <strong>“My Drive”</strong>.<br />
+(v) A shortcut to <strong>EMBC_workshop_data</strong> should now be visible at <a class="reference external" href="https://drive.google.com/drive/my-drive">https://drive.google.com/drive/my-drive</a>.</p>
+<p><a class="reference external" href="https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing">Google Drive Link</a></p>
 <p>There’s no need to download the data manually. After mounting your Google Drive in the setup section, you will be able to directly access all datasets and pretrained models.</p>
 <section id="pre-training-data-loading">
 <h3>Pre-training Data Loading<a class="headerlink" href="#pre-training-data-loading" title="Link to this heading">#</a></h3>
@@ -637,8 +644,8 @@ External YAML files like <code class="docutils literal notranslate"><span class=
 <p>The complete preprocessing pipeline, implemented using the PyKale API, is provided for reference. Additionally, CSV files containing subject IDs for the full dataset are provided. Users interested in training on the complete 50K dataset can leverage the <strong>PyKale API</strong>, which supports direct loading of raw CXR and ECG features with integrated preprocessing.</p>
 <p><strong>Note:</strong></p>
 <ul class="simple">
-<li><p>For ease of use in Colab, the full-data loading functionality is <strong>commented out by default</strong>. It can be re-enabled for local or high-resource environments.</p></li>
-<li><p>To access the required files, ensure that the shared folder <strong><code class="docutils literal notranslate"><span class="pre">EMBC_workshop_data</span></code></strong> is added as a <strong>shortcut to your Google Drive (under “My Drive”)</strong>.</p></li>
+<li><p>For ease of use in Colab, the full data loading functionality is <strong>commented out by default</strong>. It can be re-enabled for local or high-resource environments. To load the full 50K paired CXR-ECG data, you need to download the <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> datasets, then <strong>uncomment</strong> the optional code cell and run it.</p></li>
+<li><p>To access the required files for dataloading, ensure that the shared folder <strong><code class="docutils literal notranslate"><span class="pre">EMBC_workshop_data</span></code></strong> is added as a <strong>shortcut to your Google Drive (under “My Drive”)</strong>.</p></li>
 </ul>
 <p><strong>Estimated runtime:</strong> 12 seconds</p>
 <div class="cell docutils container">
@@ -647,8 +654,10 @@ External YAML files like <code class="docutils literal notranslate"><span class=
 <span class="c1"># from kale.loaddata.signal_access import load_ecg_from_folder</span>
 <span class="c1"># from kale.loaddata.image_access import load_images_from_dir</span>
 
-<span class="c1"># ecg_tensor = load_ecg_from_folder(&quot;/data/ecg/&quot;, &quot;ecg_files.csv&quot;)</span>
-<span class="c1"># cxr_tensor = load_images_from_dir(&quot;/data/cxr/&quot;, &quot;cxr_files.csv&quot;)</span>
+<span class="c1"># ecg_tensor = load_ecg_from_folder(&quot;/mimic-iv-ecg-diagnostic-electrocardiogram-matched-subset-1.0/&quot;, &quot;mimic_ecg_50K.csv&quot;)</span>
+<span class="c1"># cxr_tensor = load_images_from_dir(&quot;/physionet.org/files/mimic-cxr-jpg/2.0.0/&quot;, &quot;mimic_cxr_50K.csv&quot;)</span>
+
+<span class="c1"># train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders( ecg_tensor, cxr_tensor)</span>
 </pre></div>
 </div>
 </div>
