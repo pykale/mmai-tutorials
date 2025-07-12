@@ -980,9 +980,9 @@ Each drug–protein pair is given a label:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">cd</span> <span class="n">pykale</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">bindingdb_drugban</span>
 <span class="err">!</span><span class="n">python</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> \
     <span class="o">--</span><span class="n">cfg</span> <span class="n">configs</span><span class="o">/</span><span class="n">DA_cross_domain</span><span class="o">.</span><span class="n">yaml</span> \
-    <span class="o">--</span><span class="n">ckpt_resume</span> <span class="n">best</span><span class="o">.</span><span class="n">ckpt</span> \
+    <span class="o">--</span><span class="n">ckpt_resume</span> <span class="s2">&quot;checkpoint/best.ckpt&quot;</span> \
     <span class="o">--</span><span class="n">test_file</span> <span class="s2">&quot;datasets/bindingdb/cluster/target_test.csv&quot;</span> \
-    <span class="o">--</span><span class="n">save_att_path</span> <span class="s2">&quot;attention_map_all.pt&quot;</span>
+    <span class="o">--</span><span class="n">save_att_path</span> <span class="s2">&quot;attention_map.pt&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1004,7 +1004,7 @@ Each drug–protein pair is given a label:</p>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">cd</span> <span class="n">pykale</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">bindingdb_drugban</span>
 <span class="err">!</span><span class="n">python</span> <span class="n">interpret</span><span class="o">.</span><span class="n">py</span> \
-    <span class="o">--</span><span class="n">att_file</span> <span class="s2">&quot;attention_map_all.pt&quot;</span> \
+    <span class="o">--</span><span class="n">att_file</span> <span class="s2">&quot;attention_map.pt&quot;</span> \
     <span class="o">--</span><span class="n">data_file</span> <span class="s2">&quot;datasets/bindingdb/target_test.csv&quot;</span>
 </pre></div>
 </div>
