@@ -58,7 +58,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/brain-disorder-diagnosis/tutorial';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/brain-disorder-diagnosis/tutorial-brain';</script>
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -258,7 +258,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/brain-disorder-diagnosis/tutorial.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/brain-disorder-diagnosis/tutorial-brain.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -306,7 +306,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/brain-disorder-diagnosis/tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/brain-disorder-diagnosis/tutorial-brain.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -336,7 +336,7 @@
       
       
       
-      <li><a href="../../_sources/tutorials/brain-disorder-diagnosis/tutorial.ipynb" target="_blank"
+      <li><a href="../../_sources/tutorials/brain-disorder-diagnosis/tutorial-brain.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -512,7 +512,10 @@ Autism Brain Imaging Data Exchange
 </div>
 </details>
 </div>
-<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/helper-functions.html"><span class="std std-doc">helper functions</span></a> used in this tutorial.</p>
+<div class="tip admonition">
+<p class="admonition-title">Optional</p>
+<p>Learn more about the <a class="reference internal" href="extend-reading/helper-functions.html"><span class="std std-doc">helper functions</span></a> used in this tutorial.</p>
+</div>
 <section id="install-required-packages">
 <h3>Install Required Packages<a class="headerlink" href="#install-required-packages" title="Link to this heading">#</a></h3>
 <p>Run the cell below to install the required packages for this tutorial. <em><strong>Estimated Runtime in Google Colab</strong></em>: 3-5 minutes</p>
@@ -529,11 +532,11 @@ Autism Brain Imaging Data Exchange
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">user</span> \
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
     <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
     <span class="n">gdown</span><span class="o">==</span><span class="mf">5.2.0</span> <span class="n">nilearn</span><span class="o">==</span><span class="mf">0.12.0</span> <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> \
-    <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span><span class="o">==</span><span class="mf">2.3.0</span> <span class="n">torch_sparse</span> <span class="n">torch_scatter</span> \
-    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.3.0</span><span class="o">+</span><span class="n">cpu</span><span class="o">.</span><span class="n">html</span> \
+    <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span><span class="o">==</span><span class="mf">2.6.0</span> <span class="n">torch_sparse</span> <span class="n">torch_scatter</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cpu</span><span class="o">.</span><span class="n">html</span> \
     <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale, gdown, nilearn, and yacs installed successfully ✅&quot;</span> \
     <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale, gdown, nilearn, and yacs ❌&quot;</span>
 </pre></div>
@@ -593,7 +596,6 @@ Note: you may need to restart the kernel to use updated packages.
 <span class="c1"># cfg.MODEL.NUM_SEARCH_ITER = 100</span>
 <span class="c1"># cfg.MODEL.NUM_SOLVER_ITER = 100</span>
 
-<span class="n">cfg</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -657,10 +659,21 @@ TRAINER:
 <h3>Data Loading<a class="headerlink" href="#data-loading" title="Link to this heading">#</a></h3>
 <p>As mentioned earlier, we provide a <code class="docutils literal notranslate"><span class="pre">load_data</span></code> function to load <strong>pre-computed functional connectivity (FC)</strong> embeddings along with associated phenotypic information.<br />
 This function supports automated downloading via <a class="reference external" href="https://pypi.org/project/gdown/">gdown</a> by reading from manifest files if the data is not found locally.</p>
-<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-data-loading"><span class="std std-ref">configuration arguments for data loading</span></a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Optional</p>
+<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-data-loading"><span class="std std-ref">configuration arguments for data loading</span></a>.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_data</span>
+
+<span class="c1"># A subset of the configuration can be modified here for quick playtest.</span>
+<span class="c1"># Uncomment the following lines if you are interested in quickly</span>
+<span class="c1"># modifying the configuration without modifying or making new `yml` files.</span>
+
+<span class="c1"># cfg.DATASET.ATLAS = &quot;hcp-ica&quot;</span>
+<span class="c1"># cfg.DATASET.FC = &quot;tangent-pearson&quot;</span>
+<span class="c1"># cfg.DATASET.TOP_K_SITES = 5</span>
 
 <span class="n">fc</span><span class="p">,</span> <span class="n">phenotypes</span><span class="p">,</span> <span class="n">rois</span><span class="p">,</span> <span class="n">coords</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span>
     <span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">DATA_DIR</span><span class="p">,</span>
@@ -679,6 +692,35 @@ This function supports automated downloading via <a class="reference external" h
 </div>
 </div>
 </div>
+<p>The downloaded dataset will follow the structure:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dataset_folder/
+├──<span class="w"> </span>abide/<span class="w">                             </span>
+│<span class="w">   </span>├──<span class="w"> </span>fc/<span class="w">                           </span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>atlas_name/<span class="w">              </span>
+│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>fc.npy<span class="w">               </span>
+│<span class="w">   </span>└──<span class="w"> </span>phenotypes.csv<span class="w">               </span>
+└──<span class="w"> </span>atlas/<span class="w">                           </span>
+<span class="w">    </span>└──<span class="w"> </span>atlas_type/<span class="w">                   </span>
+<span class="w">        </span>└──<span class="w"> </span>atlas_name/<span class="w">              </span>
+<span class="w">            </span>├──<span class="w"> </span>atlas.nii.gz<span class="w">          </span>
+<span class="w">            </span>├──<span class="w"> </span>coords.npy<span class="w">           </span>
+<span class="w">            </span>└──<span class="w"> </span>labels.txt<span class="w">          </span>
+</pre></div>
+</div>
+<p>Descriptions for each file are as follows:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">abide/fc/atlas_name/fc.npy</span></code></strong><br />
+A NumPy array containing functional connectivity (FC) matrices for all subjects using a specific atlas. Each FC is typically a symmetric matrix of shape <code class="docutils literal notranslate"><span class="pre">(regions</span> <span class="pre">×</span> <span class="pre">regions)</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">abide/phenotypes.csv</span></code></strong><br />
+A CSV file with subject-level metadata, including attributes such as <code class="docutils literal notranslate"><span class="pre">age</span></code>, <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">diagnosis</span> <span class="pre">group</span></code>, and <code class="docutils literal notranslate"><span class="pre">site</span></code>. This information is essential for downstream analyses like classification or covariate correction.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">atlas/atlas_type/atlas_name/atlas.nii.gz</span></code></strong><br />
+A NIfTI file representing the brain parcellation. Each voxel value corresponds to a labeled brain region defined by the atlas.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">atlas/atlas_type/atlas_name/coords.npy</span></code></strong><br />
+A NumPy array with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">3)</span></code> representing the MNI coordinates of region centroids. These are often used in graph construction or spatial visualization.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">atlas/atlas_type/atlas_name/labels.txt</span></code></strong><br />
+A plain text file listing the names of the brain regions defined in the atlas, with one region name per line.</p></li>
+</ul>
+<p>While we use <code class="docutils literal notranslate"><span class="pre">.npy</span></code> files for <code class="docutils literal notranslate"><span class="pre">fc</span></code> and <code class="docutils literal notranslate"><span class="pre">coords</span></code>, our pipeline does support different file formats like <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, as long as the loaded data conforms to the expected format required by the corresponding functions or methods.</p>
 <div class="exercise admonition" id="find-number-of-samples">
 
 <p class="admonition-title"><span class="caption-number">Exercise 1 </span></p>
@@ -993,10 +1035,19 @@ available ROI.</p></li>
 <section id="data-preprocessing">
 <h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
 <p>Before modeling, we need to preprocess the phenotypic variables to ensure they are in a usable format. This includes handling missing values, encoding categorical variables, and optionally standardizing continuous ones.</p>
-<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#categorical-variables-from-phenotypic-data"><span class="std std-ref">categorical variables from phenotypic data</span></a> used in this tutorial.</p>
+<div class="tip admonition">
+<p class="admonition-title">Optional</p>
+<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#categorical-variables-from-phenotypic-data"><span class="std std-ref">categorical variables from phenotypic data</span></a> used in this tutorial.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_phenotypic_data</span>
+
+<span class="c1"># A subset of the configuration can be modified here for quick playtest.</span>
+<span class="c1"># Uncomment the following lines if you are interested in quickly</span>
+<span class="c1"># modifying the configuration without modifying or making new `yml` files.</span>
+
+<span class="c1"># cfg.PHENOTYPE.STANDARDIZE = &quot;site&quot;</span>
 
 <span class="n">labels</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">phenotypes</span> <span class="o">=</span> <span class="n">preprocess_phenotypic_data</span><span class="p">(</span>
     <span class="n">phenotypes</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">PHENOTYPE</span><span class="o">.</span><span class="n">STANDARDIZE</span>
@@ -1328,10 +1379,21 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 </div>
 </section>
 </div>
-<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-cross-validation"><span class="std std-ref">configuration arguments for cross-validation</span></a> used in this tutorial.</p>
+<div class="tip admonition">
+<p class="admonition-title">Optional</p>
+<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-cross-validation"><span class="std std-ref">configuration arguments for cross-validation</span></a> used in this tutorial.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeavePGroupsOut</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
+
+<span class="c1"># A subset of the configuration can be modified here for quick playtest.</span>
+<span class="c1"># Uncomment the following lines if you are interested in quickly</span>
+<span class="c1"># modifying the configuration without modifying or making new `yml` files.</span>
+
+<span class="c1"># cfg.CROSS_VALIDATION.SPLIT = &quot;skf&quot;</span>
+<span class="c1"># cfg.CROSS_VALIDATION.NUM_FOLDS = 5</span>
+<span class="c1"># cfg.CROSS_VALIDATION.NUM_REPEATS = 2</span>
 
 <span class="c1"># Define the default cross-validation strategy:</span>
 <span class="c1"># Repeated stratified k-fold maintains class distribution across folds and supports multiple repetitions</span>
@@ -1380,13 +1442,25 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 <li><p><strong>Site Only</strong>: A domain-adapted model that uses site labels as the adaptation factor to reduce site-specific bias.</p></li>
 <li><p><strong>All Phenotypes</strong>: An extended domain-adapted model that incorporates multiple phenotypic variables (e.g., age, sex, handedness) to further reduce inter-site variability.</p></li>
 </ul>
-<p>(Optional) Learn more about the <a class="reference internal" href="extend-reading/data-config.html#hyperparameter-grid"><span class="std std-ref">hyperparameter grid</span></a> used in this tutorial.</p>
+<div class="tip admonition">
+<p class="admonition-title">Optional</p>
+<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#hyperparameter-grid"><span class="std std-ref">hyperparameter grid</span></a> used in this tutorial.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">clone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multi_domain_adapter</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMIDAClassificationTrainer</span> <span class="k">as</span> <span class="n">Trainer</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">helpers.parsing</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_param_grid</span>
+
+<span class="c1"># A subset of the configuration can be modified here for quick playtest.</span>
+<span class="c1"># Uncomment the following lines if you are interested in quickly</span>
+<span class="c1"># modifying the configuration without modifying or making new `yml` files.</span>
+
+<span class="c1"># cfg.MODEL.CLASSIFIER = &quot;lr&quot;</span>
+<span class="c1"># cfg.MODEL.PARAM_GRID = None</span>
+<span class="c1"># cfg.MODEL.NUM_SEARCH_ITER = 100</span>
+<span class="c1"># cfg.MODEL.NUM_SOLVER_ITER = 100</span>
 
 <span class="c1"># Configuration with cv and random_state/seed included</span>
 <span class="n">trainer_cfg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">TRAINER</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s2">&quot;PARAM_GRID&quot;</span><span class="p">}</span>

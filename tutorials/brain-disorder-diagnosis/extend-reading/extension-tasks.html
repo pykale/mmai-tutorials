@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Helper Functions" href="helper-functions.html" />
-    <link rel="prev" title="Brain Disorder Diagnosis" href="../tutorial.html" />
+    <link rel="prev" title="Brain Disorder Diagnosis" href="../tutorial-brain.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,7 +190,7 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tutorial.html">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tutorial-brain.html">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-config.html">Data &amp; Config</a></li>
@@ -463,7 +463,7 @@ document.write(`
 <h2>Exercise Solutions<a class="headerlink" href="#exercise-solutions" title="Link to this heading">#</a></h2>
 <div class="solution dropdown admonition" id="solution-find-number-of-samples">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-number-of-samples"> Exercise 1</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#find-number-of-samples"> Exercise 1</a></p>
 <section id="solution-content">
 <p>There are 722 samples found. To find the number of samples,
 we can use <code class="docutils literal notranslate"><span class="pre">len(phenotypes)</span></code> which will output 722.</p>
@@ -471,7 +471,7 @@ we can use <code class="docutils literal notranslate"><span class="pre">len(phen
 </div>
 <div class="solution dropdown admonition" id="solution-find-roi-count">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-roi-count"> Exercise 2</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#find-roi-count"> Exercise 2</a></p>
 <section id="solution-content">
 <p>There are 32 ROIs found. To find the number of ROIs,
 we can use <code class="docutils literal notranslate"><span class="pre">len(rois)</span></code> which will output 32.</p>
@@ -479,7 +479,7 @@ we can use <code class="docutils literal notranslate"><span class="pre">len(rois
 </div>
 <div class="solution dropdown admonition" id="solution-find-number-of-phenotypes">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-number-of-phenotypes"> Exercise 3</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#find-number-of-phenotypes"> Exercise 3</a></p>
 <section id="solution-content">
 <p>Looking at the dataframe, there are 104 phenotypes based on
 the number of columns.</p>
@@ -487,7 +487,7 @@ the number of columns.</p>
 </div>
 <div class="solution dropdown admonition" id="solution-find-number-of-phenotypes-after-preprocess">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-number-of-phenotypes-after-preprocess"> Exercise 4</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#find-number-of-phenotypes-after-preprocess"> Exercise 4</a></p>
 <section id="solution-content">
 <p>By calling <code class="docutils literal notranslate"><span class="pre">phenotypes.shape</span></code>, we can inspect the number
 of rows and columns. We can see that there are 19 encoded
@@ -505,14 +505,14 @@ phenotypes.</p>
 </div>
 <div class="solution dropdown admonition" id="solution-understanding-one-hot-encoding">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#understanding-one-hot-encoding"> Exercise 5</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#understanding-one-hot-encoding"> Exercise 5</a></p>
 <section id="solution-content">
 <p>One-hot encoding essentially maps the categories into a binary vector space where each category is represented by a unique vector with a single high (commonly set to one) value and all other positions set to zero. It will increase the dimension given the number of categories found within a categorical variable.</p>
 </section>
 </div>
 <div class="solution dropdown admonition" id="solution-find-total-models-produced">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-total-models-produced"> Exercise 6</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#find-total-models-produced"> Exercise 6</a></p>
 <section id="solution-content">
 <p>To estimate the total number of models trained:</p>
 <ul class="simple">
@@ -528,7 +528,7 @@ phenotypes.</p>
 </div>
 <div class="solution dropdown admonition" id="solution-find-the-aggregate-in-cv-results">
 
-<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial.html#find-the-aggregate-in-cv-results"> Exercise 7</a></p>
+<p class="admonition-title">Solution to<a class="reference internal" href="../tutorial-brain.html#find-the-aggregate-in-cv-results"> Exercise 7</a></p>
 <section id="solution-content">
 <p>Some notable examples found in <code class="docutils literal notranslate"><span class="pre">cv_results_</span></code> include:</p>
 <ul class="simple">
@@ -573,7 +573,7 @@ phenotypes.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../tutorial.html"
+       href="../tutorial-brain.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
