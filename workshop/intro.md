@@ -4,36 +4,13 @@
 
 ### Open Biomedical Multimodal AI Research Workshop
 
-<!-- **EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark** -->
-
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
 
-1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in leveraging multimodal data, including fusion, regularization, and interaction techniques for biomedical research.
+1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three techniques, **regularization**, **fusion**, and **interaction**, to leverag multimodal data are covered in the tutorials.
 2. **Open research**: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the [GitHub repository](https://github.com/pykale/mmai-tutorials).
-3. **Reproducible pipelines with PyKale**: Promoting open research practices using `PyKale`, which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.
+3. **Reproducible pipelines with PyKale**: The core machine learning library behind the tutorial of this workshop is [`PyKale`](https://github.com/pykale/pykale), which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.
 
----
-
-### Questions to Consider
-
-Consider the following questions to help familiarize yourself with the key concepts of this workshop:
-
-- Have you used publicly available data or code in your work?
-
-- Have you ever shared data or code from your own research?
-
-- Have you practiced reproducible research methods?
-
-Consider the following questions, choose those that apply to you, to reflect on your experience:
-
-- Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?
-- What aspects of the tutorials did you find most helpful or challenging?
-- How do you envision multimodal AI contributing to your own research?
-- What challenges do you currently face when working with multimodal data or methods?
-
-### Discussion forum for Q&A etc
-
-We have a [discussion forum](https://github.com/pykale/mmai-tutorials/discussions) as our primary communication channel, e.g. for Q&A, information sharing, and discussion. Please ask questions or post information there, rather than emailing the organisers directly. This will help others to benefit from the answers and help build an engaging community. You will need a [GitHub account](https://github.com/join) to post questions.
+In person event: **EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 2:30 PM 16 July | B3 M7-8 of Bella Center, Copenhagen, Denmark**.
 
 ---
 
@@ -44,24 +21,32 @@ This workshop covers the tutorials for **four biomedical applications** using th
 **Tutorial Topics:**
 
 1. **Brain Disorder Diagnosis**
-   - **Data**: ABIDE (Autism Brain Imaging Data Exchange)
-   - **Goal**: Use neuroimaging and phenotypic data for autism classification
+   - **Dataset**: ABIDE (Autism Brain Imaging Data Exchange)
+   - **Modalities**: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)
+   - **Task**: Use neuroimaging and phenotypic data for autism classification
+   - **Multimodal technique**: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.
 
 2. **Cardiovascular Disease Assessment**
-   - **Data**: MIMIC Chest X-rays and ECG signals
-   - **Goal**: Integrate imaging and physiological signals for risk prediction
+   - **Dataset**: MIMIC Chest X-rays and ECG signals
+   - **Modalities**: Chest X-ray images and ECG signals
+   - **Task**: Integrate imaging and physiological signals for classifying health and cardiothoracic abnormalities
+   - **Multimodal technique**: Fusion - combining imaging and ECG features at feature and decision level for improved classification.
 
 3. **Cancer Classification**
-   - **Data**: TCGA (The Cancer Genome Atlas)
-   - **Goal**: Combine genomics and transcriptomics data for cancer subtype classification
+   - **Dataset**: TCGA (The Cancer Genome Atlas)
+   - **Modalities**: Genomics (DNA methylation, gene expression) and transcriptomics (RNA sequencing)
+   - **Task**: Combine genomics and transcriptomics data for cancer subtype classification
+   - **Multimodal technique**: Fusion and interaction - concatenating omic-specific probabilities and constructing a cross-omics tensor for the probability interaction.
 
 4. **Drug–Target Interaction Prediction**
-   - **Data**: BindingDB and BioSNAP
-   - **Goal**: Predict molecular interactions from structural and textual features
+   - **Dataset**: BindingDB and BioSNAP
+   - **Modalities**: Protein structures (3D) and molecular graphs (SMILES)
+   - **Task**: Predict molecular interactions from structural and textual features
+   - **Multimodal technique**: Interaction - bilinear interaction between protein and molecular embedding.
 
 The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.
 
-The tutorials are organized as standardized file structure, which is shown below:
+The tutorials are organized as standardized file structure. The common file structure of a tutorial is shown below:
 
 ```text
     ├───tutorial.ipynb
@@ -69,6 +54,18 @@ The tutorials are organized as standardized file structure, which is shown below
     ├───configs
     │   ├───base.yml
     │   ├───**.yml
+```
+
+Some tutorials may also include additional resources. A more comprehensive file structure is shown below:
+
+```text
+    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+    |───extend-reading
+    │   ├───**.md
     ├───model.py
     ├───models
     │   ├───**.pt
@@ -97,3 +94,25 @@ Using a configuration file offers several benefits:
 - **Scalability**: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.
 
 Please refer to the provided configuration files for details on how to customize your experiment.
+
+### Discussion forum for Q&A etc
+
+We have a [discussion forum](https://github.com/pykale/mmai-tutorials/discussions) as our primary communication channel, e.g. for Q&A, information sharing, and discussion. Please ask questions or post information there, rather than emailing the organisers directly. This will help others to benefit from the answers and help build an engaging community. You will need a [GitHub account](https://github.com/join) to post questions.
+
+
+### Questions to Consider
+
+Consider the following questions to help familiarize yourself with the key concepts of this workshop:
+
+- Have you used publicly available data or code in your work?
+
+- Have you ever shared data or code from your own research?
+
+- Have you practiced reproducible research methods?
+
+Consider the following questions, choose those that apply to you, to reflect on your experience:
+
+- Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?
+- What aspects of the tutorials did you find most helpful or challenging?
+- How do you envision multimodal AI contributing to your own research?
+- What challenges do you currently face when working with multimodal data or methods?
