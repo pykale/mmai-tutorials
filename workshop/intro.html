@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -192,15 +192,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/brain-disorder-diagnosis/tutorial-brain.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config (optional)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
@@ -401,12 +401,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome">Welcome</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-biomedical-multimodal-ai-research-workshop">Open Biomedical Multimodal AI Research Workshop</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-forum-for-q-a-etc">Discussion forum for Q&amp;A etc</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-materials">Overview of the Materials</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-forum-for-q-a-etc">Discussion forum for Q&amp;A etc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
 </ul>
 </li>
 </ul>
@@ -426,34 +426,13 @@ document.write(`
 <h2>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h2>
 <section id="open-biomedical-multimodal-ai-research-workshop">
 <h3>Open Biomedical Multimodal AI Research Workshop<a class="headerlink" href="#open-biomedical-multimodal-ai-research-workshop" title="Link to this heading">#</a></h3>
-<!-- **EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark** -->
 <p>This workshop offers practical, hands-on tutorials in <strong>open biomedical multimodal AI research</strong>, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:</p>
 <ol class="arabic simple">
-<li><p><strong>Foundational skills in multimodal learning</strong>: Developing knowledge and practical skills in leveraging multimodal data, including fusion, regularization, and interaction techniques for biomedical research.</p></li>
+<li><p><strong>Foundational skills in multimodal learning</strong>: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three techniques, <strong>regularization</strong>, <strong>fusion</strong>, and <strong>interaction</strong>, to leverag multimodal data are covered in the tutorials.</p></li>
 <li><p><strong>Open research</strong>: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the <a class="reference external" href="https://github.com/pykale/mmai-tutorials">GitHub repository</a>.</p></li>
-<li><p><strong>Reproducible pipelines with PyKale</strong>: Promoting open research practices using <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>, which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.</p></li>
+<li><p><strong>Reproducible pipelines with PyKale</strong>: The core machine learning library behind the tutorial of this workshop is <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a>, which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.</p></li>
 </ol>
-</section>
-<hr class="docutils" />
-<section id="questions-to-consider">
-<h3>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Link to this heading">#</a></h3>
-<p>Consider the following questions to help familiarize yourself with the key concepts of this workshop:</p>
-<ul class="simple">
-<li><p>Have you used publicly available data or code in your work?</p></li>
-<li><p>Have you ever shared data or code from your own research?</p></li>
-<li><p>Have you practiced reproducible research methods?</p></li>
-</ul>
-<p>Consider the following questions, choose those that apply to you, to reflect on your experience:</p>
-<ul class="simple">
-<li><p>Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?</p></li>
-<li><p>What aspects of the tutorials did you find most helpful or challenging?</p></li>
-<li><p>How do you envision multimodal AI contributing to your own research?</p></li>
-<li><p>What challenges do you currently face when working with multimodal data or methods?</p></li>
-</ul>
-</section>
-<section id="discussion-forum-for-q-a-etc">
-<h3>Discussion forum for Q&amp;A etc<a class="headerlink" href="#discussion-forum-for-q-a-etc" title="Link to this heading">#</a></h3>
-<p>We have a <a class="reference external" href="https://github.com/pykale/mmai-tutorials/discussions">discussion forum</a> as our primary communication channel, e.g. for Q&amp;A, information sharing, and discussion. Please ask questions or post information there, rather than emailing the organisers directly. This will help others to benefit from the answers and help build an engaging community. You will need a <a class="reference external" href="https://github.com/join">GitHub account</a> to post questions.</p>
+<p>In person event: <strong>EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 2:30 PM 16 July | B3 M7-8 of Bella Center, Copenhagen, Denmark</strong>.</p>
 </section>
 </section>
 <hr class="docutils" />
@@ -464,36 +443,54 @@ document.write(`
 <ol class="arabic simple">
 <li><p><strong>Brain Disorder Diagnosis</strong></p>
 <ul class="simple">
-<li><p><strong>Data</strong>: ABIDE (Autism Brain Imaging Data Exchange)</p></li>
-<li><p><strong>Goal</strong>: Use neuroimaging and phenotypic data for autism classification</p></li>
+<li><p><strong>Dataset</strong>: ABIDE (Autism Brain Imaging Data Exchange)</p></li>
+<li><p><strong>Modalities</strong>: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)</p></li>
+<li><p><strong>Task</strong>: Use neuroimaging and phenotypic data for autism classification</p></li>
+<li><p><strong>Multimodal technique</strong>: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.</p></li>
 </ul>
 </li>
 <li><p><strong>Cardiovascular Disease Assessment</strong></p>
 <ul class="simple">
-<li><p><strong>Data</strong>: MIMIC Chest X-rays and ECG signals</p></li>
-<li><p><strong>Goal</strong>: Integrate imaging and physiological signals for risk prediction</p></li>
+<li><p><strong>Dataset</strong>: MIMIC Chest X-rays and ECG signals</p></li>
+<li><p><strong>Modalities</strong>: Chest X-ray images and ECG signals</p></li>
+<li><p><strong>Task</strong>: Integrate imaging and physiological signals for classifying health and cardiothoracic abnormalities</p></li>
+<li><p><strong>Multimodal technique</strong>: Fusion - combining imaging and ECG features at feature and decision level for improved classification.</p></li>
 </ul>
 </li>
 <li><p><strong>Cancer Classification</strong></p>
 <ul class="simple">
-<li><p><strong>Data</strong>: TCGA (The Cancer Genome Atlas)</p></li>
-<li><p><strong>Goal</strong>: Combine genomics and transcriptomics data for cancer subtype classification</p></li>
+<li><p><strong>Dataset</strong>: TCGA (The Cancer Genome Atlas)</p></li>
+<li><p><strong>Modalities</strong>: Genomics (DNA methylation, gene expression) and transcriptomics (RNA sequencing)</p></li>
+<li><p><strong>Task</strong>: Combine genomics and transcriptomics data for cancer subtype classification</p></li>
+<li><p><strong>Multimodal technique</strong>: Fusion and interaction - concatenating omic-specific probabilities and constructing a cross-omics tensor for the probability interaction.</p></li>
 </ul>
 </li>
 <li><p><strong>Drug–Target Interaction Prediction</strong></p>
 <ul class="simple">
-<li><p><strong>Data</strong>: BindingDB and BioSNAP</p></li>
-<li><p><strong>Goal</strong>: Predict molecular interactions from structural and textual features</p></li>
+<li><p><strong>Dataset</strong>: BindingDB and BioSNAP</p></li>
+<li><p><strong>Modalities</strong>: Protein structures (3D) and molecular graphs (SMILES)</p></li>
+<li><p><strong>Task</strong>: Predict molecular interactions from structural and textual features</p></li>
+<li><p><strong>Multimodal technique</strong>: Interaction - bilinear interaction between protein and molecular embedding.</p></li>
 </ul>
 </li>
 </ol>
 <p>The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.</p>
-<p>The tutorials are organized as standardized file structure, which is shown below:</p>
+<p>The tutorials are organized as standardized file structure. The common file structure of a tutorial is shown below:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
     ├───config.py
     ├───configs
     │   ├───base.yml
     │   ├───**.yml
+</pre></div>
+</div>
+<p>Some tutorials may also include additional resources. A more comprehensive file structure is shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+    |───extend-reading
+    │   ├───**.md
     ├───model.py
     ├───models
     │   ├───**.pt
@@ -521,6 +518,26 @@ document.write(`
 <li><p><strong>Scalability</strong>: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.</p></li>
 </ul>
 <p>Please refer to the provided configuration files for details on how to customize your experiment.</p>
+</section>
+<section id="discussion-forum-for-q-a-etc">
+<h3>Discussion forum for Q&amp;A etc<a class="headerlink" href="#discussion-forum-for-q-a-etc" title="Link to this heading">#</a></h3>
+<p>We have a <a class="reference external" href="https://github.com/pykale/mmai-tutorials/discussions">discussion forum</a> as our primary communication channel, e.g. for Q&amp;A, information sharing, and discussion. Please ask questions or post information there, rather than emailing the organisers directly. This will help others to benefit from the answers and help build an engaging community. You will need a <a class="reference external" href="https://github.com/join">GitHub account</a> to post questions.</p>
+</section>
+<section id="questions-to-consider">
+<h3>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Link to this heading">#</a></h3>
+<p>Consider the following questions to help familiarize yourself with the key concepts of this workshop:</p>
+<ul class="simple">
+<li><p>Have you used publicly available data or code in your work?</p></li>
+<li><p>Have you ever shared data or code from your own research?</p></li>
+<li><p>Have you practiced reproducible research methods?</p></li>
+</ul>
+<p>Consider the following questions, choose those that apply to you, to reflect on your experience:</p>
+<ul class="simple">
+<li><p>Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?</p></li>
+<li><p>What aspects of the tutorials did you find most helpful or challenging?</p></li>
+<li><p>How do you envision multimodal AI contributing to your own research?</p></li>
+<li><p>What challenges do you currently face when working with multimodal data or methods?</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -591,12 +608,12 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#welcome">Welcome</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-biomedical-multimodal-ai-research-workshop">Open Biomedical Multimodal AI Research Workshop</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-forum-for-q-a-etc">Discussion forum for Q&amp;A etc</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-materials">Overview of the Materials</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-forum-for-q-a-etc">Discussion forum for Q&amp;A etc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
 </ul>
 </li>
 </ul>

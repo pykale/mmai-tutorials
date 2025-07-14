@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -192,15 +192,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assessment/tutorial.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="extend-reading/extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extend-reading/helper-functions.html">Helper Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extend-reading/data-config.html">Data &amp; Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/data-config.html">Data &amp; Config (optional)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
@@ -488,10 +488,10 @@ Autism Brain Imaging Data Exchange
 <h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
 <p>To get started, we will install the necessary packages and load a set of helper functions to support the tutorial workflow. Run the cell below to copy all tutorial-related materials to your Google Colab runtime directory. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -526,10 +526,10 @@ Autism Brain Imaging Data Exchange
 <li><p><strong>yacs</strong>: A lightweight configuration management library used to store and organize experiment settings in a hierarchical and human-readable format.</p></li>
 </ul>
 <div class="cell tag_hide-input tag_hide-output docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
@@ -543,10 +543,10 @@ Autism Brain Imaging Data Exchange
 </div>
 </div>
 </details>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pykale, gdown, nilearn, and yacs installed successfully ✅
@@ -570,10 +570,10 @@ Note: you may need to restart the kernel to use updated packages.
 </div>
 <p>A detailed description of each configurable option is provided as optional extended reading in the following sections.</p>
 <div class="cell tag_hide-input tag_hide-output docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
@@ -601,10 +601,10 @@ Note: you may need to restart the kernel to use updated packages.
 </div>
 </div>
 </details>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CROSS_VALIDATION:
@@ -739,10 +739,10 @@ describing the subjects.</p></li>
 </div>
 <p>To get a more visual overview on what FC represents and which parts of it we use for the features, we visualize the FC below using a heatmap.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_connectivity_matrix</span>
@@ -799,10 +799,10 @@ available ROI.</p></li>
 </div>
 <p>Next, we want to inspect the phenotypic information provided in <strong>ABIDE dataset</strong>.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">RANDOM_STATE</span><span class="p">))</span>
@@ -988,10 +988,10 @@ available ROI.</p></li>
 </div>
 <p>We also want to know how the phenotypes are distributed, we can visualize it with count and histogram plot for categorical and continuous variable respectively. Following Kunda et al. (2022), we mainly focused on the distribution of site, gender, handedness, eye status, age, and FIQ.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
@@ -1058,10 +1058,10 @@ available ROI.</p></li>
 </div>
 <p>After preprocessing, we want to observe how the encoding, imputation, and standardization affected the phenotypes.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">RANDOM_STATE</span><span class="p">))</span>
@@ -1273,10 +1273,10 @@ variables have been one-hot-encoded.</p>
 </div>
 <p>We also want to check how the phenotypes are distributed after we preprocess it.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">helpers.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_phenotypic_distribution</span>
