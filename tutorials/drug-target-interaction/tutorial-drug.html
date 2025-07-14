@@ -628,8 +628,25 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of the folder:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of the data folder:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/drug-target-interaction&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data content is structured as follows:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="w">    </span>├───data
+<span class="w">    </span>│<span class="w">   </span>├───checkpoint
+<span class="w">    </span>│<span class="w">   </span>├───bindingdb
+<span class="w">    </span>│<span class="w">   </span>├───biosnap
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> folder contains two datasets: <code class="docutils literal notranslate"><span class="pre">bindingdb</span></code> and <code class="docutils literal notranslate"><span class="pre">biosnap</span></code>. Each dataset folder contains the following files. The <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> folder contains the saved model checkpoint, which are used later in the interpretation section.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of bindingdb folder:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/drug-target-interaction/bindingdb&quot;</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -694,7 +711,7 @@ Each drug–protein pair is given a label:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> if they do not</p></li>
 </ul>
 <p>Each row shows one drug–protein pair. The goal of our machine learning model is to predict the last column (<strong>Y</strong>) — whether or not the drug and protein interact.</p>
-<p>You can load CSV files into Python using tools like <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
+<p>You can load CSV files into Python using tools like <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. The output shows a sample of the data, including the SMILES string for the drug, the protein sequence, the interaction label (Y) and the cluster ID.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -706,6 +723,8 @@ Each drug–protein pair is given a label:</p>
 <span class="n">df_train_source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;source_train.csv&quot;</span><span class="p">))</span>
 <span class="n">df_train_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;target_train.csv&quot;</span><span class="p">))</span>
 <span class="n">df_test_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;target_test.csv&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample example:&quot;</span><span class="p">,</span> <span class="n">df_train_source</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -751,6 +770,8 @@ Each drug–protein pair is given a label:</p>
     <span class="s2">&quot;drop_last&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="s2">&quot;collate_fn&quot;</span><span class="p">:</span> <span class="n">graph_collate_func</span><span class="p">,</span>
 <span class="p">}</span>
+
+<span class="n">params</span>
 </pre></div>
 </div>
 </div>
@@ -758,7 +779,9 @@ Each drug–protein pair is given a label:</p>
 <p>Then, we create a DataLoader from both the source and target datasets for training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using domain adaptation:&quot;</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">:</span>
     <span class="n">training_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">source_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -852,7 +875,7 @@ Each drug–protein pair is given a label:</p>
 </section>
 <section id="predict">
 <h3>Predict<a class="headerlink" href="#predict" title="Link to this heading">#</a></h3>
-<p>We use the training class <code class="docutils literal notranslate"><span class="pre">kale.pipeline.drugban_trainer</span></code>, which handles model training, domain adaptation, and evaluation for DrugBAN.</p>
+<p>We use the PyKale pipeline API <code class="docutils literal notranslate"><span class="pre">kale.pipeline.drugban_trainer</span></code> to connect dataloaders, encoders and outcoders for model training and evaluation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.drugban_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugbanTrainer</span>
@@ -957,6 +980,7 @@ Each drug–protein pair is given a label:</p>
 <section id="performance-comparison">
 <h3>Performance Comparison<a class="headerlink" href="#performance-comparison" title="Link to this heading">#</a></h3>
 <p>The earlier example was a simple demonstration. To properly evaluate DrugBAN against baseline models, we train it for 100 epochs across multiple random seeds.</p>
+<p>We provide a checkpoint trained for 100 epochs in the <code class="docutils literal notranslate"><span class="pre">data/drug-target-interaction/checkpoint</span></code> for your test after the tutorial. We will also use the provided checkpoint for the interpretation section for a better visualization.</p>
 <p>The figure below shows the performance of different models on the BioSNAP and BindingDB datasets:</p>
 <ul class="simple">
 <li><p>Left plot: AUROC (Area Under the ROC Curve)</p></li>
@@ -976,7 +1000,7 @@ Each drug–protein pair is given a label:</p>
 <p>This helps us understand which parts of the drug contribute to the interaction with the target protein.</p>
 <section id="extracting-attention-weights">
 <h3>Extracting Attention Weights<a class="headerlink" href="#extracting-attention-weights" title="Link to this heading">#</a></h3>
-<p>We use the <code class="docutils literal notranslate"><span class="pre">test.py</span></code> script to evaluate the trained model and optionally extract the attention weights by specifying <code class="docutils literal notranslate"><span class="pre">--save_att_path</span></code>:</p>
+<p>First, we need to load the test dataset and create a DataLoader for it. This will allow us to process the test samples in batches. We define functions to create the test dataset and DataLoader.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_test_dataset</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">):</span>
@@ -998,16 +1022,19 @@ Each drug–protein pair is given a label:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/xianyuan/PycharmProjects/embc-mmai25/tutorials/drug-target-interaction/test.py&#39;: [Errno 2] No such file or directory
+</div>
+<p>We load a small subset of samples for testing from the provided <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file. You can create your own <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file with the same format to test your drug–protein pairs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataFolder</span> <span class="o">=</span> <span class="s2">&quot;/content/drug-target-interaction/data/drug-target-interaction/bindingdb/interpretation_samples.csv&quot;</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We then build the test dataset and DataLoader using the functions defined above. The <code class="docutils literal notranslate"><span class="pre">batchsize</span></code> is set to 1 to ensure we process one sample at a time for attention visualization later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataFolder</span> <span class="o">=</span> <span class="s2">&quot;/content/drug-target-interaction/data/drug-target-interaction/bindingdb/interpretation_samples.csv&quot;</span>
-<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">get_test_dataset</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataset</span> <span class="o">=</span> <span class="n">get_test_dataset</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
 <span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">get_test_dataloader</span><span class="p">(</span>
     <span class="n">test_dataset</span><span class="p">,</span>
     <span class="n">batchsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -1018,6 +1045,7 @@ Each drug–protein pair is given a label:</p>
 </div>
 </div>
 </div>
+<p>Then, we use the following function to load the trained model with the PyKale API.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_model_from_ckpt</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
@@ -1043,6 +1071,7 @@ Each drug–protein pair is given a label:</p>
 </div>
 </div>
 </div>
+<p>Once the model and test data are prepared, we extract attention maps from the trained model. We set the directory to the provided checkpoint file, load the trained model, and set it to evaluation mode.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="p">(</span>
@@ -1054,6 +1083,7 @@ Each drug–protein pair is given a label:</p>
 </div>
 </div>
 </div>
+<p>We then iterate through the test DataLoader, passing each batch of drug and protein pairs to the model. The model’s forward method returns the attention weights. After processing all batches, we concatenate the attention tensors into a single tensor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
@@ -1073,14 +1103,13 @@ Each drug–protein pair is given a label:</p>
 <span class="c1"># Concatenate into one tensor: [N, H, V, Q]</span>
 <span class="n">all_attentions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">all_attentions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">all_attentions</span><span class="p">,</span> <span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">)</span>
+
+<span class="n">all_attentions</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">--cfg</span></code>: Path to the configuration file.</p>
-<p><code class="docutils literal notranslate"><span class="pre">--ckpt_resume</span></code>: Path to the trained model checkpoint.</p>
-<p><code class="docutils literal notranslate"><span class="pre">--test_file</span></code>: Path to the test set file.</p>
-<p><code class="docutils literal notranslate"><span class="pre">--save_att_path</span></code>: Path to save the attention map in <code class="docutils literal notranslate"><span class="pre">.pt</span></code> format (PyTorch tensor).</p>
+<p>The attention has shape [B, H, V, Q] (Number of drug-target pairs, Heads of attentions, Drug tokens, Protein tokens).</p>
 </section>
 <section id="visualize-attention-maps-and-molecule-images">
 <h3>Visualize Attention Maps and Molecule Images<a class="headerlink" href="#visualize-attention-maps-and-molecule-images" title="Link to this heading">#</a></h3>
@@ -1094,35 +1123,23 @@ Each drug–protein pair is given a label:</p>
 </li>
 </ol>
 <p>The output images are saved in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> directory. You can also modify the <code class="docutils literal notranslate"><span class="pre">data_file</span></code> to use your own input in the same format as <code class="docutils literal notranslate"><span class="pre">target_test.csv</span></code>.</p>
+<p>We first import the necessary PyKale APIs and set the output directory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">nilearn</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">kale.interpret.visualize</span><span class="w"> </span><span class="kn">import</span> <span class="n">draw_attention_map</span><span class="p">,</span> <span class="n">draw_mol_with_attention</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">kale.prepdata.tensor_reshape</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize_tensor</span>
+
+<span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;./visualization&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We then load the attention maps, data, and SMILES strings from the test dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;./visualization&quot;</span>
-<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">att_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;att_map_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
-<span class="n">mol_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;mol_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.svg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>  <span class="c1"># [B, H, V, Q]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 <span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
 <span class="n">smiles</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;SMILES&quot;</span><span class="p">]</span>
 <span class="n">proteins</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;Protein&quot;</span><span class="p">]</span>
@@ -1130,19 +1147,27 @@ Each drug–protein pair is given a label:</p>
 </div>
 </div>
 </div>
+<p>We select the first sample from the attention maps and corresponding SMILES and protein sequence for visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_real_length</span><span class="p">(</span><span class="n">smile</span><span class="p">,</span> <span class="n">protein_sequence</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the real length of the drug and protein sequences.&quot;&quot;&quot;</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smile</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">protein_sequence</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">att_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;att_map_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+<span class="n">mol_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;mol_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.svg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>We crop the attention map to the actual lengths of the drug and protein sequences. This is important because the attention map may include padding tokens.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_real_length</span><span class="p">(</span><span class="n">smile</span><span class="p">,</span> <span class="n">protein_sequence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the real length of the drug and protein sequences.&quot;&quot;&quot;</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smile</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">protein_sequence</span><span class="p">)</span>
+
 
 <span class="n">att</span> <span class="o">=</span> <span class="n">attention</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>  <span class="c1"># [H, V, Q]</span>
 <span class="n">smile</span> <span class="o">=</span> <span class="n">smiles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
@@ -1156,6 +1181,7 @@ Each drug–protein pair is given a label:</p>
 </div>
 </div>
 </div>
+<p>Finally, we save the attention map and the molecule image with attention highlights.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">draw_attention_map</span><span class="p">(</span>
@@ -1176,6 +1202,7 @@ Each drug–protein pair is given a label:</p>
 </div>
 </div>
 </div>
+<p>The output images are saved in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> directory. The attention map shows how much each drug token attends to each protein token, while the molecule image highlights the atoms based on their attention values.</p>
 </section>
 </section>
 <section id="extension-tasks">
