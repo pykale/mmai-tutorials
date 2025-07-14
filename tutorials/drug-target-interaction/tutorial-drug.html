@@ -618,6 +618,7 @@ document.write(`
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">gdown</span>
 <span class="err">!</span><span class="n">gdown</span> <span class="o">--</span><span class="nb">id</span> <span class="mi">1</span><span class="n">ogOcxZn</span><span class="o">-</span><span class="mi">1</span><span class="n">q418LOT</span><span class="o">-</span><span class="n">gQ94aHQV0Y1sOmk</span> <span class="o">--</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">.</span><span class="n">zip</span>
 <span class="err">!</span><span class="n">unzip</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">d</span> <span class="n">data</span><span class="o">/</span>
+<span class="err">!</span><span class="n">mv</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">/</span><span class="n">checkpoint</span> <span class="o">./</span>
 </pre></div>
 </div>
 </div>
@@ -980,7 +981,7 @@ Each drug–protein pair is given a label:</p>
 <section id="performance-comparison">
 <h3>Performance Comparison<a class="headerlink" href="#performance-comparison" title="Link to this heading">#</a></h3>
 <p>The earlier example was a simple demonstration. To properly evaluate DrugBAN against baseline models, we train it for 100 epochs across multiple random seeds.</p>
-<p>We provide a checkpoint trained for 100 epochs in the <code class="docutils literal notranslate"><span class="pre">data/drug-target-interaction/checkpoint</span></code> for your test after the tutorial. We will also use the provided checkpoint for the interpretation section for a better visualization.</p>
+<p>We provide a checkpoint trained for 100 epochs in the <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> for your test after the tutorial. We will also use the provided checkpoint for the interpretation section for a better visualization.</p>
 <p>The figure below shows the performance of different models on the BioSNAP and BindingDB datasets:</p>
 <ul class="simple">
 <li><p>Left plot: AUROC (Area Under the ROC Curve)</p></li>
@@ -1075,7 +1076,7 @@ Each drug–protein pair is given a label:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;/content/drug-target-interaction/data/drug-target-interaction/checkpoint/best.ckpt&quot;</span>
+    <span class="s2">&quot;/content/drug-target-interaction/checkpoint/best.ckpt&quot;</span>
 <span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">get_model_from_ckpt</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">cfg</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
