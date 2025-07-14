@@ -2,10 +2,13 @@
 
 <!-- This repository contains materials and resources for EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark. -->
 
-## Structure
+This repository contains materials and resources for building the [Jupyter book](https://pykale.github.io/mmai-tutorials/) of the tutorials on multimodal AI applications using [PyKale](https://github.com/pykale/pykale), a Python library of the [PyTorch ecosystem](https://landscape.pytorch.org/?item=training--multimodal--pykale).
 
-- `tutorials/`: Contains tutorial notebooks and related materials.
-- `requirements.txt`: Lists dependencies required for the project.
+## Structure of source code
+
+- [``]
+- [`tutorials/`](https://github.com/pykale/mmai-tutorials/tree/main/tutorials): Contains tutorial notebooks and related materials.
+- [`requirements.txt`](https://github.com/pykale/mmai-tutorials/blob/main/requirements.txt): Lists dependencies required for the project.
 
 The structure of each tutorial is as follows:
 
@@ -52,7 +55,7 @@ The structure of each tutorial is as follows:
 
 Please ensure your contributions adhere to the repository's coding standards and include appropriate documentation.
 
-## Building the Book
+### Building the and preview the book
 
 To build the book in development, assuming that the working directory is the project's folder, please call:
 

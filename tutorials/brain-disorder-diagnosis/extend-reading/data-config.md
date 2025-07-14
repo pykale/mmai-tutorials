@@ -48,7 +48,7 @@ It returns four values, including:
 
 ## Categorical Variables from Phenotypic Data
 
-The following categorical phenotypes are included and will be **one-hot encoded** for modeling:
+The following categorical phenotypes are included and will be **one-hot encoded** for modelling:
 
 - `SITE_ID`
 - `SEX`
@@ -64,7 +64,7 @@ These variables are first mapped to descriptive labels using the provided `MAPPI
   - `"AMBIDEXTROUS"` (e.g., `"Mixed"`, `"L->R"`, `"Ambi"`)
 - `EYE_STATUS_AT_SCAN`: `{1 → OPEN, 2 → CLOSED}`
 
-**Continuous Variables**
+### Continuous Variables
 
 The following continuous phenotypes will be optionally **standardized**:
 
@@ -73,7 +73,7 @@ The following continuous phenotypes will be optionally **standardized**:
 
 We will explain the available options for standardizing these phenotypes in more detail down below.
 
-**Handling Missing Values**
+### Handling Missing Values
 
 Missing values are handled with the following assumptions and imputation strategies:
 
@@ -82,7 +82,7 @@ Missing values are handled with the following assumptions and imputation strateg
 
 These choices ensure that the downstream models can operate without interruption while maintaining reasonable assumptions based on domain knowledge.
 
-**Target Variable Encoding**
+### Target Variable Encoding
 
 The diagnostic group `DX_GROUP` is used to define the target label for classification:
 
@@ -140,6 +140,7 @@ The function returns the following:
 ## Configuration Arguments for Cross-Validation
 
 In this tutorial, we specify the following arguments for cross-validation:
+
 - **`split`**: Defines the cross-validation strategy.
   - Available options:
     - `"skf"`: Stratified K-fold to maintain label balance in each fold.

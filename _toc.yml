@@ -26,23 +26,23 @@ parts:
   chapters:
   - file: tutorials/setup-config/tutorial-0
     title: Setup & Configuration
-  - file: tutorials/cardiac-hemodynamics-assessment/tutorial
   - file: tutorials/brain-disorder-diagnosis/tutorial-brain
     sections:
     - file: tutorials/brain-disorder-diagnosis/extend-reading/extension-tasks
       title: Extension Tasks
-    - file: tutorials/brain-disorder-diagnosis/extend-reading/helper-functions
-      title: Helper Functions (optional)
     - file: tutorials/brain-disorder-diagnosis/extend-reading/data-config
       title: Data & Config (optional)
+    - file: tutorials/brain-disorder-diagnosis/extend-reading/helper-functions
+      title: Helper Functions (optional)
+  - file: tutorials/cardiac-hemodynamics-assessment/tutorial-heart
   - file: tutorials/drug-target-interaction/tutorial-drug
   - file: tutorials/multiomics-cancer-classification/tutorial-cancer
     sections:
+    - file: tutorials/multiomics-cancer-classification/extend-reading/extension-tasks
+      title: Extension Tasks
     - file: tutorials/multiomics-cancer-classification/extend-reading/data
       title: Data (optional)
     - file: tutorials/multiomics-cancer-classification/extend-reading/helper-functions
       title: Helper Functions & Model Details (optional)
     - file: tutorials/multiomics-cancer-classification/extend-reading/interpretation-study
       title: Interpretation Study (optional)
-    - file: tutorials/multiomics-cancer-classification/extend-reading/extension-tasks
-      title: Extension Tasks
