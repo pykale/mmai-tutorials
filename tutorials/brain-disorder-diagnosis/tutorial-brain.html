@@ -191,16 +191,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="extend-reading/extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extend-reading/data-config.html">Data &amp; Config (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../cardiac-hemodynamics-assessment/tutorial-heart.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
 </ul>
@@ -513,7 +514,7 @@ Autism Brain Imaging Data Exchange
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Optional</p>
-<p>Learn more about the <a class="reference internal" href="extend-reading/helper-functions.html"><span class="std std-doc">helper functions</span></a> used in this tutorial.</p>
+<p>Learn more about the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/extend-reading/helper-functions.html">helper functions</a> used in this tutorial.</p>
 </div>
 <section id="install-required-packages">
 <h3>Install Required Packages<a class="headerlink" href="#install-required-packages" title="Link to this heading">#</a></h3>
@@ -558,7 +559,7 @@ Note: you may need to restart the kernel to use updated packages.
 </section>
 <section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
-<p>Please refer to the <a class="reference internal" href="../../overview.html#configuration"><span class="std std-ref">configuration overview</span></a> for general configuration setup instructions for this workshop.</p>
+<p>Please refer to the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/setup-config/tutorial-0.html#step-2-configuration-using-yml-files">configuration tutorial</a> for general configuration setup instructions for this workshop.</p>
 <p>In this tutorial, <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/brain-disorder-diagnosis/configs/lpgo/base.yml"><code class="docutils literal notranslate"><span class="pre">configs/lpgo/base.yml</span></code></a> provides a lightweight setup suitable for quick experimentation. <strong>Note</strong> that this configuration file is used to describe the outputs shown in this notebook.</p>
 <p>Therefore, if a different configuration is used during execution, some of the descriptions or assumptions in the notebook may no longer apply and should be interpreted with caution, as they may become misleading.</p>
 <div class="admonition note">
@@ -659,8 +660,8 @@ TRAINER:
 <p>As mentioned earlier, we provide a <code class="docutils literal notranslate"><span class="pre">load_data</span></code> function to load <strong>pre-computed functional connectivity (FC)</strong> embeddings along with associated phenotypic information.<br />
 This function supports automated downloading via <a class="reference external" href="https://pypi.org/project/gdown/">gdown</a> by reading from manifest files if the data is not found locally.</p>
 <div class="tip admonition">
-<p class="admonition-title">Optional</p>
-<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-data-loading"><span class="std std-ref">configuration arguments for data loading</span></a>.</p>
+<p class="admonition-title">Extended Reading (optional)</p>
+<p>Learn more about the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/extend-reading/data-config.html#configuration-arguments-for-data-loading">configuration arguments for data loading</a>.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1036,7 +1037,7 @@ available ROI.</p></li>
 <p>Before modeling, we need to preprocess the phenotypic variables to ensure they are in a usable format. This includes handling missing values, encoding categorical variables, and optionally standardizing continuous ones.</p>
 <div class="tip admonition">
 <p class="admonition-title">Optional</p>
-<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#categorical-variables-from-phenotypic-data"><span class="std std-ref">categorical variables from phenotypic data</span></a> used in this tutorial.</p>
+<p>Learn more about the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/extend-reading/data-config.html#categorical-variables-from-phenotypic-data">categorical variables from phenotypic data</a> used in this tutorial.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1380,7 +1381,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Optional</p>
-<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#configuration-arguments-for-cross-validation"><span class="std std-ref">configuration arguments for cross-validation</span></a> used in this tutorial.</p>
+<p>Learn more about the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/extend-reading/data-config.html#configuration-arguments-for-cross-validation">configuration arguments for cross-validation</a> used in this tutorial.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1443,7 +1444,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Optional</p>
-<p>Learn more about the <a class="reference internal" href="extend-reading/data-config.html#hyperparameter-grid"><span class="std std-ref">hyperparameter grid</span></a> used in this tutorial.</p>
+<p>Learn more about the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/extend-reading/data-config.html#hyperparameter-grid">hyperparameter grid</a> used in this tutorial.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

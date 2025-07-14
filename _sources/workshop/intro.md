@@ -6,7 +6,7 @@
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
 
-1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three techniques, **regularization**, **fusion**, and **interaction**, to leverag multimodal data are covered in the tutorials.
+1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three techniques, **regularization**, **fusion**, and **interaction**, to leverage multimodal data are covered in the tutorials.
 2. **Open research**: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the [GitHub repository](https://github.com/pykale/mmai-tutorials).
 3. **Reproducible pipelines with PyKale**: The core machine learning library behind the tutorial of this workshop is [`PyKale`](https://github.com/pykale/pykale), which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.
 
@@ -99,7 +99,6 @@ Please refer to the provided configuration files for details on how to customize
 
 We have a [discussion forum](https://github.com/pykale/mmai-tutorials/discussions) as our primary communication channel, e.g. for Q&A, information sharing, and discussion. Please ask questions or post information there, rather than emailing the organisers directly. This will help others to benefit from the answers and help build an engaging community. You will need a [GitHub account](https://github.com/join) to post questions.
 
-
 ### Questions to Consider
 
 Consider the following questions to help familiarize yourself with the key concepts of this workshop:
@@ -108,7 +107,7 @@ Consider the following questions to help familiarize yourself with the key conce
 
 - Have you ever shared data or code from your own research?
 
-- Have you practiced reproducible research methods?
+- Have you practised reproducible research methods?
 
 Consider the following questions, choose those that apply to you, to reflect on your experience:
 

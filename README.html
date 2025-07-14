@@ -191,16 +191,17 @@
 <li class="toctree-l1"><a class="reference internal" href="tutorials/setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/brain-disorder-diagnosis/tutorial-brain.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/cardiac-hemodynamics-assessment/tutorial-heart.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
 </ul>
@@ -398,9 +399,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-contribute">How to Contribute</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-book">Building the Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-source-code">Structure of source code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-contribute">How to Contribute</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-and-preview-the-book">Building the and preview the book</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
 </ul>
             </nav>
@@ -416,11 +419,13 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="multimodal-ai-tutorials-repository">
 <h1>Multimodal AI tutorials repository<a class="headerlink" href="#multimodal-ai-tutorials-repository" title="Link to this heading">#</a></h1>
 <!-- This repository contains materials and resources for EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 16 July | Copenhagen, Denmark. -->
-<section id="structure">
-<h2>Structure<a class="headerlink" href="#structure" title="Link to this heading">#</a></h2>
+<p>This repository contains materials and resources for building the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/">Jupyter book</a> of the tutorials on multimodal AI applications using <a class="reference external" href="https://github.com/pykale/pykale">PyKale</a>, a Python library of the <a class="reference external" href="https://landscape.pytorch.org/?item=training--multimodal--pykale">PyTorch ecosystem</a>.</p>
+<section id="structure-of-source-code">
+<h2>Structure of source code<a class="headerlink" href="#structure-of-source-code" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">tutorials/</span></code>: Contains tutorial notebooks and related materials.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>: Lists dependencies required for the project.</p></li>
+<li><p>[``]</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/tree/main/tutorials"><code class="docutils literal notranslate"><span class="pre">tutorials/</span></code></a>: Contains tutorial notebooks and related materials.</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></a>: Lists dependencies required for the project.</p></li>
 </ul>
 <p>The structure of each tutorial is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
@@ -463,13 +468,13 @@ document.write(`
 <li><p>Open a pull request to the main repository.</p></li>
 </ol>
 <p>Please ensure your contributions adhere to the repository’s coding standards and include appropriate documentation.</p>
-</section>
-<section id="building-the-book">
-<h2>Building the Book<a class="headerlink" href="#building-the-book" title="Link to this heading">#</a></h2>
+<section id="building-the-and-preview-the-book">
+<h3>Building the and preview the book<a class="headerlink" href="#building-the-and-preview-the-book" title="Link to this heading">#</a></h3>
 <p>To build the book in development, assuming that the working directory is the project’s folder, please call:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-book<span class="w"> </span>build<span class="w"> </span>.
 </pre></div>
 </div>
+</section>
 </section>
 <section id="pre-commit-hooks">
 <h2>Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Link to this heading">#</a></h2>
@@ -541,9 +546,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-contribute">How to Contribute</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-book">Building the Book</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-source-code">Structure of source code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-contribute">How to Contribute</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-and-preview-the-book">Building the and preview the book</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
 </ul>
   </nav></div>

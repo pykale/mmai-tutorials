@@ -58,10 +58,12 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assessment/tutorial-cardiac';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assessment/tutorial-heart';</script>
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/tutorial-drug.html" />
+    <link rel="prev" title="Helper Functions" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +126,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -187,20 +187,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../../workshop/schedule.html">Schedule</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../brain-disorder-diagnosis/tutorial-brain.html">Brain Disorder Diagnosis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/data-config.html">Data &amp; Config (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
 </ul>
@@ -257,7 +258,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/cardiac-hemodynamics-assessment/tutorial-cardiac.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +306,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assessment/tutorial-cardiac.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assessment/tutorial-heart.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -335,7 +336,7 @@
       
       
       
-      <li><a href="../../_sources/tutorials/cardiac-hemodynamics-assessment/tutorial-cardiac.ipynb" target="_blank"
+      <li><a href="../../_sources/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -1157,6 +1158,24 @@ This method helps identify which regions in each modality, such as specific wave
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../brain-disorder-diagnosis/extend-reading/helper-functions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Helper Functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../drug-target-interaction/tutorial-drug.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Drug–Target Interaction Prediction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

@@ -62,8 +62,8 @@
     <link rel="icon" href="../../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Drug–Target Interaction Prediction" href="../../drug-target-interaction/tutorial-drug.html" />
-    <link rel="prev" title="Helper Functions" href="helper-functions.html" />
+    <link rel="next" title="Helper Functions" href="helper-functions.html" />
+    <link rel="prev" title="Extended Exploration" href="extension-tasks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,16 +191,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../setup-config/tutorial-0.html">Setup &amp; Configuration</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../tutorial-brain.html">Brain Disorder Diagnosis</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions (optional)</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Data &amp; Config (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helper-functions.html">Helper Functions (optional)</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cardiac-hemodynamics-assessment/tutorial-heart.html">Cardiothoracic Abnormality Assessment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
 </ul>
@@ -399,7 +400,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-arguments-for-data-loading">Configuration Arguments for Data Loading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-variables-from-phenotypic-data">Categorical Variables from Phenotypic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-variables-from-phenotypic-data">Categorical Variables from Phenotypic Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-variables">Continuous Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-values">Handling Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-variable-encoding">Target Variable Encoding</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-arguments-for-cross-validation">Configuration Arguments for Cross-Validation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-grid">Hyperparameter Grid</a></li>
 </ul>
@@ -474,7 +480,7 @@ document.write(`
 </section>
 <section id="categorical-variables-from-phenotypic-data">
 <h2>Categorical Variables from Phenotypic Data<a class="headerlink" href="#categorical-variables-from-phenotypic-data" title="Link to this heading">#</a></h2>
-<p>The following categorical phenotypes are included and will be <strong>one-hot encoded</strong> for modeling:</p>
+<p>The following categorical phenotypes are included and will be <strong>one-hot encoded</strong> for modelling:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">SITE_ID</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SEX</span></code></p></li>
@@ -493,21 +499,26 @@ document.write(`
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">EYE_STATUS_AT_SCAN</span></code>: <code class="docutils literal notranslate"><span class="pre">{1</span> <span class="pre">→</span> <span class="pre">OPEN,</span> <span class="pre">2</span> <span class="pre">→</span> <span class="pre">CLOSED}</span></code></p></li>
 </ul>
-<p><strong>Continuous Variables</strong></p>
+<section id="continuous-variables">
+<h3>Continuous Variables<a class="headerlink" href="#continuous-variables" title="Link to this heading">#</a></h3>
 <p>The following continuous phenotypes will be optionally <strong>standardized</strong>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">AGE_AT_SCAN</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code></p></li>
 </ul>
 <p>We will explain the available options for standardizing these phenotypes in more detail down below.</p>
-<p><strong>Handling Missing Values</strong></p>
+</section>
+<section id="handling-missing-values">
+<h3>Handling Missing Values<a class="headerlink" href="#handling-missing-values" title="Link to this heading">#</a></h3>
 <p>Missing values are handled with the following assumptions and imputation strategies:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">HANDEDNESS_CATEGORY</span></code>: Missing entries (<code class="docutils literal notranslate"><span class="pre">-9999</span></code> or <code class="docutils literal notranslate"><span class="pre">NaN</span></code>) are imputed as <code class="docutils literal notranslate"><span class="pre">&quot;RIGHT&quot;</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FIQ</span></code>: Missing scores (<code class="docutils literal notranslate"><span class="pre">-9999</span></code>) are imputed with a default value of <code class="docutils literal notranslate"><span class="pre">100</span></code>.</p></li>
 </ul>
 <p>These choices ensure that the downstream models can operate without interruption while maintaining reasonable assumptions based on domain knowledge.</p>
-<p><strong>Target Variable Encoding</strong></p>
+</section>
+<section id="target-variable-encoding">
+<h3>Target Variable Encoding<a class="headerlink" href="#target-variable-encoding" title="Link to this heading">#</a></h3>
 <p>The diagnostic group <code class="docutils literal notranslate"><span class="pre">DX_GROUP</span></code> is used to define the target label for classification:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">CONTROL</span></code> → <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
@@ -579,6 +590,7 @@ The cleaned and processed phenotype DataFrame with missing values imputed, categ
 </li>
 </ul>
 <p><a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial.html#data-preprocessing">Back to the main tutorial</a></p>
+</section>
 </section>
 <section id="configuration-arguments-for-cross-validation">
 <h2>Configuration Arguments for Cross-Validation<a class="headerlink" href="#configuration-arguments-for-cross-validation" title="Link to this heading">#</a></h2>
@@ -745,20 +757,20 @@ The cleaned and processed phenotype DataFrame with missing values imputed, categ
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="helper-functions.html"
+       href="extension-tasks.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Helper Functions</p>
+        <p class="prev-next-title">Extended Exploration</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../drug-target-interaction/tutorial-drug.html"
+       href="helper-functions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Drug–Target Interaction Prediction</p>
+        <p class="prev-next-title">Helper Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -779,7 +791,12 @@ The cleaned and processed phenotype DataFrame with missing values imputed, categ
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-arguments-for-data-loading">Configuration Arguments for Data Loading</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-variables-from-phenotypic-data">Categorical Variables from Phenotypic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-variables-from-phenotypic-data">Categorical Variables from Phenotypic Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-variables">Continuous Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-values">Handling Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-variable-encoding">Target Variable Encoding</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-arguments-for-cross-validation">Configuration Arguments for Cross-Validation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-grid">Hyperparameter Grid</a></li>
 </ul>
