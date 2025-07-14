@@ -979,17 +979,100 @@ Each drug–protein pair is given a label:</p>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">test.py</span></code> script to evaluate the trained model and optionally extract the attention weights by specifying <code class="docutils literal notranslate"><span class="pre">--save_att_path</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">cd</span> <span class="n">pykale</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">bindingdb_drugban</span>
-<span class="err">!</span><span class="n">python</span> <span class="n">test</span><span class="o">.</span><span class="n">py</span> \
-    <span class="o">--</span><span class="n">cfg</span> <span class="n">configs</span><span class="o">/</span><span class="n">DA_cross_domain</span><span class="o">.</span><span class="n">yaml</span> \
-    <span class="o">--</span><span class="n">ckpt_resume</span> <span class="s2">&quot;checkpoint/best.ckpt&quot;</span> \
-    <span class="o">--</span><span class="n">test_file</span> <span class="s2">&quot;datasets/bindingdb/cluster/target_test.csv&quot;</span> \
-    <span class="o">--</span><span class="n">save_att_path</span> <span class="s2">&quot;attention_map.pt&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_test_dataset</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">):</span>
+    <span class="n">df_test_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">)</span>
+    <span class="n">test_target_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_test_target</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_test_target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">test_target_dataset</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_test_dataloader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batchsize</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">,</span> <span class="n">collate_fn</span><span class="p">):</span>
+    <span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
+        <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span>
+        <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">,</span>
+        <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">test_dataloader</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/xianyuan/PycharmProjects/embc-mmai25/tutorials/drug-target-interaction/test.py&#39;: [Errno 2] No such file or directory
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataFolder</span> <span class="o">=</span> <span class="s2">&quot;/content/drug-target-interaction/data/drug-target-interaction/bindingdb/interpretation_samples.csv&quot;</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">get_test_dataset</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
+<span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">get_test_dataloader</span><span class="p">(</span>
+    <span class="n">test_dataset</span><span class="p">,</span>
+    <span class="n">batchsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">graph_collate_func</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_model_from_ckpt</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">DrugbanTrainer</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span>
+        <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">ckpt_path</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">),</span>
+        <span class="n">solver_lr</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">LEARNING_RATE</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+        <span class="c1"># --- domain adaptation parameters ---</span>
+        <span class="n">is_da</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">,</span>
+        <span class="n">solver_da_lr</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">DA_LEARNING_RATE</span><span class="p">,</span>
+        <span class="n">da_init_epoch</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">INIT_EPOCH</span><span class="p">,</span>
+        <span class="n">da_method</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">METHOD</span><span class="p">,</span>
+        <span class="n">original_random</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">ORIGINAL_RANDOM</span><span class="p">,</span>
+        <span class="n">use_da_entropy</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE_ENTROPY</span><span class="p">,</span>
+        <span class="n">da_random_layer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_LAYER</span><span class="p">,</span>
+        <span class="c1"># --- discriminator parameters ---</span>
+        <span class="n">da_random_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_DIM</span><span class="p">,</span>
+        <span class="n">decoder_in_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">IN_DIM</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;/content/drug-target-interaction/data/drug-target-interaction/checkpoint/best.ckpt&quot;</span>
+<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">get_model_from_ckpt</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">cfg</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">all_attentions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">):</span>
+    <span class="n">drug</span><span class="p">,</span> <span class="n">protein</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">batch</span>
+    <span class="n">drug</span><span class="p">,</span> <span class="n">protein</span> <span class="o">=</span> <span class="n">drug</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">protein</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">attention</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span>
+        <span class="n">drug</span><span class="p">,</span> <span class="n">protein</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;eval&quot;</span>
+    <span class="p">)</span>  <span class="c1"># [B, H, V, Q]</span>
+
+    <span class="n">attention</span> <span class="o">=</span> <span class="n">attention</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+    <span class="n">all_attentions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attention</span><span class="p">)</span>
+
+<span class="c1"># Concatenate into one tensor: [N, H, V, Q]</span>
+<span class="n">all_attentions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">all_attentions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">all_attentions</span><span class="p">,</span> <span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1002,16 +1085,6 @@ Each drug–protein pair is given a label:</p>
 <section id="visualize-attention-maps-and-molecule-images">
 <h3>Visualize Attention Maps and Molecule Images<a class="headerlink" href="#visualize-attention-maps-and-molecule-images" title="Link to this heading">#</a></h3>
 <p>Once attention maps are saved, run the visualization script:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">cd</span> <span class="n">pykale</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">bindingdb_drugban</span>
-<span class="err">!</span><span class="n">python</span> <span class="n">interpret</span><span class="o">.</span><span class="n">py</span> \
-    <span class="o">--</span><span class="n">att_file</span> <span class="s2">&quot;attention_map.pt&quot;</span> \
-    <span class="o">--</span><span class="n">data_file</span> <span class="s2">&quot;datasets/bindingdb/target_test.csv&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>This script will:</p>
 <ol class="arabic">
 <li><p>Load the attention weights and the corresponding SMILES + protein data.</p></li>
@@ -1021,6 +1094,88 @@ Each drug–protein pair is given a label:</p>
 </li>
 </ol>
 <p>The output images are saved in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> directory. You can also modify the <code class="docutils literal notranslate"><span class="pre">data_file</span></code> to use your own input in the same format as <code class="docutils literal notranslate"><span class="pre">target_test.csv</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">nilearn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.interpret.visualize</span><span class="w"> </span><span class="kn">import</span> <span class="n">draw_attention_map</span><span class="p">,</span> <span class="n">draw_mol_with_attention</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.prepdata.tensor_reshape</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize_tensor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;./visualization&quot;</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">att_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;att_map_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+<span class="n">mol_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;mol_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.svg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>  <span class="c1"># [B, H, V, Q]</span>
+<span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
+<span class="n">smiles</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;SMILES&quot;</span><span class="p">]</span>
+<span class="n">proteins</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;Protein&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_real_length</span><span class="p">(</span><span class="n">smile</span><span class="p">,</span> <span class="n">protein_sequence</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the real length of the drug and protein sequences.&quot;&quot;&quot;</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smile</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">protein_sequence</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="n">att</span> <span class="o">=</span> <span class="n">attention</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>  <span class="c1"># [H, V, Q]</span>
+<span class="n">smile</span> <span class="o">=</span> <span class="n">smiles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="n">protein</span> <span class="o">=</span> <span class="n">proteins</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="n">real_drug_len</span><span class="p">,</span> <span class="n">real_prot_len</span> <span class="o">=</span> <span class="n">get_real_length</span><span class="p">(</span><span class="n">smile</span><span class="p">,</span> <span class="n">protein</span><span class="p">)</span>
+<span class="n">att</span> <span class="o">=</span> <span class="n">att</span><span class="p">[:,</span> <span class="p">:</span><span class="n">real_drug_len</span><span class="p">,</span> <span class="p">:</span><span class="n">real_prot_len</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [V, Q]</span>
+
+<span class="c1"># Normalize</span>
+<span class="n">att</span> <span class="o">=</span> <span class="n">normalize_tensor</span><span class="p">(</span><span class="n">att</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">draw_attention_map</span><span class="p">(</span>
+    <span class="n">att</span><span class="p">,</span>
+    <span class="n">att_path</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Drug </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2"> Attention&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Drug Tokens&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Protein Tokens&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">draw_mol_with_attention</span><span class="p">(</span><span class="n">att</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">smile</span><span class="p">,</span> <span class="n">mol_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="extension-tasks">
