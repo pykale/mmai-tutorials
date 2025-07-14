@@ -446,6 +446,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation-study">Step 5: Interpretation Study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -460,9 +461,16 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="multiomics-cancer-classification">
 <h1>Multiomics Cancer Classification<a class="headerlink" href="#multiomics-cancer-classification" title="Link to this heading">#</a></h1>
 <p><img alt="" src="../../_images/mogonet-pykale-api.png" /></p>
-<p>In this tutorial, we demonstrate how to use the standard pipeline in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> to integrate <strong>patient multiomics data</strong> in <strong>cancer classification</strong>.
-We use <strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<strong>O</strong>nvolutional <strong>NET</strong>works (MOGONET) by <strong>Huang et al. (Nature Communication, 2021)</strong> as an example.</p>
-<p>This tutorial is about cancer subtypes classification problem, which is a multi-class classification problem. The input is the multiomics data from patient, including mRNA expression data, DNA methylation data, and miRNA expression data. The output will be the subtype of cancers. We have two datasets to work with, <strong>BRCA</strong> and <strong>ROSMAP</strong>. BRCA has five subtypes and ROSMAP has only two.</p>
+<p>In this tutorial, we will use a <a class="reference external" href="https://www.nature.com/articles/s41467-021-23774-w"><strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<strong>O</strong>nvolutional <strong>NET</strong>works (MOGONET) by <strong>Wang et al. (Nature Communication, 2021)</strong></a> [1] pipeline implemented in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [2] to integrate <strong>patient multiomics data</strong> for <strong>cancer subtypes classification</strong>.</p>
+<p>We will work with multiomics data from two datasets: <a class="reference external" href="https://www.cancerimagingarchive.net/collection/tcga-brca/"><strong>BRCA</strong> of TCGA</a> [3] and <a class="reference external" href="https://www.synapse.org/Synapse:syn3219045"><strong>ROSMAP</strong></a> [4,5]. The BRCA dataset has five subtypes, while the ROSMAP dataset has only two. Three omics modalities will be used: mRNA expression, DNA methylation, and miRNA expression.</p>
+<p>The multimodal approach used in this tutorial involves <strong>interaction</strong>, where a cross-omics tensor is constructed for the probability interaction across three omics modalities.</p>
+<p>The main tasks of this tutorial are:</p>
+<ul class="simple">
+<li><p>Load BRCA or ROSMAP dataset.</p></li>
+<li><p>Define a MOGONET model.</p></li>
+<li><p>Train and evaluate the MOGONET model on the multiomics data.</p></li>
+<li><p>Obtain the feature importance and visualize the interpretation of the model.</p></li>
+</ul>
 <section id="step-0-environment-preparation">
 <h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
 <p>As a starting point, we will install the required packages and load a set of helper functions to assist throughout this tutorial. To keep the output clean and focused on interpretation, we will also suppress warnings.</p>
@@ -775,6 +783,15 @@ If users are interested, please increase them to get more accurate predictions.<
 </div>
 </div>
 </section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>[1] Wang, T., Shao, W., Huang, Z., Tang, H., Zhang, J., Ding, Z., &amp; Huang, K. (2021). MOGONET integrates multi-omics data using graph convolutional networks allowing patient classification and biomarker identification. Nature communications, 12(1), 3445.</p>
+<p>[2] Lu, H., Liu, X., Zhou, S., Turner, R., Bai, P., Koot, R. E., … &amp; Xu, H. (2022, October). PyKale: Knowledge-aware machine learning from multiple sources in Python. In <em>Proceedings of the 31st ACM International Conference on Information &amp; Knowledge Management</em> (pp. 4274-4278).</p>
+<p>[3] Lingle, W., Erickson, B. J., Zuley, M. L., Jarosz, R., Bonaccio, E., Filippini, J., Net, J. M., Levi, L., Morris, E. A., Figler, G. G., Elnajjar, P., Kirk, S., Lee, Y., Giger, M., &amp; Gruszauskas, N. (2016). The Cancer Genome Atlas Breast Invasive Carcinoma Collection (TCGA-BRCA) (Version 3) [Data set]. The Cancer Imaging Archive.</p>
+<!-- Brigham & Women’s Hospital & Harvard Medical School Chin Lynda 9 11 Park Peter J. 12 Kucherlapati Raju 13, Genome data analysis: Baylor College of Medicine Creighton Chad J. 22 23 Donehower Lawrence A. 22 23 24 25, Institute for Systems Biology Reynolds Sheila 31 Kreisberg Richard B. 31 Bernard Brady 31 Bressler Ryan 31 Erkkila Timo 32 Lin Jake 31 Thorsson Vesteinn 31 Zhang Wei 33 Shmulevich Ilya 31, Oregon Health & Science University Anur Pavana 37 Spellman Paul T. 37, NCI Yan Chunhua 44 Hu Ying 44 Meerzaman Daoud 44, Tissue source sites: ABS-IUPUI Tarvin Katie 48 Saller Charles 49 Sandusky George 50 Mitchell Colleen 50, ... & National Human Genome Research Institute Ozenberger Bradley A. 91 Guyer Mark S. 91 Sofia Heidi J. 91 Palchik Jacqueline D. 91. (2012). Comprehensive molecular portraits of human breast tumours. Nature, 490(7418), 61-70. -->
+<p>[4] Bennett, D. A., Buchman, A. S., Boyle, P. A., Barnes, L. L., Wilson, R. S., &amp; Schneider, J. A. (2018). Religious orders study and rush memory and aging project. Journal of Alzheimer’s disease, 64(s1), S161-S189.</p>
+<p>[5] De Jager, P.L.; Ma, Y.; McCabe, C.; Xu, J.; Vardarajan, B.N.; Felsky, D.; Klein, H.U.; White, C.C.; Peters, M.A.; Lodgson, B.; et al. (2018). A multi-omic atlas of the human frontal cortex for aging and Alzheimer’s disease research. Scientific Data 5, 1-13</p>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -857,6 +874,7 @@ If users are interested, please increase them to get more accurate predictions.<
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation-study">Step 5: Interpretation Study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

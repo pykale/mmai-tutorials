@@ -431,6 +431,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-google-colab-runtime-type">Setup Google Colab runtime type</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package installation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
@@ -466,6 +467,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
         </div>
@@ -480,12 +482,25 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="cardiothoracic-abnormality-assessment">
 <h1>Cardiothoracic Abnormality Assessment<a class="headerlink" href="#cardiothoracic-abnormality-assessment" title="Link to this heading">#</a></h1>
 <p><img alt="" src="../../_images/embc_heart_tutorial_fig.png" /></p>
-<p>In this tutorial, we demonstrate how to use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> to pretrain, fine-tune, evaluate, and interpret deep learning models on two low-cost, non-invasive modalities: <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>, for assessing <strong>cardiothoracic abnormalities</strong>.</p>
-<p><strong>Estimated runtime:</strong> Completing the steps in this tutorial will take approximately 10 minutes.</p>
-<p>We will use a multimodal dataset derived from MIMIC-CXR and MIMIC-IV-ECG, which contains approximately 50K paired CXR and ECG samples. In this tutorial, we pretrain a multimodal <strong>CardioVAE</strong> model using ~49K CXR-ECG pairs via a tri-stream pretraining method. We then fine-tune this pretrained CardioVAE model on a smaller subset (~1K paired samples) with binary labels: <strong>Healthy</strong> and <strong>Cardiothoracic Abnormality</strong>. Lastly, we demonstrate how to interpret the trained CardioVAE model on both the CXR and ECG modalities.</p>
-<p>This notebook is based on the work of <a class="reference external" href="https://link.springer.com/chapter/10.1007/978-3-031-72378-0_28">Suvon et al. (MICCAI 2024)</a>, which introduced a tri-stream pretraining strategy using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-shared and modality-specific representations for assessing <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a critical indicator of cardiac hemodynamics. The resulting model, <strong>CardioVAE</strong>, is implemented in the <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a> library. Here, we provide a concise example of how to use this model through <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>’s APIs—from pretraining and fine-tuning to model interpretation.</p>
+<p>In this tutorial, we will use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [1] to pretrain, fine-tune, evaluate, and interpret deep learning models on two low-cost, non-invasive data modalities: <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>, for classifying individuals as <strong>healthy</strong> or having a <strong>cardiothoracic abnormality</strong>.</p>
+<p>We will work with a multimodal dataset derived from <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> [2,3] and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> [4], which contains approximately 50,000 paired CXR–ECG samples.</p>
+<p>This tutorial is based on the work of <a class="reference external" href="https://link.springer.com/chapter/10.1007/978-3-031-72378-0_28">Suvon et al. (MICCAI 2024)</a> [5], which proposed a tri-stream pretraining method using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-specific and modality-shared representations for estimating <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a key indicator of cardiac hemodynamics.</p>
+<p>The multimodal approach used in this tutorial involves <strong>hybrid fusion</strong>, where imaging (CXR) and ECG features are combined at both the feature and decision levels to improve classification performance.</p>
+<p>The main tasks of this tutorial are:</p>
+<ul class="simple">
+<li><p>Load CXR and ECG data.</p></li>
+<li><p>Pretrain a multimodal <strong>CardioVAE</strong> model using ~49,000 CXR–ECG pairs via a tri-stream pretraining method</p></li>
+<li><p>Fine-tune the pretrained CardioVAE model on a smaller subset (~1,000 paired samples) with binary labels: <strong>Healthy</strong> and <strong>Cardiothoracic Abnormality</strong></p></li>
+<li><p>Evaluate the performance of the fine-tuned model</p></li>
+<li><p>Interpret the trained CardioVAE model across both CXR and ECG modalities</p></li>
+</ul>
+<p><strong>Estimated runtime:</strong> Completing the tasks in this tutorial will take approximately 10 minutes (<strong>GPU is required</strong>).</p>
 <section id="step-0-environment-preparation">
 <h2>Step 0: Environment Preparation<a class="headerlink" href="#step-0-environment-preparation" title="Link to this heading">#</a></h2>
+<section id="setup-google-colab-runtime-type">
+<h3>Setup Google Colab runtime type<a class="headerlink" href="#setup-google-colab-runtime-type" title="Link to this heading">#</a></h3>
+<p>To run this tutorial in Google Colab, you need to use GPU runtime type. Click on the <strong>“Runtime”</strong> option in the top-left menu, then select <strong>“Change runtime type”</strong> and choose <strong>T4 GPU</strong> as the hardware accelerator.</p>
+</section>
 <section id="package-installation">
 <h3>Package installation<a class="headerlink" href="#package-installation" title="Link to this heading">#</a></h3>
 <p>The main packages required (excluding <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>) for this tutorial are:</p>
@@ -497,25 +512,16 @@ document.write(`
 </ul>
 <p><strong>Additional Notes for Colab</strong>
 Some non-critical dependencies (e.g., <code class="docutils literal notranslate"><span class="pre">torch-geometric</span></code>) may face version conflicts when installing <code class="docutils literal notranslate"><span class="pre">pykale</span></code> on Colab. These are handled manually in the installation step below. An automatic crash and reset have also been added, as the session needs to be restarted after installing these dependencies. <strong>Do not run this block again if you have already run it once.</strong></p>
-<p>In addition, when using Google Colab, please select the <strong>T4 GPU</strong> hardware accelerator to ensure the tutorial runs smoothly. To do this, click the <strong>“Runtime”</strong> option in the top-left menu, then select <strong>“Change runtime type”</strong> and choose <strong>T4 GPU</strong> as the hardware accelerator.</p>
 <p><strong>Estimated runtime:</strong> 4 minutes</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-
-<span class="err">!</span><span class="n">pip</span> <span class="n">uninstall</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">-</span><span class="n">y</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="n">torchdata</span>
-
-<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="n">torch</span><span class="o">==</span><span class="mf">2.3.0</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu121</span>
-<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span><span class="o">-</span><span class="n">scatter</span> <span class="n">torch</span><span class="o">-</span><span class="n">sparse</span> <span class="n">torch</span><span class="o">-</span><span class="n">cluster</span> <span class="n">torch</span><span class="o">-</span><span class="n">spline</span><span class="o">-</span><span class="n">conv</span> <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span> <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.3.0</span><span class="o">+</span><span class="n">cu121</span><span class="o">.</span><span class="n">html</span>
-
-<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> <span class="o">--</span><span class="n">user</span> \
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
     <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
-    <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> <span class="n">wfdb</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span> <span class="n">tabulate</span> <span class="n">captum</span> <span class="n">neurokit2</span>\
+    <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> <span class="n">wfdb</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span> <span class="n">tabulate</span> <span class="n">captum</span> <span class="n">neurokit2</span> \
+    <span class="n">torch</span><span class="o">-</span><span class="n">scatter</span> <span class="n">torch</span><span class="o">-</span><span class="n">sparse</span> <span class="n">torch</span><span class="o">-</span><span class="n">cluster</span> <span class="n">torch</span><span class="o">-</span><span class="n">spline</span><span class="o">-</span><span class="n">conv</span> <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cu124</span><span class="o">.</span><span class="n">html</span> \
     <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale,yacs and wfdb installed successfully ✅&quot;</span> \
     <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale,yacs and wfdb ❌&quot;</span>
-
-<span class="c1"># This code crashes the Colab runtime, triggering an automatic reset.</span>
-<span class="n">os</span><span class="o">.</span><span class="n">kill</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">(),</span> <span class="mi">9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1126,6 +1132,14 @@ This method helps identify which regions in each modality, such as specific wave
 </div>
 </div>
 </section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>[1] Lu, H., Liu, X., Zhou, S., Turner, R., Bai, P., Koot, R. E., … &amp; Xu, H. (2022, October). PyKale: Knowledge-aware machine learning from multiple sources in Python. In <em>Proceedings of the 31st ACM International Conference on Information &amp; Knowledge Management</em> (pp. 4274-4278).</p>
+<p>[2] Johnson, A., Pollard, T., Mark, R., Berkowitz, S., &amp; Horng, S. (2024). MIMIC-CXR Database (version 2.1.0). <em>PhysioNet</em>. RRID:SCR_007345.</p>
+<p>[3] Johnson, A. E., Pollard, T. J., Berkowitz, S. J., Greenbaum, N. R., Lungren, M. P., Deng, C. Y., … &amp; Horng, S. (2019). MIMIC-CXR, a de-identified publicly available database of chest radiographs with free-text reports. <em>Scientific data</em>, 6(1), 317.</p>
+<p>[4] Gow, B., Pollard, T., Nathanson, L. A., Johnson, A., Moody, B., Fernandes, C., Greenbaum, N., Waks, J. W., Eslami, P., Carbonati, T., Chaudhari, A., Herbst, E., Moukheiber, D., Berkowitz, S., Mark, R., &amp; Horng, S. (2023). MIMIC-IV-ECG: Diagnostic Electrocardiogram Matched Subset (version 1.0). PhysioNet. RRID:SCR_007345.</p>
+<p>[5] Suvon, M. N., Tripathi, P. C., Fan, W., Zhou, S., Liu, X., Alabed, S., … &amp; Lu, H. (2024, October). Multimodal variational autoencoder for low-cost cardiac hemodynamics instability detection. In <em>International Conference on Medical Image Computing and Computer-Assisted Intervention</em> (pp. 296-306).</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1193,6 +1207,7 @@ This method helps identify which regions in each modality, such as specific wave
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-environment-preparation">Step 0: Environment Preparation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-google-colab-runtime-type">Setup Google Colab runtime type</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#package-installation">Package installation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a><ul class="nav section-nav flex-column">
@@ -1228,6 +1243,7 @@ This method helps identify which regions in each modality, such as specific wave
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-evaluation">Step 4: Evaluation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-interpretation">Step 5: Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
 

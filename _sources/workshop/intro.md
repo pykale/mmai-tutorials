@@ -6,7 +6,7 @@
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
 
-1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three techniques, **regularization**, **fusion**, and **interaction**, to leverage multimodal data are covered in the tutorials.
+1. **Foundational skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three approaches, **regularization**, **hybrid fusion**, and **interaction**, to leverage multimodal data are covered in the tutorials.
 2. **Open research**: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the [GitHub repository](https://github.com/pykale/mmai-tutorials).
 3. **Reproducible pipelines with PyKale**: The core machine learning library behind the tutorial of this workshop is [`PyKale`](https://github.com/pykale/pykale), which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.
 
@@ -24,25 +24,25 @@ This workshop covers the tutorials for **four biomedical applications** using th
    - **Dataset**: ABIDE (Autism Brain Imaging Data Exchange)
    - **Modalities**: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)
    - **Task**: Use neuroimaging and phenotypic data for autism classification
-   - **Multimodal technique**: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.
+   - **Multimodal approach**: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.
 
 2. **Cardiovascular Disease Assessment**
    - **Dataset**: MIMIC Chest X-rays and ECG signals
    - **Modalities**: Chest X-ray images and ECG signals
    - **Task**: Integrate imaging and physiological signals for classifying health and cardiothoracic abnormalities
-   - **Multimodal technique**: Fusion - combining imaging and ECG features at feature and decision level for improved classification.
+   - **Multimodal approach**: Hybrid fusion - combining CXR and ECG at feature and decision level for improved classification.
 
 3. **Cancer Classification**
    - **Dataset**: TCGA (The Cancer Genome Atlas)
-   - **Modalities**: Genomics (DNA methylation, gene expression) and transcriptomics (RNA sequencing)
+   - **Modalities**: DNA methylation, mRNA expression, and miRNA expression.
    - **Task**: Combine genomics and transcriptomics data for cancer subtype classification
-   - **Multimodal technique**: Fusion and interaction - concatenating omic-specific probabilities and constructing a cross-omics tensor for the probability interaction.
+   - **Multimodal approach**: Interaction - constructing a tensor for the cross-omics probability interaction.
 
 4. **Drug–Target Interaction Prediction**
    - **Dataset**: BindingDB and BioSNAP
    - **Modalities**: Protein structures (3D) and molecular graphs (SMILES)
    - **Task**: Predict molecular interactions from structural and textual features
-   - **Multimodal technique**: Interaction - bilinear interaction between protein and molecular embedding.
+   - **Multimodal approach**: Interaction - bilinear interaction between protein and molecular embedding.
 
 The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.
 
