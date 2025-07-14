@@ -1075,9 +1075,7 @@ Each drug–protein pair is given a label:</p>
 <p>Once the model and test data are prepared, we extract attention maps from the trained model. We set the directory to the provided checkpoint file, load the trained model, and set it to evaluation mode.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;/content/drug-target-interaction/checkpoint/best.ckpt&quot;</span>
-<span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drug-target-interaction/checkpoint/best.ckpt&quot;</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">get_model_from_ckpt</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">cfg</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 </pre></div>
