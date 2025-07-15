@@ -4,7 +4,7 @@
 
 **2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
-Program Chair: [Peter Charlton](https://peterhcharlton.github.io/) | Co-Chair: [Xianyuan Liu](https://xianyuanliu.github.io/)
+Session Chair: [Peter Charlton](https://peterhcharlton.github.io/) | Co-Chair: [Xianyuan Liu](https://xianyuanliu.github.io/)
 
 | **Duration** | **Activity**                                                                                                                                                                                                                                                                                |
 |:-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
