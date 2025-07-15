@@ -48,7 +48,7 @@ The structure of each tutorial is as follows:
 4. Push your branch to your forked repository:
 
    ```bash
-   git push origin my-tutorial-branch
+   git push origin my-branch
    ```
 
 5. Open a pull request to the main repository.
