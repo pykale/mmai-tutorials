@@ -537,26 +537,12 @@ Autism Brain Imaging Data Exchange
 <p class="collapsed admonition-title">Show code cell source</p>
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
-<div class="cell_input above-output-prompt docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
-    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
-    <span class="n">gdown</span><span class="o">==</span><span class="mf">5.2.0</span> <span class="n">nilearn</span><span class="o">==</span><span class="mf">0.12.0</span> <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> \
-    <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span><span class="o">==</span><span class="mf">2.6.0</span> <span class="n">torch_sparse</span> <span class="n">torch_scatter</span> \
-    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cpu</span><span class="o">.</span><span class="n">html</span> \
-    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale, gdown, nilearn, and yacs installed successfully ✅&quot;</span> \
-    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale, gdown, nilearn, and yacs ❌&quot;</span>
-</pre></div>
-</div>
-</div>
-</details>
-<details class="admonition hide below-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell output</p>
-<p class="expanded admonition-title">Hide code cell output</p>
-</summary>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pykale, gdown, nilearn, and yacs installed successfully ✅
-Note: you may need to restart the kernel to use updated packages.
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
+    <span class="s2">&quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot;</span> \
+    <span class="n">gdown</span><span class="o">==</span><span class="mf">5.2.0</span> <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span><span class="o">==</span><span class="mf">2.6.0</span> <span class="n">torch_sparse</span> <span class="n">torch_scatter</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cpu</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
 </div>
@@ -767,7 +753,7 @@ describing the subjects.</p></li>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/bbfc07ed0d6bc98aacecb5dddf4dc9da53e6a00f5f3e4e4fa43a03dd8d6ba743.png" src="../../_images/bbfc07ed0d6bc98aacecb5dddf4dc9da53e6a00f5f3e4e4fa43a03dd8d6ba743.png" />
+<img alt="../../_images/9988ec0e649d84becd8f7b532b09e0c061de6fcfceffc76d72a406ec2cf595e3.png" src="../../_images/9988ec0e649d84becd8f7b532b09e0c061de6fcfceffc76d72a406ec2cf595e3.png" />
 </div>
 </div>
 <p>The heatmap above displays the <strong>functional connectivity (FC) matrix</strong> for <strong>Subject 50003</strong>, computed using the <strong>Tangent-Pearson</strong> method. The matrix represents pairwise relationships between different brain regions of interest (ROIs) based on their time-series similarity.</p>
@@ -1025,7 +1011,7 @@ available ROI.</p></li>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/7f025fc074b03904cd9f8edb720c07dda0cd6818e5d0b11cdda4166ebe0b4d9b.png" src="../../_images/7f025fc074b03904cd9f8edb720c07dda0cd6818e5d0b11cdda4166ebe0b4d9b.png" />
+<img alt="../../_images/c9c3f39962911747e2082e8a21ebfffcaa422f6ad9fd64db56f03febcfb30386.png" src="../../_images/c9c3f39962911747e2082e8a21ebfffcaa422f6ad9fd64db56f03febcfb30386.png" />
 </div>
 </div>
 <p>Several important observations can be made:</p>
@@ -1333,7 +1319,7 @@ variables have been one-hot-encoded.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/c43b5db465672793ce10931a70ce3175bccb2bed491188e94b0839b7d3404252.png" src="../../_images/c43b5db465672793ce10931a70ce3175bccb2bed491188e94b0839b7d3404252.png" />
+<img alt="../../_images/b10a26f88091211b413f50a3415bfb18082601e4f075ba4aa139f9948eaff8c1.png" src="../../_images/b10a26f88091211b413f50a3415bfb18082601e4f075ba4aa139f9948eaff8c1.png" />
 </div>
 </div>
 <p>We can see that we can interpret the phenotypes much clearer now, as we can infer that:</p>
@@ -1537,7 +1523,10 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████| 3/3 [00:59&lt;00:00, 19.98s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/3 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting all_phenotypes model: 100%|██████████| 3/3 [01:01&lt;00:00, 20.52s/it]
 </pre></div>
 </div>
 </div>
@@ -1700,7 +1689,7 @@ This method preserves the <strong>group structure</strong> by leaving out entire
     <span class="n">coords</span><span class="p">,</span>
     <span class="mf">1.5</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># Take top 1.5% of connections</span>
     <span class="n">legend_params</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">3.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">),</span>  <span class="c1"># Align legend outside the plot</span>
+        <span class="s2">&quot;bbox_to_anchor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">),</span>  <span class="c1"># Align legend outside the plot</span>
         <span class="s2">&quot;ncol&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -1711,10 +1700,10 @@ This method preserves the <strong>group structure</strong> by leaving out entire
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x7d009f7d2770&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;nilearn.plotting.displays._projectors.OrthoProjector at 0x14f173340&gt;
 </pre></div>
 </div>
-<img alt="../../_images/8f90cd524b453221b5f44bd75ee74e1d41c032b0de749fc0577af87b7295a02c.png" src="../../_images/8f90cd524b453221b5f44bd75ee74e1d41c032b0de749fc0577af87b7295a02c.png" />
+<img alt="../../_images/7d7a668bd7a3cbf6684f3f2e477b6f53125d296fbc283992a4bd55e4df41757c.png" src="../../_images/7d7a668bd7a3cbf6684f3f2e477b6f53125d296fbc283992a4bd55e4df41757c.png" />
 </div>
 </div>
 <p>The figure illustrates the <strong>most discriminative ROI-to-ROI functional connections</strong> that differentiate <strong>Autism Spectrum Disorder (ASD)</strong> participants from <strong>Controls</strong>, based on group-level functional connectivity analysis.</p>
