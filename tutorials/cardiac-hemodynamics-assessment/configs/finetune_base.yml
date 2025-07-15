@@ -8,12 +8,13 @@ DATA:
 MODEL:
   LATENT_DIM: 256
   INPUT_IMAGE_CHANNELS: 1
-  INPUT_DIM_ECG: 60000
-  NUM_LEADS: 12
+  NUM_LEADS: 12 # The number of leads must match the input configuration of the pretrained model.
+  INPUT_DIM_ECG: 60000 # The ECG input dimensions must match those expected by the pretrained model.
 
 FT:
   EPOCHS: 10
   LR: 0.001
+  HIDDEN_DIM: 128
   CKPT_PATH: "/content/drive/MyDrive/EMBC_workshop_data/CardioVAE.pth"
   ACCELERATOR: "gpu"
   DEVICE: "cuda"
