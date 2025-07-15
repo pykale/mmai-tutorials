@@ -58,7 +58,7 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assessment/extend-reading/extension-tasks';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-abnormality-assessment/extend-reading/extension-tasks';</script>
     <link rel="icon" href="../../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -184,7 +184,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../../workshop/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../workshop/schedule.html">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../workshop/schedule.html">Schedule</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
@@ -199,7 +199,10 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Extension Tasks</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../drug-target-interaction/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
@@ -278,7 +281,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assessment/extend-reading/extension-tasks.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-abnormality-assessment/extend-reading/extension-tasks.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +311,7 @@
       
       
       
-      <li><a href="../../../_sources/tutorials/cardiac-hemodynamics-assessment/extend-reading/extension-tasks.md" target="_blank"
+      <li><a href="../../../_sources/tutorials/cardiac-abnormality-assessment/extend-reading/extension-tasks.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -428,7 +431,7 @@ document.write(`
 </section>
 <section id="task-3-explore-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">
 <h2>Task 3 - Explore pre-training with full 50K paired CXR-ECG data (Home task with high resources)<a class="headerlink" href="#task-3-explore-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources" title="Link to this heading">#</a></h2>
-<p>Download the <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> datasets, then <strong>uncomment</strong> the optional code cell in <em><a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.html#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></em>.</p>
+<p>Download the <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> datasets, then <strong>uncomment</strong> the optional code cell in <em><a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/cardiac-abnormality-assessment/tutorial-heart.html#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></em>.</p>
 <p>Set <code class="docutils literal notranslate"><span class="pre">cfg_PT.TRAIN.LATENT_DIM=128</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_PT.DATA.BATCH_SIZE=128</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg_PT.TRAIN.EPOCH=100</span></code> to obtain the <strong>optimal pre-trained CardioVAE model</strong> using the full 50K paired CXR-ECG data. Compare the results with the pre-trained CardioVAE model using 10K paired CXR-ECG data in the tutorial.</p>
 </section>
 </section>
@@ -446,7 +449,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./tutorials/cardiac-hemodynamics-assessment/extend-reading"
+            path: "./tutorials/cardiac-abnormality-assessment/extend-reading"
         },
         predefinedOutput: true
     }

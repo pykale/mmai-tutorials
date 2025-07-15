@@ -58,7 +58,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-hemodynamics-assessment/tutorial-heart';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/cardiac-abnormality-assessment/tutorial-heart';</script>
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -184,7 +184,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../workshop/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../workshop/schedule.html">Program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/schedule.html">Schedule</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
@@ -199,7 +199,10 @@
 <li class="toctree-l2"><a class="reference internal" href="extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../drug-target-interaction/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
@@ -261,7 +264,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/pykale/mmai-tutorials/blob/main/tutorials/cardiac-abnormality-assessment/tutorial-heart.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +312,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-hemodynamics-assessment/tutorial-heart.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/cardiac-abnormality-assessment/tutorial-heart.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -339,7 +342,7 @@
       
       
       
-      <li><a href="../../_sources/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.ipynb" target="_blank"
+      <li><a href="../../_sources/tutorials/cardiac-abnormality-assessment/tutorial-heart.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -590,7 +593,7 @@ document.write(`
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()):</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">getusersitepackages</span><span class="p">())</span>
     <span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">-</span><span class="n">q</span> <span class="o">--</span><span class="n">single</span><span class="o">-</span><span class="n">branch</span> <span class="o">-</span><span class="n">b</span> <span class="n">main</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
-    <span class="o">%</span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">cardiac</span><span class="o">-</span><span class="n">hemodynamics</span><span class="o">-</span><span class="n">assessment</span><span class="o">/*</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span>
+    <span class="o">%</span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">cardiac</span><span class="o">-</span><span class="n">abnormality</span><span class="o">-</span><span class="n">assessment</span><span class="o">/*</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span>
     <span class="o">%</span><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
 </pre></div>
 </div>
@@ -1277,7 +1280,7 @@ This method helps identify which regions in each modality, such as specific wave
         },
         kernelOptions: {
             name: "python3",
-            path: "./tutorials/cardiac-hemodynamics-assessment"
+            path: "./tutorials/cardiac-abnormality-assessment"
         },
         predefinedOutput: true
     }

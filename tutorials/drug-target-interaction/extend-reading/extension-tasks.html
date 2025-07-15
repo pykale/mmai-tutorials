@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Helper Functions and Model Definition &#8212; PyKale</title>
+    <title>Extension Tasks &#8212; PyKale</title>
   
   
   
@@ -58,12 +58,12 @@
     <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/multiomics-cancer-classification/extend-reading/helper-functions';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/drug-target-interaction/extend-reading/extension-tasks';</script>
     <link rel="icon" href="../../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Interpretation Study - Feature Masking Importance Analysis" href="interpretation-study.html" />
-    <link rel="prev" title="Data" href="data.html" />
+    <link rel="next" title="Multiomics Cancer Classification" href="../../multiomics-cancer-classification/tutorial-cancer.html" />
+    <link rel="prev" title="Drug–Target Interaction Prediction" href="../tutorial-drug.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,15 +199,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../cardiac-abnormality-assessment/extend-reading/extension-tasks.html">Extension Tasks</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../drug-target-interaction/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tutorial-drug.html">Drug–Target Interaction Prediction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Extension Tasks</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tutorial-cancer.html">Multiomics Cancer Classification</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="extension-tasks.html">Extension Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="data.html">Data (optional)</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Helper Functions &amp; Model Details (optional)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="interpretation-study.html">Interpretation Study (optional)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/data.html">Data (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Functions &amp; Model Details (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study (optional)</a></li>
 </ul>
 </details></li>
 </ul>
@@ -281,7 +281,7 @@
       
       
       
-      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/multiomics-cancer-classification/extend-reading/helper-functions.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/pykale/mmai-tutorials/issues/new?title=Issue%20on%20page%20%2Ftutorials/drug-target-interaction/extend-reading/extension-tasks.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@
       
       
       
-      <li><a href="../../../_sources/tutorials/multiomics-cancer-classification/extend-reading/helper-functions.md" target="_blank"
+      <li><a href="../../../_sources/tutorials/drug-target-interaction/extend-reading/extension-tasks.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -395,7 +395,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Helper Functions and Model Definition</h1>
+    <h1>Extension Tasks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -405,13 +405,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition-in-model-py">Model Definition in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-of-other-apis-in-model-py">Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-the-effect-of-domain-adaptation">Task 1 Explore the Effect of Domain Adaptation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-evaluate-drugban-on-bindingdb-dataset">Task 2 Evaluate DrugBAN on BindingDB Dataset</a></li>
 </ul>
             </nav>
         </div>
@@ -423,43 +418,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="helper-functions-and-model-definition">
-<h1>Helper Functions and Model Definition<a class="headerlink" href="#helper-functions-and-model-definition" title="Link to this heading">#</a></h1>
-<section id="helper-functions">
-<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Link to this heading">#</a></h2>
-<p>We provide helper functions that can be inspected directly in the <code class="docutils literal notranslate"><span class="pre">.py</span></code> files located in the notebook’s current directory. Two additional helper scripts are:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/config.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>: Defines the base configuration settings, which can be overridden using a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file.</p></li>
-<li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>: Defines the network structure of MOGONET.</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="extension-tasks">
+<h1>Extension Tasks<a class="headerlink" href="#extension-tasks" title="Link to this heading">#</a></h1>
+<section id="task-1-explore-the-effect-of-domain-adaptation">
+<h2>Task 1 Explore the Effect of Domain Adaptation<a class="headerlink" href="#task-1-explore-the-effect-of-domain-adaptation" title="Link to this heading">#</a></h2>
+<p>Turn off domain adaptation by updating the config file and re-running training and testing.</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">configs/DA_cross_domain.yaml</span></code> with <code class="docutils literal notranslate"><span class="pre">configs/non_DA_cross_domain.yaml</span></code> in the Configuration section of <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/drug-target-interaction/tutorial-drug.html#step-0-environment-preparation">Step 0</a> as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/non_DA_cross_domain.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Tip: Compare the results with and without domain adaptation to see how it affects model performance.</p>
+</div></blockquote>
 </section>
-<section id="model-definition-in-model-py">
-<h2>Model Definition in <code class="docutils literal notranslate"><span class="pre">model.py</span></code><a class="headerlink" href="#model-definition-in-model-py" title="Link to this heading">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> applies <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code> and <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code> to define <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> class in <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>, which wraps all the necessary components of the MOGONET pipeline based on the configuration.</p>
-<p>This wrapper takes care of:</p>
-<ul class="simple">
-<li><p>Building GCN encoders for each omics modality.</p></li>
-<li><p>Creating linear classifiers for modality-specific outputs.</p></li>
-<li><p>Optionally initializing a VCDN decoder for multimodal fusion.</p></li>
-</ul>
-<p>MOGONET consists of two major sections: modality-specific encoders to encode graph data into latent space, and View Correlation Discovery Network (VCDN) for multimodal feature fusion, as shown in the top figure.
-The modalitity-specific encoders is called from <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code> and VCDN along with the prediction head is integrated in <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code>.</p>
-<section id="embedding-extraction">
-<h3>Embedding Extraction<a class="headerlink" href="#embedding-extraction" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> support graph convolutional neural networks (GCNs) in <code class="docutils literal notranslate"><span class="pre">kale.embed</span></code>, which is used as the modality-specific encoders for MOGONET.
-GCNs are neural networks designed for graph data, which generalize convolution operations to graph-structured data by aggregating feature information from neighboring nodes.
-Through GCN encoders in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>, we can encode the raw data to graph embeddings.</p>
-</section>
-<section id="prediction-of-cancer-subtypes">
-<h3>Prediction of Cancer Subtypes<a class="headerlink" href="#prediction-of-cancer-subtypes" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">PyKale</span></code> support prediction layers that output the final prediction of cancer subtypes according to the input embeddings.
-In <code class="docutils literal notranslate"><span class="pre">kale.predict</span></code>, the VCDN of MOGONET fuses modality-specific predictions for final classification and captures correlations between different modalities at the decision level.
-Besides, <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> also call the linear classifier layer from <code class="docutils literal notranslate"><span class="pre">kale.predict.decode.LinearClassifier</span></code> to implement MOGONET.</p>
-</section>
-<section id="descriptions-of-other-apis-in-model-py">
-<h3>Descriptions of Other APIs in <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a><a class="headerlink" href="#descriptions-of-other-apis-in-model-py" title="Link to this heading">#</a></h3>
-<p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a> also calls <code class="docutils literal notranslate"><span class="pre">kale.pipeline.multiomics_trainer</span></code>, which provides <code class="docutils literal notranslate"><span class="pre">MultiomicsTrainer</span></code>, the training and evaluation engine that orchestrates how unimodal encoders and the multimodal VCDN fusion layer work together. It supports pretraining and full training regimes.</p>
-</section>
+<section id="task-2-evaluate-drugban-on-bindingdb-dataset">
+<h2>Task 2 Evaluate DrugBAN on BindingDB Dataset<a class="headerlink" href="#task-2-evaluate-drugban-on-bindingdb-dataset" title="Link to this heading">#</a></h2>
+<p>To use the BindingDB dataset, modify the relevant line in the Configuration section of <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/drug-target-interaction/tutorial-drug.html#step-0-environment-preparation">Step 0</a> as shown below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATASET</span> <span class="o">=</span> <span class="s2">&quot;bindingdb&quot;</span>
+</pre></div>
+</div>
+<p>Reload the dataset and re-run training and testing.</p>
+<blockquote>
+<div><p>Tip: See if the model struggles more or less with the new dataset. It can reveal how generalisable DrugBAN is.</p>
+</div></blockquote>
 </section>
 </section>
 
@@ -476,7 +457,7 @@ Besides, <code class="docutils literal notranslate"><span class="pre">PyKale</sp
         },
         kernelOptions: {
             name: "python3",
-            path: "./tutorials/multiomics-cancer-classification/extend-reading"
+            path: "./tutorials/drug-target-interaction/extend-reading"
         },
         predefinedOutput: true
     }
@@ -494,20 +475,20 @@ Besides, <code class="docutils literal notranslate"><span class="pre">PyKale</sp
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="data.html"
+       href="../tutorial-drug.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data</p>
+        <p class="prev-next-title">Drug–Target Interaction Prediction</p>
       </div>
     </a>
     <a class="right-next"
-       href="interpretation-study.html"
+       href="../../multiomics-cancer-classification/tutorial-cancer.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Interpretation Study - Feature Masking Importance Analysis</p>
+        <p class="prev-next-title">Multiomics Cancer Classification</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -527,13 +508,8 @@ Besides, <code class="docutils literal notranslate"><span class="pre">PyKale</sp
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helper-functions">Helper Functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition-in-model-py">Model Definition in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-extraction">Embedding Extraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediction-of-cancer-subtypes">Prediction of Cancer Subtypes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptions-of-other-apis-in-model-py">Descriptions of Other APIs in <code class="docutils literal notranslate"><span class="pre">model.py</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-the-effect-of-domain-adaptation">Task 1 Explore the Effect of Domain Adaptation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-evaluate-drugban-on-bindingdb-dataset">Task 2 Evaluate DrugBAN on BindingDB Dataset</a></li>
 </ul>
   </nav></div>
 
