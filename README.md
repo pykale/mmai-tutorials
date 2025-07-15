@@ -6,7 +6,7 @@ This repository contains materials and resources for building the [Jupyter book]
 
 ## Structure of source code
 
-- [``]
+- [`workshop/`](https://github.com/pykale/mmai-tutorials/tree/main/workshop): Contains information for the EMBC 2025 Workshop.
 - [`tutorials/`](https://github.com/pykale/mmai-tutorials/tree/main/tutorials): Contains tutorial notebooks and related materials.
 - [`requirements.txt`](https://github.com/pykale/mmai-tutorials/blob/main/requirements.txt): Lists dependencies required for the project.
 

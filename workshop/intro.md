@@ -2,9 +2,9 @@
 
 ## Welcome
 
-### Open Biomedical Multimodal AI Research Workshop
+### Open Biomedical Multimodal AI Research
 
-**EMBC 2025 Workshop | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
+**Workshop@EMBC-2025  | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
 
@@ -48,7 +48,7 @@ This workshop covers the tutorials for **four biomedical applications** using th
    - **Multimodal approach**: Interaction - bilinear interaction between protein and molecular embedding
    - **Dataset**: [BindingDB](https://www.bindingdb.org/rwd/bind/index.jsp) and [BioSNAP](https://snap.stanford.edu/biodata/)
 
-The core machine learning library behind these tutorials of this workshop is (https://github.com/pykale/pykale). The core functions of each tutorial are implemented in the [`PyKale` APIs] of a **standardized machine learning pipeline**:
+The core functions of each tutorial are implemented in the [`PyKale` APIs](https://pykale.readthedocs.io/en/latest/) of a **standardized machine learning pipeline**:
 
 > **Data loading → Preprocessing → Embedding → Prediction → Evaluation → Interpretation**
 
