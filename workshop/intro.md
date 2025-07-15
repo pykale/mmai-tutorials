@@ -4,7 +4,7 @@
 
 ### Open Biomedical Multimodal AI Research Workshop
 
-**EMBC 2025 Workshop | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**  
+**EMBC 2025 Workshop | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
 
