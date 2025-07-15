@@ -6,14 +6,14 @@
 
 Program Chair: [Peter Charlton](https://peterhcharlton.github.io/) | Co-Chair: [Xianyuan Liu](https://xianyuanliu.github.io/)
 
-| **Duration** | **Activity** |
-|:-------------|:-------------|
-| **5 mins**   | **Welcome**  |
-| **20 mins**  | **Opening Talk**: *Towards Deployment-Centric Multimodal AI* – [Prof. Haiping Lu](#) |
-| **25 mins**  | **Introduction to the Tutorials**<br>**Speakers**:<br>• [Xianyuan Liu](https://xianyuanliu.github.io/) <br>• [Zixuan (Kelly) Ding](https://www.linkedin.com/in/kellydingzx)<br>• [Jiayang Zhang](https://linkedin.com/in/jiayang-zhang)<br>• [Sina Tabakhi](https://sinatabakhi.github.io/) |
-| **10 mins**  | **Guided Tutorial**                |
-| **1 hour**   | **Hands-on Session (Run 1)**       |
-| **15 mins**  | **Open Sharing and Discussion**    |
-| **1 hour**   | **Hands-on Session (Run 2)**       |
-| **25 mins**  | **Post-Tutorial and Discussion**   |
-| **20 mins**  | **Closing Remarks and Networking** |
+| **Duration** | **Activity**                                                                                                                                                                                                                                                                                |
+|:-------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **5 mins**   | **Welcome**                                                                                                                                                                                                                                                                                 |
+| **20 mins**  | **Opening Talk**: *Towards Deployment-Centric Multimodal AI* – [Prof. Haiping Lu](#)                                                                                                                                                                                                        |
+| **20 mins**  | **Introduction to the Tutorials**<br>**Speakers**:<br>• [Xianyuan Liu](https://xianyuanliu.github.io/) <br>• [Zixuan (Kelly) Ding](https://www.linkedin.com/in/kellydingzx)<br>• [Jiayang Zhang](https://linkedin.com/in/jiayang-zhang)<br>• [Sina Tabakhi](https://sinatabakhi.github.io/) |
+| **10 mins**  | **Guided Tutorial**                                                                                                                                                                                                                                                                         |
+| **1 hour**   | **Hands-on Session (Run 1)**                                                                                                                                                                                                                                                                |
+| **10 mins**  | **Open Sharing and Discussion**                                                                                                                                                                                                                                                             |
+| **1 hour**   | **Hands-on Session (Run 2)**                                                                                                                                                                                                                                                                |
+| **15 mins**  | **Post-Tutorial Discussion**                                                                                                                                                                                                                                                                |
+| **10 mins**  | **Closing Remarks and Networking**                                                                                                                                                                                                                                                          |
