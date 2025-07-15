@@ -27,13 +27,13 @@ This workshop covers the tutorials for **four biomedical applications** using th
    - **Multimodal approach**: Regularization - using phenotypic features to regularize feature embedding for reducing the phenotypic effect (e.g. site effect) in neuroimaging data to improve cross-site classification performance.
    
 2. **Cardiovascular Disease Assessment**
-   - **Dataset**: MIMIC [Chest X-rays]((https://physionet.org/content/mimic-cxr/2.1.0/)) and [ECG signals](https://physionet.org/content/mimic-iv-ecg/1.0/)
+   - **Dataset**: MIMIC [Chest X-rays](https://physionet.org/content/mimic-cxr/2.1.0/) and [ECG signals](https://physionet.org/content/mimic-iv-ecg/1.0/)
    - **Modalities**: Chest X-ray images and ECG signals
    - **Task**: Integrate imaging and physiological signals for classifying health and cardiothoracic abnormalities
    - **Multimodal approach**: Hybrid fusion - combining CXR and ECG at feature and decision level for improved classification.
 
 3. **Cancer Classification**
-   - **Dataset**: [TCGA (The Cancer Genome Atlas)]((https://www.cancerimagingarchive.net/collection/tcga-brca/))
+   - **Dataset**: [TCGA (The Cancer Genome Atlas)](https://www.cancerimagingarchive.net/collection/tcga-brca/)
    - **Modalities**: DNA methylation, mRNA expression, and miRNA expression.
    - **Task**: Combine genomics and transcriptomics data for cancer classification
    - **Multimodal approach**: Late fusion - cross-omics tensor for probability fusion.
