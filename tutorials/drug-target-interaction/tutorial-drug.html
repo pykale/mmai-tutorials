@@ -482,7 +482,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="drugtarget-interaction-prediction">
 <h1>Drug–Target Interaction Prediction<a class="headerlink" href="#drugtarget-interaction-prediction" title="Link to this heading">#</a></h1>
-<p><img alt="" src="../../_images/drugban-pyakle-api.png" /></p>
+<p><img alt="" src="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/drug-target-interaction/images/drugban-pyakle-api.png?raw=1" /></p>
 <p>In this tutorial, we will train models to predict the interaction between <strong>two data modalities</strong>: <strong>molecules (drug)</strong> and <strong>proteins (target)</strong> using <code class="docutils literal notranslate"><span class="pre">PyKale</span></code>. Drug-target interaction (DTI) plays a key role in drug discovery and identifying potential therapeutic targets. This example is based on the <strong>DrugBAN</strong> framework by <a class="reference external" href="https://www.nature.com/articles/s42256-022-00605-1"><strong>Bai et al. (<em>Nature Machine Intelligence</em>, 2023)</strong></a>.</p>
 <p>The DTI prediction problem is formulated as a <strong>binary classification task</strong>, where the goal is to predict whether a given <strong>drug–protein pair interacts or not</strong>. The DrugBAN framework tackles this problem using two key ideas:</p>
 <ul class="simple">
@@ -500,14 +500,28 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
 
-<span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
-<span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">single</span><span class="o">-</span><span class="n">branch</span> <span class="o">-</span><span class="n">b</span> <span class="n">main</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">.</span><span class="n">git</span>
-<span class="o">%</span><span class="n">mv</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span>
-<span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span>
+!rm -rf /content/mmai-tutorials
+!git clone --single-branch -b main https://github.com/pykale/mmai-tutorials.git
+%mv /content/mmai-tutorials/tutorials/drug-target-interaction /content/
+%cd /content/drug-target-interaction
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Changed working directory to:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+print(&quot;Changed working directory to:&quot;, os.getcwd())
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;mmai-tutorials&#39;...
+remote: Enumerating objects: 610, done.
+remote: Counting objects: 100% (242/242), done.
+remote: Compressing objects: 100% (146/146), done.
+remote: Total 610 (delta 156), reused 121 (delta 96), pack-reused 368 (from 2)
+Receiving objects: 100% (610/610), 23.16 MiB | 16.03 MiB/s, done.
+Resolving deltas: 100% (309/309), done.
+mv: cannot move &#39;/content/mmai-tutorials/tutorials/drug-target-interaction&#39; to &#39;/content/drug-target-interaction&#39;: Directory not empty
+/content/drug-target-interaction
+Changed working directory to: /content/drug-target-interaction
 </pre></div>
 </div>
 </div>
@@ -520,14 +534,20 @@ document.write(`
 <p>Please <strong>do not</strong> re-run this session after installation completed. Runing this installation multiple times will trigger issues related to <code class="docutils literal notranslate"><span class="pre">PyG</span></code>. If you want to re-run this installation, please click the <code class="docutils literal notranslate"><span class="pre">Runtime</span></code> on the top menu and choose <code class="docutils literal notranslate"><span class="pre">Disconnect</span> <span class="pre">and</span> <span class="pre">delete</span> <span class="pre">runtime</span></code> before installing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
-    <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">pykale</span><span class="nd">@main</span> \
-    <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> \
-    <span class="n">rdkit</span> \
-    <span class="n">torch</span><span class="o">-</span><span class="n">scatter</span> <span class="n">torch</span><span class="o">-</span><span class="n">sparse</span> <span class="n">torch</span><span class="o">-</span><span class="n">cluster</span> <span class="n">torch</span><span class="o">-</span><span class="n">spline</span><span class="o">-</span><span class="n">conv</span> <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span> \
-    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cu124</span><span class="o">.</span><span class="n">html</span> \
-    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale,yacs and wfdb installed successfully ✅&quot;</span> \
-    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale,yacs ❌&quot;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%pip install --quiet \
+    &quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot; \
+    gdown==5.2.0 torch-geometric==2.6.0 torch_sparse torch_scatter \
+    -f https://data.pyg.org/whl/torch-2.6.0+cu124.html \
+    &amp;&amp; echo &quot;pykale, gdown, pyg and yacs installed successfully ✅&quot; \
+    || echo &quot;Failed to install pykale, gdown, pyg and yacs ❌&quot;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Installing build dependencies ... ?25l?25hdone
+  Getting requirements to build wheel ... ?25l?25hdone
+  Preparing metadata (pyproject.toml) ... ?25l?25hdone
+pykale, gdown, pyg and yacs installed successfully ✅
 </pre></div>
 </div>
 </div>
@@ -535,11 +555,11 @@ document.write(`
 <p>We then hide the warnings messages to get a clear output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
+import warnings
 
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
+warnings.filterwarnings(&quot;ignore&quot;)
+os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 </pre></div>
 </div>
 </div>
@@ -547,9 +567,14 @@ document.write(`
 <p>Exercise: Check NumPy Version</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy version:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>  <span class="c1"># numpy should be 2.0.0 or higher</span>
+print(&quot;NumPy version:&quot;, np.__version__)  # numpy should be 2.0.0 or higher
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy version: 2.0.2
 </pre></div>
 </div>
 </div>
@@ -560,14 +585,19 @@ document.write(`
 <p>To minimize the footprint of the notebook when specifying configurations, we provide a <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a> file that defines default parameters. These can be customized by supplying a <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> configuration file, such as <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs/DA_cross_domain.yaml"><code class="docutils literal notranslate"><span class="pre">configs/DA_cross_domain.yaml</span></code></a> as an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">configs</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from configs import get_cfg_defaults
 
-<span class="o">%</span><span class="n">cd</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span>
+%cd /content/drug-target-interaction
 
-<span class="n">cfg</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>  <span class="c1"># Load the default settings from config.py</span>
-<span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span>
-    <span class="s2">&quot;configs/DA_cross_domain.yaml&quot;</span>
-<span class="p">)</span>  <span class="c1"># Update (or override) some of those settings using a custom YAML file</span>
+cfg = get_cfg_defaults()  # Load the default settings from config.py
+cfg.merge_from_file(
+    &quot;configs/DA_cross_domain.yaml&quot;
+)  # Update (or override) some of those settings using a custom YAML file
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/content/drug-target-interaction
 </pre></div>
 </div>
 </div>
@@ -580,7 +610,7 @@ document.write(`
 <p>As a quick exercise, please take a moment to review and understand the parameters in <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/drug-target-interaction/configs.py"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCH</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cfg.SOLVER.MAX_EPOCH = 2
 </pre></div>
 </div>
 </div>
@@ -588,7 +618,7 @@ document.write(`
 <p>You can also switch to a different dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATASET</span> <span class="o">=</span> <span class="s2">&quot;biosnap&quot;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cfg.DATA.DATASET = &quot;biosnap&quot;
 </pre></div>
 </div>
 </div>
@@ -596,7 +626,58 @@ document.write(`
 <p>Exercise: Now print the full configuration to check all current hyperparameter and dataset settings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(cfg)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCN:
+  HEADS: 2
+COMET:
+  API_KEY: 
+  EXPERIMENT_NAME: DA_cross_domain
+  PROJECT_NAME: drugban-23-May
+  TAG: DrugBAN_CDAN
+  USE: False
+DA:
+  INIT_EPOCH: 10
+  LAMB_DA: 1
+  METHOD: CDAN
+  ORIGINAL_RANDOM: True
+  RANDOM_DIM: 256
+  RANDOM_LAYER: True
+  TASK: True
+  USE: True
+  USE_ENTROPY: False
+DATA:
+  DATASET: biosnap
+  SPLIT: cluster
+DECODER:
+  BINARY: 2
+  HIDDEN_DIM: 512
+  IN_DIM: 256
+  NAME: MLP
+  OUT_DIM: 128
+DRUG:
+  HIDDEN_LAYERS: [128, 128, 128]
+  MAX_NODES: 290
+  NODE_IN_EMBEDDING: 128
+  NODE_IN_FEATS: 7
+  PADDING: True
+PROTEIN:
+  EMBEDDING_DIM: 128
+  KERNEL_SIZE: [3, 6, 9]
+  NUM_FILTERS: [128, 128, 128]
+  PADDING: True
+RESULT:
+  SAVE_MODEL: True
+SOLVER:
+  BATCH_SIZE: 32
+  DA_LEARNING_RATE: 5e-05
+  LEARNING_RATE: 0.0001
+  MAX_EPOCH: 2
+  NUM_WORKERS: 0
+  SEED: 20
 </pre></div>
 </div>
 </div>
@@ -611,14 +692,14 @@ document.write(`
 <p>Please run the following cell to download necessary datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">data</span>
-<span class="err">!</span><span class="n">mkdir</span> <span class="n">data</span>
-<span class="err">!</span><span class="n">cd</span> <span class="n">data</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!rm -rf data
+!mkdir data
+!cd data
 
-<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">gdown</span>
-<span class="err">!</span><span class="n">gdown</span> <span class="o">--</span><span class="nb">id</span> <span class="mi">1</span><span class="n">ogOcxZn</span><span class="o">-</span><span class="mi">1</span><span class="n">q418LOT</span><span class="o">-</span><span class="n">gQ94aHQV0Y1sOmk</span> <span class="o">--</span><span class="n">output</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">.</span><span class="n">zip</span>
-<span class="err">!</span><span class="n">unzip</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">.</span><span class="n">zip</span> <span class="o">-</span><span class="n">d</span> <span class="n">data</span><span class="o">/</span>
-<span class="err">!</span><span class="n">mv</span> <span class="n">data</span><span class="o">/</span><span class="n">drug</span><span class="o">-</span><span class="n">target</span><span class="o">-</span><span class="n">interaction</span><span class="o">/</span><span class="n">checkpoint</span> <span class="o">./</span>
+!pip install -q gdown
+!gdown --id 1ogOcxZn-1q418LOT-gQ94aHQV0Y1sOmk --output data/drug-target-interaction.zip
+!unzip data/drug-target-interaction.zip -d data/
+!mv data/drug-target-interaction/checkpoint ./
 </pre></div>
 </div>
 </div>
@@ -626,12 +707,20 @@ document.write(`
 <p>Exercise: Check the data is ready</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
+import shutil
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of the data folder:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/drug-target-interaction&quot;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+print(&quot;Contents of the data folder:&quot;)
+for item in os.listdir(&quot;data/drug-target-interaction&quot;):
+    print(item)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contents of the data folder:
+biosnap
+bindingdb
+checkpoint
 </pre></div>
 </div>
 </div>
@@ -646,9 +735,18 @@ document.write(`
 <p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> folder contains two datasets: <code class="docutils literal notranslate"><span class="pre">bindingdb</span></code> and <code class="docutils literal notranslate"><span class="pre">biosnap</span></code>. Each dataset folder contains the following files. The <code class="docutils literal notranslate"><span class="pre">checkpoint</span></code> folder contains the saved model checkpoint, which are used later in the interpretation section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of bindingdb folder:&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data/drug-target-interaction/bindingdb&quot;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(&quot;Contents of bindingdb folder:&quot;)
+for item in os.listdir(&quot;data/drug-target-interaction/bindingdb&quot;):
+    print(item)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contents of bindingdb folder:
+random
+full.csv
+interpretation_samples.csv
+cluster
 </pre></div>
 </div>
 </div>
@@ -715,17 +813,27 @@ Each drug–protein pair is given a label:</p>
 <p>You can load CSV files into Python using tools like <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. The output shows a sample of the data, including the SMILES string for the drug, the protein sequence, the interaction label (Y) and the cluster ID.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pandas as pd
 
-<span class="n">dataFolder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">&quot;data/drug-target-interaction/</span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATASET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">SPLIT</span><span class="p">)</span>
-<span class="p">)</span>
+dataFolder = os.path.join(
+    f&quot;data/drug-target-interaction/{cfg.DATA.DATASET}&quot;, str(cfg.DATA.SPLIT)
+)
 
-<span class="n">df_train_source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;source_train.csv&quot;</span><span class="p">))</span>
-<span class="n">df_train_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;target_train.csv&quot;</span><span class="p">))</span>
-<span class="n">df_test_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">,</span> <span class="s2">&quot;target_test.csv&quot;</span><span class="p">))</span>
+df_train_source = pd.read_csv(os.path.join(dataFolder, &quot;source_train.csv&quot;))
+df_train_target = pd.read_csv(os.path.join(dataFolder, &quot;target_train.csv&quot;))
+df_test_target = pd.read_csv(os.path.join(dataFolder, &quot;target_test.csv&quot;))
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample example:&quot;</span><span class="p">,</span> <span class="n">df_train_source</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+print(&quot;Sample example:&quot;, df_train_source.iloc[0])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample example: SMILES                              CC1=CN=C2N1C=CN=C2NCC1=CC=NC=C1
+Protein           MARSLLLPLQILLLSLALETAGEEAQGDKIIDGAPCARGSHPWQVA...
+Y                                                               0.0
+drug_cluster                                                   1904
+target_cluster                                                 1528
+Name: 0, dtype: object
 </pre></div>
 </div>
 </div>
@@ -739,12 +847,12 @@ Each drug–protein pair is given a label:</p>
 <p><strong>Note:</strong> If you encounter an error related to requiring numpy <code class="docutils literal notranslate"><span class="pre">&lt;2.0</span></code>, simply ignore it and re-run this block until it completes successfully.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.molecular_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTIDataset</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.loaddata.molecular_datasets import DTIDataset
 
-<span class="c1"># Create preprocessed datasets</span>
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_train_source</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_train_source</span><span class="p">)</span>
-<span class="n">train_target_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_train_target</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_train_target</span><span class="p">)</span>
-<span class="n">test_target_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_test_target</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_test_target</span><span class="p">)</span>
+# Create preprocessed datasets
+train_dataset = DTIDataset(df_train_source.index.values, df_train_source)
+train_target_dataset = DTIDataset(df_train_target.index.values, df_train_target)
+test_target_dataset = DTIDataset(df_test_target.index.values, df_test_target)
 </pre></div>
 </div>
 </div>
@@ -760,19 +868,28 @@ Each drug–protein pair is given a label:</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.molecular_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">graph_collate_func</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.sampler</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiDataLoader</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from torch.utils.data import DataLoader
+from kale.loaddata.molecular_datasets import graph_collate_func
+from kale.loaddata.sampler import MultiDataLoader
 
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
-    <span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;num_workers&quot;</span><span class="p">:</span> <span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
-    <span class="s2">&quot;drop_last&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;collate_fn&quot;</span><span class="p">:</span> <span class="n">graph_collate_func</span><span class="p">,</span>
-<span class="p">}</span>
+params = {
+    &quot;batch_size&quot;: cfg.SOLVER.BATCH_SIZE,
+    &quot;shuffle&quot;: True,
+    &quot;num_workers&quot;: cfg.SOLVER.NUM_WORKERS,
+    &quot;drop_last&quot;: True,
+    &quot;collate_fn&quot;: graph_collate_func,
+}
 
-<span class="n">params</span>
+params
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;batch_size&#39;: 32,
+ &#39;shuffle&#39;: True,
+ &#39;num_workers&#39;: 0,
+ &#39;drop_last&#39;: True,
+ &#39;collate_fn&#39;: &lt;function kale.loaddata.molecular_datasets.graph_collate_func(x)&gt;}
 </pre></div>
 </div>
 </div>
@@ -780,21 +897,26 @@ Each drug–protein pair is given a label:</p>
 <p>Then, we create a DataLoader from both the source and target datasets for training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using domain adaptation:&quot;</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(&quot;Using domain adaptation:&quot;, cfg.DA.USE)
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">:</span>
-    <span class="n">training_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">source_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-    <span class="n">target_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_target_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+if not cfg.DA.USE:
+    training_generator = DataLoader(train_dataset, **params)
+else:
+    source_generator = DataLoader(train_dataset, **params)
+    target_generator = DataLoader(train_target_dataset, **params)
 
-    <span class="c1"># Get the number of batches in the longer dataset to align both</span>
-    <span class="n">n_batches</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">source_generator</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_generator</span><span class="p">))</span>
+    # Get the number of batches in the longer dataset to align both
+    n_batches = max(len(source_generator), len(target_generator))
 
-    <span class="c1"># Combine the source and target data loaders using MultiDataLoader</span>
-    <span class="n">training_generator</span> <span class="o">=</span> <span class="n">MultiDataLoader</span><span class="p">(</span>
-        <span class="n">dataloaders</span><span class="o">=</span><span class="p">[</span><span class="n">source_generator</span><span class="p">,</span> <span class="n">target_generator</span><span class="p">],</span> <span class="n">n_batches</span><span class="o">=</span><span class="n">n_batches</span>
-    <span class="p">)</span>
+    # Combine the source and target data loaders using MultiDataLoader
+    training_generator = MultiDataLoader(
+        dataloaders=[source_generator, target_generator], n_batches=n_batches
+    )
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using domain adaptation: True
 </pre></div>
 </div>
 </div>
@@ -802,12 +924,12 @@ Each drug–protein pair is given a label:</p>
 <p>Lastly, we set up DataLoaders for validation and testing. Since we don’t want to shuffle or drop any samples, we adjust the parameters accordingly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update parameters for validation/testing (no shuffling, keep all data)</span>
-<span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;drop_last&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Update parameters for validation/testing (no shuffling, keep all data)
+params.update({&quot;shuffle&quot;: False, &quot;drop_last&quot;: False})
 
-<span class="c1"># Create validation and test data loaders</span>
-<span class="n">valid_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_target_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-<span class="n">test_generator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">test_target_dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+# Create validation and test data loaders
+valid_generator = DataLoader(test_target_dataset, **params)
+test_generator = DataLoader(test_target_dataset, **params)
 </pre></div>
 </div>
 </div>
@@ -818,17 +940,25 @@ Each drug–protein pair is given a label:</p>
 <p>Once the dataset is ready, let’s inspect one sample from the training data to check the input graph, protein sequence, and label format.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first batch (contains one batch from source and one from target)</span>
-<span class="n">first_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">training_generator</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Get the first batch (contains one batch from source and one from target)
+first_batch = next(iter(training_generator))
 
-<span class="c1"># Unpack source and target batches</span>
-<span class="n">source_batch</span><span class="p">,</span> <span class="n">target_batch</span> <span class="o">=</span> <span class="n">first_batch</span>
+# Unpack source and target batches
+source_batch, target_batch = first_batch
 
-<span class="c1"># Inspect the first sample from the source batch</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First sample from source batch:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Drug graph:&quot;</span><span class="p">,</span> <span class="n">source_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Protein sequence:&quot;</span><span class="p">,</span> <span class="n">source_batch</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label:&quot;</span><span class="p">,</span> <span class="n">source_batch</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+# Inspect the first sample from the source batch
+print(&quot;First sample from source batch:&quot;)
+print(&quot;Drug graph:&quot;, source_batch[0][0])
+print(&quot;Protein sequence:&quot;, source_batch[1][0])
+print(&quot;Label:&quot;, source_batch[2][0])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First sample from source batch:
+Drug graph: Data(x=[290, 7], edge_index=[2, 106], edge_attr=[106, 1], num_nodes=290)
+Protein sequence: tensor([11.,  7., 18.,  ...,  0.,  0.,  0.], dtype=torch.float64)
+Label: tensor(0., dtype=torch.float64)
 </pre></div>
 </div>
 </div>
@@ -865,10 +995,58 @@ Each drug–protein pair is given a label:</p>
 <p>We define the DrugBAN class in <code class="docutils literal notranslate"><span class="pre">kale.embed.ban</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.embed.ban</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugBAN</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.embed.ban import DrugBAN
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+model = DrugBAN(**cfg)
+print(model)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DrugBAN(
+  (drug_extractor): MolecularGCN(
+    (init_transform): Linear(in_features=7, out_features=128, bias=False)
+    (gcn_layers): ModuleList(
+      (0-2): 3 x GCNConv(128, 128)
+    )
+  )
+  (protein_extractor): ProteinCNN(
+    (embedding): Embedding(26, 128, padding_idx=0)
+    (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,))
+    (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv2): Conv1d(128, 128, kernel_size=(6,), stride=(1,))
+    (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv3): Conv1d(128, 128, kernel_size=(9,), stride=(1,))
+    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (bcn): BANLayer(
+    (v_net): FCNet(
+      (main): Sequential(
+        (0): Dropout(p=0.2, inplace=False)
+        (1): Linear(in_features=128, out_features=768, bias=True)
+        (2): ReLU()
+      )
+    )
+    (q_net): FCNet(
+      (main): Sequential(
+        (0): Dropout(p=0.2, inplace=False)
+        (1): Linear(in_features=128, out_features=768, bias=True)
+        (2): ReLU()
+      )
+    )
+    (p_net): AvgPool1d(kernel_size=(3,), stride=(3,), padding=(0,))
+    (bn): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mlp_classifier): MLPDecoder(
+    (fc1): Linear(in_features=256, out_features=512, bias=True)
+    (bn1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fc2): Linear(in_features=512, out_features=512, bias=True)
+    (bn2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fc3): Linear(in_features=512, out_features=128, bias=True)
+    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fc4): Linear(in_features=128, out_features=2, bias=True)
+  )
+)
 </pre></div>
 </div>
 </div>
@@ -879,23 +1057,23 @@ Each drug–protein pair is given a label:</p>
 <p>We use the PyKale pipeline API <code class="docutils literal notranslate"><span class="pre">kale.pipeline.drugban_trainer</span></code> to connect dataloaders, encoders and outcoders for model training and evaluation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.drugban_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugbanTrainer</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.pipeline.drugban_trainer import DrugbanTrainer
 
-<span class="n">drugban_trainer</span> <span class="o">=</span> <span class="n">DrugbanTrainer</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">),</span>
-    <span class="n">solver_lr</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">LEARNING_RATE</span><span class="p">,</span>
-    <span class="n">num_classes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span>
-    <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
-    <span class="n">is_da</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">,</span>
-    <span class="n">solver_da_lr</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">DA_LEARNING_RATE</span><span class="p">,</span>
-    <span class="n">da_init_epoch</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">INIT_EPOCH</span><span class="p">,</span>
-    <span class="n">da_method</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">METHOD</span><span class="p">,</span>
-    <span class="n">original_random</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">ORIGINAL_RANDOM</span><span class="p">,</span>
-    <span class="n">use_da_entropy</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE_ENTROPY</span><span class="p">,</span>
-    <span class="n">da_random_layer</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_LAYER</span><span class="p">,</span>
-    <span class="n">da_random_dim</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_DIM</span><span class="p">,</span>
-    <span class="n">decoder_in_dim</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">IN_DIM</span><span class="p">,</span>
-<span class="p">)</span>
+drugban_trainer = DrugbanTrainer(
+    model=DrugBAN(**cfg),
+    solver_lr=cfg.SOLVER.LEARNING_RATE,
+    num_classes=cfg.DECODER.BINARY,
+    batch_size=cfg.SOLVER.BATCH_SIZE,
+    is_da=cfg.DA.USE,
+    solver_da_lr=cfg.SOLVER.DA_LEARNING_RATE,
+    da_init_epoch=cfg.DA.INIT_EPOCH,
+    da_method=cfg.DA.METHOD,
+    original_random=cfg.DA.ORIGINAL_RANDOM,
+    use_da_entropy=cfg.DA.USE_ENTROPY,
+    da_random_layer=cfg.DA.RANDOM_LAYER,
+    da_random_dim=cfg.DA.RANDOM_DIM,
+    decoder_in_dim=cfg.DECODER.IN_DIM,
+)
 </pre></div>
 </div>
 </div>
@@ -903,14 +1081,14 @@ Each drug–protein pair is given a label:</p>
 <p>We want to save the best model during training so we can reuse it later without needing to retrain. PyTorch Lightning’s <code class="docutils literal notranslate"><span class="pre">ModelCheckpoint</span></code> does this by automatically saving the model whenever it achieves a new best validation AUROC score.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pytorch_lightning.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
+from pytorch_lightning.callbacks import ModelCheckpoint
 
-<span class="n">checkpoint_callback</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
-    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{epoch}</span><span class="s2">-</span><span class="si">{step}</span><span class="s2">-</span><span class="si">{val_BinaryAUROC:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_BinaryAUROC&quot;</span><span class="p">,</span>
-    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+checkpoint_callback = ModelCheckpoint(
+    filename=&quot;{epoch}-{step}-{val_BinaryAUROC:.4f}&quot;,
+    monitor=&quot;val_BinaryAUROC&quot;,
+    mode=&quot;max&quot;,
+)
 </pre></div>
 </div>
 </div>
@@ -918,15 +1096,22 @@ Each drug–protein pair is given a label:</p>
 <p>We now create the <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
 
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
-    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">],</span>
-    <span class="n">devices</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-    <span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCH</span><span class="p">,</span>
-    <span class="n">deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
+trainer = pl.Trainer(
+    callbacks=[checkpoint_callback],
+    devices=&quot;auto&quot;,
+    accelerator=&quot;auto&quot;,
+    max_epochs=cfg.SOLVER.MAX_EPOCH,
+    deterministic=True,
+)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:GPU available: True (cuda), used: True
+INFO:pytorch_lightning.utilities.rank_zero:TPU available: False, using: 0 TPU cores
+INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 </pre></div>
 </div>
 </div>
@@ -948,11 +1133,42 @@ Each drug–protein pair is given a label:</p>
 <p>This code block takes approximately 5 minutes to complete.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
-    <span class="n">drugban_trainer</span><span class="p">,</span>
-    <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">training_generator</span><span class="p">,</span>
-    <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">valid_generator</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer.fit(
+    drugban_trainer,
+    train_dataloaders=training_generator,
+    val_dataloaders=valid_generator,
+)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO:pytorch_lightning.callbacks.model_summary:
+  | Name                 | Type                | Params | Mode 
+---------------------------------------------------------------------
+0 | model                | DrugBAN             | 1.0 M  | train
+1 | domain_discriminator | DomainNetSmallImage | 133 K  | train
+2 | random_layer         | RandomLayer         | 66.0 K | train
+3 | valid_metrics        | MetricCollection    | 0      | train
+4 | test_metrics         | MetricCollection    | 0      | train
+---------------------------------------------------------------------
+1.2 M     Trainable params
+0         Non-trainable params
+1.2 M     Total params
+4.847     Total estimated model params size (MB)
+64        Modules in train mode
+0         Modules in eval mode
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "bc415b5a5635482eb20a65601866febf", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "9a8deecaaef543fbb18d0f50b83b5abc", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[18:07:56] Unusual charge on atom 0 number of radical electrons set to zero
+[18:08:08] Unusual charge on atom 0 number of radical electrons set to zero
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "07d966a71f604f63b00707e6d3a0bfe6", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[18:09:24] Unusual charge on atom 0 number of radical electrons set to zero
+[18:10:07] Unusual charge on atom 0 number of radical electrons set to zero
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f60cfca35cab44e5801bbb2b04f9cc6f", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=2` reached.
 </pre></div>
 </div>
 </div>
@@ -972,7 +1188,45 @@ Each drug–protein pair is given a label:</p>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">drugban_trainer</span><span class="p">,</span> <span class="n">dataloaders</span><span class="o">=</span><span class="n">test_generator</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer.test(drugban_trainer, dataloaders=test_generator, ckpt_path=&quot;best&quot;)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:Restoring states from the checkpoint path at /content/drug-target-interaction/lightning_logs/version_2/checkpoints/epoch=0-step=610-val_BinaryAUROC=0.4845.ckpt
+INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpoint at /content/drug-target-interaction/lightning_logs/version_2/checkpoints/epoch=0-step=610-val_BinaryAUROC=0.4845.ckpt
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d782f86576c9463eb171f866f007b9b3", "version_major": 2, "version_minor": 0}</script><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold">        Test metric        </span>┃<span style="font-weight: bold">       DataLoader 0        </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│<span style="color: #008080; text-decoration-color: #008080">     test_BinaryAUROC      </span>│<span style="color: #800080; text-decoration-color: #800080">    0.48449382185935974    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">    test_BinaryAccuracy    </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5071665048599243     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">    test_BinaryF1Score     </span>│<span style="color: #800080; text-decoration-color: #800080">    0.0933062881231308     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_BinaryRecall     </span>│<span style="color: #800080; text-decoration-color: #800080">   0.050549451261758804    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">  test_BinarySpecificity   </span>│<span style="color: #800080; text-decoration-color: #800080">    0.9668141603469849     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">   test_accuracy_sklearn   </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5038588643074036     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">    test_auroc_sklearn     </span>│<span style="color: #800080; text-decoration-color: #800080">    0.48449382185935974    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">      test_f1_sklearn      </span>│<span style="color: #800080; text-decoration-color: #800080">    0.6671618223190308     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">         test_loss         </span>│<span style="color: #800080; text-decoration-color: #800080">    0.8901852369308472     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">   test_optim_threshold    </span>│<span style="color: #800080; text-decoration-color: #800080">    0.07649494707584381    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_sensitivity      </span>│<span style="color: #800080; text-decoration-color: #800080">   0.006637168116867542    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_specificity      </span>│<span style="color: #800080; text-decoration-color: #800080">     0.997802197933197     </span>│
+└───────────────────────────┴───────────────────────────┘
+</pre>
+</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.8901852369308472,
+  &#39;test_auroc_sklearn&#39;: 0.48449382185935974,
+  &#39;test_accuracy_sklearn&#39;: 0.5038588643074036,
+  &#39;test_f1_sklearn&#39;: 0.6671618223190308,
+  &#39;test_optim_threshold&#39;: 0.07649494707584381,
+  &#39;test_sensitivity&#39;: 0.006637168116867542,
+  &#39;test_specificity&#39;: 0.997802197933197,
+  &#39;test_BinaryAUROC&#39;: 0.48449382185935974,
+  &#39;test_BinaryF1Score&#39;: 0.0933062881231308,
+  &#39;test_BinaryRecall&#39;: 0.050549451261758804,
+  &#39;test_BinarySpecificity&#39;: 0.9668141603469849,
+  &#39;test_BinaryAccuracy&#39;: 0.5071665048599243}]
 </pre></div>
 </div>
 </div>
@@ -1004,22 +1258,22 @@ Each drug–protein pair is given a label:</p>
 <p>First, we need to load the test dataset and create a DataLoader for it. This will allow us to process the test samples in batches. We define functions to create the test dataset and DataLoader.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_test_dataset</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">):</span>
-    <span class="n">df_test_target</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataFolder</span><span class="p">)</span>
-    <span class="n">test_target_dataset</span> <span class="o">=</span> <span class="n">DTIDataset</span><span class="p">(</span><span class="n">df_test_target</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_test_target</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">test_target_dataset</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def get_test_dataset(dataFolder):
+    df_test_target = pd.read_csv(dataFolder)
+    test_target_dataset = DTIDataset(df_test_target.index.values, df_test_target)
+    return test_target_dataset
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">get_test_dataloader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batchsize</span><span class="p">,</span> <span class="n">num_workers</span><span class="p">,</span> <span class="n">collate_fn</span><span class="p">):</span>
-    <span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
-        <span class="n">dataset</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
-        <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span>
-        <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">,</span>
-        <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-        <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">test_dataloader</span>
+def get_test_dataloader(dataset, batchsize, num_workers, collate_fn):
+    test_dataloader = DataLoader(
+        dataset,
+        batch_size=batchsize,
+        num_workers=num_workers,
+        collate_fn=collate_fn,
+        shuffle=False,
+        drop_last=True,
+    )
+    return test_dataloader
 </pre></div>
 </div>
 </div>
@@ -1027,7 +1281,7 @@ Each drug–protein pair is given a label:</p>
 <p>We load a small subset of samples for testing from the provided <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file. You can create your own <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file with the same format to test your drug–protein pairs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataFolder</span> <span class="o">=</span> <span class="s2">&quot;/content/drug-target-interaction/data/drug-target-interaction/bindingdb/interpretation_samples.csv&quot;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>test_dataFolder = &quot;/content/drug-target-interaction/data/drug-target-interaction/bindingdb/interpretation_samples.csv&quot;
 </pre></div>
 </div>
 </div>
@@ -1035,13 +1289,13 @@ Each drug–protein pair is given a label:</p>
 <p>We then build the test dataset and DataLoader using the functions defined above. The <code class="docutils literal notranslate"><span class="pre">batchsize</span></code> is set to 1 to ensure we process one sample at a time for attention visualization later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_dataset</span> <span class="o">=</span> <span class="n">get_test_dataset</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
-<span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">get_test_dataloader</span><span class="p">(</span>
-    <span class="n">test_dataset</span><span class="p">,</span>
-    <span class="n">batchsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">num_workers</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
-    <span class="n">collate_fn</span><span class="o">=</span><span class="n">graph_collate_func</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>test_dataset = get_test_dataset(test_dataFolder)
+test_dataloader = get_test_dataloader(
+    test_dataset,
+    batchsize=1,
+    num_workers=cfg.SOLVER.NUM_WORKERS,
+    collate_fn=graph_collate_func,
+)
 </pre></div>
 </div>
 </div>
@@ -1049,25 +1303,25 @@ Each drug–protein pair is given a label:</p>
 <p>Then, we use the following function to load the trained model with the PyKale API.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_model_from_ckpt</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">DrugbanTrainer</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span>
-        <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">ckpt_path</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">),</span>
-        <span class="n">solver_lr</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">LEARNING_RATE</span><span class="p">,</span>
-        <span class="n">num_classes</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
-        <span class="c1"># --- domain adaptation parameters ---</span>
-        <span class="n">is_da</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">,</span>
-        <span class="n">solver_da_lr</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">DA_LEARNING_RATE</span><span class="p">,</span>
-        <span class="n">da_init_epoch</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">INIT_EPOCH</span><span class="p">,</span>
-        <span class="n">da_method</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">METHOD</span><span class="p">,</span>
-        <span class="n">original_random</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">ORIGINAL_RANDOM</span><span class="p">,</span>
-        <span class="n">use_da_entropy</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE_ENTROPY</span><span class="p">,</span>
-        <span class="n">da_random_layer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_LAYER</span><span class="p">,</span>
-        <span class="c1"># --- discriminator parameters ---</span>
-        <span class="n">da_random_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_DIM</span><span class="p">,</span>
-        <span class="n">decoder_in_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">IN_DIM</span><span class="p">,</span>
-    <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def get_model_from_ckpt(ckpt_path, config):
+    return DrugbanTrainer.load_from_checkpoint(
+        checkpoint_path=ckpt_path,
+        model=DrugBAN(**config),
+        solver_lr=config.SOLVER.LEARNING_RATE,
+        num_classes=config.DECODER.BINARY,
+        batch_size=config.SOLVER.BATCH_SIZE,
+        # --- domain adaptation parameters ---
+        is_da=config.DA.USE,
+        solver_da_lr=config.SOLVER.DA_LEARNING_RATE,
+        da_init_epoch=config.DA.INIT_EPOCH,
+        da_method=config.DA.METHOD,
+        original_random=config.DA.ORIGINAL_RANDOM,
+        use_da_entropy=config.DA.USE_ENTROPY,
+        da_random_layer=config.DA.RANDOM_LAYER,
+        # --- discriminator parameters ---
+        da_random_dim=config.DA.RANDOM_DIM,
+        decoder_in_dim=config.DECODER.IN_DIM,
+    )
 </pre></div>
 </div>
 </div>
@@ -1075,9 +1329,57 @@ Each drug–protein pair is given a label:</p>
 <p>Once the model and test data are prepared, we extract attention maps from the trained model. We set the directory to the provided checkpoint file, load the trained model, and set it to evaluation mode.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="s2">&quot;/content/drug-target-interaction/checkpoint/best.ckpt&quot;</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">get_model_from_ckpt</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">cfg</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>checkpoint_path = &quot;/content/drug-target-interaction/checkpoint/best.ckpt&quot;
+model = get_model_from_ckpt(checkpoint_path, cfg)
+model.model.eval()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DrugBAN(
+  (drug_extractor): MolecularGCN(
+    (init_transform): Linear(in_features=7, out_features=128, bias=False)
+    (gcn_layers): ModuleList(
+      (0-2): 3 x GCNConv(128, 128)
+    )
+  )
+  (protein_extractor): ProteinCNN(
+    (embedding): Embedding(26, 128, padding_idx=0)
+    (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,))
+    (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv2): Conv1d(128, 128, kernel_size=(6,), stride=(1,))
+    (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv3): Conv1d(128, 128, kernel_size=(9,), stride=(1,))
+    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (bcn): BANLayer(
+    (v_net): FCNet(
+      (main): Sequential(
+        (0): Dropout(p=0.2, inplace=False)
+        (1): Linear(in_features=128, out_features=768, bias=True)
+        (2): ReLU()
+      )
+    )
+    (q_net): FCNet(
+      (main): Sequential(
+        (0): Dropout(p=0.2, inplace=False)
+        (1): Linear(in_features=128, out_features=768, bias=True)
+        (2): ReLU()
+      )
+    )
+    (p_net): AvgPool1d(kernel_size=(3,), stride=(3,), padding=(0,))
+    (bn): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (mlp_classifier): MLPDecoder(
+    (fc1): Linear(in_features=256, out_features=512, bias=True)
+    (bn1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fc2): Linear(in_features=512, out_features=512, bias=True)
+    (bn2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fc3): Linear(in_features=512, out_features=128, bias=True)
+    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (fc4): Linear(in_features=128, out_features=2, bias=True)
+  )
+)
 </pre></div>
 </div>
 </div>
@@ -1085,25 +1387,33 @@ Each drug–protein pair is given a label:</p>
 <p>We then iterate through the test DataLoader, passing each batch of drug and protein pairs to the model. The model’s forward method returns the attention weights. After processing all batches, we concatenate the attention tensors into a single tensor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tqdm import tqdm
 
-<span class="n">all_attentions</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_dataloader</span><span class="p">):</span>
-    <span class="n">drug</span><span class="p">,</span> <span class="n">protein</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">batch</span>
-    <span class="n">drug</span><span class="p">,</span> <span class="n">protein</span> <span class="o">=</span> <span class="n">drug</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">),</span> <span class="n">protein</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+all_attentions = []
+for batch in tqdm(test_dataloader):
+    drug, protein, _ = batch
+    drug, protein = drug.to(model.device), protein.to(model.device)
 
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">attention</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span>
-        <span class="n">drug</span><span class="p">,</span> <span class="n">protein</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;eval&quot;</span>
-    <span class="p">)</span>  <span class="c1"># [B, H, V, Q]</span>
+    _, _, _, _, attention = model.model.forward(
+        drug, protein, mode=&quot;eval&quot;
+    )  # [B, H, V, Q]
 
-    <span class="n">attention</span> <span class="o">=</span> <span class="n">attention</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
-    <span class="n">all_attentions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attention</span><span class="p">)</span>
+    attention = attention.detach().cpu()
+    all_attentions.append(attention)
 
-<span class="c1"># Concatenate into one tensor: [N, H, V, Q]</span>
-<span class="n">all_attentions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">all_attentions</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">all_attentions</span><span class="p">,</span> <span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">)</span>
+# Concatenate into one tensor: [N, H, V, Q]
+all_attentions = torch.cat(all_attentions, dim=0)
+torch.save(all_attentions, &quot;attention_maps.pt&quot;)
 
-<span class="n">all_attentions</span><span class="o">.</span><span class="n">shape</span>
+all_attentions.shape
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 6/6 [00:00&lt;00:00, 65.52it/s]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([6, 2, 290, 1185])
 </pre></div>
 </div>
 </div>
@@ -1125,12 +1435,11 @@ Each drug–protein pair is given a label:</p>
 <p>We first import the necessary PyKale APIs and set the output directory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">nilearn</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">kale.interpret.visualize</span><span class="w"> </span><span class="kn">import</span> <span class="n">draw_attention_map</span><span class="p">,</span> <span class="n">draw_mol_with_attention</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">kale.prepdata.tensor_reshape</span><span class="w"> </span><span class="kn">import</span> <span class="n">normalize_tensor</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.interpret.visualize import draw_attention_map, draw_mol_with_attention
+from kale.prepdata.tensor_reshape import normalize_tensor
 
-<span class="n">out_dir</span> <span class="o">=</span> <span class="s2">&quot;./visualization&quot;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+out_dir = &quot;./visualization&quot;
+os.makedirs(out_dir, exist_ok=True)
 </pre></div>
 </div>
 </div>
@@ -1138,10 +1447,10 @@ Each drug–protein pair is given a label:</p>
 <p>We then load the attention maps, data, and SMILES strings from the test dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">attention</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;attention_maps.pt&quot;</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-<span class="n">data_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">test_dataFolder</span><span class="p">)</span>
-<span class="n">smiles</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;SMILES&quot;</span><span class="p">]</span>
-<span class="n">proteins</span> <span class="o">=</span> <span class="n">data_df</span><span class="p">[</span><span class="s2">&quot;Protein&quot;</span><span class="p">]</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>attention = torch.load(&quot;attention_maps.pt&quot;, map_location=&quot;cpu&quot;)
+data_df = pd.read_csv(test_dataFolder)
+smiles = data_df[&quot;SMILES&quot;]
+proteins = data_df[&quot;Protein&quot;]
 </pre></div>
 </div>
 </div>
@@ -1149,9 +1458,9 @@ Each drug–protein pair is given a label:</p>
 <p>We select the first sample from the attention maps and corresponding SMILES and protein sequence for visualization.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">att_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;att_map_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
-<span class="n">mol_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;mol_</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">.svg&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>index = 0
+att_path = os.path.join(out_dir, f&quot;att_map_{index}.png&quot;)
+mol_path = os.path.join(out_dir, f&quot;mol_{index}.svg&quot;)
 </pre></div>
 </div>
 </div>
@@ -1159,23 +1468,23 @@ Each drug–protein pair is given a label:</p>
 <p>We crop the attention map to the actual lengths of the drug and protein sequences. This is important because the attention map may include padding tokens.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from rdkit import Chem
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">get_real_length</span><span class="p">(</span><span class="n">smile</span><span class="p">,</span> <span class="n">protein_sequence</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the real length of the drug and protein sequences.&quot;&quot;&quot;</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smile</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">protein_sequence</span><span class="p">)</span>
+def get_real_length(smile, protein_sequence):
+    &quot;&quot;&quot;Get the real length of the drug and protein sequences.&quot;&quot;&quot;
+    mol = Chem.MolFromSmiles(smile)
+    return mol.GetNumAtoms(), len(protein_sequence)
 
 
-<span class="n">att</span> <span class="o">=</span> <span class="n">attention</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>  <span class="c1"># [H, V, Q]</span>
-<span class="n">smile</span> <span class="o">=</span> <span class="n">smiles</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-<span class="n">protein</span> <span class="o">=</span> <span class="n">proteins</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-<span class="n">real_drug_len</span><span class="p">,</span> <span class="n">real_prot_len</span> <span class="o">=</span> <span class="n">get_real_length</span><span class="p">(</span><span class="n">smile</span><span class="p">,</span> <span class="n">protein</span><span class="p">)</span>
-<span class="n">att</span> <span class="o">=</span> <span class="n">att</span><span class="p">[:,</span> <span class="p">:</span><span class="n">real_drug_len</span><span class="p">,</span> <span class="p">:</span><span class="n">real_prot_len</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [V, Q]</span>
+att = attention[index]  # [H, V, Q]
+smile = smiles[index]
+protein = proteins[index]
+real_drug_len, real_prot_len = get_real_length(smile, protein)
+att = att[:, :real_drug_len, :real_prot_len].mean(0)  # [V, Q]
 
-<span class="c1"># Normalize</span>
-<span class="n">att</span> <span class="o">=</span> <span class="n">normalize_tensor</span><span class="p">(</span><span class="n">att</span><span class="p">)</span>
+# Normalize
+att = normalize_tensor(att)
 </pre></div>
 </div>
 </div>
@@ -1183,22 +1492,44 @@ Each drug–protein pair is given a label:</p>
 <p>Finally, we save the attention map and the molecule image with attention highlights.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">draw_attention_map</span><span class="p">(</span>
-    <span class="n">att</span><span class="p">,</span>
-    <span class="n">att_path</span><span class="p">,</span>
-    <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Drug </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2"> Attention&quot;</span><span class="p">,</span>
-    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Drug Tokens&quot;</span><span class="p">,</span>
-    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Protein Tokens&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>draw_attention_map(
+    att,
+    att_path,
+    title=f&quot;Drug {index} Attention&quot;,
+    xlabel=&quot;Drug Tokens&quot;,
+    ylabel=&quot;Protein Tokens&quot;,
+)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">draw_mol_with_attention</span><span class="p">(</span><span class="n">att</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">smile</span><span class="p">,</span> <span class="n">mol_path</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>draw_mol_with_attention(att.mean(dim=1), smile, mol_path)
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from IPython.display import Image, SVG
+
+attention_plot = Image(att_path)
+molecular_img = SVG(mol_path)
+display(attention_plot)
+display(molecular_img)
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/7aef2419b368e38ef8b35f1671353b143c874dfdf1efe4e0f8d214ee2c0d6b25.png" src="../../_images/7aef2419b368e38ef8b35f1671353b143c874dfdf1efe4e0f8d214ee2c0d6b25.png" />
+<img alt="../../_images/5e13ad8feab0b288d86960abf7217e7f7d66fc7a8df3b19bdf3bae5a05387960.svg" src="../../_images/5e13ad8feab0b288d86960abf7217e7f7d66fc7a8df3b19bdf3bae5a05387960.svg" />
 </div>
 </div>
 <p>The output images are saved in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> directory. The attention map shows how much each drug token attends to each protein token, while the molecule image highlights the atoms based on their attention values.</p>
