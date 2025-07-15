@@ -25,7 +25,7 @@ This workshop covers the tutorials for **four biomedical applications** using th
    - **Modalities**: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)
    - **Task**: Use neuroimaging and phenotypic data for autism classification
    - **Multimodal approach**: Regularization - using phenotypic features to regularize feature embedding for reducing the phenotypic effect (e.g. site effect) in neuroimaging data to improve cross-site classification performance.
-   
+
 2. **Cardiovascular Disease Assessment**
    - **Dataset**: MIMIC [Chest X-rays](https://physionet.org/content/mimic-cxr/2.1.0/) and [ECG signals](https://physionet.org/content/mimic-iv-ecg/1.0/)
    - **Modalities**: Chest X-ray images and ECG signals
