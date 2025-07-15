@@ -11,6 +11,6 @@ Zoom into specific regions of the input ECG for detailed model interpretation. Y
 
 ## Task 3 - Explore pre-training with full 50K paired CXR-ECG data (Home task with high resources)
 
-Download the [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.1.0/) and [MIMIC-IV-ECG](https://physionet.org/content/mimic-iv-ecg/1.0/) datasets, then **uncomment** the optional code cell in *[Step 1: Data Loading and Preparation](https://pykale.github.io/mmai-tutorials/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.html#step-1-data-loading-and-preparation)*.
+Download the [MIMIC-CXR](https://physionet.org/content/mimic-cxr/2.1.0/) and [MIMIC-IV-ECG](https://physionet.org/content/mimic-iv-ecg/1.0/) datasets, then **uncomment** the optional code cell in *[Step 1: Data Loading and Preparation](https://pykale.github.io/mmai-tutorials/tutorials/cardiac-abnormality-assessment/tutorial-heart.html#step-1-data-loading-and-preparation)*.
 
 Set `cfg_PT.TRAIN.LATENT_DIM=128`, `cfg_PT.DATA.BATCH_SIZE=128` and `cfg_PT.TRAIN.EPOCH=100` to obtain the **optimal pre-trained CardioVAE model** using the full 50K paired CXR-ECG data. Compare the results with the pre-trained CardioVAE model using 10K paired CXR-ECG data in the tutorial.

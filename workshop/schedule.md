@@ -1,4 +1,4 @@
-# Program
+# Schedule
 
 ## EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules
 
