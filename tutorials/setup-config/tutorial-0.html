@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Brain Disorder Diagnosis" href="../brain-disorder-diagnosis/tutorial-brain.html" />
-    <link rel="prev" title="Schedule" href="../../workshop/schedule.html" />
+    <link rel="prev" title="Program" href="../../workshop/schedule.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -184,7 +184,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../workshop/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../workshop/schedule.html">Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../workshop/schedule.html">Program</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
@@ -540,6 +540,39 @@ document.write(`
     ├───**.py
 </pre></div>
 </div>
+<!-- The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.
+
+The tutorials are organized as standardized file structure. The common file structure of a tutorial is shown below:
+
+```text
+    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+```
+
+Some tutorials may also include additional resources. A more comprehensive file structure is shown below:
+
+```text
+    ├───tutorial.ipynb
+    ├───config.py
+    ├───configs
+    │   ├───base.yml
+    │   ├───**.yml
+    |───extend-reading
+    │   ├───**.md
+    ├───model.py
+    ├───models
+    │   ├───**.pt
+    ├───data
+    │   ├───**.csv
+    │   ├───**.**
+    ├───images
+    │   ├───**.png
+    │   ├───**.jpg
+    ├───**.py
+``` -->
 <p>The <code class="docutils literal notranslate"><span class="pre">config.py</span></code> file contains the default configuration settings for the tutorial. The default configurations defined in the toy <a class="reference download internal" download="" href="../../_downloads/df95f600bac9e6be3f04898e5b3a773e/config.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></span></a> file for this tutorial are as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_C</span> <span class="o">=</span> <span class="n">CfgNode</span><span class="p">()</span>
 
@@ -556,7 +589,18 @@ document.write(`
 </pre></div>
 </div>
 <p>These default values can be overridden by the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files in the <code class="docutils literal notranslate"><span class="pre">configs</span></code> directory. Run the following code cell to load the configuration <code class="docutils literal notranslate"><span class="pre">base.yml</span></code> to override the default <code class="docutils literal notranslate"><span class="pre">MODEL.NAME</span></code> value in the <code class="docutils literal notranslate"><span class="pre">config.py</span></code> file.</p>
-<div class="cell docutils container">
+<!-- ### Configuration
+
+As shown in the file structure above, each tutorial has a `config.py` script that defines the base configuration settings. These settings can be customized or overridden using external `.yml` files located in the `configs` directory. The configuration system allows for easy parameter tuning and reproducibility across different runs of the tutorials.
+
+Using a configuration file offers several benefits:
+
+- **Separation of concerns**: Keeps the notebook focused on analysis and results, while experiment parameters are managed externally.
+- **Reproducibility**: Ensures that all experiment settings are recorded, making it easier to reproduce results consistently.
+- **Flexibility**: Allows rapid switching between different configurations without modifying the core implementation.
+- **Scalability**: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.
+
+Please refer to the provided configuration files for details on how to customize your experiment. --><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
 
@@ -621,7 +665,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Schedule</p>
+        <p class="prev-next-title">Program</p>
       </div>
     </a>
     <a class="right-next"

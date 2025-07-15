@@ -10,8 +10,6 @@ This workshop offers practical, hands-on tutorials in **open biomedical multimod
 2. **Open research**: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the [GitHub repository](https://github.com/pykale/mmai-tutorials).
 3. **Reproducible pipelines with PyKale**: The core machine learning library behind the tutorial of this workshop is [`PyKale`](https://github.com/pykale/pykale), which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.
 
-In person event: **EMBC 2025 Workshop: Open Biomedical Multimodal AI Research – From Pixels to Molecules – 2:30 PM 16 July | B3 M7-8 of Bella Center, Copenhagen, Denmark**.
-
 ---
 
 ## Overview of the Materials
@@ -44,56 +42,9 @@ This workshop covers the tutorials for **four biomedical applications** using th
    - **Task**: Predict molecular interactions from structural and textual features
    - **Multimodal approach**: Interaction - bilinear interaction between protein and molecular embedding.
 
-The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.
-
-The tutorials are organized as standardized file structure. The common file structure of a tutorial is shown below:
-
-```text
-    ├───tutorial.ipynb
-    ├───config.py
-    ├───configs
-    │   ├───base.yml
-    │   ├───**.yml
-```
-
-Some tutorials may also include additional resources. A more comprehensive file structure is shown below:
-
-```text
-    ├───tutorial.ipynb
-    ├───config.py
-    ├───configs
-    │   ├───base.yml
-    │   ├───**.yml
-    |───extend-reading
-    │   ├───**.md
-    ├───model.py
-    ├───models
-    │   ├───**.pt
-    ├───data
-    │   ├───**.csv
-    │   ├───**.**
-    ├───images
-    │   ├───**.png
-    │   ├───**.jpg
-    ├───**.py
-```
-
-Each tutorial follows standardized machine learning pipelines:
+The core machine learning library behind the tutorial of this workshop is [`PyKale`](https://github.com/pykale/pykale). The core functions of each tutorial are implemented in the PyKale APIs of a **standardized machine learning pipeline**:
 
 > **Data loading → Preprocessing → Embedding → Prediction → Evaluation → Interpretation**
-
-### Configuration
-
-As shown in the file structure above, each tutorial has a `config.py` script that defines the base configuration settings. These settings can be customized or overridden using external `.yml` files located in the `configs` directory. The configuration system allows for easy parameter tuning and reproducibility across different runs of the tutorials.
-
-Using a configuration file offers several benefits:
-
-- **Separation of concerns**: Keeps the notebook focused on analysis and results, while experiment parameters are managed externally.
-- **Reproducibility**: Ensures that all experiment settings are recorded, making it easier to reproduce results consistently.
-- **Flexibility**: Allows rapid switching between different configurations without modifying the core implementation.
-- **Scalability**: Facilitates managing multiple experiments systematically, especially in larger workflows or batch processing.
-
-Please refer to the provided configuration files for details on how to customize your experiment.
 
 ### Discussion forum for Q&A etc
 
@@ -104,14 +55,12 @@ We have a [discussion forum](https://github.com/pykale/mmai-tutorials/discussion
 Consider the following questions to help familiarize yourself with the key concepts of this workshop:
 
 - Have you used publicly available data or code in your work?
-
 - Have you ever shared data or code from your own research?
-
 - Have you practised reproducible research methods?
 
 Consider the following questions, choose those that apply to you, to reflect on your experience:
 
+- Do you currently face any challenges when working with multimodal data or methods?
 - Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?
 - What aspects of the tutorials did you find most helpful or challenging?
 - How do you envision multimodal AI contributing to your own research?
-- What challenges do you currently face when working with multimodal data or methods?
