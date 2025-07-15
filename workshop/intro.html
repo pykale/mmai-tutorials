@@ -446,7 +446,7 @@ document.write(`
 <li><p><strong>Dataset</strong>: ABIDE (Autism Brain Imaging Data Exchange)</p></li>
 <li><p><strong>Modalities</strong>: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)</p></li>
 <li><p><strong>Task</strong>: Use neuroimaging and phenotypic data for autism classification</p></li>
-<li><p><strong>Multimodal approach</strong>: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.</p></li>
+<li><p><strong>Multimodal approach</strong>: Regularization - using phenotypic features to regularize feature embedding for reducing the phenotypic effect (e.g. site effect) in neuroimaging data to improve cross-site classification performance.</p></li>
 </ul>
 </li>
 <li><p><strong>Cardiovascular Disease Assessment</strong></p>
@@ -461,8 +461,8 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Dataset</strong>: TCGA (The Cancer Genome Atlas)</p></li>
 <li><p><strong>Modalities</strong>: DNA methylation, mRNA expression, and miRNA expression.</p></li>
-<li><p><strong>Task</strong>: Combine genomics and transcriptomics data for cancer subtype classification</p></li>
-<li><p><strong>Multimodal approach</strong>: Interaction - constructing a tensor for the cross-omics probability interaction.</p></li>
+<li><p><strong>Task</strong>: Combine genomics and transcriptomics data for cancer classification</p></li>
+<li><p><strong>Multimodal approach</strong>: Late fusion - cross-omics tensor for probability fusion.</p></li>
 </ul>
 </li>
 <li><p><strong>Drug–Target Interaction Prediction</strong></p>

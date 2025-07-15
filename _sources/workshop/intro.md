@@ -24,7 +24,7 @@ This workshop covers the tutorials for **four biomedical applications** using th
    - **Dataset**: ABIDE (Autism Brain Imaging Data Exchange)
    - **Modalities**: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)
    - **Task**: Use neuroimaging and phenotypic data for autism classification
-   - **Multimodal approach**: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.
+   - **Multimodal approach**: Regularization - using phenotypic features to regularize feature embedding for reducing the phenotypic effect (e.g. site effect) in neuroimaging data to improve cross-site classification performance.
 
 2. **Cardiovascular Disease Assessment**
    - **Dataset**: MIMIC Chest X-rays and ECG signals
@@ -35,8 +35,8 @@ This workshop covers the tutorials for **four biomedical applications** using th
 3. **Cancer Classification**
    - **Dataset**: TCGA (The Cancer Genome Atlas)
    - **Modalities**: DNA methylation, mRNA expression, and miRNA expression.
-   - **Task**: Combine genomics and transcriptomics data for cancer subtype classification
-   - **Multimodal approach**: Interaction - constructing a tensor for the cross-omics probability interaction.
+   - **Task**: Combine genomics and transcriptomics data for cancer classification
+   - **Multimodal approach**: Late fusion - cross-omics tensor for probability fusion.
 
 4. **Drug–Target Interaction Prediction**
    - **Dataset**: BindingDB and BioSNAP

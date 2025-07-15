@@ -461,9 +461,9 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="multiomics-cancer-classification">
 <h1>Multiomics Cancer Classification<a class="headerlink" href="#multiomics-cancer-classification" title="Link to this heading">#</a></h1>
 <p><img alt="" src="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/images/mogonet-pykale-api.png?raw=1" /></p>
-<p>In this tutorial, we will use a <a class="reference external" href="https://www.nature.com/articles/s41467-021-23774-w"><strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<strong>O</strong>nvolutional <strong>NET</strong>works (MOGONET) by <strong>Wang et al. (Nature Communication, 2021)</strong></a> [1] pipeline implemented in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [2] to integrate <strong>patient multiomics data</strong> for <strong>cancer subtypes classification</strong>.</p>
+<p>In this tutorial, we will use a <a class="reference external" href="https://www.nature.com/articles/s41467-021-23774-w"><strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<strong>O</strong>nvolutional <strong>NET</strong>works (MOGONET) by <strong>Wang et al. (Nature Communication, 2021)</strong></a> [1] pipeline implemented in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [2] to integrate <strong>patient multiomics data</strong> for <strong>cancer classification</strong>.</p>
 <p>We will work with multiomics data from two datasets: <a class="reference external" href="https://www.cancerimagingarchive.net/collection/tcga-brca/"><strong>BRCA</strong> of TCGA</a> [3] and <a class="reference external" href="https://www.synapse.org/Synapse:syn3219045"><strong>ROSMAP</strong></a> [4,5]. The BRCA dataset has five subtypes, while the ROSMAP dataset has only two. Three omics modalities will be used: mRNA expression, DNA methylation, and miRNA expression.</p>
-<p>The multimodal approach used in this tutorial involves <strong>interaction</strong>, where a cross-omics tensor is constructed for the probability interaction across three omics modalities.</p>
+<p>The multimodal approach used in this tutorial involves <strong>late fusion</strong>, where a cross-omics tensor is constructed for the prediction probability fusion across three omics modalities.</p>
 <p>The main tasks of this tutorial are:</p>
 <ul class="simple">
 <li><p>Load BRCA or ROSMAP dataset.</p></li>
@@ -783,7 +783,7 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "69bed99b2d194cdd9c32a523820d8579"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=100` reached.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "69bed99b2d194cdd9c32a523820d8579", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=100` reached.
 </pre></div>
 </div>
 </div>
@@ -828,7 +828,7 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "305496c13a134426ab2261926a17c518"}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=500` reached.
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "305496c13a134426ab2261926a17c518", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=500` reached.
 </pre></div>
 </div>
 </div>
@@ -848,7 +848,7 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9ebbf6fd784944a39d374b60e4c53024"}</script><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9ebbf6fd784944a39d374b60e4c53024", "version_major": 2, "version_minor": 0}</script><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold">        Test metric        </span>┃<span style="font-weight: bold">       DataLoader 0        </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
 │<span style="color: #008080; text-decoration-color: #008080">         Accuracy          </span>│<span style="color: #800080; text-decoration-color: #800080">    0.8019999861717224     </span>│
