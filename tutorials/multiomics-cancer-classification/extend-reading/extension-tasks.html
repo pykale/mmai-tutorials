@@ -401,6 +401,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
             </nav>
         </div>
@@ -420,10 +421,17 @@ document.write(`
 </section>
 <section id="task-2-try-another-dataset">
 <h2>Task 2 - Try another dataset<a class="headerlink" href="#task-2-try-another-dataset" title="Link to this heading">#</a></h2>
+<p>To demonstrate the generalizability of the model, we also provide a dataset for Alzheimer’s Disease, <a class="reference external" href="https://www.synapse.org/Synapse:syn3219045"><strong>ROSMAP</strong></a> [1,2]
+Besides, we also provide a configuration file for <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/configs/ROSMAP.yaml"><code class="docutils literal notranslate"><span class="pre">configs/ROSMAP.yaml</span></code></a>.</p>
 <p>To try ROSMAP dataset, replace <code class="docutils literal notranslate"><span class="pre">&quot;experiments/BRCA.yaml&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;experiments/ROSMAP.yaml&quot;</span></code> in the following line under Configuration section and run the pipeline again.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;experiments/BRCA.yaml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
+<p>[1] Bennett, D. A., Buchman, A. S., Boyle, P. A., Barnes, L. L., Wilson, R. S., &amp; Schneider, J. A. (2018). Religious orders study and rush memory and aging project. Journal of Alzheimer’s disease, 64(s1), S161-S189.</p>
+<p>[2] De Jager, P.L.; Ma, Y.; McCabe, C.; Xu, J.; Vardarajan, B.N.; Felsky, D.; Klein, H.U.; White, C.C.; Peters, M.A.; Lodgson, B.; et al. (2018). A multi-omic atlas of the human frontal cortex for aging and Alzheimer’s disease research. Scientific Data 5, 1-13</p>
 </section>
 </section>
 
@@ -493,6 +501,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
   </nav></div>
 
