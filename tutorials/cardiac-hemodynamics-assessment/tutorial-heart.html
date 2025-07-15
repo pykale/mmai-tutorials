@@ -62,7 +62,7 @@
     <link rel="icon" href="../../_static/icon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Drug–Target Interaction Prediction" href="../drug-target-interaction/tutorial-drug.html" />
+    <link rel="next" title="Extension Tasks" href="extend-reading/extension-tasks.html" />
     <link rel="prev" title="Helper Functions" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -195,7 +195,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../brain-disorder-diagnosis/extend-reading/helper-functions.html">Helper Functions (optional)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiothoracic Abnormality Assessment</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Cardiothoracic Abnormality Assessment</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="extend-reading/extension-tasks.html">Extension Tasks</a></li>
+</ul>
+</details></li>
 <li class="toctree-l1"><a class="reference internal" href="../drug-target-interaction/tutorial-drug.html">Drug–Target Interaction Prediction</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../multiomics-cancer-classification/tutorial-cancer.html">Multiomics Cancer Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../multiomics-cancer-classification/extend-reading/extension-tasks.html">Extension Tasks</a></li>
@@ -631,9 +634,9 @@ External YAML files like <code class="docutils literal notranslate"><span class=
 <p>This tutorial uses separate data pipelines for <strong>pre-training</strong> and <strong>fine-tuning</strong>, both based on paired chest X-ray (CXR) and ECG signal features. Each stage follows standard preprocessing steps—such as resizing, normalization, interpolation, and tensor conversion—tailored for resource-constrained environments like <strong>Google Colab</strong>.</p>
 <p>PyKale API for Data preparation:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_access.load_ecg_from_folder</span></code> provides a convenient function for loading ECG waveform data stored in a directory structure. It supports automatic parsing and conversion of ECG signal files into PyTorch tensors, with options for standard preprocessing such as normalisation, resize, interpolation, and resampling. This enables streamlined integration with deep learning pipelines.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.image_access.load_images_from_dir</span></code> offers an easy-to-use utility for loading image datasets from directory hierarchies. It supports standard image formats and returns PyTorch tensors, performing essential preprocessing steps such as resizing and normalisation. This function is suitable for image classification, computer vision, and multimodal learning tasks.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_image_access.SignalImageDataset</span></code> defines a unified dataset class designed for paired signal (e.g., ECG) and image (e.g., CXR) modalities. It facilitates synchronized access to multi-source data, providing ready-to-use PyTorch datasets that can be directly utilised for multimodal training, evaluation, and downstream applications.</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/loaddata/signal_access.py"><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_access.load_ecg_from_folder</span></code></a> provides a convenient function for loading ECG waveform data stored in a directory structure. It supports automatic parsing and conversion of ECG signal files into PyTorch tensors, with options for standard preprocessing such as normalisation, resize, interpolation, and resampling. This enables streamlined integration with deep learning pipelines.</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/loaddata/image_access.py"><code class="docutils literal notranslate"><span class="pre">kale.loaddata.image_access.load_images_from_dir</span></code></a> offers an easy-to-use utility for loading image datasets from directory hierarchies. It supports standard image formats and returns PyTorch tensors, performing essential preprocessing steps such as resizing and normalisation. This function is suitable for image classification, computer vision, and multimodal learning tasks.</p></li>
+<li><p><a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/loaddata/signal_image_access.py"><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_image_access.SignalImageDataset</span></code></a> defines a unified dataset class designed for paired signal (e.g., ECG) and image (e.g., CXR) modalities. It facilitates synchronized access to multi-source data, providing ready-to-use PyTorch datasets that can be directly utilised for multimodal training, evaluation, and downstream applications.</p></li>
 </ul>
 <p><strong>Note:</strong> Please create a shortcut to the following Google Drive folder in your <strong>MyDrive</strong>.
 To create a shortcut:
@@ -758,17 +761,17 @@ To create a shortcut:
 <p>The embedding module is composed of independent encoders for each modality and a fusion mechanism to obtain a shared latent representation.</p>
 <section id="signal-encoder">
 <h4>Signal Encoder<a class="headerlink" href="#signal-encoder" title="Link to this heading">#</a></h4>
-<p>The ECG signal pathway uses <code class="docutils literal notranslate"><span class="pre">SignalVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn</span></code>.
+<p>The ECG signal pathway uses <code class="docutils literal notranslate"><span class="pre">SignalVAEEncoder</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/embed/signal_cnn.py"><code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn</span></code></a>.
 This encoder captures high-level temporal features from preprocessed ECG waveforms and maps them to a latent space suitable for downstream fusion and representation learning.</p>
 </section>
 <section id="image-encoder">
 <h4>Image Encoder<a class="headerlink" href="#image-encoder" title="Link to this heading">#</a></h4>
-<p>The image pathway uses <code class="docutils literal notranslate"><span class="pre">ImageVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.image_cnn</span></code>.
+<p>The image pathway uses <code class="docutils literal notranslate"><span class="pre">ImageVAEEncoder</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/embed/image_cnn.py"><code class="docutils literal notranslate"><span class="pre">kale.embed.image_cnn</span></code></a>.
 This encoder captures high-level spatial features from preprocessed CXR’s and maps them to a latent space suitable for downstream fusion and representation learning.</p>
 </section>
 <section id="feature-fusion">
 <h4>Feature Fusion<a class="headerlink" href="#feature-fusion" title="Link to this heading">#</a></h4>
-<p>Encoded modality-specific features are combined using a <strong>Product-of-Experts (PoE)</strong> approach, implemented in <code class="docutils literal notranslate"><span class="pre">kale.embed.feature_fusion</span></code>.
+<p>Encoded modality-specific features are combined using a <strong>Product-of-Experts (PoE)</strong> approach, implemented in <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/embed/feature_fusion.py"><code class="docutils literal notranslate"><span class="pre">kale.embed.feature_fusion</span></code></a>.
 The PoE fusion computes a joint posterior over the latent space by aggregating information from each modality, enabling coherent multimodal representation.</p>
 </section>
 </section>
@@ -778,15 +781,15 @@ The PoE fusion computes a joint posterior over the latent space by aggregating i
 <h4>Reconstruction (Pre-training)<a class="headerlink" href="#reconstruction-pre-training" title="Link to this heading">#</a></h4>
 <p>During pre-training, the model reconstructs both modalities using decoders from the shared latent representation:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ImageVAEDecoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.vae_decoder</span></code> for CXR reconstruction</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SignalVAEDecoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn_vae</span></code> for ECG waveform reconstruction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ImageVAEDecoder</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/predict/decode.py"><code class="docutils literal notranslate"><span class="pre">kale.predict.decode</span></code></a> for CXR reconstruction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SignalVAEDecoder</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/predict/decode.py"><code class="docutils literal notranslate"><span class="pre">kale.predict.decode</span></code></a> for ECG waveform reconstruction</p></li>
 </ul>
 <p>The model is trained to minimise the <strong>Evidence Lower Bound (ELBO)</strong>, encouraging informative and disentangled latent representations.</p>
 </section>
 <section id="classification-fine-tuning">
 <h4>Classification (Fine-tuning)<a class="headerlink" href="#classification-fine-tuning" title="Link to this heading">#</a></h4>
 <p>For downstream classification tasks, we reuse the pretrained encoders as feature extractors.
-The <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/finetune.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.finetune</span></code></a> adds a lightweight classification head on top of the shared latent space for supervised learning.
+The <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/predict/decode.py"><code class="docutils literal notranslate"><span class="pre">kale.predict.decode</span></code></a> adds a lightweight classification head on top of the shared latent space for supervised learning.
 This setup is optimised for clinical prediction tasks, such as binary or multi-label disease classification.</p>
 </section>
 </section>
@@ -855,10 +858,10 @@ This setup is optimised for clinical prediction tasks, such as binary or multi-l
 <section id="multimodal-fine-tuning">
 <h3>Multimodal Fine-tuning<a class="headerlink" href="#multimodal-fine-tuning" title="Link to this heading">#</a></h3>
 <p>For downstream classification, we fine-tune a shallow classifier on top of a <strong>pretrained CardioVAE encoder</strong>. The encoder is loaded from <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code>, pretrained with reconstruction loss, and used as a fixed or partially trainable <strong>feature extractor</strong>.</p>
-<p>We use <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/finetune.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.finetune</span></code></a>, which wraps:</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningTrainer</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/multimodal_trainer.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.multimodal_trainer</span></code></a>, which wraps:</p>
 <ul class="simple">
-<li><p>A <strong>pretrained encoder</strong> from <code class="docutils literal notranslate"><span class="pre">SignalImageVAE</span></code></p></li>
-<li><p>A <strong>classification head</strong> (single or multi-layer MLP)</p></li>
+<li><p>A <strong>pretrained CardioVAE model</strong></p></li>
+<li><p>A <strong>SignalImageFineTuningClassifier</strong> (two-layer fully connected classifier)</p></li>
 <li><p>A <strong>training step</strong> that supports standard supervised learning with cross-entropy loss</p></li>
 </ul>
 <p><strong>Estimated runtime:</strong> 2 minute with 10 epoch</p>
@@ -1139,6 +1142,8 @@ This method helps identify which regions in each modality, such as specific wave
 <p>[4] Gow, B., Pollard, T., Nathanson, L. A., Johnson, A., Moody, B., Fernandes, C., Greenbaum, N., Waks, J. W., Eslami, P., Carbonati, T., Chaudhari, A., Herbst, E., Moukheiber, D., Berkowitz, S., Mark, R., &amp; Horng, S. (2023). MIMIC-IV-ECG: Diagnostic Electrocardiogram Matched Subset (version 1.0). PhysioNet. RRID:SCR_007345.</p>
 <p>[5] Suvon, M. N., Tripathi, P. C., Fan, W., Zhou, S., Liu, X., Alabed, S., … &amp; Lu, H. (2024, October). Multimodal variational autoencoder for low-cost cardiac hemodynamics instability detection. In <em>International Conference on Medical Image Computing and Computer-Assisted Intervention</em> (pp. 296-306).</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1181,11 +1186,11 @@ This method helps identify which regions in each modality, such as specific wave
       </div>
     </a>
     <a class="right-next"
-       href="../drug-target-interaction/tutorial-drug.html"
+       href="extend-reading/extension-tasks.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Drug–Target Interaction Prediction</p>
+        <p class="prev-next-title">Extension Tasks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
