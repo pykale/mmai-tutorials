@@ -6,9 +6,9 @@ DATA:
 
 MODEL:
   LATENT_DIM: 128
-  INPUT_DIM_ECG: 60000
+  NUM_LEADS: 12   # For this tutorial, only 12-lead ECG has been considered. To change the number of leads, modify the lead input before preprocessing.
+  INPUT_DIM_ECG: 60000 # NUM_LEADS*SAMPLING_RATE*ECG_LENGTH: 12*500*10.
   INPUT_DIM_CXR: 1
-  NUM_LEADS: 12
 
 TRAIN:
   EPOCHS: 1

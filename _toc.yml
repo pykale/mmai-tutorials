@@ -35,6 +35,9 @@ parts:
     - file: tutorials/brain-disorder-diagnosis/extend-reading/helper-functions
       title: Helper Functions (optional)
   - file: tutorials/cardiac-hemodynamics-assessment/tutorial-heart
+    sections:
+    - file: tutorials/cardiac-hemodynamics-assessment/extend-reading/extension-tasks
+      title: Extension Tasks
   - file: tutorials/drug-target-interaction/tutorial-drug
   - file: tutorials/multiomics-cancer-classification/tutorial-cancer
     sections:
