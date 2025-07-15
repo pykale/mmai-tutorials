@@ -475,7 +475,7 @@ document.write(`
 </figure>
 <p>In this tutorial, we will use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [1] to train models that classify individuals with Autism Spectrum Disorder (ASD) and healthy controls based on two data modalities: functional magnetic resonance imaging (fMRI) and phenotypic features.</p>
 <p>We will work with preprocessed data from the <a class="reference external" href="https://fcon_1000.projects.nitrc.org/indi/abide/">Autism Brain Imaging Data Exchange (ABIDE)</a> [2], which includes fMRI and phenotypic information for over 1,000 subjects, contributed by 17 research centers worldwide.</p>
-<p>The multimodal approach used in this tutorial involves <strong>regularization</strong>, where phenotypic features are incorporated into the regularization term to learn imaging feature embedding and improve classification performance.</p>
+<p>The multimodal approach used in this tutorial involves <strong>regularization</strong>, where phenotypic features are incorporated into the regularization term to reduce the phenotypic effect (e.g., site effects) in the imaging feature embedding and improve cross-site classification performance.</p>
 <p>The main tasks of the tutorial are as follows:</p>
 <ul class="simple">
 <li><p>Load fMRI and phenotypic data</p></li>

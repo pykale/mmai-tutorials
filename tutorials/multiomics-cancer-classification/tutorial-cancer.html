@@ -485,14 +485,14 @@ document.write(`
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import sys
-import site
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">site</span>
 
-if &quot;google.colab&quot; in str(get_ipython()):
-    sys.path.insert(0, site.getusersitepackages())
-    !git clone -q --single-branch -b main https://github.com/pykale/mmai-tutorials
-    %cp -rf /content/mmai-tutorials/tutorials/multiomics-cancer-classification/* /content/
-    %rm -r /content/mmai-tutorials
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">getusersitepackages</span><span class="p">())</span>
+    <span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">-</span><span class="n">q</span> <span class="o">--</span><span class="n">single</span><span class="o">-</span><span class="n">branch</span> <span class="o">-</span><span class="n">b</span> <span class="n">main</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
+    <span class="o">%</span><span class="n">cp</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">multiomics</span><span class="o">-</span><span class="n">cancer</span><span class="o">-</span><span class="n">classification</span><span class="o">/*</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span>
+    <span class="o">%</span><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
 </pre></div>
 </div>
 </div>
@@ -511,11 +511,11 @@ if &quot;google.colab&quot; in str(get_ipython()):
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%%capture
-!pip install --quiet \
-    &quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot; \
-    torch-geometric==2.6.0 torch_sparse torch_scatter \
-    -f https://data.pyg.org/whl/torch-2.6.0+cu124.html
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
+    <span class="s2">&quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot;</span> \
+    <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span><span class="o">==</span><span class="mf">2.6.0</span> <span class="n">torch_sparse</span> <span class="n">torch_scatter</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cu124</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
 </div>
@@ -529,11 +529,11 @@ if &quot;google.colab&quot; in str(get_ipython()):
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
-import warnings
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
-warnings.filterwarnings(&quot;ignore&quot;)
-os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -546,10 +546,10 @@ os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
 <p>First, we load the configuration from <a class="reference external" href="https://github.com/pykale/mmai-tutorial/blob/main/tutorials/multiomics-cancer-classification/configs/BRCA.yaml"><code class="docutils literal notranslate"><span class="pre">configs/BRCA.yaml</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from config import get_cfg_defaults
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
 
-cfg = get_cfg_defaults()
-cfg.merge_from_file(&quot;configs/BRCA.yaml&quot;)
+<span class="n">cfg</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/BRCA.yaml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -570,9 +570,9 @@ cfg.merge_from_file(&quot;configs/BRCA.yaml&quot;)
 If users are interested, please increase them to get more accurate predictions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cfg.SOLVER.MAX_EPOCHS_PRETRAIN = 100
-cfg.SOLVER.MAX_EPOCHS = 500
-cfg.DATASET.NUM_MODALITIES = 3
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCHS_PRETRAIN</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCHS</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">NUM_MODALITIES</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -580,7 +580,7 @@ cfg.DATASET.NUM_MODALITIES = 3
 <p>Print hyperparameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(cfg)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -619,7 +619,7 @@ SOLVER:
 <p>Delete the potential existing data and download new version:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!rm -rf dataset/
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">dataset</span><span class="o">/</span>
 </pre></div>
 </div>
 </div>
@@ -627,13 +627,13 @@ SOLVER:
 <p>To load data, we first define a list the names of data files:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>file_names = []
-for modality in range(1, cfg.DATASET.NUM_MODALITIES + 1):
-    file_names.append(f&quot;{modality}_tr.csv&quot;)
-    file_names.append(f&quot;{modality}_lbl_tr.csv&quot;)
-    file_names.append(f&quot;{modality}_te.csv&quot;)
-    file_names.append(f&quot;{modality}_lbl_te.csv&quot;)
-    file_names.append(f&quot;{modality}_feat_name.csv&quot;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">modality</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">NUM_MODALITIES</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">modality</span><span class="si">}</span><span class="s2">_tr.csv&quot;</span><span class="p">)</span>
+    <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">modality</span><span class="si">}</span><span class="s2">_lbl_tr.csv&quot;</span><span class="p">)</span>
+    <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">modality</span><span class="si">}</span><span class="s2">_te.csv&quot;</span><span class="p">)</span>
+    <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">modality</span><span class="si">}</span><span class="s2">_lbl_te.csv&quot;</span><span class="p">)</span>
+    <span class="n">file_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">modality</span><span class="si">}</span><span class="s2">_feat_name.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -642,22 +642,22 @@ for modality in range(1, cfg.DATASET.NUM_MODALITIES + 1):
 <p>[Estimated running time] 20s</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-from kale.loaddata.multiomics_datasets import SparseMultiomicsDataset
-from kale.prepdata.tabular_transform import ToOneHotEncoding, ToTensor
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.multiomics_datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparseMultiomicsDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.prepdata.tabular_transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToOneHotEncoding</span><span class="p">,</span> <span class="n">ToTensor</span>
 
-multiomics_data = SparseMultiomicsDataset(
-    root=cfg.DATASET.ROOT,
-    raw_file_names=file_names,
-    num_modalities=cfg.DATASET.NUM_MODALITIES,
-    num_classes=cfg.DATASET.NUM_CLASSES,
-    edge_per_node=cfg.MODEL.EDGE_PER_NODE,
-    url=cfg.DATASET.URL,
-    random_split=cfg.DATASET.RANDOM_SPLIT,
-    equal_weight=cfg.MODEL.EQUAL_WEIGHT,
-    pre_transform=ToTensor(dtype=torch.float),
-    target_pre_transform=ToOneHotEncoding(dtype=torch.float),
-)
+<span class="n">multiomics_data</span> <span class="o">=</span> <span class="n">SparseMultiomicsDataset</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">ROOT</span><span class="p">,</span>
+    <span class="n">raw_file_names</span><span class="o">=</span><span class="n">file_names</span><span class="p">,</span>
+    <span class="n">num_modalities</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">NUM_MODALITIES</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">NUM_CLASSES</span><span class="p">,</span>
+    <span class="n">edge_per_node</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">EDGE_PER_NODE</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">URL</span><span class="p">,</span>
+    <span class="n">random_split</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DATASET</span><span class="o">.</span><span class="n">RANDOM_SPLIT</span><span class="p">,</span>
+    <span class="n">equal_weight</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">EQUAL_WEIGHT</span><span class="p">,</span>
+    <span class="n">pre_transform</span><span class="o">=</span><span class="n">ToTensor</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">),</span>
+    <span class="n">target_pre_transform</span><span class="o">=</span><span class="n">ToOneHotEncoding</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">),</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -673,7 +673,7 @@ Done!
 <p>Inspect the dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(multiomics_data)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">multiomics_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -699,9 +699,9 @@ Done!
 <p>To initialize the model, we firstly call <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> from <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from model import MogonetModel
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">model</span><span class="w"> </span><span class="kn">import</span> <span class="n">MogonetModel</span>
 
-mogonet_model = MogonetModel(cfg, dataset=multiomics_data)
+<span class="n">mogonet_model</span> <span class="o">=</span> <span class="n">MogonetModel</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="n">multiomics_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -709,7 +709,7 @@ mogonet_model = MogonetModel(cfg, dataset=multiomics_data)
 <p>Visualize the model architecture:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(mogonet_model)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mogonet_model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -760,16 +760,16 @@ mogonet_model = MogonetModel(cfg, dataset=multiomics_data)
 <p>We can define the trainer of pretraining stage by:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-network = mogonet_model.get_model(pretrain=True)
-trainer_pretrain = pl.Trainer(
-    max_epochs=cfg.SOLVER.MAX_EPOCHS_PRETRAIN,
-    default_root_dir=cfg.OUTPUT.OUT_DIR,
-    accelerator=&quot;auto&quot;,
-    devices=&quot;auto&quot;,
-    enable_model_summary=False,
-)
+<span class="n">network</span> <span class="o">=</span> <span class="n">mogonet_model</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">pretrain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">trainer_pretrain</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCHS_PRETRAIN</span><span class="p">,</span>
+    <span class="n">default_root_dir</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">OUTPUT</span><span class="o">.</span><span class="n">OUT_DIR</span><span class="p">,</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">devices</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">enable_model_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -792,7 +792,7 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <p>[Estimated running time] 15s for 100 epochs</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer_pretrain.fit(network)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer_pretrain</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -812,15 +812,15 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <p>We define the trainer of multimodal training by:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>network = mogonet_model.get_model(pretrain=False)
-trainer = pl.Trainer(
-    max_epochs=cfg.SOLVER.MAX_EPOCHS,
-    default_root_dir=cfg.OUTPUT.OUT_DIR,
-    accelerator=&quot;auto&quot;,
-    devices=&quot;auto&quot;,
-    enable_model_summary=False,
-    log_every_n_steps=1,
-)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">network</span> <span class="o">=</span> <span class="n">mogonet_model</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">pretrain</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCHS</span><span class="p">,</span>
+    <span class="n">default_root_dir</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">OUTPUT</span><span class="o">.</span><span class="n">OUT_DIR</span><span class="p">,</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">devices</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">enable_model_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">log_every_n_steps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -837,7 +837,7 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <p>[Estimated running time] 1 min for 500 epochs</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer.fit(network)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -857,7 +857,7 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <p>Once training is complete, we evaluate the model on the test set using <code class="docutils literal notranslate"><span class="pre">trainer.test()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>trainer.test(network)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -888,15 +888,15 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <p>[<strong>NOTE</strong>] The final results may be different from what they should be because we only train the model for a few epochs to reduce waiting time in this tutorial.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.interpret.model_weights import select_top_features_by_masking
-import pytorch_lightning as pl
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.interpret.model_weights</span><span class="w"> </span><span class="kn">import</span> <span class="n">select_top_features_by_masking</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 
-trainer_biomarker = pl.Trainer(
-    max_epochs=cfg.SOLVER.MAX_EPOCHS,
-    accelerator=&quot;auto&quot;,
-    devices=&quot;auto&quot;,
-    enable_progress_bar=False,
-)
+<span class="n">trainer_biomarker</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">MAX_EPOCHS</span><span class="p">,</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">devices</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">enable_progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -919,9 +919,9 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 <p>To supress the verbose messages in the following experiments:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import logging
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
-logging.getLogger(&quot;pytorch_lightning&quot;).setLevel(logging.ERROR)
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;pytorch_lightning&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -930,15 +930,15 @@ logging.getLogger(&quot;pytorch_lightning&quot;).setLevel(logging.ERROR)
 <p>[Estimated running time] Because the following block will train the model for 2,503 times for BRCA dataset, the following block may take about 6 minutes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>f1_key = &quot;F1&quot; if multiomics_data.num_classes == 2 else &quot;F1 macro&quot;
-df_featimp_top = select_top_features_by_masking(
-    trainer=trainer_biomarker,
-    model=network,
-    dataset=multiomics_data,
-    metric=f1_key,
-    num_top_feats=30,
-    verbose=False,
-)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f1_key</span> <span class="o">=</span> <span class="s2">&quot;F1&quot;</span> <span class="k">if</span> <span class="n">multiomics_data</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;F1 macro&quot;</span>
+<span class="n">df_featimp_top</span> <span class="o">=</span> <span class="n">select_top_features_by_masking</span><span class="p">(</span>
+    <span class="n">trainer</span><span class="o">=</span><span class="n">trainer_biomarker</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">network</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="n">multiomics_data</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="n">f1_key</span><span class="p">,</span>
+    <span class="n">num_top_feats</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -951,9 +951,9 @@ df_featimp_top = select_top_features_by_masking(
 <p>Print the most important features:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(&quot;{:&gt;4}\t{:&lt;20}\t{:&gt;5}\t{}&quot;.format(&quot;Rank&quot;, &quot;Feature name&quot;, &quot;Omics&quot;, &quot;Importance&quot;))
-for rank, row in enumerate(df_featimp_top.itertuples(index=False), 1):
-    print(f&quot;{rank:&gt;4}\t{row.feat_name:&lt;20}\t{row.omics:&gt;5}\t{row.imp:.4f}&quot;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:&gt;4}</span><span class="se">\t</span><span class="si">{:&lt;20}</span><span class="se">\t</span><span class="si">{:&gt;5}</span><span class="se">\t</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Rank&quot;</span><span class="p">,</span> <span class="s2">&quot;Feature name&quot;</span><span class="p">,</span> <span class="s2">&quot;Omics&quot;</span><span class="p">,</span> <span class="s2">&quot;Importance&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df_featimp_top</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rank</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">feat_name</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">omics</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">imp</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

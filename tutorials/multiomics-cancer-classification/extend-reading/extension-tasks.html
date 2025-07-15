@@ -403,7 +403,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-explore-experiments-with-another-dataset">Task 2 - Explore experiments with another dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
             </nav>
@@ -420,13 +420,13 @@ document.write(`
 <h1>Extension Tasks<a class="headerlink" href="#extension-tasks" title="Link to this heading">#</a></h1>
 <section id="task-1-unimodal-v-s-multimodal">
 <h2>Task 1 - Unimodal v.s. Multimodal<a class="headerlink" href="#task-1-unimodal-v-s-multimodal" title="Link to this heading">#</a></h2>
-<p>Users can try to set the <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.NUM_MODALITIES=1</span></code> to try only using single mRNA experission for prediction and compare its results with the ones using all three modalities.</p>
+<p>Explore using only one modality, e.g., using only mRNA expression, for prediction. You may find the modifying <code class="docutils literal notranslate"><span class="pre">cfg.DATASET.NUM_MODALITIES</span></code> setting in configuration useful for this purpose. Then, compare its results with the ones using all three modalities.</p>
 </section>
-<section id="task-2-try-another-dataset">
-<h2>Task 2 - Try another dataset<a class="headerlink" href="#task-2-try-another-dataset" title="Link to this heading">#</a></h2>
-<p>To demonstrate the generalizability of the model, we also provide a dataset for Alzheimer’s Disease, <a class="reference external" href="https://www.synapse.org/Synapse:syn3219045"><strong>ROSMAP</strong></a> [1,2]
-Besides, we also provide a configuration file for <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/configs/ROSMAP.yaml"><code class="docutils literal notranslate"><span class="pre">configs/ROSMAP.yaml</span></code></a>.</p>
-<p>To try ROSMAP dataset, replace <code class="docutils literal notranslate"><span class="pre">&quot;experiments/BRCA.yaml&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;experiments/ROSMAP.yaml&quot;</span></code> in the following line under Configuration section and run the pipeline again.</p>
+<section id="task-2-explore-experiments-with-another-dataset">
+<h2>Task 2 - Explore experiments with another dataset<a class="headerlink" href="#task-2-explore-experiments-with-another-dataset" title="Link to this heading">#</a></h2>
+<p>An additional dataset for Alzheimer’s Disease, <a class="reference external" href="https://www.synapse.org/Synapse:syn3219045"><strong>ROSMAP</strong></a> [1,2], is provided for further demonstrating the reusability of the code.
+A configuration file for <strong>ROSMAP</strong>, named <a class="reference external" href="https://github.com/pykale/embc-mmai25/blob/main/tutorials/multiomics-cancer-classification/configs/ROSMAP.yaml"><code class="docutils literal notranslate"><span class="pre">configs/ROSMAP.yaml</span></code></a> has already been provided in the <code class="docutils literal notranslate"><span class="pre">./configs</span></code> folder.</p>
+<p>To explore experiments on ROSMAP dataset, replace <code class="docutils literal notranslate"><span class="pre">&quot;experiments/BRCA.yaml&quot;</span></code> with <code class="docutils literal notranslate"><span class="pre">&quot;experiments/ROSMAP.yaml&quot;</span></code> in the following line under <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/tutorial-cancer.html#configuration">Configuration</a> section and run the pipeline again.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;experiments/BRCA.yaml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -503,7 +503,7 @@ Besides, we also provide a configuration file for <strong>ROSMAP</strong>, named
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-unimodal-v-s-multimodal">Task 1 - Unimodal v.s. Multimodal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-another-dataset">Task 2 - Try another dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-explore-experiments-with-another-dataset">Task 2 - Explore experiments with another dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
   </nav></div>

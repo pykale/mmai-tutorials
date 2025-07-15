@@ -488,7 +488,7 @@ document.write(`
 <p>In this tutorial, we will use <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [1] to pretrain, fine-tune, evaluate, and interpret deep learning models on two low-cost, non-invasive data modalities: <strong>Chest X-ray (CXR)</strong> and <strong>12-lead Electrocardiogram (ECG)</strong>, for classifying individuals as <strong>healthy</strong> or having a <strong>cardiothoracic abnormality</strong>.</p>
 <p>We will work with a multimodal dataset derived from <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> [2,3] and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> [4], which contains approximately 50,000 paired CXR–ECG samples.</p>
 <p>This tutorial is based on the work of <a class="reference external" href="https://link.springer.com/chapter/10.1007/978-3-031-72378-0_28">Suvon et al. (MICCAI 2024)</a> [5], which proposed a tri-stream pretraining method using a <strong>Multimodal Variational Autoencoder (VAE)</strong> to learn both modality-specific and modality-shared representations for estimating <strong>Pulmonary Arterial Wedge Pressure (PAWP)</strong>—a key indicator of cardiac hemodynamics.</p>
-<p>The multimodal approach used in this tutorial involves <strong>hybrid fusion</strong>, where imaging (CXR) and ECG features are combined at both the feature and decision levels to improve classification performance.</p>
+<p>The multimodal approach used in this tutorial involves <strong>intermediate fusion</strong>, where imaging (CXR) and ECG features are combined at feature embedding level.</p>
 <p>The main tasks of this tutorial are:</p>
 <ul class="simple">
 <li><p>Load CXR and ECG data.</p></li>
@@ -521,11 +521,11 @@ document.write(`
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%%capture
-!pip install --quiet \
-    &quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot; \
-    torch-geometric==2.6.0 torch_sparse torch_scatter \
-    -f https://data.pyg.org/whl/torch-2.6.0+cu124.html
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">quiet</span> \
+    <span class="s2">&quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot;</span> \
+    <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span><span class="o">==</span><span class="mf">2.6.0</span> <span class="n">torch_sparse</span> <span class="n">torch_scatter</span> \
+    <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cu124</span><span class="o">.</span><span class="n">html</span>
 </pre></div>
 </div>
 </div>
@@ -542,10 +542,10 @@ document.write(`
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Connect with your google drive for data and model loading
-from google.colab import drive
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect with your google drive for data and model loading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">drive</span>
 
-drive.mount(&quot;/content/drive&quot;)
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s2">&quot;/content/drive&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -571,27 +571,27 @@ drive.mount(&quot;/content/drive&quot;)
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
-import site
-import sys
-import warnings
-import logging
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">site</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 
 
-# Disable warnings
-warnings.filterwarnings(&quot;ignore&quot;)
-os.environ[&quot;PYTHONWARNINGS&quot;] = &quot;ignore&quot;
+<span class="c1"># Disable warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
 
-# Suppress PyTorch Lightning logs
-logging.getLogger(&quot;pytorch_lightning&quot;).setLevel(logging.ERROR)
-logging.getLogger(&quot;pytorch_lightning.utilities.rank_zero&quot;).setLevel(logging.ERROR)
-logging.getLogger(&quot;pytorch_lightning.accelerators.cuda&quot;).setLevel(logging.ERROR)
+<span class="c1"># Suppress PyTorch Lightning logs</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;pytorch_lightning&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;pytorch_lightning.utilities.rank_zero&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;pytorch_lightning.accelerators.cuda&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 
-if &quot;google.colab&quot; in str(get_ipython()):
-    sys.path.insert(0, site.getusersitepackages())
-    !git clone -q --single-branch -b main https://github.com/pykale/mmai-tutorials
-    %cp -r /content/mmai-tutorials/tutorials/cardiac-hemodynamics-assessment/* /content/
-    %rm -r /content/mmai-tutorials
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">get_ipython</span><span class="p">()):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">getusersitepackages</span><span class="p">())</span>
+    <span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="o">-</span><span class="n">q</span> <span class="o">--</span><span class="n">single</span><span class="o">-</span><span class="n">branch</span> <span class="o">-</span><span class="n">b</span> <span class="n">main</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykale</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
+    <span class="o">%</span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">cardiac</span><span class="o">-</span><span class="n">hemodynamics</span><span class="o">-</span><span class="n">assessment</span><span class="o">/*</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span>
+    <span class="o">%</span><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">mmai</span><span class="o">-</span><span class="n">tutorials</span>
 </pre></div>
 </div>
 </div>
@@ -608,20 +608,20 @@ if &quot;google.colab&quot; in str(get_ipython()):
 This modular structure allows easy experiment tracking and customisation by simply editing the associated <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from config_pretrain import get_cfg_defaults
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config_pretrain</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
 
-cfg_PT = get_cfg_defaults()
-cfg_PT.merge_from_file(&quot;configs/pretraining_base.yml&quot;)
+<span class="n">cfg_PT</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>
+<span class="n">cfg_PT</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/pretraining_base.yml&quot;</span><span class="p">)</span>
 
-# ------ Hyperparameters to play with -----
-cfg_PT.MODEL.LATENT_DIM = 128
-cfg_PT.TRAIN.EPOCHS = 1
-cfg_PT.TRAIN.LAMBDA_IMAGE = 1
-cfg_PT.TRAIN.LAMBDA_SIGNAL = 10
-# User can change this to try different batch size.
-cfg_PT.DATA.BATCH_SIZE = 128
+<span class="c1"># ------ Hyperparameters to play with -----</span>
+<span class="n">cfg_PT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">LATENT_DIM</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">LAMBDA_IMAGE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">LAMBDA_SIGNAL</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># User can change this to try different batch size.</span>
+<span class="n">cfg_PT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
 
-print(cfg_PT)
+<span class="nb">print</span><span class="p">(</span><span class="n">cfg_PT</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -659,18 +659,18 @@ TRAIN:
 External YAML files like <code class="docutils literal notranslate"><span class="pre">experiments/finetune_base.yml</span></code> enable flexible adjustments for different downstream tasks or datasets.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from config_finetune import get_cfg_defaults
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">config_finetune</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cfg_defaults</span>
 
-cfg_FT = get_cfg_defaults()
-cfg_FT.merge_from_file(&quot;configs/finetune_base.yml&quot;)
+<span class="n">cfg_FT</span> <span class="o">=</span> <span class="n">get_cfg_defaults</span><span class="p">()</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">merge_from_file</span><span class="p">(</span><span class="s2">&quot;configs/finetune_base.yml&quot;</span><span class="p">)</span>
 
-# ------ Hyperparameters to play with -----
-cfg_FT.FT.EPOCHS = 10
-cfg_FT.FT.HIDDEN_DIM = 128
-# User can change this to try different batch size.
-cfg_FT.DATA.BATCH_SIZE = 32
+<span class="c1"># ------ Hyperparameters to play with -----</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">HIDDEN_DIM</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="c1"># User can change this to try different batch size.</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
 
-print(cfg_FT)
+<span class="nb">print</span><span class="p">(</span><span class="n">cfg_FT</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -741,35 +741,35 @@ To create a shortcut:
 <p><strong>Estimated runtime:</strong> 12 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># (OPTIONAL)
-# from kale.loaddata.signal_access import load_ecg_from_folder
-# from kale.loaddata.image_access import load_images_from_dir
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (OPTIONAL)</span>
+<span class="c1"># from kale.loaddata.signal_access import load_ecg_from_folder</span>
+<span class="c1"># from kale.loaddata.image_access import load_images_from_dir</span>
 
-# ecg_tensor = load_ecg_from_folder(&quot;/mimic-iv-ecg-diagnostic-electrocardiogram-matched-subset-1.0/&quot;, &quot;mimic_ecg_50K.csv&quot;)
-# cxr_tensor = load_images_from_dir(&quot;/physionet.org/files/mimic-cxr-jpg/2.0.0/&quot;, &quot;mimic_cxr_50K.csv&quot;)
+<span class="c1"># ecg_tensor = load_ecg_from_folder(&quot;/mimic-iv-ecg-diagnostic-electrocardiogram-matched-subset-1.0/&quot;, &quot;mimic_ecg_50K.csv&quot;)</span>
+<span class="c1"># cxr_tensor = load_images_from_dir(&quot;/physionet.org/files/mimic-cxr-jpg/2.0.0/&quot;, &quot;mimic_cxr_50K.csv&quot;)</span>
 
-# train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders( ecg_tensor, cxr_tensor)
+<span class="c1"># train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders( ecg_tensor, cxr_tensor)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-from kale.loaddata.signal_image_access import SignalImageDataset
-from kale.utils.seed import set_seed
-import random
-import numpy as np
-import torch
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.loaddata.signal_image_access</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignalImageDataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.utils.seed</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_seed</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 
-set_seed(cfg_PT.TRAIN.SEED)
+<span class="n">set_seed</span><span class="p">(</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">SEED</span><span class="p">)</span>
 
-ecg_tensor_PT = torch.load(cfg_PT.DATA.ECG_PATH, map_location=cfg_PT.TRAIN.DATA_DEVICE)
-cxr_tensor_PT = torch.load(cfg_PT.DATA.CXR_PATH, map_location=cfg_PT.TRAIN.DATA_DEVICE)
+<span class="n">ecg_tensor_PT</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">ECG_PATH</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">DATA_DEVICE</span><span class="p">)</span>
+<span class="n">cxr_tensor_PT</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CXR_PATH</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">DATA_DEVICE</span><span class="p">)</span>
 
-train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders(
-    ecg_tensor_PT, cxr_tensor_PT
-)
+<span class="n">train_dataset_PT</span><span class="p">,</span> <span class="n">val_dataset_PT</span> <span class="o">=</span> <span class="n">SignalImageDataset</span><span class="o">.</span><span class="n">prepare_data_loaders</span><span class="p">(</span>
+    <span class="n">ecg_tensor_PT</span><span class="p">,</span> <span class="n">cxr_tensor_PT</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -788,47 +788,47 @@ train_dataset_PT, val_dataset_PT = SignalImageDataset.prepare_data_loaders(
 <p><strong>Estimated runtime:</strong> 10 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-from torch.utils.data import TensorDataset, DataLoader, random_split
-import pandas as pd
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">random_split</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-# Set seed for reproducibility
-torch.manual_seed(cfg_FT.FT.SEED)
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">SEED</span><span class="p">)</span>
 
-# Load data
-ecg_tensor_FT = torch.load(cfg_FT.DATA.ECG_PATH, map_location=cfg_FT.DATA.DATA_DEVICE)
-cxr_tensor_FT = torch.load(cfg_FT.DATA.CXR_PATH, map_location=cfg_FT.DATA.DATA_DEVICE)
-label_df = pd.read_csv(cfg_FT.DATA.CSV_PATH)
-labels = torch.tensor(label_df[&quot;label&quot;].values, dtype=torch.long)
+<span class="c1"># Load data</span>
+<span class="n">ecg_tensor_FT</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">ECG_PATH</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATA_DEVICE</span><span class="p">)</span>
+<span class="n">cxr_tensor_FT</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CXR_PATH</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">DATA_DEVICE</span><span class="p">)</span>
+<span class="n">label_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">label_df</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
 
-# Combine tensors into a single dataset
-dataset = TensorDataset(cxr_tensor_FT, ecg_tensor_FT, labels)
+<span class="c1"># Combine tensors into a single dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">cxr_tensor_FT</span><span class="p">,</span> <span class="n">ecg_tensor_FT</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 
-# Split into train/val
-val_ratio = 0.2
-num_samples = len(dataset)
-num_val = int(val_ratio * num_samples)
-num_train = num_samples - num_val
+<span class="c1"># Split into train/val</span>
+<span class="n">val_ratio</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">num_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val_ratio</span> <span class="o">*</span> <span class="n">num_samples</span><span class="p">)</span>
+<span class="n">num_train</span> <span class="o">=</span> <span class="n">num_samples</span> <span class="o">-</span> <span class="n">num_val</span>
 
-train_dataset_FT, val_dataset_FT = random_split(
-    dataset,
-    [num_train, num_val],
-    generator=torch.Generator().manual_seed(cfg_FT.FT.SEED),
-)
+<span class="n">train_dataset_FT</span><span class="p">,</span> <span class="n">val_dataset_FT</span> <span class="o">=</span> <span class="n">random_split</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">num_train</span><span class="p">,</span> <span class="n">num_val</span><span class="p">],</span>
+    <span class="n">generator</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">SEED</span><span class="p">),</span>
+<span class="p">)</span>
 
-# DataLoaders
-train_loader_FT = DataLoader(
-    train_dataset_FT,
-    batch_size=cfg_FT.DATA.BATCH_SIZE,
-    shuffle=True,
-    num_workers=cfg_FT.DATA.NUM_WORKERS,
-)
-val_loader_FT = DataLoader(
-    val_dataset_FT,
-    batch_size=cfg_FT.DATA.BATCH_SIZE,
-    shuffle=False,
-    num_workers=cfg_FT.DATA.NUM_WORKERS,
-)
+<span class="c1"># DataLoaders</span>
+<span class="n">train_loader_FT</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train_dataset_FT</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">val_loader_FT</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">val_dataset_FT</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -896,42 +896,42 @@ This setup is optimised for clinical prediction tasks, such as binary or multi-l
 <p><strong>Estimated runtime:</strong> 2 minutes with 1 epoch</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pytorch_lightning as pl
-from kale.pipeline.multimodal_trainer import SignalImageTriStreamVAETrainer
-from kale.embed.multimodal_encoder import SignalImageVAE
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multimodal_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignalImageTriStreamVAETrainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.embed.multimodal_encoder</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignalImageVAE</span>
 
-model = SignalImageVAE(
-    image_input_channels=cfg_PT.MODEL.INPUT_DIM_CXR,
-    signal_input_dim=cfg_PT.MODEL.INPUT_DIM_ECG,
-    latent_dim=cfg_PT.MODEL.LATENT_DIM,
-)
+<span class="n">model</span> <span class="o">=</span> <span class="n">SignalImageVAE</span><span class="p">(</span>
+    <span class="n">image_input_channels</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">INPUT_DIM_CXR</span><span class="p">,</span>
+    <span class="n">signal_input_dim</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">INPUT_DIM_ECG</span><span class="p">,</span>
+    <span class="n">latent_dim</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">LATENT_DIM</span><span class="p">,</span>
+<span class="p">)</span>
 
-# PyKale trainer instance (all from config)
-pl_trainer = SignalImageTriStreamVAETrainer(
-    model=model,
-    train_dataset=train_dataset_PT,
-    val_dataset=val_dataset_PT,
-    batch_size=cfg_PT.DATA.BATCH_SIZE,
-    num_workers=cfg_PT.DATA.NUM_WORKERS,
-    lambda_image=cfg_PT.TRAIN.LAMBDA_IMAGE,
-    lambda_signal=cfg_PT.TRAIN.LAMBDA_SIGNAL,
-    lr=cfg_PT.TRAIN.LR,
-    annealing_epochs=cfg_PT.TRAIN.EPOCHS,
-    scale_factor=cfg_PT.TRAIN.SCALE_FACTOR,
-)
+<span class="c1"># PyKale trainer instance (all from config)</span>
+<span class="n">pl_trainer</span> <span class="o">=</span> <span class="n">SignalImageTriStreamVAETrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_dataset_PT</span><span class="p">,</span>
+    <span class="n">val_dataset</span><span class="o">=</span><span class="n">val_dataset_PT</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+    <span class="n">num_workers</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">DATA</span><span class="o">.</span><span class="n">NUM_WORKERS</span><span class="p">,</span>
+    <span class="n">lambda_image</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">LAMBDA_IMAGE</span><span class="p">,</span>
+    <span class="n">lambda_signal</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">LAMBDA_SIGNAL</span><span class="p">,</span>
+    <span class="n">lr</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">LR</span><span class="p">,</span>
+    <span class="n">annealing_epochs</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">EPOCHS</span><span class="p">,</span>
+    <span class="n">scale_factor</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">SCALE_FACTOR</span><span class="p">,</span>
+<span class="p">)</span>
 
-trainer = pl.Trainer(
-    max_epochs=cfg_PT.TRAIN.EPOCHS,
-    accelerator=cfg_PT.TRAIN.ACCELERATOR,
-    devices=cfg_PT.TRAIN.DEVICES,
-    log_every_n_steps=10,
-)
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">EPOCHS</span><span class="p">,</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">ACCELERATOR</span><span class="p">,</span>
+    <span class="n">devices</span><span class="o">=</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">DEVICES</span><span class="p">,</span>
+    <span class="n">log_every_n_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
 
-trainer.fit(pl_trainer)
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pl_trainer</span><span class="p">)</span>
 
-# Save model state dict
-torch.save(model.state_dict(), cfg_PT.TRAIN.SAVE_PATH)
-print(f&quot;Saved model state dictionary to &#39;{cfg_PT.TRAIN.SAVE_PATH}&#39;&quot;)
+<span class="c1"># Save model state dict</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">SAVE_PATH</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved model state dictionary to &#39;</span><span class="si">{</span><span class="n">cfg_PT</span><span class="o">.</span><span class="n">TRAIN</span><span class="o">.</span><span class="n">SAVE_PATH</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -967,42 +967,42 @@ print(f&quot;Saved model state dictionary to &#39;{cfg_PT.TRAIN.SAVE_PATH}&#39;&
 <p><strong>Estimated runtime:</strong> 2 minute with 10 epoch</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import torch
-import pytorch_lightning as pl
-from kale.embed.multimodal_encoder import SignalImageVAE
-from kale.pipeline.multimodal_trainer import SignalImageFineTuningTrainer
-from kale.utils.remap_model_parameters import remap_state_dict_keys
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.embed.multimodal_encoder</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignalImageVAE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.multimodal_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignalImageFineTuningTrainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">kale.utils.remap_model_parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">remap_state_dict_keys</span>
 
-# Load and remap checkpoint
-checkpoint = torch.load(cfg_FT.FT.CKPT_PATH, map_location=cfg_FT.FT.DEVICE)
-checkpoint = remap_state_dict_keys(checkpoint)
+<span class="c1"># Load and remap checkpoint</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">CKPT_PATH</span><span class="p">,</span> <span class="n">map_location</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">remap_state_dict_keys</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">)</span>
 
-pretrained_mvae = SignalImageVAE(
-    image_input_channels=cfg_FT.MODEL.INPUT_IMAGE_CHANNELS,
-    signal_input_dim=cfg_FT.MODEL.INPUT_DIM_ECG,
-    latent_dim=cfg_FT.MODEL.LATENT_DIM,
-)
-pretrained_mvae.load_state_dict(checkpoint, strict=False)
-pretrained_mvae.to(cfg_FT.FT.DEVICE)
-pretrained_mvae.eval()
+<span class="n">pretrained_mvae</span> <span class="o">=</span> <span class="n">SignalImageVAE</span><span class="p">(</span>
+    <span class="n">image_input_channels</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">INPUT_IMAGE_CHANNELS</span><span class="p">,</span>
+    <span class="n">signal_input_dim</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">INPUT_DIM_ECG</span><span class="p">,</span>
+    <span class="n">latent_dim</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">LATENT_DIM</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">pretrained_mvae</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pretrained_mvae</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+<span class="n">pretrained_mvae</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
-model_pl = SignalImageFineTuningTrainer(
-    pretrained_model=pretrained_mvae,
-    num_classes=cfg_FT.FT.NUM_CLASSES,
-    lr=cfg_FT.FT.LR,
-    hidden_dim=cfg_FT.FT.HIDDEN_DIM,
-)
+<span class="n">model_pl</span> <span class="o">=</span> <span class="n">SignalImageFineTuningTrainer</span><span class="p">(</span>
+    <span class="n">pretrained_model</span><span class="o">=</span><span class="n">pretrained_mvae</span><span class="p">,</span>
+    <span class="n">num_classes</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">NUM_CLASSES</span><span class="p">,</span>
+    <span class="n">lr</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">LR</span><span class="p">,</span>
+    <span class="n">hidden_dim</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">HIDDEN_DIM</span><span class="p">,</span>
+<span class="p">)</span>
 
-trainer = pl.Trainer(
-    max_epochs=cfg_FT.FT.EPOCHS,
-    accelerator=cfg_FT.FT.ACCELERATOR,
-    devices=cfg_FT.FT.DEVICES,
-    log_every_n_steps=10,
-    enable_checkpointing=False,
-    logger=False,
-)
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">EPOCHS</span><span class="p">,</span>
+    <span class="n">accelerator</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">ACCELERATOR</span><span class="p">,</span>
+    <span class="n">devices</span><span class="o">=</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">FT</span><span class="o">.</span><span class="n">DEVICES</span><span class="p">,</span>
+    <span class="n">log_every_n_steps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">enable_checkpointing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">logger</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 
-trainer.fit(model_pl, train_dataloaders=train_loader_FT, val_dataloaders=val_loader_FT)
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model_pl</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_loader_FT</span><span class="p">,</span> <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_loader_FT</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1039,22 +1039,22 @@ trainer.fit(model_pl, train_dataloaders=train_loader_FT, val_dataloaders=val_loa
 <p>The metrics are printed in a tabulated format using the <code class="docutils literal notranslate"><span class="pre">tabulate</span></code> library for clear presentation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from tabulate import tabulate
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
 
-# Get validation metrics
-val_metrics = trainer.callback_metrics
-acc = val_metrics[&quot;val_acc&quot;].item() if &quot;val_acc&quot; in val_metrics else float(&quot;nan&quot;)
-auc = val_metrics[&quot;val_auroc&quot;].item() if &quot;val_auroc&quot; in val_metrics else float(&quot;nan&quot;)
-mcc = val_metrics[&quot;val_mcc&quot;].item() if &quot;val_mcc&quot; in val_metrics else float(&quot;nan&quot;)
+<span class="c1"># Get validation metrics</span>
+<span class="n">val_metrics</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">callback_metrics</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">val_metrics</span><span class="p">[</span><span class="s2">&quot;val_acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;val_acc&quot;</span> <span class="ow">in</span> <span class="n">val_metrics</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
+<span class="n">auc</span> <span class="o">=</span> <span class="n">val_metrics</span><span class="p">[</span><span class="s2">&quot;val_auroc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;val_auroc&quot;</span> <span class="ow">in</span> <span class="n">val_metrics</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
+<span class="n">mcc</span> <span class="o">=</span> <span class="n">val_metrics</span><span class="p">[</span><span class="s2">&quot;val_mcc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;val_mcc&quot;</span> <span class="ow">in</span> <span class="n">val_metrics</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
 
-# Print metrics
-table_data = [
-    [&quot;Accuracy&quot;, f&quot;{acc:.3f}&quot;],
-    [&quot;AUROC&quot;, f&quot;{auc:.3f}&quot;],
-    [&quot;MCC&quot;, f&quot;{mcc:.3f}&quot;],
-]
-print(&quot;\n=== Validation Summary ===&quot;)
-print(tabulate(table_data, headers=[&quot;Metric&quot;, &quot;Value&quot;], tablefmt=&quot;fancy_grid&quot;))
+<span class="c1"># Print metrics</span>
+<span class="n">table_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;AUROC&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;MCC&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mcc</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Validation Summary ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">table_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Metric&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;fancy_grid&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1081,34 +1081,34 @@ This method helps identify which regions in each modality, such as specific wave
 <p><strong>Estimated runtime:</strong> 10 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from kale.interpret.signal_image_attribution import multimodal_signal_image_attribution
-import matplotlib.pyplot as plt
-import numpy as np
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.interpret.signal_image_attribution</span><span class="w"> </span><span class="kn">import</span> <span class="n">multimodal_signal_image_attribution</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-# User can change this to try different ECG and CXR interpretation configaration to play with
-cfg_FT.INTERPRET.ECG_THRESHOLD = 0.75
-cfg_FT.INTERPRET.SAMPLE_IDX = 3
-cfg_FT.INTERPRET.ZOOM_RANGE = [3.5, 4]
-cfg_FT.INTERPRET.CXR_THRESHOLD = 0.75
-
-
-sample_idx = cfg_FT.INTERPRET.SAMPLE_IDX
-zoom_range = tuple(cfg_FT.INTERPRET.ZOOM_RANGE)
-ecg_threshold = cfg_FT.INTERPRET.ECG_THRESHOLD
-cxr_threshold = cfg_FT.INTERPRET.CXR_THRESHOLD
-lead_number = cfg_FT.MODEL.NUM_LEADS
-sampling_rate = cfg_FT.INTERPRET.SAMPLING_RATE
+<span class="c1"># User can change this to try different ECG and CXR interpretation configaration to play with</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">ECG_THRESHOLD</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">SAMPLE_IDX</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">ZOOM_RANGE</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">CXR_THRESHOLD</span> <span class="o">=</span> <span class="mf">0.75</span>
 
 
-# Run interpretation
-result = multimodal_signal_image_attribution(
-    last_fold_model=model_pl,
-    last_val_loader=val_loader_FT,
-    sample_idx=sample_idx,
-    signal_threshold=ecg_threshold,
-    image_threshold=cxr_threshold,
-    zoom_range=zoom_range,
-)
+<span class="n">sample_idx</span> <span class="o">=</span> <span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">SAMPLE_IDX</span>
+<span class="n">zoom_range</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">ZOOM_RANGE</span><span class="p">)</span>
+<span class="n">ecg_threshold</span> <span class="o">=</span> <span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">ECG_THRESHOLD</span>
+<span class="n">cxr_threshold</span> <span class="o">=</span> <span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">CXR_THRESHOLD</span>
+<span class="n">lead_number</span> <span class="o">=</span> <span class="n">cfg_FT</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">NUM_LEADS</span>
+<span class="n">sampling_rate</span> <span class="o">=</span> <span class="n">cfg_FT</span><span class="o">.</span><span class="n">INTERPRET</span><span class="o">.</span><span class="n">SAMPLING_RATE</span>
+
+
+<span class="c1"># Run interpretation</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">multimodal_signal_image_attribution</span><span class="p">(</span>
+    <span class="n">last_fold_model</span><span class="o">=</span><span class="n">model_pl</span><span class="p">,</span>
+    <span class="n">last_val_loader</span><span class="o">=</span><span class="n">val_loader_FT</span><span class="p">,</span>
+    <span class="n">sample_idx</span><span class="o">=</span><span class="n">sample_idx</span><span class="p">,</span>
+    <span class="n">signal_threshold</span><span class="o">=</span><span class="n">ecg_threshold</span><span class="p">,</span>
+    <span class="n">image_threshold</span><span class="o">=</span><span class="n">cxr_threshold</span><span class="p">,</span>
+    <span class="n">zoom_range</span><span class="o">=</span><span class="n">zoom_range</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1116,40 +1116,40 @@ result = multimodal_signal_image_attribution(
 <p><strong>Full ECG View:</strong> Displays attribution across the full 12-lead ECG signal. A percentile-based threshold (e.g., top 25%) is applied to highlight segments with the highest contribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(figsize=(12, 5))
-fig.patch.set_facecolor(&quot;white&quot;)
-ax.set_facecolor(&quot;white&quot;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 
-# Plot the full ECG waveform
-ax.plot(
-    result[&quot;full_time&quot;],
-    result[&quot;signal_waveform_np&quot;][: result[&quot;full_length&quot;]],
-    color=&quot;black&quot;,
-    linewidth=1,
-    label=&quot;ECG Waveform&quot;,
-)
+<span class="c1"># Plot the full ECG waveform</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;full_time&quot;</span><span class="p">],</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;signal_waveform_np&quot;</span><span class="p">][:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;full_length&quot;</span><span class="p">]],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ECG Waveform&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
-for idx in result[&quot;important_indices_full&quot;]:
-    stretch_start = max(0, idx - 6)
-    stretch_end = min(result[&quot;full_length&quot;], idx + 6 + 1)
-    ax.plot(
-        result[&quot;full_time&quot;][stretch_start:stretch_end],
-        result[&quot;signal_waveform_np&quot;][stretch_start:stretch_end],
-        color=&quot;red&quot;,
-        linewidth=2,
-    )
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;important_indices_full&quot;</span><span class="p">]:</span>
+    <span class="n">stretch_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">stretch_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;full_length&quot;</span><span class="p">],</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;full_time&quot;</span><span class="p">][</span><span class="n">stretch_start</span><span class="p">:</span><span class="n">stretch_end</span><span class="p">],</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;signal_waveform_np&quot;</span><span class="p">][</span><span class="n">stretch_start</span><span class="p">:</span><span class="n">stretch_end</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
 
-ax.set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
-ax.set_ylabel(&quot;Amplitude&quot;, fontsize=&quot;x-large&quot;)
-ax.set_title(&quot;Full ECG with Important Regions&quot;, fontsize=&quot;x-large&quot;)
-ax.set_xticks(np.linspace(0, 10, 11))
-ax.set_xlim([0, 10])
-ax.tick_params(axis=&quot;x&quot;, labelsize=&quot;large&quot;)
-ax.tick_params(axis=&quot;y&quot;, labelsize=&quot;large&quot;)
-ax.legend([&quot;ECG Waveform&quot;, &quot;Important Regions&quot;], fontsize=&quot;medium&quot;)
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-large&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-large&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Full ECG with Important Regions&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-large&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="s2">&quot;large&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;ECG Waveform&quot;</span><span class="p">,</span> <span class="s2">&quot;Important Regions&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;medium&quot;</span><span class="p">)</span>
 
-plt.tight_layout()
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1160,43 +1160,43 @@ plt.show()
 <p><strong>Zoomed-In ECG Segment:</strong> Focuses on a specific time window (e.g., 3 to 4 seconds) for fine-grained inspection of high-attribution waveform regions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(figsize=(12, 5))
-fig.patch.set_facecolor(&quot;white&quot;)
-ax.set_facecolor(&quot;white&quot;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 
-# Plot zoomed-in ECG segment
-ax.plot(
-    result[&quot;zoom_time&quot;],
-    result[&quot;segment_signal_waveform&quot;],
-    color=&quot;black&quot;,
-    linewidth=3,
-    label=&quot;ECG Waveform&quot;,
-)
-
-
-for idx in result[&quot;important_indices_zoom&quot;]:
-    stretch_start = max(0, idx - 6)
-    stretch_end = min(len(result[&quot;segment_signal_waveform&quot;]), idx + 6 + 1)
-    ax.plot(
-        result[&quot;zoom_time&quot;][stretch_start:stretch_end],
-        result[&quot;segment_signal_waveform&quot;][stretch_start:stretch_end],
-        color=&quot;red&quot;,
-        linewidth=6,
-    )
+<span class="c1"># Plot zoomed-in ECG segment</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_time&quot;</span><span class="p">],</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;segment_signal_waveform&quot;</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ECG Waveform&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
 
-ax.set_xticks(np.linspace(result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;], 11))
-ax.set_xlim([result[&quot;zoom_start_sec&quot;], result[&quot;zoom_end_sec&quot;]])
-ax.set_yticks([])
-ax.set_xlabel(&quot;Time (seconds)&quot;, fontsize=&quot;x-large&quot;)
-ax.set_ylabel(&quot;&quot;)
-ax.set_title(
-    f&#39;Zoomed-In ECG Segment ({result[&quot;zoom_start_sec&quot;]:.2f}s – {result[&quot;zoom_end_sec&quot;]:.2f}s)&#39;,
-    fontsize=&quot;x-large&quot;,
-)
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;important_indices_zoom&quot;</span><span class="p">]:</span>
+    <span class="n">stretch_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">stretch_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;segment_signal_waveform&quot;</span><span class="p">]),</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_time&quot;</span><span class="p">][</span><span class="n">stretch_start</span><span class="p">:</span><span class="n">stretch_end</span><span class="p">],</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;segment_signal_waveform&quot;</span><span class="p">][</span><span class="n">stretch_start</span><span class="p">:</span><span class="n">stretch_end</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="p">)</span>
 
-plt.tight_layout()
-plt.show()
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_start_sec&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_end_sec&quot;</span><span class="p">],</span> <span class="mi">11</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_start_sec&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_end_sec&quot;</span><span class="p">]])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-large&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;Zoomed-In ECG Segment (</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_start_sec&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">s – </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;zoom_end_sec&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">s)&#39;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-large&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1207,43 +1207,43 @@ plt.show()
 <p><strong>CXR Attribution Map:</strong> Shows a heatmap over the input CXR image, with highlighted areas corresponding to regions above a configurable percentile threshold (e.g., top 25%). This helps reveal where the model focused attention in the spatial domain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x_pts = result[&quot;x_pts&quot;]
-y_pts = result[&quot;y_pts&quot;]
-importance_pts = result[&quot;importance_pts&quot;]
-cxr_thresh = result[&quot;image_threshold&quot;]
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_pts</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;x_pts&quot;</span><span class="p">]</span>
+<span class="n">y_pts</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;y_pts&quot;</span><span class="p">]</span>
+<span class="n">importance_pts</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;importance_pts&quot;</span><span class="p">]</span>
+<span class="n">cxr_thresh</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;image_threshold&quot;</span><span class="p">]</span>
 
-fig, ax = plt.subplots(figsize=(6, 6))
-fig.patch.set_facecolor(&quot;white&quot;)
-ax.set_facecolor(&quot;white&quot;)
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 
-# Show base CXR image
-ax.imshow(result[&quot;image_np&quot;], cmap=&quot;gray&quot;, alpha=1)
+<span class="c1"># Show base CXR image</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;image_np&quot;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-# Overlay attribution points
-sc = ax.scatter(
-    x_pts,
-    y_pts,
-    c=importance_pts,
-    cmap=&quot;summer&quot;,
-    marker=&quot;x&quot;,
-    s=150,
-    vmin=cxr_thresh,
-    vmax=1.0,
-    alpha=0.8,
-    linewidths=0.7,
-    edgecolor=&quot;black&quot;,
-)
+<span class="c1"># Overlay attribution points</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x_pts</span><span class="p">,</span>
+    <span class="n">y_pts</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">importance_pts</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;summer&quot;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="n">cxr_thresh</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Add colorbar for importance
-cbar = plt.colorbar(sc, ax=ax, fraction=0.04, pad=0.04)
-cbar.set_label(f&quot;Importance ({cxr_thresh:.2f}–1.00)&quot;)
+<span class="c1"># Add colorbar for importance</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Importance (</span><span class="si">{</span><span class="n">cxr_thresh</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">–1.00)&quot;</span><span class="p">)</span>
 
-# Final formatting
-ax.axis(&quot;off&quot;)
-ax.set_title(&quot;CXR: Important Regions&quot;, fontsize=&quot;x-large&quot;)
+<span class="c1"># Final formatting</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;CXR: Important Regions&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-large&quot;</span><span class="p">)</span>
 
-plt.tight_layout()
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

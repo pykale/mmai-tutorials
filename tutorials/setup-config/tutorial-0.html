@@ -440,7 +440,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-link-colab-runtime-storage-to-google-drive">(Optional) Link Colab Runtime Storage to Google Drive</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configuration-using-yml-files">Step 2: Configuration using .yml files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-file-organization-and-configuration">Step 2: File Organization and Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure">File Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-using-yml-files">Configuration Using .yml Files</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -515,8 +519,10 @@ document.write(`
 </div>
 </section>
 </section>
-<section id="step-2-configuration-using-yml-files">
-<h2>Step 2: Configuration using .yml files<a class="headerlink" href="#step-2-configuration-using-yml-files" title="Link to this heading">#</a></h2>
+<section id="step-2-file-organization-and-configuration">
+<h2>Step 2: File Organization and Configuration<a class="headerlink" href="#step-2-file-organization-and-configuration" title="Link to this heading">#</a></h2>
+<section id="file-structure">
+<h3>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading">#</a></h3>
 <p>Click the folder icon on the left sidebar to open the file explorer. You should see a directory structure below:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial-0.ipynb
     ├───config.py
@@ -525,58 +531,28 @@ document.write(`
     │   ├───alternative.yml
 </pre></div>
 </div>
-<p>The other tutorials will have similar directory structures, with additional files as shown below:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
+<p>The other tutorials have the similar standardized directory structure, with additional files as shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial-**.ipynb
+    ├───model.py
     ├───config.py
     ├───configs
     │   ├───base.yml
     │   ├───**.yml
-    ├───model.py
-    ├───models
-    │   ├───**.pt
-    ├───data
-    │   ├───**.csv
-    │   ├───**.**
     ├───images
     │   ├───**.png
     │   ├───**.jpg
-    ├───**.py
+    ├───helpers
+    │   ├───**.py
+    ├───extend-reading
+    │   ├───**.md
 </pre></div>
 </div>
 <!-- The tutorial materials are organized into a Jupyter Book comprising four chapters. Each chapter is prepared in an accessible and executable Jupyter notebook corresponds to a specific biomedical application. You’ll find a rocket icon <i class="fas fa-rocket"></i> near the top mid-right of each executable page. We recommend first reviewing the content in your browser (HTML format), then launching the corresponding notebook, preferably in Google Colab, by clicking the rocket icon (via <i class="fas fa-rocket"></i>) to run and experiment with the code.
-
-The tutorials are organized as standardized file structure. The common file structure of a tutorial is shown below:
-
-```text
-    ├───tutorial.ipynb
-    ├───config.py
-    ├───configs
-    │   ├───base.yml
-    │   ├───**.yml
-```
-
-Some tutorials may also include additional resources. A more comprehensive file structure is shown below:
-
-```text
-    ├───tutorial.ipynb
-    ├───config.py
-    ├───configs
-    │   ├───base.yml
-    │   ├───**.yml
-    |───extend-reading
-    │   ├───**.md
-    ├───model.py
-    ├───models
-    │   ├───**.pt
-    ├───data
-    │   ├───**.csv
-    │   ├───**.**
-    ├───images
-    │   ├───**.png
-    │   ├───**.jpg
-    ├───**.py
-``` -->
-<p>The <code class="docutils literal notranslate"><span class="pre">config.py</span></code> file contains the default configuration settings for the tutorial. The default configurations defined in the toy <a class="reference download internal" download="" href="../../_downloads/df95f600bac9e6be3f04898e5b3a773e/config.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></span></a> file for this tutorial are as follows:</p>
+-->
+</section>
+<section id="configuration-using-yml-files">
+<h3>Configuration Using .yml Files<a class="headerlink" href="#configuration-using-yml-files" title="Link to this heading">#</a></h3>
+<p>As shown in the file structure above, each tutorial has a <code class="docutils literal notranslate"><span class="pre">config.py</span></code> script that defines the default configuration settings. The base configurations defined in the <a class="reference download internal" download="" href="../../_downloads/df95f600bac9e6be3f04898e5b3a773e/config.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">config.py</span></code></span></a> file for this toy tutorial are as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_C</span> <span class="o">=</span> <span class="n">CfgNode</span><span class="p">()</span>
 
 <span class="c1"># Dataset configuration</span>
@@ -591,7 +567,7 @@ Some tutorials may also include additional resources. A more comprehensive file 
 <span class="n">_C</span><span class="o">.</span><span class="n">MODEL</span><span class="o">.</span><span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;MyModel&quot;</span>
 </pre></div>
 </div>
-<p>These default values can be overridden by the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files in the <code class="docutils literal notranslate"><span class="pre">configs</span></code> directory. Run the following code cell to load the configuration <code class="docutils literal notranslate"><span class="pre">base.yml</span></code> to override the default <code class="docutils literal notranslate"><span class="pre">MODEL.NAME</span></code> value in the <code class="docutils literal notranslate"><span class="pre">config.py</span></code> file.</p>
+<p>These default values can be overridden by the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files in the <code class="docutils literal notranslate"><span class="pre">./configs</span></code> directory. Run the following code cell to load the configuration <code class="docutils literal notranslate"><span class="pre">base.yml</span></code> to override the default <code class="docutils literal notranslate"><span class="pre">MODEL.NAME</span></code> value in the <code class="docutils literal notranslate"><span class="pre">config.py</span></code> file.</p>
 <!-- ### Configuration
 
 As shown in the file structure above, each tutorial has a `config.py` script that defines the base configuration settings. These settings can be customized or overridden using external `.yml` files located in the `configs` directory. The configuration system allows for easy parameter tuning and reproducibility across different runs of the tutorials.
@@ -629,6 +605,7 @@ Please refer to the provided configuration files for details on how to customize
 </div>
 <p>You can see that both <code class="docutils literal notranslate"><span class="pre">DATASET.DATA_DIR</span></code> and <code class="docutils literal notranslate"><span class="pre">MODEL.NAME</span></code> values have been overridden to <code class="docutils literal notranslate"><span class="pre">/data</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;Transformer&quot;</span></code> respectively as specified in the <code class="docutils literal notranslate"><span class="pre">alternative.yml</span></code> file.</p>
 <p>The configuration system allows running the tutorials with different settings without modifying the core code, and therefore enables reproducibility and reusability of the code across different experiments.</p>
+</section>
 </section>
 </section>
 
@@ -703,7 +680,11 @@ Please refer to the provided configuration files for details on how to customize
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-link-colab-runtime-storage-to-google-drive">(Optional) Link Colab Runtime Storage to Google Drive</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configuration-using-yml-files">Step 2: Configuration using .yml files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-file-organization-and-configuration">Step 2: File Organization and Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure">File Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-using-yml-files">Configuration Using .yml Files</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

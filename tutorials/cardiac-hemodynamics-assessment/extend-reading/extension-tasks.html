@@ -402,9 +402,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-different-model-interpretation-settings-for-ecg">Task 1 - Explore different model interpretation settings for ECG</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-different-model-interpretation-settings-for-cxr">Task 2 - Try different model interpretation settings for CXR</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-try-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">Task 3 - Try pre-training with full 50K paired CXR-ECG data (Home task with high resources)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-different-model-interpretation-settings-for-cxr-and-ecg">Task 1 - Explore different model interpretation settings for CXR and ECG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-zoom-into-specific-regions-of-the-input-ecg">Task 2 - Zoom into specific regions of the input ECG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-explore-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">Task 3 - Explore pre-training with full 50K paired CXR-ECG data (Home task with high resources)</a></li>
 </ul>
             </nav>
         </div>
@@ -418,19 +418,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="extension-tasks">
 <h1>Extension Tasks<a class="headerlink" href="#extension-tasks" title="Link to this heading">#</a></h1>
-<section id="task-1-explore-different-model-interpretation-settings-for-ecg">
-<h2>Task 1 - Explore different model interpretation settings for ECG<a class="headerlink" href="#task-1-explore-different-model-interpretation-settings-for-ecg" title="Link to this heading">#</a></h2>
-<p>Users can try setting <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.ECG_THRESHOLD=0.8</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.ECG_THRESHOLD=0.9</span></code>, and <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.ECG_THRESHOLD=0.95</span></code> to visualise and compare the top 20%, 10%, and 5% most important features in the 12-lead ECG.</p>
-<p>Additionally, users can change the value of <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.ZOOM_RANGE</span></code> from 0 to 10 to zoom into specific regions of the input ECG for detailed model interpretation.</p>
+<section id="task-1-explore-different-model-interpretation-settings-for-cxr-and-ecg">
+<h2>Task 1 - Explore different model interpretation settings for CXR and ECG<a class="headerlink" href="#task-1-explore-different-model-interpretation-settings-for-cxr-and-ecg" title="Link to this heading">#</a></h2>
+<p>Visualise and compare the top 20%, 10%, and 5% most important features in the 12-lead ECG. You may find the modifying values for <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.ECG_THRESHOLD</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.CXR_THRESHOLD</span></code> in configuration useful for this purpose.</p>
 </section>
-<section id="task-2-try-different-model-interpretation-settings-for-cxr">
-<h2>Task 2 - Try different model interpretation settings for CXR<a class="headerlink" href="#task-2-try-different-model-interpretation-settings-for-cxr" title="Link to this heading">#</a></h2>
-<p>Users can try setting <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.CXR_THRESHOLD=0.8</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.CXR_THRESHOLD=0.9</span></code>, or <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.CXR_THRESHOLD=0.95</span></code> to visualise and compare the top 20%, 10%, and 5% most important features in the CXR.</p>
+<section id="task-2-zoom-into-specific-regions-of-the-input-ecg">
+<h2>Task 2 - Zoom into specific regions of the input ECG<a class="headerlink" href="#task-2-zoom-into-specific-regions-of-the-input-ecg" title="Link to this heading">#</a></h2>
+<p>Zoom into specific regions of the input ECG for detailed model interpretation. You can set different values for <code class="docutils literal notranslate"><span class="pre">cfg_FT.INTERPRET.ZOOM_RANGE</span></code> for this task.</p>
 </section>
-<section id="task-3-try-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">
-<h2>Task 3 - Try pre-training with full 50K paired CXR-ECG data (Home task with high resources)<a class="headerlink" href="#task-3-try-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources" title="Link to this heading">#</a></h2>
-<p>Users can download the <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> datasets, then <strong>uncomment</strong> the optional code cell in <em><a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.html#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></em>.</p>
-<p>Set <code class="docutils literal notranslate"><span class="pre">cfg_PT.TRAIN.LATENT_DIM=128</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_PT.DATA.BATCH_SIZE=128</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg_PT.TRAIN.EPOCH=100</span></code> to obtain the <strong>optimal pre-trained CardioVAE model</strong> using the full 50K paired CXR-ECG data.</p>
+<section id="task-3-explore-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">
+<h2>Task 3 - Explore pre-training with full 50K paired CXR-ECG data (Home task with high resources)<a class="headerlink" href="#task-3-explore-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources" title="Link to this heading">#</a></h2>
+<p>Download the <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">MIMIC-CXR</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">MIMIC-IV-ECG</a> datasets, then <strong>uncomment</strong> the optional code cell in <em><a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/cardiac-hemodynamics-assessment/tutorial-heart.html#step-1-data-loading-and-preparation">Step 1: Data Loading and Preparation</a></em>.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">cfg_PT.TRAIN.LATENT_DIM=128</span></code>, <code class="docutils literal notranslate"><span class="pre">cfg_PT.DATA.BATCH_SIZE=128</span></code> and <code class="docutils literal notranslate"><span class="pre">cfg_PT.TRAIN.EPOCH=100</span></code> to obtain the <strong>optimal pre-trained CardioVAE model</strong> using the full 50K paired CXR-ECG data. Compare the results with the pre-trained CardioVAE model using 10K paired CXR-ECG data in the tutorial.</p>
 </section>
 </section>
 
@@ -498,9 +497,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-different-model-interpretation-settings-for-ecg">Task 1 - Explore different model interpretation settings for ECG</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-try-different-model-interpretation-settings-for-cxr">Task 2 - Try different model interpretation settings for CXR</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-try-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">Task 3 - Try pre-training with full 50K paired CXR-ECG data (Home task with high resources)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-explore-different-model-interpretation-settings-for-cxr-and-ecg">Task 1 - Explore different model interpretation settings for CXR and ECG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-zoom-into-specific-regions-of-the-input-ecg">Task 2 - Zoom into specific regions of the input ECG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-explore-pre-training-with-full-50k-paired-cxr-ecg-data-home-task-with-high-resources">Task 3 - Explore pre-training with full 50K paired CXR-ECG data (Home task with high resources)</a></li>
 </ul>
   </nav></div>
 
