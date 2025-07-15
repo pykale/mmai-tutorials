@@ -461,7 +461,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="multiomics-cancer-classification">
 <h1>Multiomics Cancer Classification<a class="headerlink" href="#multiomics-cancer-classification" title="Link to this heading">#</a></h1>
 <p><img alt="" src="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/images/mogonet-pykale-api.png?raw=1" /></p>
-<p>In this tutorial, we will use a <a class="reference external" href="https://www.nature.com/articles/s41467-021-23774-w"><strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<strong>O</strong>nvolutional <strong>NET</strong>works (MOGONET) by <strong>Wang et al. (Nature Communication, 2021)</strong></a> [1] pipeline implemented in <code class="docutils literal notranslate"><span class="pre">PyKale</span></code> [2] to integrate <strong>patient multiomics data</strong> for <strong>cancer classification</strong>.</p>
+<p>In this tutorial, we will use a <a class="reference external" href="https://www.nature.com/articles/s41467-021-23774-w"><strong>M</strong>ulti-<strong>O</strong>mics <strong>G</strong>raph c<strong>O</strong>nvolutional <strong>NET</strong>works (MOGONET) by <strong>Wang et al. (Nature Communication, 2021)</strong></a> [1] pipeline implemented in <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a> [2] to integrate <strong>patient multiomics data</strong> for <strong>cancer classification</strong>.</p>
 <p>We will work with multiomics data from <a class="reference external" href="https://www.cancerimagingarchive.net/collection/tcga-brca/"><strong>BRCA</strong> of TCGA</a> [3], which has five subtypes as the labels of classification. Three omics modalities will be used: mRNA expression, DNA methylation, and miRNA expression.</p>
 <p>The multimodal approach used in this tutorial involves <strong>late fusion</strong>, where a cross-omics tensor is constructed for the prediction probability fusion across three omics modalities.</p>
 <p>The main tasks of this tutorial are:</p>
@@ -502,8 +502,8 @@ print(&quot;Changed working directory to:&quot;, os.getcwd())
     &quot;pykale[example]@git+https://github.com/pykale/pykale@main&quot; \
     gdown==5.2.0 torch-geometric==2.6.0 torch_sparse torch_scatter \
     -f https://data.pyg.org/whl/torch-2.6.0+cu124.html \
-    &amp;&amp; echo &quot;pykale, gdown, nilearn, and yacs installed successfully ✅&quot; \
-    || echo &quot;Failed to install pykale, gdown, nilearn, and yacs ❌&quot;
+    &amp;&amp; echo &quot;pykale and its requirements installed successfully ✅&quot; \
+    || echo &quot;Failed to install pykale and its requirements ❌&quot;
 </pre></div>
 </div>
 </div>
@@ -629,7 +629,7 @@ multiomics_data = SparseMultiomicsDataset(
 </section>
 <section id="step-2-model-definition">
 <h2>Step 2: Model Definition<a class="headerlink" href="#step-2-model-definition" title="Link to this heading">#</a></h2>
-<p>If users are interested in more details regarding the model, please refer to the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Function &amp; Model Definition</a> of the tutorial.</p>
+<p>If users are interested in more details regarding the model, please refer to the <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/helper-functions.html">Helper Function and Model Definition</a> of the tutorial.</p>
 <p>To initialize the model, we firstly call <code class="docutils literal notranslate"><span class="pre">MogonetModel</span></code> from <a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/tutorials/multiomics-cancer-classification/model.py"><code class="docutils literal notranslate"><span class="pre">model.py</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -724,7 +724,7 @@ trainer = pl.Trainer(
 </section>
 <section id="step-5-interpretation-study">
 <h2>Step 5: Interpretation Study<a class="headerlink" href="#step-5-interpretation-study" title="Link to this heading">#</a></h2>
-<p>We use <code class="docutils literal notranslate"><span class="pre">kale.interpret</span></code> to perform interpretation, where a function that systematically masks input features and observes the effect on performance—highlighting which features are most important for classification is provided. Please refer to <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpret Study page</a> for more details.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">kale.interpret</span></code> to perform interpretation, where a function that systematically masks input features and observes the effect on performance—highlighting which features are most important for classification is provided. Please refer to <a class="reference external" href="https://pykale.github.io/mmai-tutorials/tutorials/multiomics-cancer-classification/extend-reading/interpretation-study.html">Interpretation Study page</a> for more details.</p>
 <p>Because the interpretation study needs us to mask one feature and observe the performance drop, we firstly define the trainer for the interpretation experiments.</p>
 <p>[<strong>NOTE</strong>] The final results may be different from what they should be because we only train the model for a few epochs to reduce waiting time in this tutorial.</p>
 <div class="cell docutils container">
