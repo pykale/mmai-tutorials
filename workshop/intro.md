@@ -21,25 +21,25 @@ This workshop covers the tutorials for **four biomedical applications** using th
 **Tutorial Topics:**
 
 1. **Brain Disorder Diagnosis**
-   - **Dataset**: ABIDE (Autism Brain Imaging Data Exchange)
+   - **Dataset**: [ABIDE (Autism Brain Imaging Data Exchange)](https://fcon_1000.projects.nitrc.org/indi/abide/)
    - **Modalities**: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)
    - **Task**: Use neuroimaging and phenotypic data for autism classification
    - **Multimodal approach**: Regularization - incorporating phenotypic features into regularization for imaging feature embedding to improve classification performance.
 
 2. **Cardiovascular Disease Assessment**
-   - **Dataset**: MIMIC Chest X-rays and ECG signals
+   - **Dataset**: MIMIC [Chest X-rays]((https://physionet.org/content/mimic-cxr/2.1.0/)) and [ECG signals](https://physionet.org/content/mimic-iv-ecg/1.0/)
    - **Modalities**: Chest X-ray images and ECG signals
    - **Task**: Integrate imaging and physiological signals for classifying health and cardiothoracic abnormalities
    - **Multimodal approach**: Hybrid fusion - combining CXR and ECG at feature and decision level for improved classification.
 
 3. **Cancer Classification**
-   - **Dataset**: TCGA (The Cancer Genome Atlas)
+   - **Dataset**: [TCGA (The Cancer Genome Atlas)]((https://www.cancerimagingarchive.net/collection/tcga-brca/))
    - **Modalities**: DNA methylation, mRNA expression, and miRNA expression.
    - **Task**: Combine genomics and transcriptomics data for cancer subtype classification
    - **Multimodal approach**: Interaction - constructing a tensor for the cross-omics probability interaction.
 
 4. **Drug–Target Interaction Prediction**
-   - **Dataset**: BindingDB and BioSNAP
+   - **Dataset**: [BindingDB](https://www.bindingdb.org/rwd/bind/index.jsp) and [BioSNAP](https://snap.stanford.edu/biodata/)
    - **Modalities**: Protein structures (3D) and molecular graphs (SMILES)
    - **Task**: Predict molecular interactions from structural and textual features
    - **Multimodal approach**: Interaction - bilinear interaction between protein and molecular embedding.
