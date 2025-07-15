@@ -450,7 +450,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed">Embed</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-encoder">Signal Encoder</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#image-encoder">Image Encoder</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-fusion">️ Feature Fusion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-fusion">Feature Fusion</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">Predict</a><ul class="nav section-nav flex-column">
@@ -520,8 +520,8 @@ Some non-critical dependencies (e.g., <code class="docutils literal notranslate"
     <span class="n">yacs</span><span class="o">==</span><span class="mf">0.1.8</span> <span class="n">wfdb</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span> <span class="n">tabulate</span> <span class="n">captum</span> <span class="n">neurokit2</span> \
     <span class="n">torch</span><span class="o">-</span><span class="n">scatter</span> <span class="n">torch</span><span class="o">-</span><span class="n">sparse</span> <span class="n">torch</span><span class="o">-</span><span class="n">cluster</span> <span class="n">torch</span><span class="o">-</span><span class="n">spline</span><span class="o">-</span><span class="n">conv</span> <span class="n">torch</span><span class="o">-</span><span class="n">geometric</span> \
     <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">pyg</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">torch</span><span class="o">-</span><span class="mf">2.6.0</span><span class="o">+</span><span class="n">cu124</span><span class="o">.</span><span class="n">html</span> \
-    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale,yacs and wfdb installed successfully ✅&quot;</span> \
-    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale,yacs and wfdb ❌&quot;</span>
+    <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="s2">&quot;pykale, yacs and wfdb installed successfully&quot;</span> \
+    <span class="o">||</span> <span class="n">echo</span> <span class="s2">&quot;Failed to install pykale, yacs and wfdb&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -530,8 +530,6 @@ Some non-critical dependencies (e.g., <code class="docutils literal notranslate"
 <section id="setup">
 <h3>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
 <p>As a starting point, we will mount Google Drive in Colab so that the data can be accessed directly. You might be prompted to grant permission to access your Google account—please proceed with the authorisation when asked.</p>
-<p>Next, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we also suppress unnecessary warnings.</p>
-<p><strong>Estimated runtime:</strong> 25 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect with your google drive for data and model loading</span>
@@ -542,6 +540,8 @@ Some non-critical dependencies (e.g., <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
+<p>Next, we will install the required packages and load a set of helper functions to support the tutorial workflow. To keep the output clean and focused on interpretation, we also suppress unnecessary warnings.</p>
+<p><strong>Estimated runtime:</strong> 25 seconds</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -635,12 +635,12 @@ External YAML files like <code class="docutils literal notranslate"><span class=
 <li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.image_access.load_images_from_dir</span></code> offers an easy-to-use utility for loading image datasets from directory hierarchies. It supports standard image formats and returns PyTorch tensors, performing essential preprocessing steps such as resizing and normalisation. This function is suitable for image classification, computer vision, and multimodal learning tasks.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">kale.loaddata.signal_image_access.SignalImageDataset</span></code> defines a unified dataset class designed for paired signal (e.g., ECG) and image (e.g., CXR) modalities. It facilitates synchronized access to multi-source data, providing ready-to-use PyTorch datasets that can be directly utilised for multimodal training, evaluation, and downstream applications.</p></li>
 </ul>
-<p><strong>Note:</strong> Please create a shortcut to the following Google Drive folder in your <strong>MyDrive</strong>.<br />
-To create a shortcut:<br />
-(i) Click the link to open the Google Drive folder.<br />
-(ii) Click the folder name at the top to reveal a <strong>drop-down menu</strong>.<br />
-(iii) From the drop-down menu, select <strong>Organise &gt; Add shortcut</strong>.<br />
-(iv) A dialog box titled <em>“Add shortcut to ‘EMBC_workshop_data’”</em> will appear — click the <strong>“All locations”</strong> tab, then select <strong>“My Drive”</strong>.<br />
+<p><strong>Note:</strong> Please create a shortcut to the following Google Drive folder in your <strong>MyDrive</strong>.
+To create a shortcut:
+(i) Click the link to open the Google Drive folder.
+(ii) Click the folder name at the top to reveal a <strong>drop-down menu</strong>.
+(iii) From the drop-down menu, select <strong>Organise &gt; Add shortcut</strong>.
+(iv) A dialog box titled <em>“Add shortcut to ‘EMBC_workshop_data’”</em> will appear — click the <strong>“All locations”</strong> tab, then select <strong>“My Drive”</strong>.
 (v) A shortcut to <strong>EMBC_workshop_data</strong> should now be visible at <a class="reference external" href="https://drive.google.com/drive/my-drive">https://drive.google.com/drive/my-drive</a>.</p>
 <p><a class="reference external" href="https://drive.google.com/drive/folders/1N7-fMWsdK-tuB76SdC-GF1njYYGx0Z-i?usp=sharing">Google Drive Link</a></p>
 <p>There’s no need to download the data manually. After mounting your Google Drive in the setup section, you will be able to directly access all datasets and pretrained models.</p>
@@ -695,8 +695,8 @@ To create a shortcut:<br />
 <p>For the fine-tuning stage, we use the <strong>last 1,000 paired CXR and ECG samples</strong> from the full 50K dataset derived from <strong>MIMIC-CXR</strong> and <strong>MIMIC-IV-ECG</strong>. Corresponding disease labels are obtained from MIMIC-CXR, which includes 12 cardiothoracic abnormality classes along with a “No Finding” label representing healthy cases.</p>
 <p>To formulate a binary classification task, all abnormality classes are grouped into a single <strong>Cardiothoracic Abnormality</strong> category, while the “No Finding” label is treated as <strong>Healthy</strong>. The resulting label mapping is as follows:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> → <strong>Healthy</strong></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> → <strong>Cardiothoracic Abnormality</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: <strong>Healthy</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: <strong>Cardiothoracic Abnormality</strong></p></li>
 </ul>
 <p>This fine-tuning subset is explicitly selected to ensure no overlap with the samples used during pre-training, thereby simulating a realistic downstream evaluation setting.</p>
 <p>Unlike the fine-tuning strategy reported in <em>Suvon et al., MICCAI 2024</em>, which relied on a private in-house dataset, this approach is fully reproducible using publicly available data from MIMIC-CXR and MIMIC-IV-ECG.</p>
@@ -758,21 +758,20 @@ To create a shortcut:<br />
 <p>The embedding module is composed of independent encoders for each modality and a fusion mechanism to obtain a shared latent representation.</p>
 <section id="signal-encoder">
 <h4>Signal Encoder<a class="headerlink" href="#signal-encoder" title="Link to this heading">#</a></h4>
-<p>The ECG signal pathway uses <code class="docutils literal notranslate"><span class="pre">SignalVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn</span></code>.<br />
+<p>The ECG signal pathway uses <code class="docutils literal notranslate"><span class="pre">SignalVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.signal_cnn</span></code>.
 This encoder captures high-level temporal features from preprocessed ECG waveforms and maps them to a latent space suitable for downstream fusion and representation learning.</p>
 </section>
 <section id="image-encoder">
 <h4>Image Encoder<a class="headerlink" href="#image-encoder" title="Link to this heading">#</a></h4>
-<p>The image pathway uses <code class="docutils literal notranslate"><span class="pre">ImageVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.image_cnn</span></code>.<br />
+<p>The image pathway uses <code class="docutils literal notranslate"><span class="pre">ImageVAEEncoder</span></code> from <code class="docutils literal notranslate"><span class="pre">kale.embed.image_cnn</span></code>.
 This encoder captures high-level spatial features from preprocessed CXR’s and maps them to a latent space suitable for downstream fusion and representation learning.</p>
 </section>
 <section id="feature-fusion">
-<h4>️ Feature Fusion<a class="headerlink" href="#feature-fusion" title="Link to this heading">#</a></h4>
-<p>Encoded modality-specific features are combined using a <strong>Product-of-Experts (PoE)</strong> approach, implemented in <code class="docutils literal notranslate"><span class="pre">kale.embed.feature_fusion</span></code>.<br />
+<h4>Feature Fusion<a class="headerlink" href="#feature-fusion" title="Link to this heading">#</a></h4>
+<p>Encoded modality-specific features are combined using a <strong>Product-of-Experts (PoE)</strong> approach, implemented in <code class="docutils literal notranslate"><span class="pre">kale.embed.feature_fusion</span></code>.
 The PoE fusion computes a joint posterior over the latent space by aggregating information from each modality, enabling coherent multimodal representation.</p>
 </section>
 </section>
-<hr class="docutils" />
 <section id="predict">
 <h3>Predict<a class="headerlink" href="#predict" title="Link to this heading">#</a></h3>
 <section id="reconstruction-pre-training">
@@ -786,8 +785,8 @@ The PoE fusion computes a joint posterior over the latent space by aggregating i
 </section>
 <section id="classification-fine-tuning">
 <h4>Classification (Fine-tuning)<a class="headerlink" href="#classification-fine-tuning" title="Link to this heading">#</a></h4>
-<p>For downstream classification tasks, we reuse the pretrained encoders as feature extractors.<br />
-The <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/finetune.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.finetune</span></code></a> adds a lightweight classification head on top of the shared latent space for supervised learning.<br />
+<p>For downstream classification tasks, we reuse the pretrained encoders as feature extractors.
+The <code class="docutils literal notranslate"><span class="pre">SignalImageFineTuningClassifier</span></code> from <a class="reference external" href="https://github.com/pykale/pykale/blob/main/kale/pipeline/finetune.py"><code class="docutils literal notranslate"><span class="pre">kale.pipeline.finetune</span></code></a> adds a lightweight classification head on top of the shared latent space for supervised learning.
 This setup is optimised for clinical prediction tasks, such as binary or multi-label disease classification.</p>
 </section>
 </section>
@@ -1226,7 +1225,7 @@ This method helps identify which regions in each modality, such as specific wave
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embed">Embed</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-encoder">Signal Encoder</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#image-encoder">Image Encoder</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-fusion">️ Feature Fusion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-fusion">Feature Fusion</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predict">Predict</a><ul class="nav section-nav flex-column">
