@@ -155,8 +155,8 @@
       
     
     
-    <img src="../_static/BioMedMMAI_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
-    <script>document.write(`<img src="../_static/BioMedMMAI_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
+    <img src="../_static/embc_logo.png" class="logo__image only-light" alt="PyKale - Home"/>
+    <script>document.write(`<img src="../_static/embc_logo.png" class="logo__image only-dark" alt="PyKale - Home"/>`);</script>
   
   
 </a></div>
@@ -408,7 +408,11 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-materials">Overview of the Materials</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-forum-for-q-a-etc">Discussion forum for Q&amp;A etc</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#before-we-begin">Before We Begin</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#post-tutorial-reflection">Post-Tutorial Reflection</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -428,9 +432,10 @@ document.write(`
 <h2>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h2>
 <section id="open-biomedical-multimodal-ai-research-workshop">
 <h3>Open Biomedical Multimodal AI Research Workshop<a class="headerlink" href="#open-biomedical-multimodal-ai-research-workshop" title="Link to this heading">#</a></h3>
+<p><strong>EMBC 2025 Workshop | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark</strong></p>
 <p>This workshop offers practical, hands-on tutorials in <strong>open biomedical multimodal AI research</strong>, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:</p>
 <ol class="arabic simple">
-<li><p><strong>Foundational skills in multimodal learning</strong>: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, three approaches, <strong>regularization</strong>, <strong>hybrid fusion</strong>, and <strong>interaction</strong>, to leverage multimodal data are covered in the tutorials.</p></li>
+<li><p><strong>Skills in multimodal learning</strong>: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, <strong>regularization</strong>, <strong>fusion (intermediate and late)</strong>, and <strong>interaction</strong>, to leverage multimodal data are covered in the tutorials.</p></li>
 <li><p><strong>Open research</strong>: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the <a class="reference external" href="https://github.com/pykale/mmai-tutorials">GitHub repository</a>.</p></li>
 <li><p><strong>Reproducible pipelines with PyKale</strong>: The core machine learning library behind the tutorial of this workshop is <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a>, which supports standardized machine learning pipelines and configurable experimentation without extra coding—making AI research more reproducible, reusable, and recyclable.</p></li>
 </ol>
@@ -444,38 +449,38 @@ document.write(`
 <ol class="arabic simple">
 <li><p><strong>Brain Disorder Diagnosis</strong></p>
 <ul class="simple">
-<li><p><strong>Dataset</strong>: <a class="reference external" href="https://fcon_1000.projects.nitrc.org/indi/abide/">ABIDE (Autism Brain Imaging Data Exchange)</a></p></li>
 <li><p><strong>Modalities</strong>: Neuroimaging (fMRI) and phenotypic features (e.g., age, gender, IQ)</p></li>
 <li><p><strong>Task</strong>: Use neuroimaging and phenotypic data for autism classification</p></li>
-<li><p><strong>Multimodal approach</strong>: Regularization - using phenotypic features to regularize feature embedding for reducing the phenotypic effect (e.g. site effect) in neuroimaging data to improve cross-site classification performance.</p></li>
+<li><p><strong>Multimodal approach</strong>: Regularization - using phenotypic features to regularize feature embedding for reducing the phenotypic effect (e.g. site effect) in neuroimaging data to improve cross-site classification performance</p></li>
+<li><p><strong>Dataset</strong>: <a class="reference external" href="https://fcon_1000.projects.nitrc.org/indi/abide/">ABIDE (Autism Brain Imaging Data Exchange)</a></p></li>
 </ul>
 </li>
 <li><p><strong>Cardiovascular Disease Assessment</strong></p>
 <ul class="simple">
-<li><p><strong>Dataset</strong>: MIMIC <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">Chest X-rays</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">ECG signals</a></p></li>
 <li><p><strong>Modalities</strong>: Chest X-ray images and ECG signals</p></li>
 <li><p><strong>Task</strong>: Integrate imaging and physiological signals for classifying health and cardiothoracic abnormalities</p></li>
-<li><p><strong>Multimodal approach</strong>: Hybrid fusion - combining CXR and ECG at feature and decision level for improved classification.</p></li>
+<li><p><strong>Multimodal approach</strong>: Intermediate fusion - combining CXR and ECG at feature embedding level</p></li>
+<li><p><strong>Dataset</strong>: MIMIC <a class="reference external" href="https://physionet.org/content/mimic-cxr/2.1.0/">Chest X-rays</a> and <a class="reference external" href="https://physionet.org/content/mimic-iv-ecg/1.0/">ECG signals</a></p></li>
 </ul>
 </li>
 <li><p><strong>Cancer Classification</strong></p>
 <ul class="simple">
-<li><p><strong>Dataset</strong>: <a class="reference external" href="https://www.cancerimagingarchive.net/collection/tcga-brca/">TCGA (The Cancer Genome Atlas)</a></p></li>
 <li><p><strong>Modalities</strong>: DNA methylation, mRNA expression, and miRNA expression.</p></li>
 <li><p><strong>Task</strong>: Combine genomics and transcriptomics data for cancer classification</p></li>
-<li><p><strong>Multimodal approach</strong>: Late fusion - cross-omics tensor for probability fusion.</p></li>
+<li><p><strong>Multimodal approach</strong>: Late fusion - contrcuting cross-omics tensor for probability fusion</p></li>
+<li><p><strong>Dataset</strong>: <a class="reference external" href="https://www.cancerimagingarchive.net/collection/tcga-brca/">TCGA (The Cancer Genome Atlas)</a></p></li>
 </ul>
 </li>
 <li><p><strong>Drug–Target Interaction Prediction</strong></p>
 <ul class="simple">
-<li><p><strong>Dataset</strong>: <a class="reference external" href="https://www.bindingdb.org/rwd/bind/index.jsp">BindingDB</a> and <a class="reference external" href="https://snap.stanford.edu/biodata/">BioSNAP</a></p></li>
 <li><p><strong>Modalities</strong>: Protein structures (3D) and molecular graphs (SMILES)</p></li>
 <li><p><strong>Task</strong>: Predict molecular interactions from structural and textual features</p></li>
-<li><p><strong>Multimodal approach</strong>: Interaction - bilinear interaction between protein and molecular embedding.</p></li>
+<li><p><strong>Multimodal approach</strong>: Interaction - bilinear interaction between protein and molecular embedding</p></li>
+<li><p><strong>Dataset</strong>: <a class="reference external" href="https://www.bindingdb.org/rwd/bind/index.jsp">BindingDB</a> and <a class="reference external" href="https://snap.stanford.edu/biodata/">BioSNAP</a></p></li>
 </ul>
 </li>
 </ol>
-<p>The core machine learning library behind the tutorial of this workshop is <a class="reference external" href="https://github.com/pykale/pykale"><code class="docutils literal notranslate"><span class="pre">PyKale</span></code></a>. The core functions of each tutorial are implemented in the PyKale APIs of a <strong>standardized machine learning pipeline</strong>:</p>
+<p>The core machine learning library behind these tutorials of this workshop is (<a class="github reference external" href="https://github.com/pykale/pykale">pykale/pykale</a>). The core functions of each tutorial are implemented in the [<code class="docutils literal notranslate"><span class="pre">PyKale</span></code> APIs] of a <strong>standardized machine learning pipeline</strong>:</p>
 <blockquote>
 <div><p><strong>Data loading → Preprocessing → Embedding → Prediction → Evaluation → Interpretation</strong></p>
 </div></blockquote>
@@ -485,19 +490,25 @@ document.write(`
 </section>
 <section id="questions-to-consider">
 <h3>Questions to Consider<a class="headerlink" href="#questions-to-consider" title="Link to this heading">#</a></h3>
-<p>Consider the following questions to help familiarize yourself with the key concepts of this workshop:</p>
+<section id="before-we-begin">
+<h4>Before We Begin<a class="headerlink" href="#before-we-begin" title="Link to this heading">#</a></h4>
+<p><em>Consider the following questions to help familiarize yourself with the key concepts of this workshop:</em></p>
 <ul class="simple">
 <li><p>Have you used publicly available data or code in your work?</p></li>
 <li><p>Have you ever shared data or code from your own research?</p></li>
-<li><p>Have you practised reproducible research methods?</p></li>
-</ul>
-<p>Consider the following questions, choose those that apply to you, to reflect on your experience:</p>
-<ul class="simple">
+<li><p>Have you applied any practices to make your research more reproducible?</p></li>
 <li><p>Do you currently face any challenges when working with multimodal data or methods?</p></li>
-<li><p>Are there any tools or techniques present in the tutorials that you found particularly useful or innovative?</p></li>
-<li><p>What aspects of the tutorials did you find most helpful or challenging?</p></li>
-<li><p>How do you envision multimodal AI contributing to your own research?</p></li>
 </ul>
+</section>
+<section id="post-tutorial-reflection">
+<h4>Post-Tutorial Reflection<a class="headerlink" href="#post-tutorial-reflection" title="Link to this heading">#</a></h4>
+<p><em>Consider the following questions, choose those that apply to you, to reflect on your experience:</em></p>
+<ul class="simple">
+<li><p>Were there any tools or techniques introduced in the tutorials that you found particularly useful or innovative?</p></li>
+<li><p>Which aspects of the tutorials did you find most helpful, and which were most challenging?</p></li>
+<li><p>How do you see multimodal AI contributing to or shaping your own research going forward?</p></li>
+</ul>
+</section>
 </section>
 </section>
 </section>
@@ -572,7 +583,11 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-materials">Overview of the Materials</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-forum-for-q-a-etc">Discussion forum for Q&amp;A etc</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-to-consider">Questions to Consider</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#before-we-begin">Before We Begin</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#post-tutorial-reflection">Post-Tutorial Reflection</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

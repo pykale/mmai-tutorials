@@ -10,4 +10,4 @@ Several helper scripts are provided to modularize the code and streamline the wo
 
 Throughout the tutorial, we will provide further explanations on the contents and roles of these helper scripts as they are used.
 
-[Back to the main tutorial](https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial.html#step-0-environment-preparation)
+[Back to the main tutorial](https://pykale.github.io/mmai-tutorials/tutorials/brain-disorder-diagnosis/tutorial-brain.html#step-0-environment-preparation)
