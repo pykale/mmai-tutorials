@@ -25,7 +25,7 @@ The book includes:
 - Follow the tutorials step by step from top to bottom.
 
 ## Tips for Attendees
-- If you have any question, please ask via [GitHub Discussions](https://github.com/pykale/mmai-tutorials/discussions/new?category=general).
+- If you have any question, please post a new discussion topic in the [GitHub Discussions](https://github.com/pykale/mmai-tutorials/discussions/).
 - Use the Search (on the left) to quickly find specific topics.
 - If you want to contribute, please read the following section.
 
