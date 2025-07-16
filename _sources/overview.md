@@ -2,14 +2,33 @@
 
 This book presents tutorials on multimodal AI applications using the `PyKale` library.
 
-:::{note}
-These resources are currently being developed.
-:::
+[//]: # (:::{note})
+
+[//]: # (These resources are currently being developed.)
+
+[//]: # (:::)
 
 The book includes:
+- Workshop overview: Learn what the workshop is about and see the schedule.
+- Tutorials: Follow hands-on notebooks using multimodal data.
+- Applications: Learn how AI can help with brain disorders, cancer, drug interactions, and more.
 
-- Workshop: Details of the workshop for which these resources were designed.
-- Tutorials: Hands-on tutorials for four multimodal AI applications.
+
+## What You’ll Need
+- A laptop with Wi-Fi capability
+- A Google account (https://accounts.google.com/signin) to access and run the tutorials using Google Colab
+- A GitHub account (https://github.com/signup) to make contributions and use GitHub Discussions.
+
+## How to Begin
+- Start with the Introduction under `Workshop` on the left sidebar.
+- Find the tutorial chapters you want to follow under `Tutorials`.
+- Follow the tutorials step by step from top to bottom.
+
+## Tips for Attendees
+- If you have any question, please ask via [GitHub Discussion](https://github.com/pykale/mmai-tutorials/discussions/new?category=general).
+- Use the Search (on the left) to quickly find specific topics.
+- If you want to contribute, please read the following section.
+
 
 ## Contributing
 
