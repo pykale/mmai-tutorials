@@ -34,11 +34,14 @@ parts:
       title: Data & Config (optional)
     - file: tutorials/brain-disorder-diagnosis/extend-reading/helper-functions
       title: Helper Functions (optional)
-  - file: tutorials/cardiac-hemodynamics-assessment/tutorial-heart
+  - file: tutorials/cardiac-abnormality-assessment/tutorial-heart
     sections:
-    - file: tutorials/cardiac-hemodynamics-assessment/extend-reading/extension-tasks
+    - file: tutorials/cardiac-abnormality-assessment/extend-reading/extension-tasks
       title: Extension Tasks
   - file: tutorials/drug-target-interaction/tutorial-drug
+    sections:
+    - file: tutorials/drug-target-interaction/extend-reading/extension-tasks
+      title: Extension Tasks
   - file: tutorials/multiomics-cancer-classification/tutorial-cancer
     sections:
     - file: tutorials/multiomics-cancer-classification/extend-reading/extension-tasks
