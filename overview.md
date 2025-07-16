@@ -1,6 +1,6 @@
 # Overview
 
-This book presents tutorials on using `PyKale` library for multimodal AI applications.
+This book presents tutorials on multimodal AI applications using the `PyKale` library.
 
 :::{note}
 These resources are currently being developed.
