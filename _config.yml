@@ -35,6 +35,7 @@ html:
   use_issues_button: true
   use_repository_button: true
   favicon: resources/icon.ico
+  google_analytics_id: "G-92N8J55E25"
 
 sphinx:
   extra_extensions:
