@@ -75,7 +75,7 @@ This workshop is made possible by contributions from:
 - **[Shuo Zhou](https://github.com/shuo-zhou)**
 - **[Xianyuan Liu](https://github.com/xianyuanliu)**
 - **[L. M. Riza Rizky](https://github.com/zaRizk7)**
-- **[Mohammod Naimul Islam Suvon](https://github.com/Mdnaimulislam)**
+- **[Mohammod N. I. Suvon](https://github.com/Mdnaimulislam)**
 - **[Kelly Ding](https://github.com/kellydingzx)**
 - **[Peter Charlton](https://github.com/peterhcharlton)**
 - **[Wenrui Fan](https://github.com/orgs/Shef-AIRE/people/wenruifan)**
