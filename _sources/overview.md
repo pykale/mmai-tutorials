@@ -1,6 +1,6 @@
 # Overview
 
-This book presents tutorials on multimodal AI applications using the `PyKale` library.
+This [Jupyter Book](https://jupyterbook.org) presents tutorials on multimodal AI applications using the `PyKale` library.
 
 [//]: # (:::{note})
 
