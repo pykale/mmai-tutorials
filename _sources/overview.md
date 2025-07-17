@@ -2,12 +2,6 @@
 
 This [Jupyter Book](https://jupyterbook.org) presents tutorials on multimodal AI applications using the [`PyKale`](https://github.com/pykale/pykale) library.
 
-[//]: # (:::{note})
-
-[//]: # (These resources are currently being developed.)
-
-[//]: # (:::)
-
 The book includes:
 - Workshop overview: Learn what the workshop is about and see the schedule.
 - Tutorials: Follow hands-on notebooks using multimodal data.
@@ -59,11 +53,20 @@ Please ensure your contributions adhere to the repository's coding standards and
 
 ### Building the Book Locally
 
-To build the book in development, assuming that the working directory is the project's folder, please call:
+To build the book locally, you will need to have Jupyter Book and Sphinx Exercise packages installed. If you haven't installed them yet, you can do so using pip:
+
+```bash
+pip install jupyter-book==1.0.4.post1
+pip install sphinx-exercise==1.0.1
+```
+
+To build the book in development, please ensure you are in the root directory of the repository. You can then run the following command:
 
 ```bash
 jupyter-book build .
 ```
+
+This will generate the HTML files in the `_build/html` directory. The home page of the book will be available at `_build/html/index.html`, from which you can navigate through the book.
 
 ### Pre-commit Hooks
 
@@ -89,18 +92,18 @@ This repository uses pre-commit hooks to ensure code quality and consistency. To
 
 ## Contributors
 
-This workshop is made possible by contributions from:
+This workshop is made possible by contributions from (in alphabetical order of surnames):
 
-- **[Shuo Zhou](https://github.com/shuo-zhou)**
+- **[Peter Charlton](https://github.com/peterhcharlton)**
+- **[Kelly Ding](https://github.com/kellydingzx)**
+- **[Wenrui Fan](https://github.com/wenruifan)**
 - **[Xianyuan Liu](https://github.com/xianyuanliu)**
+- **[Haiping Lu](https://github.com/haipinglu)**
 - **[L. M. Riza Rizky](https://github.com/zaRizk7)**
 - **[Mohammod N. I. Suvon](https://github.com/Mdnaimulislam)**
-- **[Kelly Ding](https://github.com/kellydingzx)**
-- **[Peter Charlton](https://github.com/peterhcharlton)**
-- **[Wenrui Fan](https://github.com/orgs/Shef-AIRE/people/wenruifan)**
 - **[Sina Tabakhi](https://github.com/SinaTabakhi)**
 - **[Jiayang Zhang](https://github.com/jiayang-zhang)**
-- **[Haiping Lu](https://github.com/haipinglu)**
+- **[Shuo Zhou](https://github.com/shuo-zhou)**
 
 <!-- ```{tableofcontents}
 ``` -->

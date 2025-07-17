@@ -10,7 +10,7 @@ This repository contains materials and resources for building the [Jupyter book]
 - [`tutorials/`](https://github.com/pykale/mmai-tutorials/tree/main/tutorials): Contains tutorial notebooks and related materials.
 - [`requirements.txt`](https://github.com/pykale/mmai-tutorials/blob/main/requirements.txt): Lists dependencies required for the project.
 
-The structure of each tutorial is as follows:
+Each tutorial is organized in a standardized structure as follows:
 
 ```text
     ├───tutorial.ipynb
@@ -19,15 +19,13 @@ The structure of each tutorial is as follows:
     │   ├───base.yml
     │   ├───**.yml
     ├───model.py
-    ├───models
-    │   ├───**.pt
-    ├───data
-    │   ├───**.csv
-    │   ├───**.**
     ├───images
     │   ├───**.png
     │   ├───**.jpg
-    ├───**.py
+    ├───helpers
+    │   ├───**.py
+    ├───extend-reading
+    │   ├───**.md
 ```
 
 ## How to Contribute
@@ -57,11 +55,20 @@ Please ensure your contributions adhere to the repository's coding standards and
 
 ### Building the and preview the book
 
-To build the book in development, assuming that the working directory is the project's folder, please call:
+To build the book locally, you will need to have Jupyter Book and Sphinx Exercise packages installed. If you haven't installed them yet, you can do so using pip:
+
+```bash
+pip install jupyter-book==1.0.4.post1
+pip install sphinx-exercise==1.0.1
+```
+
+To build the book in development, please ensure you are in the root directory of the repository. You can then run the following command:
 
 ```bash
 jupyter-book build .
 ```
+
+This will generate the HTML files in the `_build/html` directory. The home page of the book will be available at `_build/html/index.html`, from which you can navigate through the book.
 
 ## Pre-commit Hooks
 

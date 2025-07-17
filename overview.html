@@ -502,10 +502,16 @@ document.write(`
 </section>
 <section id="building-the-book-locally">
 <h3>Building the Book Locally<a class="headerlink" href="#building-the-book-locally" title="Link to this heading">#</a></h3>
-<p>To build the book in development, assuming that the working directory is the project’s folder, please call:</p>
+<p>To build the book locally, you will need to have Jupyter Book and Sphinx Exercise packages installed. If you haven’t installed them yet, you can do so using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>jupyter-book<span class="o">==</span><span class="m">1</span>.0.4.post1
+pip<span class="w"> </span>install<span class="w"> </span>sphinx-exercise<span class="o">==</span><span class="m">1</span>.0.1
+</pre></div>
+</div>
+<p>To build the book in development, please ensure you are in the root directory of the repository. You can then run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-book<span class="w"> </span>build<span class="w"> </span>.
 </pre></div>
 </div>
+<p>This will generate the HTML files in the <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> directory. The home page of the book will be available at <code class="docutils literal notranslate"><span class="pre">_build/html/index.html</span></code>, from which you can navigate through the book.</p>
 </section>
 <section id="pre-commit-hooks">
 <h3>Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Link to this heading">#</a></h3>
@@ -531,27 +537,27 @@ document.write(`
 </section>
 <section id="contributors">
 <h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading">#</a></h2>
-<p>This workshop is made possible by contributions from:</p>
+<p>This workshop is made possible by contributions from (in alphabetical order of surnames):</p>
 <ul class="simple">
-<li><p><strong><a class="reference external" href="https://github.com/shuo-zhou">Shuo Zhou</a></strong></p></li>
+<li><p><strong><a class="reference external" href="https://github.com/peterhcharlton">Peter Charlton</a></strong></p></li>
+<li><p><strong><a class="reference external" href="https://github.com/kellydingzx">Kelly Ding</a></strong></p></li>
+<li><p><strong><a class="reference external" href="https://github.com/wenruifan">Wenrui Fan</a></strong></p></li>
 <li><p><strong><a class="reference external" href="https://github.com/xianyuanliu">Xianyuan Liu</a></strong></p></li>
+<li><p><strong><a class="reference external" href="https://github.com/haipinglu">Haiping Lu</a></strong></p></li>
 <li><p><strong><a class="reference external" href="https://github.com/zaRizk7">L. M. Riza Rizky</a></strong></p></li>
 <li><p><strong><a class="reference external" href="https://github.com/Mdnaimulislam">Mohammod N. I. Suvon</a></strong></p></li>
-<li><p><strong><a class="reference external" href="https://github.com/kellydingzx">Kelly Ding</a></strong></p></li>
-<li><p><strong><a class="reference external" href="https://github.com/peterhcharlton">Peter Charlton</a></strong></p></li>
-<li><p><strong><a class="reference external" href="https://github.com/orgs/Shef-AIRE/people/wenruifan">Wenrui Fan</a></strong></p></li>
 <li><p><strong><a class="reference external" href="https://github.com/SinaTabakhi">Sina Tabakhi</a></strong></p></li>
 <li><p><strong><a class="reference external" href="https://github.com/jiayang-zhang">Jiayang Zhang</a></strong></p></li>
-<li><p><strong><a class="reference external" href="https://github.com/haipinglu">Haiping Lu</a></strong></p></li>
+<li><p><strong><a class="reference external" href="https://github.com/shuo-zhou">Shuo Zhou</a></strong></p></li>
 </ul>
 <!-- ```{tableofcontents}
 ``` -->
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
 
     <script type="text/x-thebe-config">
     {

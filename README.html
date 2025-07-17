@@ -446,22 +446,20 @@ document.write(`
 <li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/tree/main/tutorials"><code class="docutils literal notranslate"><span class="pre">tutorials/</span></code></a>: Contains tutorial notebooks and related materials.</p></li>
 <li><p><a class="reference external" href="https://github.com/pykale/mmai-tutorials/blob/main/requirements.txt"><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></a>: Lists dependencies required for the project.</p></li>
 </ul>
-<p>The structure of each tutorial is as follows:</p>
+<p>Each tutorial is organized in a standardized structure as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    ├───tutorial.ipynb
     ├───config.py
     ├───configs
     │   ├───base.yml
     │   ├───**.yml
     ├───model.py
-    ├───models
-    │   ├───**.pt
-    ├───data
-    │   ├───**.csv
-    │   ├───**.**
     ├───images
     │   ├───**.png
     │   ├───**.jpg
-    ├───**.py
+    ├───helpers
+    │   ├───**.py
+    ├───extend-reading
+    │   ├───**.md
 </pre></div>
 </div>
 </section>
@@ -489,10 +487,16 @@ document.write(`
 <p>Please ensure your contributions adhere to the repository’s coding standards and include appropriate documentation.</p>
 <section id="building-the-and-preview-the-book">
 <h3>Building the and preview the book<a class="headerlink" href="#building-the-and-preview-the-book" title="Link to this heading">#</a></h3>
-<p>To build the book in development, assuming that the working directory is the project’s folder, please call:</p>
+<p>To build the book locally, you will need to have Jupyter Book and Sphinx Exercise packages installed. If you haven’t installed them yet, you can do so using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>jupyter-book<span class="o">==</span><span class="m">1</span>.0.4.post1
+pip<span class="w"> </span>install<span class="w"> </span>sphinx-exercise<span class="o">==</span><span class="m">1</span>.0.1
+</pre></div>
+</div>
+<p>To build the book in development, please ensure you are in the root directory of the repository. You can then run the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-book<span class="w"> </span>build<span class="w"> </span>.
 </pre></div>
 </div>
+<p>This will generate the HTML files in the <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> directory. The home page of the book will be available at <code class="docutils literal notranslate"><span class="pre">_build/html/index.html</span></code>, from which you can navigate through the book.</p>
 </section>
 </section>
 <section id="pre-commit-hooks">
