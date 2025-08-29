@@ -20,7 +20,7 @@ It brings together three core themes:
 
 This workshop covers tutorials on **four biomedical applications** using the **[PyKale multimodal AI library](https://github.com/pykale/pykale)**.
 You are welcome to focus on one application with its exploration tasks or explore all four applications.
-The [workshop slides](https://media.licdn.com/dms/document/media/v2/D4E1FAQF0t5e3wq1YVw/feedshare-document-pdf-analyzed/B4EZgtOXEbHoAc-/0/1753105403045?e=1757548800&v=beta&t=Y72TVRRTkvFlp2R34DVLSBpGf4QpXMhrsC5WfF2ovTc) introduce multimodal AI and PyKale and provide summaries of each tutorial.
+The [workshop slides](https://www.linkedin.com/posts/ukomain_embc-2025-slides-activity-7353336771377602563-FNjK?utm_source=share&utm_medium=member_desktop&rcm=ACoAACntBqIB-Um3rPdeWmJTIdKxPHAoiWH7JYc) introduce multimodal AI and PyKale and provide summaries of each tutorial.
 
 **Tutorial Topics:**
 
