@@ -7,7 +7,7 @@
 **Workshop@EMBC-2025  | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**,
-introducing machine learning techniques for leveraging multimodal data in biomedical applications. 
+introducing machine learning techniques for leveraging multimodal data in biomedical applications.
 It brings together three core themes:
 
 1. **Skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, **regularization**, **fusion (intermediate and late)**, and **interaction**, to leverage multimodal data are covered in the tutorials.
