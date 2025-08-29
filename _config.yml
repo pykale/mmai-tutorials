@@ -3,7 +3,8 @@
 
 title: PyKale
 author: PyKale Contributors
-logo: resources/embc_logo.png
+logo: resources/BioMedMMAI_logo.png
+#logo: resources/embc_logo.png
 copyright: "2025"
 
 # Force re-execution of notebooks on each build.
