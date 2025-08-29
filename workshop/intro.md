@@ -6,7 +6,9 @@
 
 **Workshop@EMBC-2025  | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
-This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**, introducing machine learning techniques for leveraging multimodal data in biomedical applications. It brings together three core themes:
+This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**,
+introducing machine learning techniques for leveraging multimodal data in biomedical applications. 
+It brings together three core themes:
 
 1. **Skills in multimodal learning**: Developing knowledge and practical skills in multimodal AI for biomedical applications. Specifically, **regularization**, **fusion (intermediate and late)**, and **interaction**, to leverage multimodal data are covered in the tutorials.
 2. **Open research**: Enabling impactful and high-quality research through open-access data and code. All tutorials used in this workshop are openly available in the [GitHub repository](https://github.com/pykale/mmai-tutorials).
@@ -16,7 +18,9 @@ This workshop offers practical, hands-on tutorials in **open biomedical multimod
 
 ## Overview of the Materials
 
-This workshop covers the tutorials for **four biomedical applications** using the **[PyKale multimodal AI library](https://github.com/pykale/pykale)**. You are welcome to focus on one application with exploration tasks or explore all four applications.
+This workshop covers tutorials on **four biomedical applications** using the **[PyKale multimodal AI library](https://github.com/pykale/pykale)**.
+You are welcome to focus on one application with its exploration tasks or explore all four applications.
+The [workshop slides](https://media.licdn.com/dms/document/media/v2/D4E1FAQF0t5e3wq1YVw/feedshare-document-pdf-analyzed/B4EZgtOXEbHoAc-/0/1753105403045?e=1757548800&v=beta&t=Y72TVRRTkvFlp2R34DVLSBpGf4QpXMhrsC5WfF2ovTc) introduce multimodal AI and PyKale and provide summaries of each tutorial.
 
 **Tutorial Topics:**
 
