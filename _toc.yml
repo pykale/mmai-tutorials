@@ -9,13 +9,8 @@ options:
 parts:
 - caption: Workshop
   chapters:
-  - file: workshop/intro
-  - file: workshop/schedule
-#    sections:
-#    - file: workshops/embc2025/aims
-#    - file: workshops/embc2025/synopsis
-#    - file: workshops/embc2025/schedule
-#    - file: workshops/embc2025/preparation
+  - file: workshop/embc25
+    title: EMBC25
 ##  - file: workshops/ukomain2025/intro
 #    sections:
 #    - file: workshops/ukomain2025/aims
