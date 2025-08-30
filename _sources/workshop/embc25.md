@@ -1,10 +1,10 @@
-# Introduction
+# Workshop@EMBC-2025
+
+**2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
 ## Welcome
 
 ### Open Biomedical Multimodal AI Research
-
-**Workshop@EMBC-2025  | 2:30 PM, 16 July | B3 M7-8, Bella Center, Copenhagen, Denmark**
 
 This workshop offers practical, hands-on tutorials in **open biomedical multimodal AI research**,
 introducing machine learning techniques for leveraging multimodal data in biomedical applications.
@@ -55,6 +55,22 @@ The workshop [post and slides](https://www.linkedin.com/posts/ukomain_embc-2025-
 The core functions of each tutorial are implemented in the [`PyKale` APIs](https://pykale.readthedocs.io/en/latest/) of a **standardized machine learning pipeline**:
 
 > **Data loading → Preprocessing → Embedding → Prediction → Evaluation → Interpretation**
+
+### Schedule
+
+Chair: [Peter Charlton](https://peterhcharlton.github.io/) | Co-Chair: [Xianyuan Liu](https://xianyuanliu.github.io/)
+
+| **Duration** | **Activity**                                                                                                                                                                                                                                                                                  |
+|:-------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **5 mins**   | **Welcome**                                                                                                                                                                                                                                                                                   |
+| **20 mins**  | **Opening Talk**: *Towards Deployment-Centric Multimodal AI* – [Prof. Haiping Lu](https://haipinglu.github.io/)                                                                                                                                                                               |
+| **20 mins**  | **Introduction to the Tutorials**<br>**Speakers**:<br>• [Jiayang Zhang](https://linkedin.com/in/jiayang-zhang) <br>• [Zixuan (Kelly) Ding](https://www.linkedin.com/in/kellydingzx) <br>• [Xianyuan Liu](https://xianyuanliu.github.io/) <br>• [Sina Tabakhi](https://sinatabakhi.github.io/) |
+| **10 mins**  | **Interactive Tutorial**                                                                                                                                                                                                                                                                      |
+| **1 hour**   | **Hands-on Session (Round 1)**                                                                                                                                                                                                                                                                |
+| **10 mins**  | **Open Sharing and Discussion**                                                                                                                                                                                                                                                               |
+| **1 hour**   | **Hands-on Session (Round 2)**                                                                                                                                                                                                                                                                |
+| **15 mins**  | **Post-tutorial Discussion**                                                                                                                                                                                                                                                                  |
+| **10 mins**  | **Closing Remarks**                                                                                                                                                                                                                                                                           |
 
 ### Discussion forum for Q&A etc
 
