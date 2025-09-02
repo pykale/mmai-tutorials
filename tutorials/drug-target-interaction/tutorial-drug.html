@@ -567,8 +567,12 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">RDLogger</span>
+
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PYTHONWARNINGS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span>
+
+<span class="n">RDLogger</span><span class="o">.</span><span class="n">DisableLog</span><span class="p">(</span><span class="s2">&quot;rdApp.*&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -583,7 +587,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy version: 2.0.2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NumPy version: 2.2.6
 </pre></div>
 </div>
 </div>
@@ -678,7 +682,7 @@ SOLVER:
   BATCH_SIZE: 32
   DA_LEARNING_RATE: 5e-05
   LEARNING_RATE: 0.0001
-  MAX_EPOCH: 2
+  MAX_EPOCH: 5
   NUM_WORKERS: 0
   SEED: 20
 </pre></div>
@@ -715,9 +719,9 @@ SOLVER:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading...
 From (original): https://drive.google.com/uc?id=1ogOcxZn-1q418LOT-gQ94aHQV0Y1sOmk
-From (redirected): https://drive.google.com/uc?id=1ogOcxZn-1q418LOT-gQ94aHQV0Y1sOmk&amp;confirm=t&amp;uuid=2840f509-90c2-4c19-9458-dd54256f6088
-To: /content/data/drug-target-interaction.zip
-100% 78.4M/78.4M [00:00&lt;00:00, 168MB/s]
+From (redirected): https://drive.google.com/uc?id=1ogOcxZn-1q418LOT-gQ94aHQV0Y1sOmk&amp;confirm=t&amp;uuid=d01bab20-b2f9-41cb-a5ea-259903d5854c
+To: /home/zarizky/projects/mmai-tutorials/tutorials/drug-target-interaction/data/drug-target-interaction.zip
+100%|██████████████████████████████████████| 88.3M/88.3M [00:00&lt;00:00, 94.5MB/s]
 </pre></div>
 </div>
 </div>
@@ -737,8 +741,8 @@ To: /content/data/drug-target-interaction.zip
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contents of the data folder:
-biosnap
 bindingdb
+biosnap
 </pre></div>
 </div>
 </div>
@@ -761,8 +765,8 @@ bindingdb
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contents of bindingdb folder:
-random
 interpretation_samples.csv
+random
 cluster
 full.csv
 </pre></div>
@@ -974,9 +978,9 @@ Name: 0, dtype: object
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First sample from source batch:
-Drug graph: Data(x=[290, 7], edge_index=[2, 91], edge_attr=[91, 1], num_nodes=290)
-Protein sequence: tensor([11., 14., 16.,  ...,  0.,  0.,  0.], dtype=torch.float64)
-Label: tensor(0., dtype=torch.float64)
+Drug graph: Data(x=[290, 7], edge_index=[2, 50], edge_attr=[50, 1], num_nodes=290)
+Protein sequence: tensor([11.,  4., 12.,  ...,  0.,  0.,  0.], dtype=torch.float64)
+Label: tensor(1., dtype=torch.float64)
 </pre></div>
 </div>
 </div>
@@ -1013,16 +1017,16 @@ Label: tensor(0., dtype=torch.float64)
 <p>We define the DrugBAN class in <code class="docutils literal notranslate"><span class="pre">kale.embed.ban</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.embed.ban</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugBAN</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.embed.model_lib.drugban</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugBAN</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">DrugBAN</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DrugBAN(
-  (drug_extractor): MolecularGCN(
+  (molecular_extractor): MolecularGCN(
     (init_transform): Linear(in_features=7, out_features=128, bias=False)
     (gcn_layers): ModuleList(
       (0-2): 3 x GCNConv(128, 128)
@@ -1037,7 +1041,7 @@ Label: tensor(0., dtype=torch.float64)
     (conv3): Conv1d(128, 128, kernel_size=(9,), stride=(1,))
     (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
   )
-  (bcn): BANLayer(
+  (bcn): ParametrizedBANLayer(
     (v_net): FCNet(
       (main): Sequential(
         (0): Dropout(p=0.2, inplace=False)
@@ -1054,15 +1058,21 @@ Label: tensor(0., dtype=torch.float64)
     )
     (p_net): AvgPool1d(kernel_size=(3,), stride=(3,), padding=(0,))
     (bn): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (parametrizations): ModuleDict(
+      (h_mat): ParametrizationList(
+        (0): _WeightNorm()
+      )
+    )
   )
   (mlp_classifier): MLPDecoder(
-    (fc1): Linear(in_features=256, out_features=512, bias=True)
-    (bn1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (fc2): Linear(in_features=512, out_features=512, bias=True)
-    (bn2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (fc3): Linear(in_features=512, out_features=128, bias=True)
-    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (fc4): Linear(in_features=128, out_features=2, bias=True)
+    (model): Sequential(
+      (0): Linear(in_features=256, out_features=512, bias=True)
+      (1): ReLU()
+      (2): Dropout(p=0.1, inplace=False)
+      (3): Linear(in_features=512, out_features=128, bias=True)
+      (4): ReLU()
+      (5): Linear(in_features=128, out_features=2, bias=True)
+    )
   )
 )
 </pre></div>
@@ -1078,7 +1088,7 @@ Label: tensor(0., dtype=torch.float64)
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">kale.pipeline.drugban_trainer</span><span class="w"> </span><span class="kn">import</span> <span class="n">DrugbanTrainer</span>
 
 <span class="n">drugban_trainer</span> <span class="o">=</span> <span class="n">DrugbanTrainer</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">cfg</span><span class="p">),</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
     <span class="n">solver_lr</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">LEARNING_RATE</span><span class="p">,</span>
     <span class="n">num_classes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span>
     <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
@@ -1103,8 +1113,8 @@ Label: tensor(0., dtype=torch.float64)
 <span class="kn">from</span><span class="w"> </span><span class="nn">pytorch_lightning.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelCheckpoint</span>
 
 <span class="n">checkpoint_cb</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span>
-    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{epoch}</span><span class="s2">-</span><span class="si">{step}</span><span class="s2">-</span><span class="si">{val_BinaryAUROC:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_BinaryAUROC&quot;</span><span class="p">,</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{epoch}</span><span class="s2">-</span><span class="si">{step}</span><span class="s2">-</span><span class="si">{valid_BinaryAUROC:.4f}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;valid_BinaryAUROC&quot;</span><span class="p">,</span>
     <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -1132,9 +1142,9 @@ Label: tensor(0., dtype=torch.float64)
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:GPU available: True (cuda), used: True
-INFO:pytorch_lightning.utilities.rank_zero:TPU available: False, using: 0 TPU cores
-INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
 </pre></div>
 </div>
 </div>
@@ -1166,33 +1176,34 @@ INFO:pytorch_lightning.utilities.rank_zero:HPU available: False, using: 0 HPUs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
-INFO:pytorch_lightning.callbacks.model_summary:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are using a CUDA device (&#39;NVIDIA GeForce RTX 4090&#39;) that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision(&#39;medium&#39; | &#39;high&#39;)` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
   | Name                 | Type                | Params | Mode 
 ---------------------------------------------------------------------
-0 | model                | DrugBAN             | 1.0 M  | train
+0 | model                | DrugBAN             | 747 K  | train
 1 | domain_discriminator | DomainNetSmallImage | 133 K  | train
 2 | random_layer         | RandomLayer         | 66.0 K | train
 3 | valid_metrics        | MetricCollection    | 0      | train
 4 | test_metrics         | MetricCollection    | 0      | train
 ---------------------------------------------------------------------
-1.2 M     Trainable params
+946 K     Trainable params
 0         Non-trainable params
-1.2 M     Total params
-4.847     Total estimated model params size (MB)
-64        Modules in train mode
+946 K     Total params
+3.787     Total estimated model params size (MB)
+67        Modules in train mode
 0         Modules in eval mode
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "9901815e548947d8b664a7be70ed0fe9", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "c93c19136b484821926f59888165e195", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[17:56:37] Unusual charge on atom 0 number of radical electrons set to zero
-[17:56:52] Unusual charge on atom 0 number of radical electrons set to zero
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4: 100%|██████████| 305/305 [00:19&lt;00:00, 15.61it/s, v_num=1]        
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "96b7d503fbca4094ac847a36d3c50a2d", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[17:57:26] Unusual charge on atom 0 number of radical electrons set to zero
-[17:57:48] Unusual charge on atom 0 number of radical electrons set to zero
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`Trainer.fit` stopped: `max_epochs=5` reached.
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "1d02467474a149a2892e78dc35f08742", "version_major": 2, "version_minor": 0}</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:`Trainer.fit` stopped: `max_epochs=2` reached.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 4: 100%|██████████| 305/305 [00:19&lt;00:00, 15.61it/s, v_num=1]
 </pre></div>
 </div>
 </div>
@@ -1217,40 +1228,43 @@ INFO:pytorch_lightning.callbacks.model_summary:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:pytorch_lightning.utilities.rank_zero:Restoring states from the checkpoint path at /content/lightning_logs/version_3/checkpoints/epoch=1-step=1220-val_BinaryAUROC=0.5209.ckpt
-INFO:pytorch_lightning.accelerators.cuda:LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
-INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpoint at /content/lightning_logs/version_3/checkpoints/epoch=1-step=1220-val_BinaryAUROC=0.5209.ckpt
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restoring states from the checkpoint path at /home/zarizky/projects/mmai-tutorials/tutorials/drug-target-interaction/lightning_logs/version_1/checkpoints/epoch=0-step=610-valid_BinaryAUROC=0.5565.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /home/zarizky/projects/mmai-tutorials/tutorials/drug-target-interaction/lightning_logs/version_1/checkpoints/epoch=0-step=610-valid_BinaryAUROC=0.5565.ckpt
 </pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "40c354c897b74e07b50023a18c57b134", "version_major": 2, "version_minor": 0}</script><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing DataLoader 0: 100%|██████████| 29/29 [00:00&lt;00:00, 33.86it/s]
+</pre></div>
+</div>
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold">        Test metric        </span>┃<span style="font-weight: bold">       DataLoader 0        </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│<span style="color: #008080; text-decoration-color: #008080">     test_BinaryAUROC      </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5208548307418823     </span>│
-│<span style="color: #008080; text-decoration-color: #008080">    test_BinaryAccuracy    </span>│<span style="color: #800080; text-decoration-color: #800080">    0.49503859877586365    </span>│
-│<span style="color: #008080; text-decoration-color: #008080">    test_BinaryF1Score     </span>│<span style="color: #800080; text-decoration-color: #800080">   0.008658008649945259    </span>│
-│<span style="color: #008080; text-decoration-color: #008080">     test_BinaryRecall     </span>│<span style="color: #800080; text-decoration-color: #800080">   0.004395604599267244    </span>│
-│<span style="color: #008080; text-decoration-color: #008080">  test_BinarySpecificity   </span>│<span style="color: #800080; text-decoration-color: #800080">     0.98893803358078      </span>│
-│<span style="color: #008080; text-decoration-color: #008080">   test_accuracy_sklearn   </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5148842334747314     </span>│
-│<span style="color: #008080; text-decoration-color: #008080">    test_auroc_sklearn     </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5208548307418823     </span>│
-│<span style="color: #008080; text-decoration-color: #008080">      test_f1_sklearn      </span>│<span style="color: #800080; text-decoration-color: #800080">    0.6687231063842773     </span>│
-│<span style="color: #008080; text-decoration-color: #008080">         test_loss         </span>│<span style="color: #800080; text-decoration-color: #800080">     1.135701298713684     </span>│
-│<span style="color: #008080; text-decoration-color: #008080">   test_optim_threshold    </span>│<span style="color: #800080; text-decoration-color: #800080">   0.048901185393333435    </span>│
-│<span style="color: #008080; text-decoration-color: #008080">     test_sensitivity      </span>│<span style="color: #800080; text-decoration-color: #800080">   0.044247787445783615    </span>│
-│<span style="color: #008080; text-decoration-color: #008080">     test_specificity      </span>│<span style="color: #800080; text-decoration-color: #800080">    0.9824175834655762     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_BinaryAUROC      </span>│<span style="color: #800080; text-decoration-color: #800080">     0.556501030921936     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">    test_BinaryAccuracy    </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5380374789237976     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">    test_BinaryF1Score     </span>│<span style="color: #800080; text-decoration-color: #800080">    0.44355911016464233    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_BinaryRecall     </span>│<span style="color: #800080; text-decoration-color: #800080">    0.3670329749584198     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">  test_BinarySpecificity   </span>│<span style="color: #800080; text-decoration-color: #800080">    0.7101770043373108     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">   test_accuracy_sklearn   </span>│<span style="color: #800080; text-decoration-color: #800080">    0.5049614310264587     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">    test_auroc_sklearn     </span>│<span style="color: #800080; text-decoration-color: #800080">     0.556501030921936     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">      test_f1_sklearn      </span>│<span style="color: #800080; text-decoration-color: #800080">    0.6676556468009949     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">         test_loss         </span>│<span style="color: #800080; text-decoration-color: #800080">    0.7176582217216492     </span>│
+│<span style="color: #008080; text-decoration-color: #008080">   test_optim_threshold    </span>│<span style="color: #800080; text-decoration-color: #800080">    0.25262197852134705    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_sensitivity      </span>│<span style="color: #800080; text-decoration-color: #800080">   0.008849557489156723    </span>│
+│<span style="color: #008080; text-decoration-color: #008080">     test_specificity      </span>│<span style="color: #800080; text-decoration-color: #800080">     0.997802197933197     </span>│
 └───────────────────────────┴───────────────────────────┘
 </pre>
-</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 1.135701298713684,
-  &#39;test_auroc_sklearn&#39;: 0.5208548307418823,
-  &#39;test_accuracy_sklearn&#39;: 0.5148842334747314,
-  &#39;test_f1_sklearn&#39;: 0.6687231063842773,
-  &#39;test_optim_threshold&#39;: 0.048901185393333435,
-  &#39;test_sensitivity&#39;: 0.044247787445783615,
-  &#39;test_specificity&#39;: 0.9824175834655762,
-  &#39;test_BinaryAUROC&#39;: 0.5208548307418823,
-  &#39;test_BinaryF1Score&#39;: 0.008658008649945259,
-  &#39;test_BinaryRecall&#39;: 0.004395604599267244,
-  &#39;test_BinarySpecificity&#39;: 0.98893803358078,
-  &#39;test_BinaryAccuracy&#39;: 0.49503859877586365}]
+</div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;test_loss&#39;: 0.7176582217216492,
+  &#39;test_sensitivity&#39;: 0.008849557489156723,
+  &#39;test_specificity&#39;: 0.997802197933197,
+  &#39;test_auroc_sklearn&#39;: 0.556501030921936,
+  &#39;test_accuracy_sklearn&#39;: 0.5049614310264587,
+  &#39;test_f1_sklearn&#39;: 0.6676556468009949,
+  &#39;test_optim_threshold&#39;: 0.25262197852134705,
+  &#39;test_BinaryAUROC&#39;: 0.556501030921936,
+  &#39;test_BinaryF1Score&#39;: 0.44355911016464233,
+  &#39;test_BinaryRecall&#39;: 0.3670329749584198,
+  &#39;test_BinarySpecificity&#39;: 0.7101770043373108,
+  &#39;test_BinaryAccuracy&#39;: 0.5380374789237976}]
 </pre></div>
 </div>
 </div>
@@ -1330,21 +1344,19 @@ INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpo
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_model_from_ckpt</span><span class="p">(</span><span class="n">ckpt_path</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">DrugbanTrainer</span><span class="o">.</span><span class="n">load_from_checkpoint</span><span class="p">(</span>
         <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">ckpt_path</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">),</span>
-        <span class="n">solver_lr</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">LEARNING_RATE</span><span class="p">,</span>
-        <span class="n">num_classes</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
-        <span class="c1"># --- domain adaptation parameters ---</span>
-        <span class="n">is_da</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">,</span>
-        <span class="n">solver_da_lr</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">DA_LEARNING_RATE</span><span class="p">,</span>
-        <span class="n">da_init_epoch</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">INIT_EPOCH</span><span class="p">,</span>
-        <span class="n">da_method</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">METHOD</span><span class="p">,</span>
-        <span class="n">original_random</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">ORIGINAL_RANDOM</span><span class="p">,</span>
-        <span class="n">use_da_entropy</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE_ENTROPY</span><span class="p">,</span>
-        <span class="n">da_random_layer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_LAYER</span><span class="p">,</span>
-        <span class="c1"># --- discriminator parameters ---</span>
-        <span class="n">da_random_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_DIM</span><span class="p">,</span>
-        <span class="n">decoder_in_dim</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">IN_DIM</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">DrugBAN</span><span class="p">(</span><span class="n">config</span><span class="p">),</span>
+        <span class="n">solver_lr</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">LEARNING_RATE</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+        <span class="n">is_da</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE</span><span class="p">,</span>
+        <span class="n">solver_da_lr</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">SOLVER</span><span class="o">.</span><span class="n">DA_LEARNING_RATE</span><span class="p">,</span>
+        <span class="n">da_init_epoch</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">INIT_EPOCH</span><span class="p">,</span>
+        <span class="n">da_method</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">METHOD</span><span class="p">,</span>
+        <span class="n">original_random</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">ORIGINAL_RANDOM</span><span class="p">,</span>
+        <span class="n">use_da_entropy</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">USE_ENTROPY</span><span class="p">,</span>
+        <span class="n">da_random_layer</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_LAYER</span><span class="p">,</span>
+        <span class="n">da_random_dim</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DA</span><span class="o">.</span><span class="n">RANDOM_DIM</span><span class="p">,</span>
+        <span class="n">decoder_in_dim</span><span class="o">=</span><span class="n">cfg</span><span class="o">.</span><span class="n">DECODER</span><span class="o">.</span><span class="n">IN_DIM</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
 </div>
@@ -1355,53 +1367,92 @@ INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpo
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">checkpoint_path</span> <span class="o">=</span> <span class="s2">&quot;checkpoint/best.ckpt&quot;</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">get_model_from_ckpt</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">cfg</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DrugBAN(
-  (drug_extractor): MolecularGCN(
-    (init_transform): Linear(in_features=7, out_features=128, bias=False)
-    (gcn_layers): ModuleList(
-      (0-2): 3 x GCNConv(128, 128)
-    )
-  )
-  (protein_extractor): ProteinCNN(
-    (embedding): Embedding(26, 128, padding_idx=0)
-    (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,))
-    (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (conv2): Conv1d(128, 128, kernel_size=(6,), stride=(1,))
-    (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (conv3): Conv1d(128, 128, kernel_size=(9,), stride=(1,))
-    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  )
-  (bcn): BANLayer(
-    (v_net): FCNet(
-      (main): Sequential(
-        (0): Dropout(p=0.2, inplace=False)
-        (1): Linear(in_features=128, out_features=768, bias=True)
-        (2): ReLU()
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DrugbanTrainer(
+  (model): DrugBAN(
+    (molecular_extractor): MolecularGCN(
+      (init_transform): Linear(in_features=7, out_features=128, bias=False)
+      (gcn_layers): ModuleList(
+        (0-2): 3 x GCNConv(128, 128)
       )
     )
-    (q_net): FCNet(
-      (main): Sequential(
-        (0): Dropout(p=0.2, inplace=False)
-        (1): Linear(in_features=128, out_features=768, bias=True)
-        (2): ReLU()
+    (protein_extractor): ProteinCNN(
+      (embedding): Embedding(26, 128, padding_idx=0)
+      (conv1): Conv1d(128, 128, kernel_size=(3,), stride=(1,))
+      (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv2): Conv1d(128, 128, kernel_size=(6,), stride=(1,))
+      (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv3): Conv1d(128, 128, kernel_size=(9,), stride=(1,))
+      (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (bcn): ParametrizedBANLayer(
+      (v_net): FCNet(
+        (main): Sequential(
+          (0): Dropout(p=0.2, inplace=False)
+          (1): Linear(in_features=128, out_features=768, bias=True)
+          (2): ReLU()
+        )
+      )
+      (q_net): FCNet(
+        (main): Sequential(
+          (0): Dropout(p=0.2, inplace=False)
+          (1): Linear(in_features=128, out_features=768, bias=True)
+          (2): ReLU()
+        )
+      )
+      (p_net): AvgPool1d(kernel_size=(3,), stride=(3,), padding=(0,))
+      (bn): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (parametrizations): ModuleDict(
+        (h_mat): ParametrizationList(
+          (0): _WeightNorm()
+        )
       )
     )
-    (p_net): AvgPool1d(kernel_size=(3,), stride=(3,), padding=(0,))
-    (bn): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (mlp_classifier): MLPDecoder(
+      (model): Sequential(
+        (0): Linear(in_features=256, out_features=512, bias=True)
+        (1): ReLU()
+        (2): Dropout(p=0.1, inplace=False)
+        (3): Linear(in_features=512, out_features=128, bias=True)
+        (4): ReLU()
+        (5): Linear(in_features=128, out_features=2, bias=True)
+      )
+    )
   )
-  (mlp_classifier): MLPDecoder(
-    (fc1): Linear(in_features=256, out_features=512, bias=True)
-    (bn1): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (fc2): Linear(in_features=512, out_features=512, bias=True)
-    (bn2): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (fc3): Linear(in_features=512, out_features=128, bias=True)
-    (bn3): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-    (fc4): Linear(in_features=128, out_features=2, bias=True)
+  (domain_discriminator): DomainNetSmallImage(
+    (fc1): Linear(in_features=256, out_features=256, bias=True)
+    (bn1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu1): ReLU()
+    (fc2): Linear(in_features=256, out_features=256, bias=True)
+    (bn2): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu2): ReLU()
+    (fc3): Linear(in_features=256, out_features=2, bias=True)
+  )
+  (random_layer): RandomLayer(
+    (random_matrix): ParameterList(
+        (0): Parameter containing: [torch.float32 of size 256x256 (cuda:0)]
+        (1): Parameter containing: [torch.float32 of size 2x256 (cuda:0)]
+    )
+  )
+  (valid_metrics): MetricCollection(
+    (BinaryAUROC): BinaryAUROC()
+    (BinaryF1Score): BinaryF1Score()
+    (BinaryRecall): BinaryRecall()
+    (BinarySpecificity): BinarySpecificity()
+    (BinaryAccuracy): BinaryAccuracy(),
+    prefix=valid_
+  )
+  (test_metrics): MetricCollection(
+    (BinaryAUROC): BinaryAUROC()
+    (BinaryF1Score): BinaryF1Score()
+    (BinaryRecall): BinaryRecall()
+    (BinarySpecificity): BinarySpecificity()
+    (BinaryAccuracy): BinaryAccuracy(),
+    prefix=test_
   )
 )
 </pre></div>
@@ -1434,7 +1485,7 @@ INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpo
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 6/6 [00:00&lt;00:00, 44.70it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 6/6 [00:00&lt;00:00, 106.43it/s]
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([6, 2, 290, 1185])
@@ -1552,8 +1603,8 @@ INFO:pytorch_lightning.utilities.rank_zero:Loaded model weights from the checkpo
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../../_images/7aef2419b368e38ef8b35f1671353b143c874dfdf1efe4e0f8d214ee2c0d6b25.png" src="../../_images/7aef2419b368e38ef8b35f1671353b143c874dfdf1efe4e0f8d214ee2c0d6b25.png" />
-<img alt="../../_images/5e13ad8feab0b288d86960abf7217e7f7d66fc7a8df3b19bdf3bae5a05387960.svg" src="../../_images/5e13ad8feab0b288d86960abf7217e7f7d66fc7a8df3b19bdf3bae5a05387960.svg" />
+<img alt="../../_images/3c219df6e1cf3b3782ee7327c4cde1b103a2afbec7f184784da103178546660a.png" src="../../_images/3c219df6e1cf3b3782ee7327c4cde1b103a2afbec7f184784da103178546660a.png" />
+<img alt="../../_images/ae4fd0bdfe8069ea6a14a06a41757cd7b0c7fa84d2bca70645dec51ae267fbb2.svg" src="../../_images/ae4fd0bdfe8069ea6a14a06a41757cd7b0c7fa84d2bca70645dec51ae267fbb2.svg" />
 </div>
 </div>
 <p>The output images are saved in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> directory. The attention map shows how much each drug token attends to each protein token, while the molecule image highlights the atoms based on their attention values.</p>
